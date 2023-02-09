@@ -86,7 +86,7 @@ uchar letter_table[26] = {
     38, //v
     40, //w
     SPACE_LETTER, //x
-    44, //y
+    42, //y
     SPACE_LETTER //z
 };
 

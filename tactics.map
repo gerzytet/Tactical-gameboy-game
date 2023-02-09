@@ -76,56 +76,56 @@ _CODE                  00000200    00000FA7 =        4007. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     00000200  A$lcc1532 |    00000200  C$tactics |    00000200  G$change_
-     00000200  _change_t |    00000201  A$lcc1532 |    00000201  C$tactics
-     00000203  A$lcc1532 |    00000204  A$lcc1532 |    00000205  A$lcc1532
-     00000205  C$tactics |    00000205  C$tactics |    00000207  A$lcc1532
-     0000020A  A$lcc1532 |    0000020B  A$lcc1532 |    0000020D  A$lcc1532
-     0000020E  A$lcc1532 |    0000020F  A$lcc1532 |    00000210  A$lcc1532
-     00000211  A$lcc1532 |    00000213  A$lcc1532 |    00000215  A$lcc1532
-     00000215  C$tactics |    00000216  A$lcc1532 |    00000217  A$lcc1532
-     00000218  A$lcc1532 |    00000219  A$lcc1532 |    0000021A  A$lcc1532
-     0000021B  A$lcc1532 |    0000021D  A$lcc1532 |    0000021F  A$lcc1532
-     0000021F  C$tactics |    00000222  A$lcc1532 |    00000224  A$lcc1532
-     00000226  A$lcc1532 |    00000226  C$tactics |    00000228  A$lcc1532
-     00000229  A$lcc1532 |    0000022A  A$lcc1532 |    0000022B  A$lcc1532
-     0000022C  A$lcc1532 |    0000022F  A$lcc1532 |    00000230  A$lcc1532
-     00000231  A$lcc1532 |    00000234  A$lcc1532 |    00000234  C$tactics
-     00000237  A$lcc1532 |    00000238  A$lcc1532 |    00000239  A$lcc1532
-     0000023A  A$lcc1532 |    0000023D  A$lcc1532 |    0000023E  A$lcc1532
-     0000023F  A$lcc1532 |    0000023F  C$tactics |    00000240  A$lcc1532
-     00000240  C$tactics |    00000241  A$lcc1532 |    00000243  A$lcc1532
-     00000244  A$lcc1532 |    00000247  A$lcc1532 |    00000248  A$lcc1532
-     00000249  A$lcc1532 |    0000024A  A$lcc1532 |    0000024D  A$lcc1532
-     0000024E  A$lcc1532 |    0000024E  C$tactics |    0000024F  A$lcc1532
-     00000251  A$lcc1532 |    00000252  A$lcc1532 |    00000253  A$lcc1532
+     00000200  A$lcc1389 |    00000200  C$tactics |    00000200  G$change_
+     00000200  _change_t |    00000201  A$lcc1389 |    00000201  C$tactics
+     00000203  A$lcc1389 |    00000204  A$lcc1389 |    00000205  A$lcc1389
+     00000205  C$tactics |    00000205  C$tactics |    00000207  A$lcc1389
+     0000020A  A$lcc1389 |    0000020B  A$lcc1389 |    0000020D  A$lcc1389
+     0000020E  A$lcc1389 |    0000020F  A$lcc1389 |    00000210  A$lcc1389
+     00000211  A$lcc1389 |    00000213  A$lcc1389 |    00000215  A$lcc1389
+     00000215  C$tactics |    00000216  A$lcc1389 |    00000217  A$lcc1389
+     00000218  A$lcc1389 |    00000219  A$lcc1389 |    0000021A  A$lcc1389
+     0000021B  A$lcc1389 |    0000021D  A$lcc1389 |    0000021F  A$lcc1389
+     0000021F  C$tactics |    00000222  A$lcc1389 |    00000224  A$lcc1389
+     00000226  A$lcc1389 |    00000226  C$tactics |    00000228  A$lcc1389
+     00000229  A$lcc1389 |    0000022A  A$lcc1389 |    0000022B  A$lcc1389
+     0000022C  A$lcc1389 |    0000022F  A$lcc1389 |    00000230  A$lcc1389
+     00000231  A$lcc1389 |    00000234  A$lcc1389 |    00000234  C$tactics
+     00000237  A$lcc1389 |    00000238  A$lcc1389 |    00000239  A$lcc1389
+     0000023A  A$lcc1389 |    0000023D  A$lcc1389 |    0000023E  A$lcc1389
+     0000023F  A$lcc1389 |    0000023F  C$tactics |    00000240  A$lcc1389
+     00000240  C$tactics |    00000241  A$lcc1389 |    00000243  A$lcc1389
+     00000244  A$lcc1389 |    00000247  A$lcc1389 |    00000248  A$lcc1389
+     00000249  A$lcc1389 |    0000024A  A$lcc1389 |    0000024D  A$lcc1389
+     0000024E  A$lcc1389 |    0000024E  C$tactics |    0000024F  A$lcc1389
+     00000251  A$lcc1389 |    00000252  A$lcc1389 |    00000253  A$lcc1389
      00000253  C$tactics |    00000253  XG$change |    00000254  G$Tiles$0
      00000254  _Tiles    |    00000A54  G$Letters |    00000A54  _Letters 
-     00000D34  G$MAP$0_0 |    00000D34  _MAP      |    00000DC4  A$lcc1532
+     00000D34  G$MAP$0_0 |    00000D34  _MAP      |    00000DC4  A$lcc1389
      00000DC4  C$tactics |    00000DC4  G$main$0$ |    00000DC4  _main    
-     00000DC6  A$lcc1532 |    00000DC6  C$tactics |    00000DC9  A$lcc1532
-     00000DC9  C$tactics |    00000DCC  A$lcc1532 |    00000DCC  C$tactics
-     00000DCD  A$lcc1532 |    00000DCF  A$lcc1532 |    00000DCF  C$tactics
-     00000DD2  A$lcc1532 |    00000DD3  A$lcc1532 |    00000DD6  A$lcc1532
-     00000DD7  A$lcc1532 |    00000DDA  A$lcc1532 |    00000DDC  A$lcc1532
-     00000DDC  C$tactics |    00000DDF  A$lcc1532 |    00000DE0  A$lcc1532
-     00000DE3  A$lcc1532 |    00000DE4  A$lcc1532 |    00000DE7  A$lcc1532
-     00000DE9  A$lcc1532 |    00000DE9  C$tactics |    00000DEB  A$lcc1532
-     00000DEC  A$lcc1532 |    00000DEE  A$lcc1532 |    00000DF1  A$lcc1532
-     00000DF1  C$tactics |    00000DF3  A$lcc1532 |    00000DF5  A$lcc1532
-     00000DF7  A$lcc1532 |    00000DF8  A$lcc1532 |    00000DFA  A$lcc1532
-     00000DFD  A$lcc1532 |    00000DFD  C$tactics |    00000DFF  A$lcc1532
-     00000E00  A$lcc1532 |    00000E01  A$lcc1532 |    00000E02  A$lcc1532
-     00000E03  A$lcc1532 |    00000E04  A$lcc1532 |    00000E06  A$lcc1532
-     00000E07  A$lcc1532 |    00000E09  A$lcc1532 |    00000E0A  A$lcc1532
-     00000E0C  A$lcc1532 |    00000E0D  A$lcc1532 |    00000E0F  A$lcc1532
-     00000E11  A$lcc1532 |    00000E13  A$lcc1532 |    00000E14  A$lcc1532
-     00000E15  A$lcc1532 |    00000E16  A$lcc1532 |    00000E17  A$lcc1532
-     00000E18  A$lcc1532 |    00000E19  A$lcc1532 |    00000E1A  A$lcc1532
-     00000E1C  A$lcc1532 |    00000E1D  A$lcc1532 |    00000E1E  A$lcc1532
-     00000E1F  A$lcc1532 |    00000E21  A$lcc1532 |    00000E22  A$lcc1532
-     00000E24  A$lcc1532 |    00000E26  A$lcc1532 |    00000E27  A$lcc1532
-     00000E29  A$lcc1532 |    00000E2A  A$lcc1532 |    00000E2B  A$lcc1532
+     00000DC6  A$lcc1389 |    00000DC6  C$tactics |    00000DC9  A$lcc1389
+     00000DC9  C$tactics |    00000DCC  A$lcc1389 |    00000DCC  C$tactics
+     00000DCD  A$lcc1389 |    00000DCF  A$lcc1389 |    00000DCF  C$tactics
+     00000DD2  A$lcc1389 |    00000DD3  A$lcc1389 |    00000DD6  A$lcc1389
+     00000DD7  A$lcc1389 |    00000DDA  A$lcc1389 |    00000DDC  A$lcc1389
+     00000DDC  C$tactics |    00000DDF  A$lcc1389 |    00000DE0  A$lcc1389
+     00000DE3  A$lcc1389 |    00000DE4  A$lcc1389 |    00000DE7  A$lcc1389
+     00000DE9  A$lcc1389 |    00000DE9  C$tactics |    00000DEB  A$lcc1389
+     00000DEC  A$lcc1389 |    00000DEE  A$lcc1389 |    00000DF1  A$lcc1389
+     00000DF1  C$tactics |    00000DF3  A$lcc1389 |    00000DF5  A$lcc1389
+     00000DF7  A$lcc1389 |    00000DF8  A$lcc1389 |    00000DFA  A$lcc1389
+     00000DFD  A$lcc1389 |    00000DFD  C$tactics |    00000DFF  A$lcc1389
+     00000E00  A$lcc1389 |    00000E01  A$lcc1389 |    00000E02  A$lcc1389
+     00000E03  A$lcc1389 |    00000E04  A$lcc1389 |    00000E06  A$lcc1389
+     00000E07  A$lcc1389 |    00000E09  A$lcc1389 |    00000E0A  A$lcc1389
+     00000E0C  A$lcc1389 |    00000E0D  A$lcc1389 |    00000E0F  A$lcc1389
+     00000E11  A$lcc1389 |    00000E13  A$lcc1389 |    00000E14  A$lcc1389
+     00000E15  A$lcc1389 |    00000E16  A$lcc1389 |    00000E17  A$lcc1389
+     00000E18  A$lcc1389 |    00000E19  A$lcc1389 |    00000E1A  A$lcc1389
+     00000E1C  A$lcc1389 |    00000E1D  A$lcc1389 |    00000E1E  A$lcc1389
+     00000E1F  A$lcc1389 |    00000E21  A$lcc1389 |    00000E22  A$lcc1389
+     00000E24  A$lcc1389 |    00000E26  A$lcc1389 |    00000E27  A$lcc1389
+     00000E29  A$lcc1389 |    00000E2A  A$lcc1389 |    00000E2B  A$lcc1389
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 Hexadecimal  [32-Bits]
 
@@ -135,57 +135,57 @@ _CODE                  00000200    00000FA7 =        4007. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     00000E2C  A$lcc1532 |    00000E2D  A$lcc1532 |    00000E2E  A$lcc1532
-     00000E2F  A$lcc1532 |    00000E30  A$lcc1532 |    00000E31  A$lcc1532
-     00000E32  A$lcc1532 |    00000E33  A$lcc1532 |    00000E34  A$lcc1532
-     00000E36  A$lcc1532 |    00000E37  A$lcc1532 |    00000E38  A$lcc1532
-     00000E39  A$lcc1532 |    00000E3B  A$lcc1532 |    00000E3C  A$lcc1532
-     00000E3D  A$lcc1532 |    00000E3E  A$lcc1532 |    00000E3F  A$lcc1532
-     00000E42  A$lcc1532 |    00000E43  A$lcc1532 |    00000E44  A$lcc1532
-     00000E45  A$lcc1532 |    00000E47  A$lcc1532 |    00000E48  A$lcc1532
-     00000E49  A$lcc1532 |    00000E4A  A$lcc1532 |    00000E4C  A$lcc1532
-     00000E4D  A$lcc1532 |    00000E4F  A$lcc1532 |    00000E50  A$lcc1532
-     00000E52  A$lcc1532 |    00000E53  A$lcc1532 |    00000E54  A$lcc1532
-     00000E55  A$lcc1532 |    00000E56  A$lcc1532 |    00000E57  A$lcc1532
-     00000E58  A$lcc1532 |    00000E59  A$lcc1532 |    00000E5A  A$lcc1532
-     00000E5B  A$lcc1532 |    00000E5C  A$lcc1532 |    00000E5E  A$lcc1532
-     00000E60  A$lcc1532 |    00000E61  A$lcc1532 |    00000E62  A$lcc1532
-     00000E63  A$lcc1532 |    00000E64  A$lcc1532 |    00000E65  A$lcc1532
-     00000E66  A$lcc1532 |    00000E67  A$lcc1532 |    00000E68  A$lcc1532
-     00000E69  A$lcc1532 |    00000E6B  A$lcc1532 |    00000E6C  A$lcc1532
-     00000E6D  A$lcc1532 |    00000E6E  A$lcc1532 |    00000E70  A$lcc1532
-     00000E71  A$lcc1532 |    00000E73  A$lcc1532 |    00000E74  A$lcc1532
-     00000E75  A$lcc1532 |    00000E76  A$lcc1532 |    00000E78  A$lcc1532
-     00000E7A  A$lcc1532 |    00000E7C  A$lcc1532 |    00000E7D  A$lcc1532
-     00000E7E  A$lcc1532 |    00000E7F  A$lcc1532 |    00000E80  A$lcc1532
-     00000E81  A$lcc1532 |    00000E82  A$lcc1532 |    00000E83  A$lcc1532
-     00000E84  A$lcc1532 |    00000E85  A$lcc1532 |    00000E86  A$lcc1532
-     00000E86  C$tactics |    00000E87  A$lcc1532 |    00000E89  A$lcc1532
-     00000E8A  A$lcc1532 |    00000E8B  A$lcc1532 |    00000E8D  A$lcc1532
-     00000E8E  A$lcc1532 |    00000E90  A$lcc1532 |    00000E91  A$lcc1532
-     00000E92  A$lcc1532 |    00000E93  A$lcc1532 |    00000E93  C$tactics
-     00000E95  A$lcc1532 |    00000E96  A$lcc1532 |    00000E97  A$lcc1532
-     00000E98  A$lcc1532 |    00000E9A  A$lcc1532 |    00000E9B  A$lcc1532
-     00000E9D  A$lcc1532 |    00000E9E  A$lcc1532 |    00000EA0  A$lcc1532
-     00000EA1  A$lcc1532 |    00000EA3  A$lcc1532 |    00000EA4  A$lcc1532
-     00000EA6  A$lcc1532 |    00000EA7  A$lcc1532 |    00000EA9  A$lcc1532
-     00000EAA  A$lcc1532 |    00000EAB  A$lcc1532 |    00000EAC  A$lcc1532
-     00000EAD  A$lcc1532 |    00000EAE  A$lcc1532 |    00000EAF  A$lcc1532
-     00000EB2  A$lcc1532 |    00000EB3  A$lcc1532 |    00000EB4  A$lcc1532
-     00000EB5  A$lcc1532 |    00000EB7  A$lcc1532 |    00000EB8  A$lcc1532
-     00000EBA  A$lcc1532 |    00000EBA  C$tactics |    00000EBB  A$lcc1532
-     00000EBC  A$lcc1532 |    00000EBD  A$lcc1532 |    00000EC0  A$lcc1532
-     00000EC0  C$tactics |    00000EC1  A$lcc1532 |    00000EC4  A$lcc1532
-     00000EC4  C$tactics |    00000EC6  A$lcc1532 |    00000EC8  A$lcc1532
-     00000ECA  A$lcc1532 |    00000ECB  A$lcc1532 |    00000ECD  A$lcc1532
-     00000ECF  A$lcc1532 |    00000ECF  C$tactics |    00000ED1  A$lcc1532
-     00000ED2  A$lcc1532 |    00000ED4  A$lcc1532 |    00000ED6  A$lcc1532
-     00000ED6  C$tactics |    00000ED8  A$lcc1532 |    00000ED9  A$lcc1532
-     00000EDB  A$lcc1532 |    00000EDC  A$lcc1532 |    00000EDD  A$lcc1532
-     00000EDE  A$lcc1532 |    00000EDF  A$lcc1532 |    00000EE0  A$lcc1532
-     00000EE1  A$lcc1532 |    00000EE3  A$lcc1532 |    00000EE4  A$lcc1532
-     00000EE5  A$lcc1532 |    00000EE7  A$lcc1532 |    00000EE8  A$lcc1532
-     00000EEA  A$lcc1532 |    00000EEA  C$tactics |    00000EEB  A$lcc1532
+     00000E2C  A$lcc1389 |    00000E2D  A$lcc1389 |    00000E2E  A$lcc1389
+     00000E2F  A$lcc1389 |    00000E30  A$lcc1389 |    00000E31  A$lcc1389
+     00000E32  A$lcc1389 |    00000E33  A$lcc1389 |    00000E34  A$lcc1389
+     00000E36  A$lcc1389 |    00000E37  A$lcc1389 |    00000E38  A$lcc1389
+     00000E39  A$lcc1389 |    00000E3B  A$lcc1389 |    00000E3C  A$lcc1389
+     00000E3D  A$lcc1389 |    00000E3E  A$lcc1389 |    00000E3F  A$lcc1389
+     00000E42  A$lcc1389 |    00000E43  A$lcc1389 |    00000E44  A$lcc1389
+     00000E45  A$lcc1389 |    00000E47  A$lcc1389 |    00000E48  A$lcc1389
+     00000E49  A$lcc1389 |    00000E4A  A$lcc1389 |    00000E4C  A$lcc1389
+     00000E4D  A$lcc1389 |    00000E4F  A$lcc1389 |    00000E50  A$lcc1389
+     00000E52  A$lcc1389 |    00000E53  A$lcc1389 |    00000E54  A$lcc1389
+     00000E55  A$lcc1389 |    00000E56  A$lcc1389 |    00000E57  A$lcc1389
+     00000E58  A$lcc1389 |    00000E59  A$lcc1389 |    00000E5A  A$lcc1389
+     00000E5B  A$lcc1389 |    00000E5C  A$lcc1389 |    00000E5E  A$lcc1389
+     00000E60  A$lcc1389 |    00000E61  A$lcc1389 |    00000E62  A$lcc1389
+     00000E63  A$lcc1389 |    00000E64  A$lcc1389 |    00000E65  A$lcc1389
+     00000E66  A$lcc1389 |    00000E67  A$lcc1389 |    00000E68  A$lcc1389
+     00000E69  A$lcc1389 |    00000E6B  A$lcc1389 |    00000E6C  A$lcc1389
+     00000E6D  A$lcc1389 |    00000E6E  A$lcc1389 |    00000E70  A$lcc1389
+     00000E71  A$lcc1389 |    00000E73  A$lcc1389 |    00000E74  A$lcc1389
+     00000E75  A$lcc1389 |    00000E76  A$lcc1389 |    00000E78  A$lcc1389
+     00000E7A  A$lcc1389 |    00000E7C  A$lcc1389 |    00000E7D  A$lcc1389
+     00000E7E  A$lcc1389 |    00000E7F  A$lcc1389 |    00000E80  A$lcc1389
+     00000E81  A$lcc1389 |    00000E82  A$lcc1389 |    00000E83  A$lcc1389
+     00000E84  A$lcc1389 |    00000E85  A$lcc1389 |    00000E86  A$lcc1389
+     00000E86  C$tactics |    00000E87  A$lcc1389 |    00000E89  A$lcc1389
+     00000E8A  A$lcc1389 |    00000E8B  A$lcc1389 |    00000E8D  A$lcc1389
+     00000E8E  A$lcc1389 |    00000E90  A$lcc1389 |    00000E91  A$lcc1389
+     00000E92  A$lcc1389 |    00000E93  A$lcc1389 |    00000E93  C$tactics
+     00000E95  A$lcc1389 |    00000E96  A$lcc1389 |    00000E97  A$lcc1389
+     00000E98  A$lcc1389 |    00000E9A  A$lcc1389 |    00000E9B  A$lcc1389
+     00000E9D  A$lcc1389 |    00000E9E  A$lcc1389 |    00000EA0  A$lcc1389
+     00000EA1  A$lcc1389 |    00000EA3  A$lcc1389 |    00000EA4  A$lcc1389
+     00000EA6  A$lcc1389 |    00000EA7  A$lcc1389 |    00000EA9  A$lcc1389
+     00000EAA  A$lcc1389 |    00000EAB  A$lcc1389 |    00000EAC  A$lcc1389
+     00000EAD  A$lcc1389 |    00000EAE  A$lcc1389 |    00000EAF  A$lcc1389
+     00000EB2  A$lcc1389 |    00000EB3  A$lcc1389 |    00000EB4  A$lcc1389
+     00000EB5  A$lcc1389 |    00000EB7  A$lcc1389 |    00000EB8  A$lcc1389
+     00000EBA  A$lcc1389 |    00000EBA  C$tactics |    00000EBB  A$lcc1389
+     00000EBC  A$lcc1389 |    00000EBD  A$lcc1389 |    00000EC0  A$lcc1389
+     00000EC0  C$tactics |    00000EC1  A$lcc1389 |    00000EC4  A$lcc1389
+     00000EC4  C$tactics |    00000EC6  A$lcc1389 |    00000EC8  A$lcc1389
+     00000ECA  A$lcc1389 |    00000ECB  A$lcc1389 |    00000ECD  A$lcc1389
+     00000ECF  A$lcc1389 |    00000ECF  C$tactics |    00000ED1  A$lcc1389
+     00000ED2  A$lcc1389 |    00000ED4  A$lcc1389 |    00000ED6  A$lcc1389
+     00000ED6  C$tactics |    00000ED8  A$lcc1389 |    00000ED9  A$lcc1389
+     00000EDB  A$lcc1389 |    00000EDC  A$lcc1389 |    00000EDD  A$lcc1389
+     00000EDE  A$lcc1389 |    00000EDF  A$lcc1389 |    00000EE0  A$lcc1389
+     00000EE1  A$lcc1389 |    00000EE3  A$lcc1389 |    00000EE4  A$lcc1389
+     00000EE5  A$lcc1389 |    00000EE7  A$lcc1389 |    00000EE8  A$lcc1389
+     00000EEA  A$lcc1389 |    00000EEA  C$tactics |    00000EEB  A$lcc1389
 ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
 Hexadecimal  [32-Bits]
 
@@ -195,57 +195,57 @@ _CODE                  00000200    00000FA7 =        4007. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     00000EED  A$lcc1532 |    00000EED  C$tactics |    00000EEF  A$lcc1532
-     00000EF0  A$lcc1532 |    00000EF2  A$lcc1532 |    00000EF2  C$tactics
-     00000EF5  A$lcc1532 |    00000EF6  A$lcc1532 |    00000EF9  A$lcc1532
-     00000EFA  A$lcc1532 |    00000EFD  A$lcc1532 |    00000EFF  A$lcc1532
-     00000F02  A$lcc1532 |    00000F04  A$lcc1532 |    00000F07  A$lcc1532
-     00000F09  A$lcc1532 |    00000F0C  A$lcc1532 |    00000F0E  A$lcc1532
-     00000F11  A$lcc1532 |    00000F13  A$lcc1532 |    00000F13  C$tactics
-     00000F16  A$lcc1532 |    00000F19  A$lcc1532 |    00000F19  C$tactics
-     00000F1B  A$lcc1532 |    00000F1D  A$lcc1532 |    00000F1D  C$tactics
-     00000F1F  A$lcc1532 |    00000F21  A$lcc1532 |    00000F21  C$tactics
-     00000F21  C$tactics |    00000F24  A$lcc1532 |    00000F27  A$lcc1532
-     00000F28  A$lcc1532 |    00000F2A  A$lcc1532 |    00000F2A  C$tactics
-     00000F2B  A$lcc1532 |    00000F2D  A$lcc1532 |    00000F2D  C$tactics
-     00000F30  A$lcc1532 |    00000F32  A$lcc1532 |    00000F34  A$lcc1532
-     00000F35  A$lcc1532 |    00000F37  A$lcc1532 |    00000F38  A$lcc1532
-     00000F3B  A$lcc1532 |    00000F3C  A$lcc1532 |    00000F3E  A$lcc1532
-     00000F3F  A$lcc1532 |    00000F40  A$lcc1532 |    00000F41  A$lcc1532
-     00000F42  A$lcc1532 |    00000F43  A$lcc1532 |    00000F44  A$lcc1532
-     00000F46  A$lcc1532 |    00000F48  A$lcc1532 |    00000F4A  A$lcc1532
-     00000F4C  A$lcc1532 |    00000F4D  A$lcc1532 |    00000F4F  A$lcc1532
-     00000F51  A$lcc1532 |    00000F53  A$lcc1532 |    00000F54  A$lcc1532
-     00000F56  A$lcc1532 |    00000F56  C$tactics |    00000F59  A$lcc1532
-     00000F5A  A$lcc1532 |    00000F5A  C$tactics |    00000F5D  A$lcc1532
-     00000F60  A$lcc1532 |    00000F61  A$lcc1532 |    00000F63  A$lcc1532
-     00000F63  C$tactics |    00000F64  A$lcc1532 |    00000F66  A$lcc1532
-     00000F66  C$tactics |    00000F69  A$lcc1532 |    00000F6B  A$lcc1532
-     00000F6D  A$lcc1532 |    00000F6E  A$lcc1532 |    00000F70  A$lcc1532
-     00000F71  A$lcc1532 |    00000F74  A$lcc1532 |    00000F75  A$lcc1532
-     00000F77  A$lcc1532 |    00000F78  A$lcc1532 |    00000F79  A$lcc1532
-     00000F7A  A$lcc1532 |    00000F7B  A$lcc1532 |    00000F7C  A$lcc1532
-     00000F7D  A$lcc1532 |    00000F7F  A$lcc1532 |    00000F81  A$lcc1532
-     00000F83  A$lcc1532 |    00000F85  A$lcc1532 |    00000F86  A$lcc1532
-     00000F88  A$lcc1532 |    00000F8A  A$lcc1532 |    00000F8C  A$lcc1532
-     00000F8D  A$lcc1532 |    00000F8F  A$lcc1532 |    00000F8F  C$tactics
-     00000F92  A$lcc1532 |    00000F93  A$lcc1532 |    00000F93  C$tactics
-     00000F94  A$lcc1532 |    00000F96  A$lcc1532 |    00000F96  C$tactics
-     00000F97  A$lcc1532 |    00000F99  A$lcc1532 |    00000F99  C$tactics
-     00000F9C  A$lcc1532 |    00000F9D  A$lcc1532 |    00000F9F  A$lcc1532
-     00000FA1  A$lcc1532 |    00000FA2  A$lcc1532 |    00000FA2  C$tactics
-     00000FA5  A$lcc1532 |    00000FA6  A$lcc1532 |    00000FA8  A$lcc1532
-     00000FAA  A$lcc1532 |    00000FAB  A$lcc1532 |    00000FAB  C$tactics
-     00000FAD  A$lcc1532 |    00000FAF  A$lcc1532 |    00000FB1  A$lcc1532
-     00000FB1  C$tactics |    00000FB3  A$lcc1532 |    00000FB4  A$lcc1532
-     00000FB6  A$lcc1532 |    00000FB6  C$tactics |    00000FB9  A$lcc1532
-     00000FBB  A$lcc1532 |    00000FBB  C$tactics |    00000FBE  A$lcc1532
-     00000FC0  A$lcc1532 |    00000FC0  C$tactics |    00000FC3  A$lcc1532
-     00000FC4  A$lcc1532 |    00000FC6  A$lcc1532 |    00000FC7  A$lcc1532
-     00000FC8  A$lcc1532 |    00000FCA  A$lcc1532 |    00000FCC  A$lcc1532
-     00000FCF  A$lcc1532 |    00000FD0  A$lcc1532 |    00000FD2  A$lcc1532
-     00000FD4  A$lcc1532 |    00000FD6  A$lcc1532 |    00000FD8  A$lcc1532
-     00000FDA  A$lcc1532 |    00000FDC  A$lcc1532 |    00000FDE  A$lcc1532
+     00000EED  A$lcc1389 |    00000EED  C$tactics |    00000EEF  A$lcc1389
+     00000EF0  A$lcc1389 |    00000EF2  A$lcc1389 |    00000EF2  C$tactics
+     00000EF5  A$lcc1389 |    00000EF6  A$lcc1389 |    00000EF9  A$lcc1389
+     00000EFA  A$lcc1389 |    00000EFD  A$lcc1389 |    00000EFF  A$lcc1389
+     00000F02  A$lcc1389 |    00000F04  A$lcc1389 |    00000F07  A$lcc1389
+     00000F09  A$lcc1389 |    00000F0C  A$lcc1389 |    00000F0E  A$lcc1389
+     00000F11  A$lcc1389 |    00000F13  A$lcc1389 |    00000F13  C$tactics
+     00000F16  A$lcc1389 |    00000F19  A$lcc1389 |    00000F19  C$tactics
+     00000F1B  A$lcc1389 |    00000F1D  A$lcc1389 |    00000F1D  C$tactics
+     00000F1F  A$lcc1389 |    00000F21  A$lcc1389 |    00000F21  C$tactics
+     00000F21  C$tactics |    00000F24  A$lcc1389 |    00000F27  A$lcc1389
+     00000F28  A$lcc1389 |    00000F2A  A$lcc1389 |    00000F2A  C$tactics
+     00000F2B  A$lcc1389 |    00000F2D  A$lcc1389 |    00000F2D  C$tactics
+     00000F30  A$lcc1389 |    00000F32  A$lcc1389 |    00000F34  A$lcc1389
+     00000F35  A$lcc1389 |    00000F37  A$lcc1389 |    00000F38  A$lcc1389
+     00000F3B  A$lcc1389 |    00000F3C  A$lcc1389 |    00000F3E  A$lcc1389
+     00000F3F  A$lcc1389 |    00000F40  A$lcc1389 |    00000F41  A$lcc1389
+     00000F42  A$lcc1389 |    00000F43  A$lcc1389 |    00000F44  A$lcc1389
+     00000F46  A$lcc1389 |    00000F48  A$lcc1389 |    00000F4A  A$lcc1389
+     00000F4C  A$lcc1389 |    00000F4D  A$lcc1389 |    00000F4F  A$lcc1389
+     00000F51  A$lcc1389 |    00000F53  A$lcc1389 |    00000F54  A$lcc1389
+     00000F56  A$lcc1389 |    00000F56  C$tactics |    00000F59  A$lcc1389
+     00000F5A  A$lcc1389 |    00000F5A  C$tactics |    00000F5D  A$lcc1389
+     00000F60  A$lcc1389 |    00000F61  A$lcc1389 |    00000F63  A$lcc1389
+     00000F63  C$tactics |    00000F64  A$lcc1389 |    00000F66  A$lcc1389
+     00000F66  C$tactics |    00000F69  A$lcc1389 |    00000F6B  A$lcc1389
+     00000F6D  A$lcc1389 |    00000F6E  A$lcc1389 |    00000F70  A$lcc1389
+     00000F71  A$lcc1389 |    00000F74  A$lcc1389 |    00000F75  A$lcc1389
+     00000F77  A$lcc1389 |    00000F78  A$lcc1389 |    00000F79  A$lcc1389
+     00000F7A  A$lcc1389 |    00000F7B  A$lcc1389 |    00000F7C  A$lcc1389
+     00000F7D  A$lcc1389 |    00000F7F  A$lcc1389 |    00000F81  A$lcc1389
+     00000F83  A$lcc1389 |    00000F85  A$lcc1389 |    00000F86  A$lcc1389
+     00000F88  A$lcc1389 |    00000F8A  A$lcc1389 |    00000F8C  A$lcc1389
+     00000F8D  A$lcc1389 |    00000F8F  A$lcc1389 |    00000F8F  C$tactics
+     00000F92  A$lcc1389 |    00000F93  A$lcc1389 |    00000F93  C$tactics
+     00000F94  A$lcc1389 |    00000F96  A$lcc1389 |    00000F96  C$tactics
+     00000F97  A$lcc1389 |    00000F99  A$lcc1389 |    00000F99  C$tactics
+     00000F9C  A$lcc1389 |    00000F9D  A$lcc1389 |    00000F9F  A$lcc1389
+     00000FA1  A$lcc1389 |    00000FA2  A$lcc1389 |    00000FA2  C$tactics
+     00000FA5  A$lcc1389 |    00000FA6  A$lcc1389 |    00000FA8  A$lcc1389
+     00000FAA  A$lcc1389 |    00000FAB  A$lcc1389 |    00000FAB  C$tactics
+     00000FAD  A$lcc1389 |    00000FAF  A$lcc1389 |    00000FB1  A$lcc1389
+     00000FB1  C$tactics |    00000FB3  A$lcc1389 |    00000FB4  A$lcc1389
+     00000FB6  A$lcc1389 |    00000FB6  C$tactics |    00000FB9  A$lcc1389
+     00000FBB  A$lcc1389 |    00000FBB  C$tactics |    00000FBE  A$lcc1389
+     00000FC0  A$lcc1389 |    00000FC0  C$tactics |    00000FC3  A$lcc1389
+     00000FC4  A$lcc1389 |    00000FC6  A$lcc1389 |    00000FC7  A$lcc1389
+     00000FC8  A$lcc1389 |    00000FCA  A$lcc1389 |    00000FCC  A$lcc1389
+     00000FCF  A$lcc1389 |    00000FD0  A$lcc1389 |    00000FD2  A$lcc1389
+     00000FD4  A$lcc1389 |    00000FD6  A$lcc1389 |    00000FD8  A$lcc1389
+     00000FDA  A$lcc1389 |    00000FDC  A$lcc1389 |    00000FDE  A$lcc1389
 ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
 Hexadecimal  [32-Bits]
 
@@ -255,57 +255,57 @@ _CODE                  00000200    00000FA7 =        4007. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     00000FE0  A$lcc1532 |    00000FE1  A$lcc1532 |    00000FE4  A$lcc1532
-     00000FE4  C$tactics |    00000FE7  A$lcc1532 |    00000FE8  A$lcc1532
-     00000FEA  A$lcc1532 |    00000FEB  A$lcc1532 |    00000FEC  A$lcc1532
-     00000FEE  A$lcc1532 |    00000FF0  A$lcc1532 |    00000FF3  A$lcc1532
-     00000FF4  A$lcc1532 |    00000FF6  A$lcc1532 |    00000FF8  A$lcc1532
-     00000FFA  A$lcc1532 |    00000FFC  A$lcc1532 |    00000FFE  A$lcc1532
-     00001000  A$lcc1532 |    00001002  A$lcc1532 |    00001004  A$lcc1532
-     00001005  A$lcc1532 |    00001008  A$lcc1532 |    00001008  C$tactics
-     0000100B  A$lcc1532 |    0000100E  A$lcc1532 |    00001011  A$lcc1532
-     00001012  A$lcc1532 |    00001014  A$lcc1532 |    00001016  A$lcc1532
-     00001018  A$lcc1532 |    00001019  A$lcc1532 |    0000101C  A$lcc1532
-     0000101F  A$lcc1532 |    00001020  A$lcc1532 |    00001022  A$lcc1532
-     00001024  A$lcc1532 |    00001026  A$lcc1532 |    00001027  A$lcc1532
-     0000102A  A$lcc1532 |    0000102B  A$lcc1532 |    0000102C  A$lcc1532
-     0000102D  A$lcc1532 |    00001030  A$lcc1532 |    00001033  A$lcc1532
-     00001034  A$lcc1532 |    00001036  A$lcc1532 |    00001038  A$lcc1532
-     0000103A  A$lcc1532 |    0000103B  A$lcc1532 |    0000103E  A$lcc1532
-     00001041  A$lcc1532 |    00001042  A$lcc1532 |    00001044  A$lcc1532
-     00001046  A$lcc1532 |    00001048  A$lcc1532 |    00001049  A$lcc1532
-     0000104C  A$lcc1532 |    0000104D  A$lcc1532 |    0000104E  A$lcc1532
-     0000104F  A$lcc1532 |    00001052  A$lcc1532 |    00001055  A$lcc1532
-     00001056  A$lcc1532 |    00001058  A$lcc1532 |    0000105A  A$lcc1532
-     0000105C  A$lcc1532 |    0000105D  A$lcc1532 |    00001060  A$lcc1532
-     00001063  A$lcc1532 |    00001064  A$lcc1532 |    00001066  A$lcc1532
-     00001068  A$lcc1532 |    0000106A  A$lcc1532 |    0000106B  A$lcc1532
-     0000106E  A$lcc1532 |    0000106F  A$lcc1532 |    00001070  A$lcc1532
-     00001071  A$lcc1532 |    00001074  A$lcc1532 |    00001077  A$lcc1532
-     00001078  A$lcc1532 |    0000107A  A$lcc1532 |    0000107C  A$lcc1532
-     0000107E  A$lcc1532 |    0000107F  A$lcc1532 |    00001082  A$lcc1532
-     00001085  A$lcc1532 |    00001086  A$lcc1532 |    00001088  A$lcc1532
-     0000108A  A$lcc1532 |    0000108C  A$lcc1532 |    0000108D  A$lcc1532
-     00001090  A$lcc1532 |    00001091  A$lcc1532 |    00001092  A$lcc1532
-     00001093  A$lcc1532 |    00001093  C$tactics |    00001096  A$lcc1532
-     00001097  A$lcc1532 |    00001097  C$tactics |    00001098  A$lcc1532
-     0000109A  A$lcc1532 |    0000109C  A$lcc1532 |    0000109C  C$tactics
-     0000109F  A$lcc1532 |    000010A1  A$lcc1532 |    000010A4  A$lcc1532
-     000010A6  A$lcc1532 |    000010A9  A$lcc1532 |    000010AB  A$lcc1532
-     000010AE  A$lcc1532 |    000010B0  A$lcc1532 |    000010B3  A$lcc1532
-     000010B5  A$lcc1532 |    000010B5  C$tactics |    000010B7  A$lcc1532
-     000010B7  C$tactics |    000010BA  A$lcc1532 |    000010BC  A$lcc1532
-     000010BE  A$lcc1532 |    000010C1  A$lcc1532 |    000010C3  A$lcc1532
-     000010C6  A$lcc1532 |    000010C8  A$lcc1532 |    000010CB  A$lcc1532
-     000010CD  A$lcc1532 |    000010D0  A$lcc1532 |    000010D2  A$lcc1532
-     000010D2  C$tactics |    000010D2  C$tactics |    000010D5  A$lcc1532
-     000010D6  A$lcc1532 |    000010D8  A$lcc1532 |    000010D9  A$lcc1532
-     000010DA  A$lcc1532 |    000010DB  A$lcc1532 |    000010DC  A$lcc1532
-     000010DD  A$lcc1532 |    000010DE  A$lcc1532 |    000010E1  A$lcc1532
-     000010E2  A$lcc1532 |    000010E3  A$lcc1532 |    000010E4  A$lcc1532
-     000010E7  A$lcc1532 |    000010E8  A$lcc1532 |    000010EA  A$lcc1532
-     000010EB  A$lcc1532 |    000010EC  A$lcc1532 |    000010EC  C$tactics
-     000010EE  A$lcc1532 |    000010EF  A$lcc1532 |    000010F0  A$lcc1532
+     00000FE0  A$lcc1389 |    00000FE1  A$lcc1389 |    00000FE4  A$lcc1389
+     00000FE4  C$tactics |    00000FE7  A$lcc1389 |    00000FE8  A$lcc1389
+     00000FEA  A$lcc1389 |    00000FEB  A$lcc1389 |    00000FEC  A$lcc1389
+     00000FEE  A$lcc1389 |    00000FF0  A$lcc1389 |    00000FF3  A$lcc1389
+     00000FF4  A$lcc1389 |    00000FF6  A$lcc1389 |    00000FF8  A$lcc1389
+     00000FFA  A$lcc1389 |    00000FFC  A$lcc1389 |    00000FFE  A$lcc1389
+     00001000  A$lcc1389 |    00001002  A$lcc1389 |    00001004  A$lcc1389
+     00001005  A$lcc1389 |    00001008  A$lcc1389 |    00001008  C$tactics
+     0000100B  A$lcc1389 |    0000100E  A$lcc1389 |    00001011  A$lcc1389
+     00001012  A$lcc1389 |    00001014  A$lcc1389 |    00001016  A$lcc1389
+     00001018  A$lcc1389 |    00001019  A$lcc1389 |    0000101C  A$lcc1389
+     0000101F  A$lcc1389 |    00001020  A$lcc1389 |    00001022  A$lcc1389
+     00001024  A$lcc1389 |    00001026  A$lcc1389 |    00001027  A$lcc1389
+     0000102A  A$lcc1389 |    0000102B  A$lcc1389 |    0000102C  A$lcc1389
+     0000102D  A$lcc1389 |    00001030  A$lcc1389 |    00001033  A$lcc1389
+     00001034  A$lcc1389 |    00001036  A$lcc1389 |    00001038  A$lcc1389
+     0000103A  A$lcc1389 |    0000103B  A$lcc1389 |    0000103E  A$lcc1389
+     00001041  A$lcc1389 |    00001042  A$lcc1389 |    00001044  A$lcc1389
+     00001046  A$lcc1389 |    00001048  A$lcc1389 |    00001049  A$lcc1389
+     0000104C  A$lcc1389 |    0000104D  A$lcc1389 |    0000104E  A$lcc1389
+     0000104F  A$lcc1389 |    00001052  A$lcc1389 |    00001055  A$lcc1389
+     00001056  A$lcc1389 |    00001058  A$lcc1389 |    0000105A  A$lcc1389
+     0000105C  A$lcc1389 |    0000105D  A$lcc1389 |    00001060  A$lcc1389
+     00001063  A$lcc1389 |    00001064  A$lcc1389 |    00001066  A$lcc1389
+     00001068  A$lcc1389 |    0000106A  A$lcc1389 |    0000106B  A$lcc1389
+     0000106E  A$lcc1389 |    0000106F  A$lcc1389 |    00001070  A$lcc1389
+     00001071  A$lcc1389 |    00001074  A$lcc1389 |    00001077  A$lcc1389
+     00001078  A$lcc1389 |    0000107A  A$lcc1389 |    0000107C  A$lcc1389
+     0000107E  A$lcc1389 |    0000107F  A$lcc1389 |    00001082  A$lcc1389
+     00001085  A$lcc1389 |    00001086  A$lcc1389 |    00001088  A$lcc1389
+     0000108A  A$lcc1389 |    0000108C  A$lcc1389 |    0000108D  A$lcc1389
+     00001090  A$lcc1389 |    00001091  A$lcc1389 |    00001092  A$lcc1389
+     00001093  A$lcc1389 |    00001093  C$tactics |    00001096  A$lcc1389
+     00001097  A$lcc1389 |    00001097  C$tactics |    00001098  A$lcc1389
+     0000109A  A$lcc1389 |    0000109C  A$lcc1389 |    0000109C  C$tactics
+     0000109F  A$lcc1389 |    000010A1  A$lcc1389 |    000010A4  A$lcc1389
+     000010A6  A$lcc1389 |    000010A9  A$lcc1389 |    000010AB  A$lcc1389
+     000010AE  A$lcc1389 |    000010B0  A$lcc1389 |    000010B3  A$lcc1389
+     000010B5  A$lcc1389 |    000010B5  C$tactics |    000010B7  A$lcc1389
+     000010B7  C$tactics |    000010BA  A$lcc1389 |    000010BC  A$lcc1389
+     000010BE  A$lcc1389 |    000010C1  A$lcc1389 |    000010C3  A$lcc1389
+     000010C6  A$lcc1389 |    000010C8  A$lcc1389 |    000010CB  A$lcc1389
+     000010CD  A$lcc1389 |    000010D0  A$lcc1389 |    000010D2  A$lcc1389
+     000010D2  C$tactics |    000010D2  C$tactics |    000010D5  A$lcc1389
+     000010D6  A$lcc1389 |    000010D8  A$lcc1389 |    000010D9  A$lcc1389
+     000010DA  A$lcc1389 |    000010DB  A$lcc1389 |    000010DC  A$lcc1389
+     000010DD  A$lcc1389 |    000010DE  A$lcc1389 |    000010E1  A$lcc1389
+     000010E2  A$lcc1389 |    000010E3  A$lcc1389 |    000010E4  A$lcc1389
+     000010E7  A$lcc1389 |    000010E8  A$lcc1389 |    000010EA  A$lcc1389
+     000010EB  A$lcc1389 |    000010EC  A$lcc1389 |    000010EC  C$tactics
+     000010EE  A$lcc1389 |    000010EF  A$lcc1389 |    000010F0  A$lcc1389
 ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
 Hexadecimal  [32-Bits]
 
@@ -315,31 +315,31 @@ _CODE                  00000200    00000FA7 =        4007. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     000010F3  A$lcc1532 |    000010F4  A$lcc1532 |    000010F5  A$lcc1532
-     000010F6  A$lcc1532 |    000010F7  A$lcc1532 |    000010F7  C$tactics
-     000010F8  A$lcc1532 |    000010F9  A$lcc1532 |    000010FC  A$lcc1532
-     000010FC  C$tactics |    000010FF  A$lcc1532 |    00001100  A$lcc1532
-     00001101  A$lcc1532 |    00001103  A$lcc1532 |    00001103  C$tactics
-     00001104  A$lcc1532 |    00001104  C$tactics |    00001107  A$lcc1532
-     00001107  C$tactics |    0000110A  A$lcc1532 |    0000110B  A$lcc1532
-     0000110B  C$tactics |    0000110D  A$lcc1532 |    0000110F  A$lcc1532
-     0000110F  C$tactics |    00001112  A$lcc1532 |    00001113  A$lcc1532
-     00001114  A$lcc1532 |    00001116  A$lcc1532 |    00001116  C$tactics
-     00001117  A$lcc1532 |    00001119  A$lcc1532 |    00001119  C$tactics
-     0000111B  A$lcc1532 |    0000111D  A$lcc1532 |    0000111D  C$tactics
-     00001120  A$lcc1532 |    00001121  A$lcc1532 |    00001123  A$lcc1532
-     00001125  A$lcc1532 |    00001125  C$tactics |    00001126  A$lcc1532
-     00001128  A$lcc1532 |    00001128  C$tactics |    0000112A  A$lcc1532
-     0000112C  A$lcc1532 |    0000112C  C$tactics |    0000112F  A$lcc1532
-     00001130  A$lcc1532 |    00001131  A$lcc1532 |    00001133  A$lcc1532
-     00001133  C$tactics |    00001134  A$lcc1532 |    00001136  A$lcc1532
-     00001136  C$tactics |    00001138  A$lcc1532 |    0000113A  A$lcc1532
-     0000113A  C$tactics |    0000113D  A$lcc1532 |    0000113E  A$lcc1532
-     00001140  A$lcc1532 |    00001142  A$lcc1532 |    00001142  C$tactics
-     00001143  A$lcc1532 |    00001143  C$tactics |    00001144  A$lcc1532
-     00001145  A$lcc1532 |    00001148  A$lcc1532 |    00001148  C$tactics
-     0000114B  A$lcc1532 |    0000114D  A$lcc1532 |    00001150  A$lcc1532
-     00001152  A$lcc1532 |    00001152  C$tactics |    00001152  XG$main$0
+     000010F3  A$lcc1389 |    000010F4  A$lcc1389 |    000010F5  A$lcc1389
+     000010F6  A$lcc1389 |    000010F7  A$lcc1389 |    000010F7  C$tactics
+     000010F8  A$lcc1389 |    000010F9  A$lcc1389 |    000010FC  A$lcc1389
+     000010FC  C$tactics |    000010FF  A$lcc1389 |    00001100  A$lcc1389
+     00001101  A$lcc1389 |    00001103  A$lcc1389 |    00001103  C$tactics
+     00001104  A$lcc1389 |    00001104  C$tactics |    00001107  A$lcc1389
+     00001107  C$tactics |    0000110A  A$lcc1389 |    0000110B  A$lcc1389
+     0000110B  C$tactics |    0000110D  A$lcc1389 |    0000110F  A$lcc1389
+     0000110F  C$tactics |    00001112  A$lcc1389 |    00001113  A$lcc1389
+     00001114  A$lcc1389 |    00001116  A$lcc1389 |    00001116  C$tactics
+     00001117  A$lcc1389 |    00001119  A$lcc1389 |    00001119  C$tactics
+     0000111B  A$lcc1389 |    0000111D  A$lcc1389 |    0000111D  C$tactics
+     00001120  A$lcc1389 |    00001121  A$lcc1389 |    00001123  A$lcc1389
+     00001125  A$lcc1389 |    00001125  C$tactics |    00001126  A$lcc1389
+     00001128  A$lcc1389 |    00001128  C$tactics |    0000112A  A$lcc1389
+     0000112C  A$lcc1389 |    0000112C  C$tactics |    0000112F  A$lcc1389
+     00001130  A$lcc1389 |    00001131  A$lcc1389 |    00001133  A$lcc1389
+     00001133  C$tactics |    00001134  A$lcc1389 |    00001136  A$lcc1389
+     00001136  C$tactics |    00001138  A$lcc1389 |    0000113A  A$lcc1389
+     0000113A  C$tactics |    0000113D  A$lcc1389 |    0000113E  A$lcc1389
+     00001140  A$lcc1389 |    00001142  A$lcc1389 |    00001142  C$tactics
+     00001143  A$lcc1389 |    00001143  C$tactics |    00001144  A$lcc1389
+     00001145  A$lcc1389 |    00001148  A$lcc1389 |    00001148  C$tactics
+     0000114B  A$lcc1389 |    0000114D  A$lcc1389 |    00001150  A$lcc1389
+     00001152  A$lcc1389 |    00001152  C$tactics |    00001152  XG$main$0
      00001153  Ftactics$ |    0000115A  Ftactics$ |    00001161  Ftactics$
      00001168  Ftactics$ |    0000116F  Ftactics$ |    00001176  Ftactics$
      0000117D  Ftactics$ |    00001184  Ftactics$ |    0000118B  Ftactics$
@@ -549,13 +549,13 @@ _GSINIT                0000130C    0000002A =          42. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     0000130C  gsinit    |    00001318  A$lcc1532 |    00001318  C$tactics
-     0000131B  A$lcc1532 |    0000131D  A$lcc1532 |    0000131D  C$tactics
-     00001320  A$lcc1532 |    00001322  A$lcc1532 |    00001322  C$tactics
-     00001325  A$lcc1532 |    00001327  A$lcc1532 |    00001327  C$tactics
-     0000132A  A$lcc1532 |    0000132C  A$lcc1532 |    0000132C  C$tactics
-     0000132F  A$lcc1532 |    00001331  A$lcc1532 |    00001331  C$tactics
-     00001334  A$lcc1532
+     0000130C  gsinit    |    00001318  A$lcc1389 |    00001318  C$tactics
+     0000131B  A$lcc1389 |    0000131D  A$lcc1389 |    0000131D  C$tactics
+     00001320  A$lcc1389 |    00001322  A$lcc1389 |    00001322  C$tactics
+     00001325  A$lcc1389 |    00001327  A$lcc1389 |    00001327  C$tactics
+     0000132A  A$lcc1389 |    0000132C  A$lcc1389 |    0000132C  C$tactics
+     0000132F  A$lcc1389 |    00001331  A$lcc1389 |    00001331  C$tactics
+     00001334  A$lcc1389
 ASxxxx Linker V03.00 + NoICE + sdld,  page 29.
 Hexadecimal  [32-Bits]
 
@@ -606,7 +606,7 @@ Files Linked                              [ module(s) ]
 
 C:\Users\gerzy\OneDrive - Florida Polytechnic University\Documents\Merpcraft Stuff\codeforces\gmamer_boy\gbdk\lib/gb/crt0.o
                                           [ Runtime ]
-C:\Users\gerzy\AppData\Local\Temp/lcc153280.o
+C:\Users\gerzy\AppData\Local\Temp/lcc138920.o
                                           [ tactics ]
 
 
