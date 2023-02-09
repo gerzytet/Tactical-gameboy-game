@@ -10,32 +10,32 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
      00000000  .__.ABS.  |    00000000  _rRAMG    |    00000000  l__BASE  
      00000000  l__BSS    |    00000000  l__CABS   |    00000000  l__CODE_0
      00000000  l__DABS   |    00000000  l__HEADER |    00000000  l__HEAP  
-     00000000  l__HEAP_E |    00000000  l__HRAM   |    00000000  l__INITIA
-     00000000  l__INITIA |    00000000  l__LIT    |    00000000  s__CABS  
-     00000000  s__DABS   |    00000000  s__HEADER |    00000000  s__HEADER
+     00000000  l__HEAP_E |    00000000  l__HRAM   |    00000000  l__LIT   
+     00000000  s__CABS   |    00000000  s__DABS   |    00000000  s__HEADER
      00000000  s__HEADER |    00000000  s__HEADER |    00000000  s__HEADER
      00000000  s__HEADER |    00000000  s__HEADER |    00000000  s__HEADER
      00000000  s__HEADER |    00000000  s__HEADER |    00000000  s__HEADER
      00000000  s__HEADER |    00000000  s__HEADER |    00000000  s__HEADER
      00000000  s__HEADER |    00000000  s__HEADER |    00000000  s__HEADER
-     00000000  s__HEADER |    00000000  s__HEADER |    00000000  s__HRAM  
-     00000000  s__HRAM12 |    00000001  l__GSFINA |    00000001  l__HEADER
+     00000000  s__HEADER |    00000000  s__HEADER |    00000000  s__HEADER
+     00000000  s__HRAM   |    00000000  s__HRAM12 |    00000001  l__GSFINA
      00000001  l__HEADER |    00000001  l__HEADER |    00000001  l__HEADER
      00000001  l__HEADER |    00000001  l__HEADER |    00000001  l__HEADER
-     00000002  l__HEADER |    00000002  l__HEADER |    00000002  l__HEADER
-     00000003  l__HEADER |    00000003  l__HRAM12 |    00000005  l__HEADER
-     00000006  l__HEADER |    00000007  l__HEADER |    00000008  l__HEADER
-     00000020  l__GSINIT |    00000030  l__HEADER |    0000004C  l__HEADER
-     00000084  l__HEADER |    0000010F  l__HOME   |    00000200  s__CODE  
-     00000415  l__DATA   |    00000A7E  l__CODE   |    00000C7E  s__HOME  
-     00000D8D  s__BASE   |    00000D8D  s__CODE_0 |    00000D8D  s__GSINIT
-     00000D8D  s__INITIA |    00000D8D  s__LIT    |    00000DAD  s__GSFINA
+     00000001  l__HEADER |    00000002  l__HEADER |    00000002  l__HEADER
+     00000002  l__HEADER |    00000003  l__HEADER |    00000003  l__HRAM12
+     00000005  l__HEADER |    00000006  l__HEADER |    00000007  l__HEADER
+     00000008  l__HEADER |    00000016  l__DATA   |    00000020  l__GSINIT
+     00000030  l__HEADER |    0000004C  l__HEADER |    00000056  l__INITIA
+     00000056  l__INITIA |    00000084  l__HEADER |    0000010F  l__HOME  
+     00000200  s__CODE   |    00000EA1  l__CODE   |    000010A1  s__HOME  
+     000011B0  s__BASE   |    000011B0  s__CODE_0 |    000011B0  s__INITIA
+     000011B0  s__LIT    |    00001206  s__GSINIT |    00001226  s__GSFINA
      00002000  _rROMB0   |    00003000  _rROMB1   |    00004000  _rRAMB   
      00008000  __VRAM    |    00008000  __VRAM800 |    00008800  __VRAM880
      00009000  __VRAM900 |    00009800  __SCRN0   |    00009C00  __SCRN1  
      0000A000  __SRAM    |    0000C000  __RAM     |    0000C000  _shadow_O
-     0000C0A0  s__DATA   |    0000C4B5  s__BSS    |    0000C4B5  s__HEAP  
-     0000C4B5  s__HEAP_E |    0000C4B5  s__INITIA |    0000D000  __RAMBANK
+     0000C0A0  s__DATA   |    0000C0B6  s__BSS    |    0000C0B6  s__INITIA
+     0000C10C  s__HEAP   |    0000C10C  s__HEAP_E |    0000D000  __RAMBANK
      0000E000  .STACK    |    0000FE00  __OAMRAM  |    0000FF00  _P1_REG  
      0000FF00  __IO      |    0000FF01  _SB_REG   |    0000FF02  _SC_REG  
      0000FF04  _DIV_REG  |    0000FF05  _TIMA_REG |    0000FF06  _TMA_REG 
@@ -72,156 +72,231 @@ Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_CODE                  00000200    00000A7E =        2686. bytes (REL,CON)
+_CODE                  00000200    00000EA1 =        3745. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     00000200  A$lcc6600 |    00000200  C$tactics |    00000200  G$main$0$
-     00000200  _main     |    00000202  A$lcc6600 |    00000202  C$tactics
-     00000205  A$lcc6600 |    00000205  C$tactics |    00000208  A$lcc6600
-     00000208  C$tactics |    00000209  A$lcc6600 |    0000020B  A$lcc6600
-     0000020B  C$tactics |    0000020E  A$lcc6600 |    0000020F  A$lcc6600
-     00000212  A$lcc6600 |    00000213  A$lcc6600 |    00000216  A$lcc6600
-     00000218  A$lcc6600 |    00000218  C$tactics |    0000021A  A$lcc6600
-     0000021B  A$lcc6600 |    0000021D  A$lcc6600 |    00000220  A$lcc6600
-     00000220  C$tactics |    00000222  A$lcc6600 |    00000224  A$lcc6600
-     00000226  A$lcc6600 |    00000227  A$lcc6600 |    00000229  A$lcc6600
-     0000022C  A$lcc6600 |    0000022C  C$tactics |    0000022E  A$lcc6600
-     0000022F  A$lcc6600 |    00000230  A$lcc6600 |    00000231  A$lcc6600
-     00000232  A$lcc6600 |    00000233  A$lcc6600 |    00000235  A$lcc6600
-     00000236  A$lcc6600 |    00000238  A$lcc6600 |    00000239  A$lcc6600
-     0000023B  A$lcc6600 |    0000023C  A$lcc6600 |    0000023E  A$lcc6600
-     00000240  A$lcc6600 |    00000242  A$lcc6600 |    00000243  A$lcc6600
-     00000244  A$lcc6600 |    00000245  A$lcc6600 |    00000246  A$lcc6600
-     00000247  A$lcc6600 |    00000248  A$lcc6600 |    00000249  A$lcc6600
-     0000024B  A$lcc6600 |    0000024C  A$lcc6600 |    0000024D  A$lcc6600
-     0000024E  A$lcc6600 |    00000250  A$lcc6600 |    00000251  A$lcc6600
-     00000253  A$lcc6600 |    00000255  A$lcc6600 |    00000256  A$lcc6600
-     00000258  A$lcc6600 |    00000259  A$lcc6600 |    0000025A  A$lcc6600
-     0000025B  A$lcc6600 |    0000025C  A$lcc6600 |    0000025D  A$lcc6600
-     0000025E  A$lcc6600 |    0000025F  A$lcc6600 |    00000260  A$lcc6600
-     00000261  A$lcc6600 |    00000262  A$lcc6600 |    00000263  A$lcc6600
-     00000265  A$lcc6600 |    00000266  A$lcc6600 |    00000267  A$lcc6600
-     00000268  A$lcc6600 |    0000026A  A$lcc6600 |    0000026B  A$lcc6600
-     0000026C  A$lcc6600 |    0000026D  A$lcc6600 |    0000026E  A$lcc6600
-     00000271  A$lcc6600 |    00000272  A$lcc6600 |    00000273  A$lcc6600
-     00000274  A$lcc6600 |    00000276  A$lcc6600 |    00000277  A$lcc6600
-     00000278  A$lcc6600 |    00000279  A$lcc6600 |    0000027B  A$lcc6600
-     0000027C  A$lcc6600 |    0000027E  A$lcc6600 |    0000027F  A$lcc6600
-     00000281  A$lcc6600 |    00000282  A$lcc6600 |    00000283  A$lcc6600
-     00000284  A$lcc6600 |    00000285  A$lcc6600 |    00000286  A$lcc6600
-     00000287  A$lcc6600 |    00000288  A$lcc6600 |    00000289  A$lcc6600
-     0000028A  A$lcc6600 |    0000028B  A$lcc6600 |    0000028D  A$lcc6600
-     0000028F  A$lcc6600 |    00000290  A$lcc6600 |    00000291  A$lcc6600
-     00000292  A$lcc6600 |    00000293  A$lcc6600 |    00000294  A$lcc6600
-     00000295  A$lcc6600 |    00000296  A$lcc6600 |    00000297  A$lcc6600
-     00000298  A$lcc6600 |    0000029A  A$lcc6600 |    0000029B  A$lcc6600
-     0000029C  A$lcc6600 |    0000029D  A$lcc6600 |    0000029F  A$lcc6600
-     000002A0  A$lcc6600 |    000002A2  A$lcc6600 |    000002A3  A$lcc6600
-     000002A4  A$lcc6600 |    000002A5  A$lcc6600 |    000002A7  A$lcc6600
-     000002A9  A$lcc6600 |    000002AB  A$lcc6600 |    000002AC  A$lcc6600
-     000002AD  A$lcc6600 |    000002AE  A$lcc6600 |    000002AF  A$lcc6600
-     000002B0  A$lcc6600 |    000002B1  A$lcc6600 |    000002B2  A$lcc6600
-     000002B3  A$lcc6600 |    000002B4  A$lcc6600 |    000002B5  A$lcc6600
-     000002B5  C$tactics |    000002B6  A$lcc6600 |    000002B8  A$lcc6600
-     000002B9  A$lcc6600 |    000002BA  A$lcc6600 |    000002BC  A$lcc6600
-     000002BD  A$lcc6600 |    000002BF  A$lcc6600 |    000002C0  A$lcc6600
+     00000200  A$lcc2663 |    00000200  C$tactics |    00000200  G$change_
+     00000200  _change_t |    00000201  A$lcc2663 |    00000201  C$tactics
+     00000203  A$lcc2663 |    00000204  A$lcc2663 |    00000205  A$lcc2663
+     00000205  C$tactics |    00000205  C$tactics |    00000207  A$lcc2663
+     0000020A  A$lcc2663 |    0000020B  A$lcc2663 |    0000020D  A$lcc2663
+     0000020E  A$lcc2663 |    0000020F  A$lcc2663 |    00000210  A$lcc2663
+     00000211  A$lcc2663 |    00000213  A$lcc2663 |    00000215  A$lcc2663
+     00000215  C$tactics |    00000216  A$lcc2663 |    00000217  A$lcc2663
+     00000218  A$lcc2663 |    00000219  A$lcc2663 |    0000021A  A$lcc2663
+     0000021B  A$lcc2663 |    0000021D  A$lcc2663 |    0000021F  A$lcc2663
+     0000021F  C$tactics |    00000222  A$lcc2663 |    00000224  A$lcc2663
+     00000226  A$lcc2663 |    00000226  C$tactics |    00000228  A$lcc2663
+     00000229  A$lcc2663 |    0000022A  A$lcc2663 |    0000022B  A$lcc2663
+     0000022C  A$lcc2663 |    0000022F  A$lcc2663 |    00000230  A$lcc2663
+     00000231  A$lcc2663 |    00000234  A$lcc2663 |    00000234  C$tactics
+     00000237  A$lcc2663 |    00000238  A$lcc2663 |    00000239  A$lcc2663
+     0000023A  A$lcc2663 |    0000023D  A$lcc2663 |    0000023E  A$lcc2663
+     0000023F  A$lcc2663 |    0000023F  C$tactics |    00000240  A$lcc2663
+     00000240  C$tactics |    00000241  A$lcc2663 |    00000243  A$lcc2663
+     00000244  A$lcc2663 |    00000247  A$lcc2663 |    00000248  A$lcc2663
+     00000249  A$lcc2663 |    0000024A  A$lcc2663 |    0000024D  A$lcc2663
+     0000024E  A$lcc2663 |    0000024E  C$tactics |    0000024F  A$lcc2663
+     00000251  A$lcc2663 |    00000252  A$lcc2663 |    00000253  A$lcc2663
+     00000253  C$tactics |    00000253  XG$change |    00000254  G$Tiles$0
+     00000254  _Tiles    |    00000A54  G$Letters |    00000A54  _Letters 
+     00000D34  G$MAP$0_0 |    00000D34  _MAP      |    00000D8E  A$lcc2663
+     00000D8E  C$tactics |    00000D8E  G$main$0$ |    00000D8E  _main    
+     00000D90  A$lcc2663 |    00000D90  C$tactics |    00000D93  A$lcc2663
+     00000D93  C$tactics |    00000D96  A$lcc2663 |    00000D96  C$tactics
+     00000D97  A$lcc2663 |    00000D99  A$lcc2663 |    00000D99  C$tactics
+     00000D9C  A$lcc2663 |    00000D9D  A$lcc2663 |    00000DA0  A$lcc2663
+     00000DA1  A$lcc2663 |    00000DA4  A$lcc2663 |    00000DA6  A$lcc2663
+     00000DA6  C$tactics |    00000DA9  A$lcc2663 |    00000DAA  A$lcc2663
+     00000DAD  A$lcc2663 |    00000DAE  A$lcc2663 |    00000DB1  A$lcc2663
+     00000DB3  A$lcc2663 |    00000DB3  C$tactics |    00000DB5  A$lcc2663
+     00000DB6  A$lcc2663 |    00000DB8  A$lcc2663 |    00000DBB  A$lcc2663
+     00000DBB  C$tactics |    00000DBD  A$lcc2663 |    00000DBF  A$lcc2663
+     00000DC1  A$lcc2663 |    00000DC2  A$lcc2663 |    00000DC4  A$lcc2663
+     00000DC7  A$lcc2663 |    00000DC7  C$tactics |    00000DC9  A$lcc2663
+     00000DCA  A$lcc2663 |    00000DCB  A$lcc2663 |    00000DCC  A$lcc2663
+     00000DCD  A$lcc2663 |    00000DCE  A$lcc2663 |    00000DD0  A$lcc2663
+     00000DD1  A$lcc2663 |    00000DD3  A$lcc2663 |    00000DD4  A$lcc2663
+     00000DD6  A$lcc2663 |    00000DD7  A$lcc2663 |    00000DD9  A$lcc2663
+     00000DDB  A$lcc2663 |    00000DDD  A$lcc2663 |    00000DDE  A$lcc2663
+     00000DDF  A$lcc2663 |    00000DE0  A$lcc2663 |    00000DE1  A$lcc2663
+     00000DE2  A$lcc2663 |    00000DE3  A$lcc2663 |    00000DE4  A$lcc2663
+     00000DE6  A$lcc2663 |    00000DE7  A$lcc2663 |    00000DE8  A$lcc2663
+     00000DE9  A$lcc2663 |    00000DEB  A$lcc2663 |    00000DEC  A$lcc2663
+     00000DEE  A$lcc2663 |    00000DF0  A$lcc2663 |    00000DF1  A$lcc2663
+     00000DF3  A$lcc2663 |    00000DF4  A$lcc2663 |    00000DF5  A$lcc2663
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_CODE                  00000200    00000A7E =        2686. bytes (REL,CON)
+_CODE                  00000200    00000EA1 =        3745. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     000002C1  A$lcc6600 |    000002C2  A$lcc6600 |    000002C2  C$tactics
-     000002C4  A$lcc6600 |    000002C5  A$lcc6600 |    000002C6  A$lcc6600
-     000002C7  A$lcc6600 |    000002C9  A$lcc6600 |    000002CA  A$lcc6600
-     000002CC  A$lcc6600 |    000002CD  A$lcc6600 |    000002CF  A$lcc6600
-     000002D0  A$lcc6600 |    000002D2  A$lcc6600 |    000002D3  A$lcc6600
-     000002D5  A$lcc6600 |    000002D6  A$lcc6600 |    000002D8  A$lcc6600
-     000002D9  A$lcc6600 |    000002DA  A$lcc6600 |    000002DB  A$lcc6600
-     000002DC  A$lcc6600 |    000002DD  A$lcc6600 |    000002DE  A$lcc6600
-     000002E1  A$lcc6600 |    000002E2  A$lcc6600 |    000002E3  A$lcc6600
-     000002E4  A$lcc6600 |    000002E6  A$lcc6600 |    000002E7  A$lcc6600
-     000002E8  A$lcc6600 |    000002E9  A$lcc6600 |    000002EB  A$lcc6600
-     000002EC  A$lcc6600 |    000002ED  A$lcc6600 |    000002EE  A$lcc6600
-     000002EF  A$lcc6600 |    000002F0  A$lcc6600 |    000002F0  C$tactics
-     000002F1  A$lcc6600 |    000002F2  A$lcc6600 |    000002F3  A$lcc6600
-     000002F6  A$lcc6600 |    000002F6  C$tactics |    000002F7  A$lcc6600
-     000002FA  A$lcc6600 |    000002FA  C$tactics |    000002FD  A$lcc6600
-     000002FE  A$lcc6600 |    00000301  A$lcc6600 |    00000302  A$lcc6600
-     00000305  A$lcc6600 |    00000307  A$lcc6600 |    0000030A  A$lcc6600
-     0000030C  A$lcc6600 |    0000030F  A$lcc6600 |    00000311  A$lcc6600
-     00000314  A$lcc6600 |    00000316  A$lcc6600 |    00000319  A$lcc6600
-     0000031B  A$lcc6600 |    0000031B  C$tactics |    0000031D  A$lcc6600
-     0000031F  A$lcc6600 |    0000031F  C$tactics |    00000321  A$lcc6600
-     00000323  A$lcc6600 |    00000323  C$tactics |    00000323  C$tactics
-     00000326  A$lcc6600 |    00000329  A$lcc6600 |    0000032B  A$lcc6600
-     0000032D  A$lcc6600 |    0000032F  A$lcc6600 |    00000330  A$lcc6600
-     00000333  A$lcc6600 |    00000335  A$lcc6600 |    00000337  A$lcc6600
-     00000339  A$lcc6600 |    0000033A  A$lcc6600 |    0000033D  A$lcc6600
-     0000033E  A$lcc6600 |    0000033F  A$lcc6600 |    00000340  A$lcc6600
-     00000343  A$lcc6600 |    00000345  A$lcc6600 |    00000347  A$lcc6600
-     00000349  A$lcc6600 |    0000034A  A$lcc6600 |    0000034D  A$lcc6600
-     0000034F  A$lcc6600 |    00000351  A$lcc6600 |    00000353  A$lcc6600
-     00000354  A$lcc6600 |    00000357  A$lcc6600 |    00000358  A$lcc6600
-     00000359  A$lcc6600 |    0000035A  A$lcc6600 |    0000035D  A$lcc6600
-     0000035F  A$lcc6600 |    00000361  A$lcc6600 |    00000363  A$lcc6600
-     00000364  A$lcc6600 |    00000367  A$lcc6600 |    00000369  A$lcc6600
-     0000036B  A$lcc6600 |    0000036D  A$lcc6600 |    0000036E  A$lcc6600
-     00000371  A$lcc6600 |    00000372  A$lcc6600 |    00000373  A$lcc6600
-     00000374  A$lcc6600 |    00000377  A$lcc6600 |    00000379  A$lcc6600
-     0000037B  A$lcc6600 |    0000037D  A$lcc6600 |    0000037E  A$lcc6600
-     00000381  A$lcc6600 |    00000383  A$lcc6600 |    00000385  A$lcc6600
-     00000387  A$lcc6600 |    00000388  A$lcc6600 |    0000038B  A$lcc6600
-     0000038C  A$lcc6600 |    0000038D  A$lcc6600 |    0000038E  A$lcc6600
-     0000038E  C$tactics |    00000391  A$lcc6600 |    00000392  A$lcc6600
-     00000392  C$tactics |    00000393  A$lcc6600 |    00000395  A$lcc6600
-     00000397  A$lcc6600 |    00000397  C$tactics |    0000039A  A$lcc6600
-     0000039C  A$lcc6600 |    0000039F  A$lcc6600 |    000003A1  A$lcc6600
-     000003A4  A$lcc6600 |    000003A6  A$lcc6600 |    000003A9  A$lcc6600
-     000003AB  A$lcc6600 |    000003AE  A$lcc6600 |    000003B0  A$lcc6600
-     000003B0  C$tactics |    000003B2  A$lcc6600 |    000003B2  C$tactics
-     000003B5  A$lcc6600 |    000003B7  A$lcc6600 |    000003B9  A$lcc6600
-     000003BC  A$lcc6600 |    000003BE  A$lcc6600 |    000003C1  A$lcc6600
+     00000DF6  A$lcc2663 |    00000DF7  A$lcc2663 |    00000DF8  A$lcc2663
+     00000DF9  A$lcc2663 |    00000DFA  A$lcc2663 |    00000DFB  A$lcc2663
+     00000DFC  A$lcc2663 |    00000DFD  A$lcc2663 |    00000DFE  A$lcc2663
+     00000E00  A$lcc2663 |    00000E01  A$lcc2663 |    00000E02  A$lcc2663
+     00000E03  A$lcc2663 |    00000E05  A$lcc2663 |    00000E06  A$lcc2663
+     00000E07  A$lcc2663 |    00000E08  A$lcc2663 |    00000E09  A$lcc2663
+     00000E0C  A$lcc2663 |    00000E0D  A$lcc2663 |    00000E0E  A$lcc2663
+     00000E0F  A$lcc2663 |    00000E11  A$lcc2663 |    00000E12  A$lcc2663
+     00000E13  A$lcc2663 |    00000E14  A$lcc2663 |    00000E16  A$lcc2663
+     00000E17  A$lcc2663 |    00000E19  A$lcc2663 |    00000E1A  A$lcc2663
+     00000E1C  A$lcc2663 |    00000E1D  A$lcc2663 |    00000E1E  A$lcc2663
+     00000E1F  A$lcc2663 |    00000E20  A$lcc2663 |    00000E21  A$lcc2663
+     00000E22  A$lcc2663 |    00000E23  A$lcc2663 |    00000E24  A$lcc2663
+     00000E25  A$lcc2663 |    00000E26  A$lcc2663 |    00000E28  A$lcc2663
+     00000E2A  A$lcc2663 |    00000E2B  A$lcc2663 |    00000E2C  A$lcc2663
+     00000E2D  A$lcc2663 |    00000E2E  A$lcc2663 |    00000E2F  A$lcc2663
+     00000E30  A$lcc2663 |    00000E31  A$lcc2663 |    00000E32  A$lcc2663
+     00000E33  A$lcc2663 |    00000E35  A$lcc2663 |    00000E36  A$lcc2663
+     00000E37  A$lcc2663 |    00000E38  A$lcc2663 |    00000E3A  A$lcc2663
+     00000E3B  A$lcc2663 |    00000E3D  A$lcc2663 |    00000E3E  A$lcc2663
+     00000E3F  A$lcc2663 |    00000E40  A$lcc2663 |    00000E42  A$lcc2663
+     00000E44  A$lcc2663 |    00000E46  A$lcc2663 |    00000E47  A$lcc2663
+     00000E48  A$lcc2663 |    00000E49  A$lcc2663 |    00000E4A  A$lcc2663
+     00000E4B  A$lcc2663 |    00000E4C  A$lcc2663 |    00000E4D  A$lcc2663
+     00000E4E  A$lcc2663 |    00000E4F  A$lcc2663 |    00000E50  A$lcc2663
+     00000E50  C$tactics |    00000E51  A$lcc2663 |    00000E53  A$lcc2663
+     00000E54  A$lcc2663 |    00000E55  A$lcc2663 |    00000E57  A$lcc2663
+     00000E58  A$lcc2663 |    00000E5A  A$lcc2663 |    00000E5B  A$lcc2663
+     00000E5C  A$lcc2663 |    00000E5D  A$lcc2663 |    00000E5D  C$tactics
+     00000E5F  A$lcc2663 |    00000E60  A$lcc2663 |    00000E61  A$lcc2663
+     00000E62  A$lcc2663 |    00000E64  A$lcc2663 |    00000E65  A$lcc2663
+     00000E67  A$lcc2663 |    00000E68  A$lcc2663 |    00000E6A  A$lcc2663
+     00000E6B  A$lcc2663 |    00000E6D  A$lcc2663 |    00000E6E  A$lcc2663
+     00000E70  A$lcc2663 |    00000E71  A$lcc2663 |    00000E73  A$lcc2663
+     00000E74  A$lcc2663 |    00000E75  A$lcc2663 |    00000E76  A$lcc2663
+     00000E77  A$lcc2663 |    00000E78  A$lcc2663 |    00000E79  A$lcc2663
+     00000E7C  A$lcc2663 |    00000E7D  A$lcc2663 |    00000E7E  A$lcc2663
+     00000E7F  A$lcc2663 |    00000E81  A$lcc2663 |    00000E81  C$tactics
+     00000E82  A$lcc2663 |    00000E83  A$lcc2663 |    00000E84  A$lcc2663
+     00000E87  A$lcc2663 |    00000E87  C$tactics |    00000E88  A$lcc2663
+     00000E8B  A$lcc2663 |    00000E8B  C$tactics |    00000E8D  A$lcc2663
+     00000E8F  A$lcc2663 |    00000E91  A$lcc2663 |    00000E92  A$lcc2663
+     00000E94  A$lcc2663 |    00000E96  A$lcc2663 |    00000E96  C$tactics
+     00000E97  A$lcc2663 |    00000E99  A$lcc2663 |    00000E9B  A$lcc2663
+     00000E9C  A$lcc2663 |    00000E9E  A$lcc2663 |    00000EA0  A$lcc2663
+     00000EA0  C$tactics |    00000EA1  A$lcc2663 |    00000EA2  A$lcc2663
+     00000EA3  A$lcc2663 |    00000EA4  A$lcc2663 |    00000EA6  A$lcc2663
+     00000EA8  A$lcc2663 |    00000EAA  A$lcc2663 |    00000EAC  A$lcc2663
+     00000EAD  A$lcc2663 |    00000EAF  A$lcc2663 |    00000EB0  A$lcc2663
+     00000EB2  A$lcc2663 |    00000EB3  A$lcc2663 |    00000EB4  A$lcc2663
+     00000EB5  A$lcc2663 |    00000EB7  A$lcc2663 |    00000EB9  A$lcc2663
 ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_CODE                  00000200    00000A7E =        2686. bytes (REL,CON)
+_CODE                  00000200    00000EA1 =        3745. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     000003C3  A$lcc6600 |    000003C6  A$lcc6600 |    000003C8  A$lcc6600
-     000003CB  A$lcc6600 |    000003CD  A$lcc6600 |    000003CD  C$tactics
-     000003CD  C$tactics |    000003D0  A$lcc6600 |    000003D1  A$lcc6600
-     000003D2  A$lcc6600 |    000003D4  A$lcc6600 |    000003D4  C$tactics
-     000003D5  A$lcc6600 |    000003D5  C$tactics |    000003D8  A$lcc6600
-     000003D8  C$tactics |    000003DB  A$lcc6600 |    000003DC  A$lcc6600
-     000003DC  C$tactics |    000003DE  A$lcc6600 |    000003E0  A$lcc6600
-     000003E0  C$tactics |    000003E3  A$lcc6600 |    000003E4  A$lcc6600
-     000003E5  A$lcc6600 |    000003E7  A$lcc6600 |    000003E7  C$tactics
-     000003E8  A$lcc6600 |    000003EA  A$lcc6600 |    000003EA  C$tactics
-     000003EC  A$lcc6600 |    000003EE  A$lcc6600 |    000003EE  C$tactics
-     000003F1  A$lcc6600 |    000003F2  A$lcc6600 |    000003F4  A$lcc6600
-     000003F6  A$lcc6600 |    000003F6  C$tactics |    000003F7  A$lcc6600
-     000003F9  A$lcc6600 |    000003F9  C$tactics |    000003FB  A$lcc6600
-     000003FD  A$lcc6600 |    000003FD  C$tactics |    00000400  A$lcc6600
-     00000401  A$lcc6600 |    00000402  A$lcc6600 |    00000404  A$lcc6600
-     00000404  C$tactics |    00000405  A$lcc6600 |    00000407  A$lcc6600
-     00000407  C$tactics |    00000409  A$lcc6600 |    0000040B  A$lcc6600
-     0000040B  C$tactics |    0000040E  A$lcc6600 |    0000040F  A$lcc6600
-     00000411  A$lcc6600 |    00000413  A$lcc6600 |    00000413  C$tactics
-     00000414  A$lcc6600 |    00000414  C$tactics |    00000415  A$lcc6600
-     00000416  A$lcc6600 |    00000419  A$lcc6600 |    00000419  C$tactics
-     0000041C  A$lcc6600 |    0000041E  A$lcc6600 |    00000421  A$lcc6600
-     00000423  A$lcc6600 |    00000423  C$tactics |    00000423  XG$main$0
-     00000424  G$Tiles$0 |    00000424  _Tiles    |    00000C24  G$MAP$0_0
-     00000C24  _MAP     
+     00000EBA  A$lcc2663 |    00000EBB  A$lcc2663 |    00000EBC  A$lcc2663
+     00000EBD  A$lcc2663 |    00000EBE  A$lcc2663 |    00000EBF  A$lcc2663
+     00000EC2  A$lcc2663 |    00000EC3  A$lcc2663 |    00000EC5  A$lcc2663
+     00000EC5  C$tactics |    00000EC7  A$lcc2663 |    00000EC8  A$lcc2663
+     00000ECA  A$lcc2663 |    00000ECA  C$tactics |    00000ECC  A$lcc2663
+     00000ECD  A$lcc2663 |    00000ECF  A$lcc2663 |    00000ECF  C$tactics
+     00000ED2  A$lcc2663 |    00000ED3  A$lcc2663 |    00000ED6  A$lcc2663
+     00000ED7  A$lcc2663 |    00000EDA  A$lcc2663 |    00000EDC  A$lcc2663
+     00000EDF  A$lcc2663 |    00000EE1  A$lcc2663 |    00000EE4  A$lcc2663
+     00000EE6  A$lcc2663 |    00000EE9  A$lcc2663 |    00000EEB  A$lcc2663
+     00000EEE  A$lcc2663 |    00000EF0  A$lcc2663 |    00000EF0  C$tactics
+     00000EF3  A$lcc2663 |    00000EF6  A$lcc2663 |    00000EF6  C$tactics
+     00000EF8  A$lcc2663 |    00000EFA  A$lcc2663 |    00000EFA  C$tactics
+     00000EFC  A$lcc2663 |    00000EFE  A$lcc2663 |    00000EFE  C$tactics
+     00000EFE  C$tactics |    00000F01  A$lcc2663 |    00000F04  A$lcc2663
+     00000F06  A$lcc2663 |    00000F08  A$lcc2663 |    00000F0A  A$lcc2663
+     00000F0B  A$lcc2663 |    00000F0E  A$lcc2663 |    00000F10  A$lcc2663
+     00000F12  A$lcc2663 |    00000F14  A$lcc2663 |    00000F15  A$lcc2663
+     00000F18  A$lcc2663 |    00000F19  A$lcc2663 |    00000F1A  A$lcc2663
+     00000F1B  A$lcc2663 |    00000F1E  A$lcc2663 |    00000F20  A$lcc2663
+     00000F22  A$lcc2663 |    00000F24  A$lcc2663 |    00000F25  A$lcc2663
+     00000F28  A$lcc2663 |    00000F2A  A$lcc2663 |    00000F2C  A$lcc2663
+     00000F2E  A$lcc2663 |    00000F2F  A$lcc2663 |    00000F32  A$lcc2663
+     00000F33  A$lcc2663 |    00000F34  A$lcc2663 |    00000F35  A$lcc2663
+     00000F38  A$lcc2663 |    00000F3A  A$lcc2663 |    00000F3C  A$lcc2663
+     00000F3E  A$lcc2663 |    00000F3F  A$lcc2663 |    00000F42  A$lcc2663
+     00000F44  A$lcc2663 |    00000F46  A$lcc2663 |    00000F48  A$lcc2663
+     00000F49  A$lcc2663 |    00000F4C  A$lcc2663 |    00000F4D  A$lcc2663
+     00000F4E  A$lcc2663 |    00000F4F  A$lcc2663 |    00000F52  A$lcc2663
+     00000F54  A$lcc2663 |    00000F56  A$lcc2663 |    00000F58  A$lcc2663
+     00000F59  A$lcc2663 |    00000F5C  A$lcc2663 |    00000F5E  A$lcc2663
+     00000F60  A$lcc2663 |    00000F62  A$lcc2663 |    00000F63  A$lcc2663
+     00000F66  A$lcc2663 |    00000F67  A$lcc2663 |    00000F68  A$lcc2663
+     00000F69  A$lcc2663 |    00000F69  C$tactics |    00000F6C  A$lcc2663
+     00000F6D  A$lcc2663 |    00000F6D  C$tactics |    00000F6E  A$lcc2663
+     00000F70  A$lcc2663 |    00000F72  A$lcc2663 |    00000F72  C$tactics
+     00000F75  A$lcc2663 |    00000F77  A$lcc2663 |    00000F7A  A$lcc2663
+     00000F7C  A$lcc2663 |    00000F7F  A$lcc2663 |    00000F81  A$lcc2663
+     00000F84  A$lcc2663 |    00000F86  A$lcc2663 |    00000F89  A$lcc2663
+     00000F8B  A$lcc2663 |    00000F8B  C$tactics |    00000F8D  A$lcc2663
+     00000F8D  C$tactics |    00000F90  A$lcc2663 |    00000F92  A$lcc2663
+     00000F94  A$lcc2663 |    00000F97  A$lcc2663 |    00000F99  A$lcc2663
+     00000F9C  A$lcc2663 |    00000F9E  A$lcc2663 |    00000FA1  A$lcc2663
+     00000FA3  A$lcc2663 |    00000FA6  A$lcc2663 |    00000FA8  A$lcc2663
+     00000FA8  C$tactics |    00000FA8  C$tactics |    00000FAB  A$lcc2663
+     00000FAC  A$lcc2663 |    00000FAD  A$lcc2663 |    00000FAF  A$lcc2663
+     00000FAF  C$tactics |    00000FB0  A$lcc2663 |    00000FB0  C$tactics
+     00000FB3  A$lcc2663 |    00000FB3  C$tactics |    00000FB6  A$lcc2663
+     00000FB7  A$lcc2663 |    00000FB7  C$tactics |    00000FB9  A$lcc2663
+     00000FBB  A$lcc2663 |    00000FBB  C$tactics |    00000FBE  A$lcc2663
+     00000FBF  A$lcc2663 |    00000FC0  A$lcc2663 |    00000FC2  A$lcc2663
 ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
+Hexadecimal  [32-Bits]
+
+Area                       Addr        Size        Decimal Bytes (Attributes)
+--------------------       ----        ----        ------- ----- ------------
+_CODE                  00000200    00000EA1 =        3745. bytes (REL,CON)
+
+        Value  Global            Value  Global            Value  Global    
+        -----  ------            -----  ------            -----  ------    
+     00000FC2  C$tactics |    00000FC3  A$lcc2663 |    00000FC5  A$lcc2663
+     00000FC5  C$tactics |    00000FC7  A$lcc2663 |    00000FC9  A$lcc2663
+     00000FC9  C$tactics |    00000FCC  A$lcc2663 |    00000FCD  A$lcc2663
+     00000FCF  A$lcc2663 |    00000FD1  A$lcc2663 |    00000FD1  C$tactics
+     00000FD2  A$lcc2663 |    00000FD4  A$lcc2663 |    00000FD4  C$tactics
+     00000FD6  A$lcc2663 |    00000FD8  A$lcc2663 |    00000FD8  C$tactics
+     00000FDA  A$lcc2663 |    00000FDD  A$lcc2663 |    00000FDE  A$lcc2663
+     00000FE0  A$lcc2663 |    00000FE0  C$tactics |    00000FE1  A$lcc2663
+     00000FE3  A$lcc2663 |    00000FE3  C$tactics |    00000FE5  A$lcc2663
+     00000FE7  A$lcc2663 |    00000FE7  C$tactics |    00000FEA  A$lcc2663
+     00000FEB  A$lcc2663 |    00000FED  A$lcc2663 |    00000FEF  A$lcc2663
+     00000FEF  C$tactics |    00000FF0  A$lcc2663 |    00000FF0  C$tactics
+     00000FF1  A$lcc2663 |    00000FF2  A$lcc2663 |    00000FF4  A$lcc2663
+     00000FF4  C$tactics |    00000FF7  A$lcc2663 |    00000FF9  A$lcc2663
+     00000FF9  C$tactics |    00000FFC  A$lcc2663 |    00000FFD  A$lcc2663
+     00000FFF  A$lcc2663 |    00001000  A$lcc2663 |    00001001  A$lcc2663
+     00001002  A$lcc2663 |    00001003  A$lcc2663 |    00001004  A$lcc2663
+     00001005  A$lcc2663 |    00001008  A$lcc2663 |    00001009  A$lcc2663
+     0000100A  A$lcc2663 |    0000100B  A$lcc2663 |    0000100E  A$lcc2663
+     0000100F  A$lcc2663 |    00001011  A$lcc2663 |    00001012  A$lcc2663
+     00001013  A$lcc2663 |    00001013  C$tactics |    00001015  A$lcc2663
+     00001016  A$lcc2663 |    00001017  A$lcc2663 |    00001018  A$lcc2663
+     00001019  A$lcc2663 |    0000101A  A$lcc2663 |    0000101B  A$lcc2663
+     0000101C  A$lcc2663 |    0000101E  A$lcc2663 |    0000101F  A$lcc2663
+     00001020  A$lcc2663 |    00001021  A$lcc2663 |    00001023  A$lcc2663
+     00001024  A$lcc2663 |    00001026  A$lcc2663 |    00001027  A$lcc2663
+     00001028  A$lcc2663 |    00001029  A$lcc2663 |    0000102A  A$lcc2663
+     0000102D  A$lcc2663 |    0000102E  A$lcc2663 |    0000102F  A$lcc2663
+     00001030  A$lcc2663 |    00001032  A$lcc2663 |    00001033  A$lcc2663
+     00001034  A$lcc2663 |    00001035  A$lcc2663 |    00001037  A$lcc2663
+     00001038  A$lcc2663 |    00001039  A$lcc2663 |    0000103A  A$lcc2663
+     0000103B  A$lcc2663 |    0000103C  A$lcc2663 |    0000103D  A$lcc2663
+     0000103E  A$lcc2663 |    0000103F  A$lcc2663 |    00001040  A$lcc2663
+     00001040  C$tactics |    00001041  A$lcc2663 |    00001042  A$lcc2663
+     00001043  A$lcc2663 |    00001044  A$lcc2663 |    00001047  A$lcc2663
+     0000104A  A$lcc2663 |    0000104C  A$lcc2663 |    0000104C  C$tactics
+     0000104C  XG$main$0 |    0000104D  Ftactics$ |    00001054  Ftactics$
+     0000105B  Ftactics$ |    00001062  Ftactics$ |    00001069  Ftactics$
+     00001070  Ftactics$ |    00001077  Ftactics$ |    0000107E  Ftactics$
+     00001085  Ftactics$ |    0000108C  Ftactics$ |    00001093  Ftactics$
+     0000109A  Ftactics$
+ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -231,7 +306,7 @@ _HEADER0               00000000    00000001 =           1. bytes (ABS,CON)
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
      00000020  .call_hl 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -241,7 +316,7 @@ _HEADER1               00000000    00000005 =           5. bytes (ABS,CON)
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
      00000028  .MemsetSm
-ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 9.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -251,7 +326,7 @@ _HEADER2               00000000    00000007 =           7. bytes (ABS,CON)
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
      00000030  .MemcpySm
-ASxxxx Linker V03.00 + NoICE + sdld,  page 9.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 10.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -260,7 +335,7 @@ _HEADER3               00000000    00000008 =           8. bytes (ABS,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-ASxxxx Linker V03.00 + NoICE + sdld,  page 10.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 11.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -271,7 +346,7 @@ _HEADER4               00000000    0000004C =          76. bytes (ABS,CON)
         -----  ------            -----  ------            -----  ------    
      00000080  .int      |    0000008F  _wait_int |    0000009C  __standar
      000000AC  _refresh_
-ASxxxx Linker V03.00 + NoICE + sdld,  page 11.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 12.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -280,7 +355,7 @@ _HEADER5               00000000    00000002 =           2. bytes (ABS,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-ASxxxx Linker V03.00 + NoICE + sdld,  page 12.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 13.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -289,7 +364,7 @@ _HEADER6               00000000    00000030 =          48. bytes (ABS,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-ASxxxx Linker V03.00 + NoICE + sdld,  page 13.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 14.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -298,7 +373,7 @@ _HEADER7               00000000    00000006 =           6. bytes (ABS,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-ASxxxx Linker V03.00 + NoICE + sdld,  page 14.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 15.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -307,7 +382,7 @@ _HEADER8               00000000    00000003 =           3. bytes (ABS,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-ASxxxx Linker V03.00 + NoICE + sdld,  page 15.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 16.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -316,7 +391,7 @@ _HEADER9               00000000    00000001 =           1. bytes (ABS,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-ASxxxx Linker V03.00 + NoICE + sdld,  page 16.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 17.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -325,7 +400,7 @@ _HEADERa               00000000    00000001 =           1. bytes (ABS,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-ASxxxx Linker V03.00 + NoICE + sdld,  page 17.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 18.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -334,7 +409,7 @@ _HEADERb               00000000    00000001 =           1. bytes (ABS,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-ASxxxx Linker V03.00 + NoICE + sdld,  page 18.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 19.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -343,7 +418,7 @@ _HEADERc               00000000    00000002 =           2. bytes (ABS,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-ASxxxx Linker V03.00 + NoICE + sdld,  page 19.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 20.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -352,7 +427,7 @@ _HEADERd               00000000    00000001 =           1. bytes (ABS,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-ASxxxx Linker V03.00 + NoICE + sdld,  page 20.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 21.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -361,7 +436,7 @@ _HEADERe               00000000    00000001 =           1. bytes (ABS,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-ASxxxx Linker V03.00 + NoICE + sdld,  page 21.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 22.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -370,7 +445,7 @@ _HEADERf               00000000    00000002 =           2. bytes (ABS,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-ASxxxx Linker V03.00 + NoICE + sdld,  page 22.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 23.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -381,7 +456,7 @@ _HEADER10              00000000    00000084 =         132. bytes (ABS,CON)
         -----  ------            -----  ------            -----  ------    
      00000150  .reset    |    00000150  _reset    |    00000157  .code_sta
      000001B9  _exit     |    000001BD  _set_inte
-ASxxxx Linker V03.00 + NoICE + sdld,  page 23.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 24.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -390,60 +465,81 @@ _HEADER11              00000000    00000001 =           1. bytes (ABS,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-ASxxxx Linker V03.00 + NoICE + sdld,  page 24.
-Hexadecimal  [32-Bits]
-
-Area                       Addr        Size        Decimal Bytes (Attributes)
---------------------       ----        ----        ------- ----- ------------
-_HOME                  00000C7E    0000010F =         271. bytes (REL,CON)
-
-        Value  Global            Value  Global            Value  Global    
-        -----  ------            -----  ------            -----  ------    
-     00000C7E  .memset_s |    00000C87  .memcpy_s |    00000CA4  .remove_V
-     00000CA7  .remove_i |    00000CC4  .add_VBL  |    00000CC7  .add_int 
-     00000CD2  .wait_vbl |    00000CD2  _wait_vbl |    00000CE2  .display_
-     00000CE2  _display_ |    00000CFA  _remove_V |    00000D05  _add_VBL 
-     00000D10  _set_tile |    00000D15  _set_bkg_ |    00000D15  _set_win_
-     00000D1D  _set_spri |    00000D4D  .padup    |    00000D4D  _waitpadu
-     00000D5D  .jpad     |    00000D5D  _joypad   |    00000D85  _waitpad 
-     00000D86  .wait_pad
 ASxxxx Linker V03.00 + NoICE + sdld,  page 25.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_GSINIT                00000D8D    00000020 =          32. bytes (REL,CON)
+_HOME                  000010A1    0000010F =         271. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     00000D8D  gsinit    |    00000D99  A$lcc6600 |    00000D99  C$tactics
-     00000D9C  A$lcc6600 |    00000D9E  A$lcc6600 |    00000D9E  C$tactics
-     00000DA1  A$lcc6600 |    00000DA3  A$lcc6600 |    00000DA3  C$tactics
-     00000DA6  A$lcc6600 |    00000DA8  A$lcc6600 |    00000DA8  C$tactics
-     00000DAB  A$lcc6600
+     000010A1  .memset_s |    000010AA  .memcpy_s |    000010C7  .remove_V
+     000010CA  .remove_i |    000010E7  .add_VBL  |    000010EA  .add_int 
+     000010F5  .wait_vbl |    000010F5  _wait_vbl |    00001105  .display_
+     00001105  _display_ |    0000111D  _remove_V |    00001128  _add_VBL 
+     00001133  _set_tile |    00001138  _set_bkg_ |    00001138  _set_win_
+     00001140  _set_spri |    00001170  .padup    |    00001170  _waitpadu
+     00001180  .jpad     |    00001180  _joypad   |    000011A8  _waitpad 
+     000011A9  .wait_pad
 ASxxxx Linker V03.00 + NoICE + sdld,  page 26.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_GSFINAL               00000DAD    00000001 =           1. bytes (REL,CON)
+_INITIALIZER           000011B0    00000056 =          86. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
+     000011B0  Ftactics$ |    000011EC  Ftactics$
 ASxxxx Linker V03.00 + NoICE + sdld,  page 27.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_DATA                  0000C0A0    00000415 =        1045. bytes (REL,CON)
+_GSINIT                00001206    00000020 =          32. bytes (REL,CON)
+
+        Value  Global            Value  Global            Value  Global    
+        -----  ------            -----  ------            -----  ------    
+     00001206  gsinit    |    00001212  A$lcc2663 |    00001212  C$tactics
+     00001215  A$lcc2663 |    00001217  A$lcc2663 |    00001217  C$tactics
+     0000121A  A$lcc2663 |    0000121C  A$lcc2663 |    0000121C  C$tactics
+     0000121F  A$lcc2663 |    00001221  A$lcc2663 |    00001221  C$tactics
+     00001224  A$lcc2663
+ASxxxx Linker V03.00 + NoICE + sdld,  page 28.
+Hexadecimal  [32-Bits]
+
+Area                       Addr        Size        Decimal Bytes (Attributes)
+--------------------       ----        ----        ------- ----- ------------
+_GSFINAL               00001226    00000001 =           1. bytes (REL,CON)
+
+        Value  Global            Value  Global            Value  Global    
+        -----  ------            -----  ------            -----  ------    
+ASxxxx Linker V03.00 + NoICE + sdld,  page 29.
+Hexadecimal  [32-Bits]
+
+Area                       Addr        Size        Decimal Bytes (Attributes)
+--------------------       ----        ----        ------- ----- ------------
+_DATA                  0000C0A0    00000016 =          22. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
      0000C0A0  __cpu     |    0000C0A1  __is_GBA  |    0000C0A2  .mode    
      0000C0A3  .sys_time |    0000C0A3  _sys_time |    0000C0A5  .int_0x40
-     0000C0B1  G$tilemap |    0000C0B1  _tilemapM |    0000C4B1  Ltactics.
-     0000C4B2  Ltactics. |    0000C4B3  Ltactics. |    0000C4B4  Ltactics.
-ASxxxx Linker V03.00 + NoICE + sdld,  page 28.
+     0000C0B1  Ltactics. |    0000C0B2  Ltactics. |    0000C0B3  Ltactics.
+     0000C0B4  Ltactics. |    0000C0B5  Ltactics.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 30.
+Hexadecimal  [32-Bits]
+
+Area                       Addr        Size        Decimal Bytes (Attributes)
+--------------------       ----        ----        ------- ----- ------------
+_INITIALIZED           0000C0B6    00000056 =          86. bytes (REL,CON)
+
+        Value  Global            Value  Global            Value  Global    
+        -----  ------            -----  ------            -----  ------    
+     0000C0B6  G$display |    0000C0B6  _displayT |    0000C0F2  G$letter_
+     0000C0F2  _letter_t
+ASxxxx Linker V03.00 + NoICE + sdld,  page 31.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
@@ -453,13 +549,13 @@ _HRAM12                00000000    00000003 =           3. bytes (ABS,CON)
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
      0000FF90  __current |    0000FF92  __shadow_
-ASxxxx Linker V03.00 + NoICE + sdld,  page 29.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 32.
 
 Files Linked                              [ module(s) ]
 
 C:\Users\gerzy\OneDrive - Florida Polytechnic University\Documents\Merpcraft Stuff\codeforces\gmamer_boy\gbdk\lib/gb/crt0.o
                                           [ Runtime ]
-C:\Users\gerzy\AppData\Local\Temp/lcc66000.o
+C:\Users\gerzy\AppData\Local\Temp/lcc266320.o
                                           [ tactics ]
 
 
@@ -472,13 +568,13 @@ C:\Users\gerzy\OneDrive - Florida Polytechnic University\Documents\Merpcraft Stu
 C:\Users\gerzy\OneDrive - Florida Polytechnic University\Documents\Merpcraft Stuff\codeforces\gmamer_boy\gbdk\lib/gb/gb.lib
                                           [ sfr.o ]
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 30.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 33.
 
 User Base Address Definitions
 
 _DATA=0xC0A0
 _CODE=0x0200
-ASxxxx Linker V03.00 + NoICE + sdld,  page 31.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 34.
 
 User Global Definitions
 
