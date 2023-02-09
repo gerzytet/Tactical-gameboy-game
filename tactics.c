@@ -5,9 +5,9 @@
 #include "graphics/Letters.h"
 #include "graphics/Letters.c"
 
-
 typedef unsigned char uchar;
 
+#define FIRST_TILE 12
 #define CHARACTER3 12
 #define CHARACTER4 13
 #define CHARACTER5 14
@@ -20,25 +20,22 @@ typedef unsigned char uchar;
 #define FENCE 20
 #define GRASS 21
 #define PATH 22
-#define LETTER2_START 23
 //WALL WATER ROCK FOREST BRIDGE
 
-#define START 28
-#define END 29
-#define CURSOR1 30
-#define CURSOR2 31
-
-
+#define START 23
+#define END 24
+#define CURSOR1 25
+#define CURSOR2 26
 
 #define TILEMAP_START 0x9800
+#define WIN_TILEMAP_START 0x9C00
 
-const uchar* displayTexts[30] = {
+const uchar* displayTexts[25] = {
     "      ", "      ", "      ", "      ", "      ",
     "      ", "      ", "      ", "      ", "      ",
     "GUY   ", "GUY   ", "GUY   ", "GUY   ", "GUY   ",
     "GUY   ", "HOUSE ", "CAVE  ", "CHEST ", "TREE  ",
-    "FENCE ", "GRASS ", "PATH  ", NULL, NULL,
-    NULL, NULL, NULL, "START ", "END   "
+    "FENCE ", "GRASS ", "PATH  ", "START ", "END   "
 };
 
 #define WIDTH 12
@@ -52,7 +49,7 @@ const uchar MAP[12][12] = {
     {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, TREE, TREE},
     {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, TREE, TREE},
     {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, TREE, TREE},
-    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, TREE, TREE},
+    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, START, END},
     {HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, PATH, TREE, TREE},
     {HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, PATH, TREE, TREE},
     {HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, PATH, TREE, TREE},
@@ -90,17 +87,17 @@ uchar letter_table[26] = {
     SPACE_LETTER //z
 };
 
-#define TEXT_OFFSET 1
+#define TEXT_OFFSET 2
+
+uchar windowBuffer[2][32];
 
 void change_text(uchar *text) {
     if (text == NULL) {
         return;
     }
-    volatile uchar *tilemap = (uchar *)TILEMAP_START;
+    volatile uchar *tilemap = &windowBuffer[0][0];
     static uchar tile;
-    tilemap += TEXT_OFFSET;
-    for (int i = 0; i < 6; i++) {
-        
+    for (uchar i = 0; i < 6; i++) {
         if (text[i] == ' ') {
             tile = SPACE_LETTER;
         } else {
@@ -112,12 +109,22 @@ void change_text(uchar *text) {
     }
 }
 
+// void copy_window_buffer() {
+//    volatile uchar *tilemap = (uchar *)WIN_TILEMAP_START + TEXT_OFFSET;
+//    for (uchar i = 0; i < 6; i++) {
+//        tilemap[i] = windowBuffer[0][i];
+//        tilemap[i|32] = windowBuffer[1][i];
+//    }
+// }
+
+extern void copy_window_buffer();
+
 void main() {
     wait_vbl_done();
     display_off();
     LCDC_REG = 0x00;
-    set_bkg_data(0, 128, Tiles);
-    set_bkg_data(0, 46, Letters); //letters part 1. 46 tiles.  23 letters
+    set_bkg_data(48, 60, Tiles); //tiles.  15 big tiles, 60 small tiles
+    set_bkg_data(0, 46, Letters); //letters. 46 tiles.  23 letters
 
     volatile uchar *tilemap = (uchar *)TILEMAP_START;
     for (uchar r = 0; r < HEIGHT * 2; r++) {
@@ -132,11 +139,13 @@ void main() {
             tilemap[r*32 + c] = SPACE_LETTER;
         }
     }
-    set_sprite_data(0, 8, Tiles + (16 * CURSOR1 * 4));
+    set_sprite_data(0, 8, Tiles + ((CURSOR1 - FIRST_TILE) * 16 * 4));
     set_sprite_tile(0, 0);
     set_sprite_tile(1, 1);
     set_sprite_tile(2, 2);
     set_sprite_tile(3, 3);
+
+    vmemset((uchar *)WIN_TILEMAP_START, SPACE_LETTER, 32*32);
 
     change_text("FOREST");
 
@@ -150,10 +159,44 @@ void main() {
     static uchar cameraY = 0;
 
     //screen brightness
-    BGP_REG = 0b11100100;
+    //BGP_REG = 0b11100100;
 
-    LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON;
+    IE_REG = IEF_VBLANK;
+    enable_interrupts();
+    
+    LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00;
     while (1) {
+        //DURING FRAME:
+        if (joyTimer > 0) {
+            joyTimer--;
+        } else {
+            uchar joy = joypad();
+            if (joy & J_LEFT) {
+                if (x > 0) {
+                    x--;
+                }
+            } else if (joy & J_RIGHT) {
+                if (x < WIDTH - 1) {
+                    x++;
+                }
+            } else if (joy & J_UP) {
+                if (y > 0) {
+                    y--;
+                }
+            } else if (joy & J_DOWN) {
+                if (y < HEIGHT - 1) {
+                    y++;
+                }
+            }
+            if (joy != 0) {
+                joyTimer = 10;
+            }
+        }
+
+        uchar coord = MAP[y][x];
+        uchar *text = (uchar *)displayTexts[coord];
+        change_text(text);
+
         if (x < cameraX) {
             cameraX--;
         } else if (x >= cameraX + 10) {
@@ -166,21 +209,25 @@ void main() {
             cameraY++;
         }
 
-        SCY_REG = 0;
-        SCX_REG = 0;
+        static uchar target_scy;
+        target_scy = cameraY * 16;
+        static uchar target_scx;
+        target_scx = cameraX * 16;
 
-        cameraY *= 16;
-        cameraX *= 16;
+        __asm__("halt");
 
-        while (LY_REG != 16) ;
-        while (STAT_REG & 0x03 != 0) ;
-        
-        SCY_REG = cameraY;
-        SCX_REG = cameraX;
-        cameraY /= 16;
-        cameraX /= 16;
+        //VBLANK:
 
-        wait_vbl_done();
+        if (SCY_REG < target_scy) {
+            SCY_REG += 2;
+        } else if (SCY_REG > target_scy) {
+            SCY_REG -= 2;
+        }
+        if (SCX_REG < target_scx) {
+            SCX_REG += 2;
+        } else if (SCX_REG > target_scx) {
+            SCX_REG -= 2;
+        }
 
         move_sprite(0, (x - cameraX)*16 + 8, (y-cameraY)*16 + 32);
         move_sprite(1, (x - cameraX)*16 + 8,  (y-cameraY)*16 + 40);
@@ -200,35 +247,11 @@ void main() {
             set_sprite_tile(2, 6);
             set_sprite_tile(3, 7);
         }
-        uchar coord = MAP[y][x];
-        uchar *text = (uchar *)displayTexts[coord];
-        change_text(text);
 
-        if (joyTimer > 0) {
-            joyTimer--;
-            continue;
-        } 
-
-        uchar joy = joypad();
-        if (joy & J_LEFT) {
-            if (x > 0) {
-                x--;
-            }
-        } else if (joy & J_RIGHT) {
-            if (x < WIDTH - 1) {
-                x++;
-            }
-        } else if (joy & J_UP) {
-            if (y > 0) {
-                y--;
-            }
-        } else if (joy & J_DOWN) {
-            if (y < HEIGHT - 1) {
-                y++;
-            }
-        }
-        if (joy != 0) {
-            joyTimer = 10;
-        }
+        copy_window_buffer();
+        //while (LY_REG != 0) ;
+        LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_WINON;
+        while (LY_REG != 16) ;
+        LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_WINOFF;
     }
 }

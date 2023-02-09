@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 16 x 16
-  Tiles                : 0 to 31
+  Tiles                : 0 to 14
 
   Palette colors       : None.
   SGB Palette          : None.
@@ -22,8 +22,8 @@
 
 */
 
-#ifndef __2x2tiles_h_INCLUDE
-#define __2x2tiles_h_INCLUDE
+#ifndef __2x2Tiles_h_INCLUDE
+#define __2x2Tiles_h_INCLUDE
 
 /* Bank of tiles. */
 #define TilesBank 0
