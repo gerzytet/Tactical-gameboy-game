@@ -29,7 +29,9 @@ typedef unsigned char uchar;
 #define CURSOR2 14
 
 const uchar palleteTable[13] = {
-    0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1
+    0, 0, 0, 0,
+    2, 3, 2, 1,
+    2, 1, 1, 0, 0
 };
 
 #define TILEMAP_START 0x9800
@@ -120,6 +122,21 @@ void change_text(uchar *text) {
 //    }
 // }
 
+void setup_background_palletes() {
+    VBK_REG = VBK_BANK_1;
+
+    volatile uchar *tilemap = (uchar *)TILEMAP_START;
+    for (uchar r = 0; r < HEIGHT * 2; r++) {
+        for (uchar c = 0; c < WIDTH * 2; c++) {
+            uchar tile = MAP[r/2][c/2];
+            uchar pal = palleteTable[tile];
+            tilemap[r*32 + c] = pal;
+        }
+    }
+
+    VBK_REG = VBK_BANK_0;
+}
+
 extern void copy_window_buffer();
 
 void main() {
@@ -134,12 +151,7 @@ void main() {
         for (uchar c = 0; c < WIDTH * 2; c++) {
             uchar map = (MAP[r/2][c/2] + FIRST_TILE_OFFSET_2x2)*4;
             uchar value = map + (r&1) + (c&1)*2;
-            tilemap[r*32 + c + 64] = value;
-        }
-    }
-    for (uchar r = 0; r < 2; r++) {
-        for (uchar c = 0; c < WIDTH * 2; c++) {
-            tilemap[r*32 + c] = SPACE_LETTER;
+            tilemap[r*32 + c] = value;
         }
     }
     set_sprite_data(0, 8, Tiles + (CURSOR1 * 16 * 4));
@@ -164,7 +176,11 @@ void main() {
     //screen brightness
     //BGP_REG = 0b11100100;
 
+    setup_background_palletes();
+
     set_bkg_palette(0, 8, colors);
+    set_sprite_palette(0, 1, colors);
+    set_sprite_prop(0, 0);
 
     IE_REG = IEF_VBLANK;
     enable_interrupts();
@@ -223,9 +239,9 @@ void main() {
 
         //VBLANK:
 
-        if (SCY_REG < target_scy) {
+        if ((uchar)(SCY_REG + 16) < target_scy) {
             SCY_REG += 2;
-        } else if (SCY_REG > target_scy) {
+        } else if ((uchar)(SCY_REG + 16) > target_scy) {
             SCY_REG -= 2;
         }
         if (SCX_REG < target_scx) {
