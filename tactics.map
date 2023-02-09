@@ -25,17 +25,17 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
      00000002  l__HEADER |    00000003  l__HEADER |    00000003  l__HRAM12
      00000005  l__HEADER |    00000006  l__HEADER |    00000007  l__HEADER
      00000008  l__HEADER |    0000002A  l__GSINIT |    00000030  l__HEADER
-     0000004C  l__HEADER |    0000004C  l__INITIA |    0000004C  l__INITIA
+     00000034  l__INITIA |    00000034  l__INITIA |    0000004C  l__HEADER
      0000005A  l__DATA   |    00000084  l__HEADER |    00000170  l__HOME  
-     00000200  s__CODE   |    00000B8A  l__CODE   |    00000D8A  s__HOME  
-     00000EFA  s__BASE   |    00000EFA  s__CODE_0 |    00000EFA  s__INITIA
-     00000EFA  s__LIT    |    00000F46  s__GSINIT |    00000F70  s__GSFINA
+     00000200  s__CODE   |    00000C1D  l__CODE   |    00000E1D  s__HOME  
+     00000F8D  s__BASE   |    00000F8D  s__CODE_0 |    00000F8D  s__INITIA
+     00000F8D  s__LIT    |    00000FC1  s__GSINIT |    00000FEB  s__GSFINA
      00002000  _rROMB0   |    00003000  _rROMB1   |    00004000  _rRAMB   
      00008000  __VRAM    |    00008000  __VRAM800 |    00008800  __VRAM880
      00009000  __VRAM900 |    00009800  __SCRN0   |    00009C00  __SCRN1  
      0000A000  __SRAM    |    0000C000  __RAM     |    0000C000  _shadow_O
      0000C0A0  s__DATA   |    0000C0FA  s__BSS    |    0000C0FA  s__INITIA
-     0000C146  s__HEAP   |    0000C146  s__HEAP_E |    0000D000  __RAMBANK
+     0000C12E  s__HEAP   |    0000C12E  s__HEAP_E |    0000D000  __RAMBANK
      0000E000  .STACK    |    0000FE00  __OAMRAM  |    0000FF00  _P1_REG  
      0000FF00  __IO      |    0000FF01  _SB_REG   |    0000FF02  _SC_REG  
      0000FF04  _DIV_REG  |    0000FF05  _TIMA_REG |    0000FF06  _TMA_REG 
@@ -72,280 +72,285 @@ Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_CODE                  00000200    00000B8A =        2954. bytes (REL,CON)
+_CODE                  00000200    00000C1D =        3101. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     00000200  A$lcc2438 |    00000200  C$tactics |    00000200  G$change_
-     00000200  _change_t |    00000201  A$lcc2438 |    00000202  A$lcc2438
-     00000203  A$lcc2438 |    00000203  C$tactics |    00000204  A$lcc2438
-     00000205  A$lcc2438 |    00000205  C$tactics |    00000207  A$lcc2438
-     00000207  C$tactics |    00000207  C$tactics |    00000209  A$lcc2438
-     0000020B  A$lcc2438 |    0000020D  A$lcc2438 |    0000020E  A$lcc2438
-     00000210  A$lcc2438 |    00000212  A$lcc2438 |    00000212  C$tactics
-     00000213  A$lcc2438 |    00000215  A$lcc2438 |    00000216  A$lcc2438
-     00000217  A$lcc2438 |    00000218  A$lcc2438 |    00000219  A$lcc2438
-     0000021B  A$lcc2438 |    0000021D  A$lcc2438 |    0000021D  C$tactics
-     00000220  A$lcc2438 |    00000222  A$lcc2438 |    00000224  A$lcc2438
-     00000224  C$tactics |    00000226  A$lcc2438 |    00000227  A$lcc2438
-     00000228  A$lcc2438 |    00000229  A$lcc2438 |    0000022A  A$lcc2438
-     0000022D  A$lcc2438 |    0000022E  A$lcc2438 |    0000022F  A$lcc2438
-     00000232  A$lcc2438 |    00000232  C$tactics |    00000235  A$lcc2438
-     00000237  A$lcc2438 |    00000238  A$lcc2438 |    0000023A  A$lcc2438
-     0000023B  A$lcc2438 |    0000023C  A$lcc2438 |    0000023D  A$lcc2438
-     00000240  A$lcc2438 |    00000241  A$lcc2438 |    00000242  A$lcc2438
-     00000242  C$tactics |    00000243  A$lcc2438 |    00000243  C$tactics
-     00000245  A$lcc2438 |    00000246  A$lcc2438 |    00000248  A$lcc2438
-     0000024A  A$lcc2438 |    0000024B  A$lcc2438 |    0000024D  A$lcc2438
-     0000024F  A$lcc2438 |    00000250  A$lcc2438 |    00000253  A$lcc2438
-     00000254  A$lcc2438 |    00000254  C$tactics |    00000256  A$lcc2438
-     00000257  A$lcc2438 |    00000259  A$lcc2438 |    0000025A  A$lcc2438
+     00000200  A$lcc3108 |    00000200  C$tactics |    00000200  G$change_
+     00000200  _change_t |    00000201  A$lcc3108 |    00000202  A$lcc3108
+     00000203  A$lcc3108 |    00000203  C$tactics |    00000204  A$lcc3108
+     00000205  A$lcc3108 |    00000205  C$tactics |    00000207  A$lcc3108
+     00000207  C$tactics |    00000207  C$tactics |    00000209  A$lcc3108
+     0000020B  A$lcc3108 |    0000020D  A$lcc3108 |    0000020E  A$lcc3108
+     00000210  A$lcc3108 |    00000212  A$lcc3108 |    00000212  C$tactics
+     00000213  A$lcc3108 |    00000215  A$lcc3108 |    00000216  A$lcc3108
+     00000217  A$lcc3108 |    00000218  A$lcc3108 |    00000219  A$lcc3108
+     0000021B  A$lcc3108 |    0000021D  A$lcc3108 |    0000021D  C$tactics
+     00000220  A$lcc3108 |    00000222  A$lcc3108 |    00000224  A$lcc3108
+     00000224  C$tactics |    00000226  A$lcc3108 |    00000227  A$lcc3108
+     00000228  A$lcc3108 |    00000229  A$lcc3108 |    0000022A  A$lcc3108
+     0000022D  A$lcc3108 |    0000022E  A$lcc3108 |    0000022F  A$lcc3108
+     00000232  A$lcc3108 |    00000232  C$tactics |    00000235  A$lcc3108
+     00000237  A$lcc3108 |    00000238  A$lcc3108 |    0000023A  A$lcc3108
+     0000023B  A$lcc3108 |    0000023C  A$lcc3108 |    0000023D  A$lcc3108
+     00000240  A$lcc3108 |    00000241  A$lcc3108 |    00000242  A$lcc3108
+     00000242  C$tactics |    00000243  A$lcc3108 |    00000243  C$tactics
+     00000245  A$lcc3108 |    00000246  A$lcc3108 |    00000248  A$lcc3108
+     0000024A  A$lcc3108 |    0000024B  A$lcc3108 |    0000024D  A$lcc3108
+     0000024F  A$lcc3108 |    00000250  A$lcc3108 |    00000253  A$lcc3108
+     00000254  A$lcc3108 |    00000254  C$tactics |    00000256  A$lcc3108
+     00000257  A$lcc3108 |    00000259  A$lcc3108 |    0000025A  A$lcc3108
      0000025A  C$tactics |    0000025A  XG$change |    0000025B  G$Tiles$0
      0000025B  _Tiles    |    0000061B  G$Letters |    0000061B  _Letters 
-     000008FB  G$MAP$0_0 |    000008FB  _MAP      |    0000098B  A$lcc2438
-     0000098B  C$tactics |    0000098B  G$main$0$ |    0000098B  _main    
-     0000098D  A$lcc2438 |    0000098D  C$tactics |    00000990  A$lcc2438
-     00000990  C$tactics |    00000993  A$lcc2438 |    00000993  C$tactics
-     00000994  A$lcc2438 |    00000996  A$lcc2438 |    00000996  C$tactics
-     00000999  A$lcc2438 |    0000099A  A$lcc2438 |    0000099D  A$lcc2438
-     0000099E  A$lcc2438 |    000009A1  A$lcc2438 |    000009A3  A$lcc2438
-     000009A3  C$tactics |    000009A6  A$lcc2438 |    000009A7  A$lcc2438
-     000009AA  A$lcc2438 |    000009AB  A$lcc2438 |    000009AE  A$lcc2438
-     000009B0  A$lcc2438 |    000009B0  C$tactics |    000009B2  A$lcc2438
-     000009B3  A$lcc2438 |    000009B5  A$lcc2438 |    000009B8  A$lcc2438
-     000009B8  C$tactics |    000009BA  A$lcc2438 |    000009BC  A$lcc2438
-     000009BE  A$lcc2438 |    000009BF  A$lcc2438 |    000009C1  A$lcc2438
-     000009C4  A$lcc2438 |    000009C4  C$tactics |    000009C6  A$lcc2438
-     000009C7  A$lcc2438 |    000009C8  A$lcc2438 |    000009C9  A$lcc2438
-     000009CA  A$lcc2438 |    000009CB  A$lcc2438 |    000009CD  A$lcc2438
-     000009CE  A$lcc2438 |    000009D0  A$lcc2438 |    000009D1  A$lcc2438
-     000009D3  A$lcc2438 |    000009D4  A$lcc2438 |    000009D6  A$lcc2438
-     000009D8  A$lcc2438 |    000009DA  A$lcc2438 |    000009DB  A$lcc2438
-     000009DC  A$lcc2438 |    000009DD  A$lcc2438 |    000009DE  A$lcc2438
-     000009DF  A$lcc2438 |    000009E0  A$lcc2438 |    000009E1  A$lcc2438
-     000009E3  A$lcc2438 |    000009E4  A$lcc2438 |    000009E5  A$lcc2438
-     000009E6  A$lcc2438 |    000009E8  A$lcc2438 |    000009E9  A$lcc2438
-     000009EB  A$lcc2438 |    000009ED  A$lcc2438 |    000009EE  A$lcc2438
+     000008FB  G$colors$ |    000008FB  _colors   |    0000093B  G$MAP$0_0
+     0000093B  _MAP      |    000009CB  A$lcc3108 |    000009CB  C$tactics
+     000009CB  G$main$0$ |    000009CB  _main     |    000009CD  A$lcc3108
+     000009CD  C$tactics |    000009D0  A$lcc3108 |    000009D0  C$tactics
+     000009D3  A$lcc3108 |    000009D3  C$tactics |    000009D4  A$lcc3108
+     000009D6  A$lcc3108 |    000009D6  C$tactics |    000009D9  A$lcc3108
+     000009DA  A$lcc3108 |    000009DD  A$lcc3108 |    000009DE  A$lcc3108
+     000009E1  A$lcc3108 |    000009E3  A$lcc3108 |    000009E3  C$tactics
+     000009E6  A$lcc3108 |    000009E7  A$lcc3108 |    000009EA  A$lcc3108
+     000009EB  A$lcc3108 |    000009EE  A$lcc3108 |    000009F0  A$lcc3108
+     000009F0  C$tactics |    000009F2  A$lcc3108 |    000009F3  A$lcc3108
+     000009F5  A$lcc3108 |    000009F8  A$lcc3108 |    000009F8  C$tactics
+     000009FA  A$lcc3108 |    000009FC  A$lcc3108 |    000009FE  A$lcc3108
+     000009FF  A$lcc3108 |    00000A01  A$lcc3108 |    00000A04  A$lcc3108
+     00000A04  C$tactics |    00000A06  A$lcc3108 |    00000A07  A$lcc3108
+     00000A08  A$lcc3108 |    00000A09  A$lcc3108 |    00000A0A  A$lcc3108
+     00000A0B  A$lcc3108 |    00000A0D  A$lcc3108 |    00000A0E  A$lcc3108
+     00000A10  A$lcc3108 |    00000A11  A$lcc3108 |    00000A13  A$lcc3108
+     00000A14  A$lcc3108 |    00000A16  A$lcc3108 |    00000A18  A$lcc3108
+     00000A1A  A$lcc3108 |    00000A1B  A$lcc3108 |    00000A1C  A$lcc3108
+     00000A1D  A$lcc3108 |    00000A1E  A$lcc3108 |    00000A1F  A$lcc3108
+     00000A20  A$lcc3108 |    00000A21  A$lcc3108 |    00000A23  A$lcc3108
+     00000A24  A$lcc3108 |    00000A25  A$lcc3108 |    00000A26  A$lcc3108
+     00000A28  A$lcc3108 |    00000A29  A$lcc3108 |    00000A2B  A$lcc3108
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_CODE                  00000200    00000B8A =        2954. bytes (REL,CON)
+_CODE                  00000200    00000C1D =        3101. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     000009F0  A$lcc2438 |    000009F1  A$lcc2438 |    000009F2  A$lcc2438
-     000009F3  A$lcc2438 |    000009F4  A$lcc2438 |    000009F5  A$lcc2438
-     000009F6  A$lcc2438 |    000009F7  A$lcc2438 |    000009F8  A$lcc2438
-     000009F9  A$lcc2438 |    000009FA  A$lcc2438 |    000009FB  A$lcc2438
-     000009FD  A$lcc2438 |    000009FE  A$lcc2438 |    000009FF  A$lcc2438
-     00000A00  A$lcc2438 |    00000A02  A$lcc2438 |    00000A03  A$lcc2438
-     00000A04  A$lcc2438 |    00000A05  A$lcc2438 |    00000A06  A$lcc2438
-     00000A09  A$lcc2438 |    00000A0A  A$lcc2438 |    00000A0B  A$lcc2438
-     00000A0C  A$lcc2438 |    00000A0E  A$lcc2438 |    00000A0F  A$lcc2438
-     00000A10  A$lcc2438 |    00000A11  A$lcc2438 |    00000A13  A$lcc2438
-     00000A14  A$lcc2438 |    00000A16  A$lcc2438 |    00000A17  A$lcc2438
-     00000A19  A$lcc2438 |    00000A1A  A$lcc2438 |    00000A1B  A$lcc2438
-     00000A1C  A$lcc2438 |    00000A1D  A$lcc2438 |    00000A1E  A$lcc2438
-     00000A1F  A$lcc2438 |    00000A20  A$lcc2438 |    00000A21  A$lcc2438
-     00000A22  A$lcc2438 |    00000A23  A$lcc2438 |    00000A25  A$lcc2438
-     00000A27  A$lcc2438 |    00000A28  A$lcc2438 |    00000A29  A$lcc2438
-     00000A2A  A$lcc2438 |    00000A2B  A$lcc2438 |    00000A2C  A$lcc2438
-     00000A2D  A$lcc2438 |    00000A2E  A$lcc2438 |    00000A2F  A$lcc2438
-     00000A30  A$lcc2438 |    00000A32  A$lcc2438 |    00000A33  A$lcc2438
-     00000A34  A$lcc2438 |    00000A35  A$lcc2438 |    00000A37  A$lcc2438
-     00000A38  A$lcc2438 |    00000A3A  A$lcc2438 |    00000A3B  A$lcc2438
-     00000A3C  A$lcc2438 |    00000A3D  A$lcc2438 |    00000A3F  A$lcc2438
-     00000A41  A$lcc2438 |    00000A43  A$lcc2438 |    00000A44  A$lcc2438
-     00000A45  A$lcc2438 |    00000A46  A$lcc2438 |    00000A47  A$lcc2438
-     00000A48  A$lcc2438 |    00000A49  A$lcc2438 |    00000A4A  A$lcc2438
-     00000A4B  A$lcc2438 |    00000A4C  A$lcc2438 |    00000A4D  A$lcc2438
-     00000A4D  C$tactics |    00000A4E  A$lcc2438 |    00000A50  A$lcc2438
-     00000A51  A$lcc2438 |    00000A52  A$lcc2438 |    00000A54  A$lcc2438
-     00000A55  A$lcc2438 |    00000A57  A$lcc2438 |    00000A58  A$lcc2438
-     00000A59  A$lcc2438 |    00000A5A  A$lcc2438 |    00000A5A  C$tactics
-     00000A5C  A$lcc2438 |    00000A5D  A$lcc2438 |    00000A5E  A$lcc2438
-     00000A5F  A$lcc2438 |    00000A61  A$lcc2438 |    00000A62  A$lcc2438
-     00000A64  A$lcc2438 |    00000A65  A$lcc2438 |    00000A67  A$lcc2438
-     00000A68  A$lcc2438 |    00000A6A  A$lcc2438 |    00000A6B  A$lcc2438
-     00000A6D  A$lcc2438 |    00000A6E  A$lcc2438 |    00000A70  A$lcc2438
-     00000A71  A$lcc2438 |    00000A72  A$lcc2438 |    00000A73  A$lcc2438
-     00000A74  A$lcc2438 |    00000A75  A$lcc2438 |    00000A76  A$lcc2438
-     00000A79  A$lcc2438 |    00000A7A  A$lcc2438 |    00000A7B  A$lcc2438
-     00000A7C  A$lcc2438 |    00000A7E  A$lcc2438 |    00000A7F  A$lcc2438
-     00000A81  A$lcc2438 |    00000A81  C$tactics |    00000A82  A$lcc2438
-     00000A83  A$lcc2438 |    00000A84  A$lcc2438 |    00000A87  A$lcc2438
-     00000A87  C$tactics |    00000A88  A$lcc2438 |    00000A8B  A$lcc2438
-     00000A8B  C$tactics |    00000A8D  A$lcc2438 |    00000A8F  A$lcc2438
-     00000A91  A$lcc2438 |    00000A92  A$lcc2438 |    00000A94  A$lcc2438
-     00000A96  A$lcc2438 |    00000A96  C$tactics |    00000A98  A$lcc2438
-     00000A99  A$lcc2438 |    00000A9B  A$lcc2438 |    00000A9D  A$lcc2438
-     00000A9D  C$tactics |    00000A9F  A$lcc2438 |    00000AA0  A$lcc2438
-     00000AA2  A$lcc2438 |    00000AA3  A$lcc2438 |    00000AA4  A$lcc2438
-     00000AA5  A$lcc2438 |    00000AA6  A$lcc2438 |    00000AA7  A$lcc2438
-     00000AA8  A$lcc2438 |    00000AAA  A$lcc2438 |    00000AAB  A$lcc2438
-     00000AAC  A$lcc2438 |    00000AAE  A$lcc2438 |    00000AAF  A$lcc2438
+     00000A2D  A$lcc3108 |    00000A2E  A$lcc3108 |    00000A30  A$lcc3108
+     00000A31  A$lcc3108 |    00000A32  A$lcc3108 |    00000A33  A$lcc3108
+     00000A34  A$lcc3108 |    00000A35  A$lcc3108 |    00000A36  A$lcc3108
+     00000A37  A$lcc3108 |    00000A38  A$lcc3108 |    00000A39  A$lcc3108
+     00000A3A  A$lcc3108 |    00000A3B  A$lcc3108 |    00000A3D  A$lcc3108
+     00000A3E  A$lcc3108 |    00000A3F  A$lcc3108 |    00000A40  A$lcc3108
+     00000A42  A$lcc3108 |    00000A43  A$lcc3108 |    00000A44  A$lcc3108
+     00000A45  A$lcc3108 |    00000A46  A$lcc3108 |    00000A49  A$lcc3108
+     00000A4A  A$lcc3108 |    00000A4B  A$lcc3108 |    00000A4C  A$lcc3108
+     00000A4E  A$lcc3108 |    00000A4F  A$lcc3108 |    00000A50  A$lcc3108
+     00000A51  A$lcc3108 |    00000A53  A$lcc3108 |    00000A54  A$lcc3108
+     00000A56  A$lcc3108 |    00000A57  A$lcc3108 |    00000A59  A$lcc3108
+     00000A5A  A$lcc3108 |    00000A5B  A$lcc3108 |    00000A5C  A$lcc3108
+     00000A5D  A$lcc3108 |    00000A5E  A$lcc3108 |    00000A5F  A$lcc3108
+     00000A60  A$lcc3108 |    00000A61  A$lcc3108 |    00000A62  A$lcc3108
+     00000A63  A$lcc3108 |    00000A65  A$lcc3108 |    00000A67  A$lcc3108
+     00000A68  A$lcc3108 |    00000A69  A$lcc3108 |    00000A6A  A$lcc3108
+     00000A6B  A$lcc3108 |    00000A6C  A$lcc3108 |    00000A6D  A$lcc3108
+     00000A6E  A$lcc3108 |    00000A6F  A$lcc3108 |    00000A70  A$lcc3108
+     00000A72  A$lcc3108 |    00000A73  A$lcc3108 |    00000A74  A$lcc3108
+     00000A75  A$lcc3108 |    00000A77  A$lcc3108 |    00000A78  A$lcc3108
+     00000A7A  A$lcc3108 |    00000A7B  A$lcc3108 |    00000A7C  A$lcc3108
+     00000A7D  A$lcc3108 |    00000A7F  A$lcc3108 |    00000A81  A$lcc3108
+     00000A83  A$lcc3108 |    00000A84  A$lcc3108 |    00000A85  A$lcc3108
+     00000A86  A$lcc3108 |    00000A87  A$lcc3108 |    00000A88  A$lcc3108
+     00000A89  A$lcc3108 |    00000A8A  A$lcc3108 |    00000A8C  A$lcc3108
+     00000A8D  A$lcc3108 |    00000A8E  A$lcc3108 |    00000A8F  A$lcc3108
+     00000A8F  C$tactics |    00000A90  A$lcc3108 |    00000A92  A$lcc3108
+     00000A93  A$lcc3108 |    00000A94  A$lcc3108 |    00000A96  A$lcc3108
+     00000A97  A$lcc3108 |    00000A99  A$lcc3108 |    00000A9A  A$lcc3108
+     00000A9B  A$lcc3108 |    00000A9C  A$lcc3108 |    00000A9C  C$tactics
+     00000A9E  A$lcc3108 |    00000A9F  A$lcc3108 |    00000AA0  A$lcc3108
+     00000AA1  A$lcc3108 |    00000AA3  A$lcc3108 |    00000AA4  A$lcc3108
+     00000AA6  A$lcc3108 |    00000AA7  A$lcc3108 |    00000AA9  A$lcc3108
+     00000AAA  A$lcc3108 |    00000AAC  A$lcc3108 |    00000AAD  A$lcc3108
+     00000AAF  A$lcc3108 |    00000AB0  A$lcc3108 |    00000AB2  A$lcc3108
+     00000AB3  A$lcc3108 |    00000AB4  A$lcc3108 |    00000AB5  A$lcc3108
+     00000AB6  A$lcc3108 |    00000AB7  A$lcc3108 |    00000AB8  A$lcc3108
+     00000ABB  A$lcc3108 |    00000ABC  A$lcc3108 |    00000ABD  A$lcc3108
+     00000ABE  A$lcc3108 |    00000AC0  A$lcc3108 |    00000AC1  A$lcc3108
+     00000AC3  A$lcc3108 |    00000AC3  C$tactics |    00000AC4  A$lcc3108
+     00000AC5  A$lcc3108 |    00000AC6  A$lcc3108 |    00000AC9  A$lcc3108
+     00000AC9  C$tactics |    00000ACA  A$lcc3108 |    00000ACD  A$lcc3108
+     00000ACD  C$tactics |    00000ACF  A$lcc3108 |    00000AD1  A$lcc3108
+     00000AD3  A$lcc3108 |    00000AD4  A$lcc3108 |    00000AD6  A$lcc3108
+     00000AD8  A$lcc3108 |    00000AD8  C$tactics |    00000ADA  A$lcc3108
+     00000ADB  A$lcc3108 |    00000ADD  A$lcc3108 |    00000ADF  A$lcc3108
+     00000ADF  C$tactics |    00000AE1  A$lcc3108 |    00000AE2  A$lcc3108
+     00000AE4  A$lcc3108 |    00000AE5  A$lcc3108 |    00000AE6  A$lcc3108
+     00000AE7  A$lcc3108 |    00000AE8  A$lcc3108 |    00000AE9  A$lcc3108
+     00000AEA  A$lcc3108 |    00000AEC  A$lcc3108 |    00000AED  A$lcc3108
 ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_CODE                  00000200    00000B8A =        2954. bytes (REL,CON)
+_CODE                  00000200    00000C1D =        3101. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     00000AB1  A$lcc2438 |    00000AB1  C$tactics |    00000AB2  A$lcc2438
-     00000AB4  A$lcc2438 |    00000AB4  C$tactics |    00000AB6  A$lcc2438
-     00000AB7  A$lcc2438 |    00000AB9  A$lcc2438 |    00000AB9  C$tactics
-     00000ABC  A$lcc2438 |    00000ABD  A$lcc2438 |    00000AC0  A$lcc2438
-     00000AC1  A$lcc2438 |    00000AC4  A$lcc2438 |    00000AC6  A$lcc2438
-     00000AC9  A$lcc2438 |    00000ACB  A$lcc2438 |    00000ACE  A$lcc2438
-     00000AD0  A$lcc2438 |    00000AD3  A$lcc2438 |    00000AD5  A$lcc2438
-     00000AD8  A$lcc2438 |    00000ADA  A$lcc2438 |    00000ADA  C$tactics
-     00000ADD  A$lcc2438 |    00000ADE  A$lcc2438 |    00000AE0  A$lcc2438
-     00000AE1  A$lcc2438 |    00000AE2  A$lcc2438 |    00000AE5  A$lcc2438
-     00000AE6  A$lcc2438 |    00000AE9  A$lcc2438 |    00000AEB  A$lcc2438
-     00000AEB  C$tactics |    00000AEE  A$lcc2438 |    00000AF1  A$lcc2438
-     00000AF1  C$tactics |    00000AF3  A$lcc2438 |    00000AF5  A$lcc2438
-     00000AF6  A$lcc2438 |    00000AF6  C$tactics |    00000AF8  A$lcc2438
-     00000AFA  A$lcc2438 |    00000AFA  C$tactics |    00000AFA  C$tactics
-     00000AFD  A$lcc2438 |    00000AFE  A$lcc2438 |    00000AFF  A$lcc2438
-     00000B01  A$lcc2438 |    00000B01  C$tactics |    00000B02  A$lcc2438
-     00000B04  A$lcc2438 |    00000B04  C$tactics |    00000B07  A$lcc2438
-     00000B08  A$lcc2438 |    00000B08  C$tactics |    00000B0A  A$lcc2438
-     00000B0C  A$lcc2438 |    00000B0C  C$tactics |    00000B0F  A$lcc2438
-     00000B10  A$lcc2438 |    00000B11  A$lcc2438 |    00000B13  A$lcc2438
-     00000B13  C$tactics |    00000B14  A$lcc2438 |    00000B16  A$lcc2438
-     00000B16  C$tactics |    00000B18  A$lcc2438 |    00000B1A  A$lcc2438
-     00000B1A  C$tactics |    00000B1D  A$lcc2438 |    00000B1E  A$lcc2438
-     00000B20  A$lcc2438 |    00000B22  A$lcc2438 |    00000B22  C$tactics
-     00000B23  A$lcc2438 |    00000B25  A$lcc2438 |    00000B25  C$tactics
-     00000B27  A$lcc2438 |    00000B29  A$lcc2438 |    00000B29  C$tactics
-     00000B2C  A$lcc2438 |    00000B2D  A$lcc2438 |    00000B2E  A$lcc2438
-     00000B30  A$lcc2438 |    00000B30  C$tactics |    00000B31  A$lcc2438
-     00000B33  A$lcc2438 |    00000B33  C$tactics |    00000B35  A$lcc2438
-     00000B37  A$lcc2438 |    00000B37  C$tactics |    00000B3A  A$lcc2438
-     00000B3B  A$lcc2438 |    00000B3D  A$lcc2438 |    00000B3F  A$lcc2438
-     00000B3F  C$tactics |    00000B40  A$lcc2438 |    00000B40  C$tactics
-     00000B41  A$lcc2438 |    00000B42  A$lcc2438 |    00000B44  A$lcc2438
-     00000B44  C$tactics |    00000B47  A$lcc2438 |    00000B49  A$lcc2438
-     00000B49  C$tactics |    00000B4C  A$lcc2438 |    00000B4D  A$lcc2438
-     00000B4F  A$lcc2438 |    00000B50  A$lcc2438 |    00000B51  A$lcc2438
-     00000B52  A$lcc2438 |    00000B53  A$lcc2438 |    00000B54  A$lcc2438
-     00000B55  A$lcc2438 |    00000B58  A$lcc2438 |    00000B59  A$lcc2438
-     00000B5A  A$lcc2438 |    00000B5B  A$lcc2438 |    00000B5E  A$lcc2438
-     00000B5F  A$lcc2438 |    00000B61  A$lcc2438 |    00000B62  A$lcc2438
-     00000B63  A$lcc2438 |    00000B63  C$tactics |    00000B65  A$lcc2438
-     00000B66  A$lcc2438 |    00000B67  A$lcc2438 |    00000B6A  A$lcc2438
-     00000B6B  A$lcc2438 |    00000B6C  A$lcc2438 |    00000B6D  A$lcc2438
-     00000B6E  A$lcc2438 |    00000B6E  C$tactics |    00000B6F  A$lcc2438
-     00000B70  A$lcc2438 |    00000B73  A$lcc2438 |    00000B73  C$tactics
-     00000B76  A$lcc2438 |    00000B79  A$lcc2438 |    00000B7A  A$lcc2438
-     00000B7C  A$lcc2438 |    00000B7C  C$tactics |    00000B7D  A$lcc2438
-     00000B7F  A$lcc2438 |    00000B7F  C$tactics |    00000B82  A$lcc2438
-     00000B84  A$lcc2438 |    00000B86  A$lcc2438 |    00000B87  A$lcc2438
-     00000B89  A$lcc2438 |    00000B8A  A$lcc2438 |    00000B8D  A$lcc2438
+     00000AEE  A$lcc3108 |    00000AF0  A$lcc3108 |    00000AF1  A$lcc3108
+     00000AF3  A$lcc3108 |    00000AF3  C$tactics |    00000AF4  A$lcc3108
+     00000AF6  A$lcc3108 |    00000AF6  C$tactics |    00000AF8  A$lcc3108
+     00000AF9  A$lcc3108 |    00000AFB  A$lcc3108 |    00000AFB  C$tactics
+     00000AFE  A$lcc3108 |    00000AFF  A$lcc3108 |    00000B02  A$lcc3108
+     00000B03  A$lcc3108 |    00000B06  A$lcc3108 |    00000B08  A$lcc3108
+     00000B0B  A$lcc3108 |    00000B0D  A$lcc3108 |    00000B10  A$lcc3108
+     00000B12  A$lcc3108 |    00000B15  A$lcc3108 |    00000B17  A$lcc3108
+     00000B1A  A$lcc3108 |    00000B1C  A$lcc3108 |    00000B1C  C$tactics
+     00000B1F  A$lcc3108 |    00000B20  A$lcc3108 |    00000B22  A$lcc3108
+     00000B23  A$lcc3108 |    00000B24  A$lcc3108 |    00000B27  A$lcc3108
+     00000B28  A$lcc3108 |    00000B2B  A$lcc3108 |    00000B2D  A$lcc3108
+     00000B2D  C$tactics |    00000B30  A$lcc3108 |    00000B33  A$lcc3108
+     00000B33  C$tactics |    00000B36  A$lcc3108 |    00000B37  A$lcc3108
+     00000B3A  A$lcc3108 |    00000B3B  A$lcc3108 |    00000B3E  A$lcc3108
+     00000B40  A$lcc3108 |    00000B40  C$tactics |    00000B42  A$lcc3108
+     00000B44  A$lcc3108 |    00000B45  A$lcc3108 |    00000B45  C$tactics
+     00000B47  A$lcc3108 |    00000B49  A$lcc3108 |    00000B49  C$tactics
+     00000B49  C$tactics |    00000B4C  A$lcc3108 |    00000B4D  A$lcc3108
+     00000B4E  A$lcc3108 |    00000B50  A$lcc3108 |    00000B50  C$tactics
+     00000B51  A$lcc3108 |    00000B53  A$lcc3108 |    00000B53  C$tactics
+     00000B56  A$lcc3108 |    00000B57  A$lcc3108 |    00000B57  C$tactics
+     00000B59  A$lcc3108 |    00000B5B  A$lcc3108 |    00000B5B  C$tactics
+     00000B5E  A$lcc3108 |    00000B5F  A$lcc3108 |    00000B60  A$lcc3108
+     00000B62  A$lcc3108 |    00000B62  C$tactics |    00000B63  A$lcc3108
+     00000B65  A$lcc3108 |    00000B65  C$tactics |    00000B67  A$lcc3108
+     00000B69  A$lcc3108 |    00000B69  C$tactics |    00000B6C  A$lcc3108
+     00000B6D  A$lcc3108 |    00000B6F  A$lcc3108 |    00000B71  A$lcc3108
+     00000B71  C$tactics |    00000B72  A$lcc3108 |    00000B74  A$lcc3108
+     00000B74  C$tactics |    00000B76  A$lcc3108 |    00000B78  A$lcc3108
+     00000B78  C$tactics |    00000B7B  A$lcc3108 |    00000B7C  A$lcc3108
+     00000B7D  A$lcc3108 |    00000B7F  A$lcc3108 |    00000B7F  C$tactics
+     00000B80  A$lcc3108 |    00000B82  A$lcc3108 |    00000B82  C$tactics
+     00000B84  A$lcc3108 |    00000B86  A$lcc3108 |    00000B86  C$tactics
+     00000B89  A$lcc3108 |    00000B8A  A$lcc3108 |    00000B8C  A$lcc3108
+     00000B8E  A$lcc3108 |    00000B8E  C$tactics |    00000B8F  A$lcc3108
+     00000B8F  C$tactics |    00000B90  A$lcc3108 |    00000B91  A$lcc3108
+     00000B93  A$lcc3108 |    00000B93  C$tactics |    00000B96  A$lcc3108
+     00000B98  A$lcc3108 |    00000B98  C$tactics |    00000B9B  A$lcc3108
+     00000B9C  A$lcc3108 |    00000B9E  A$lcc3108 |    00000B9F  A$lcc3108
+     00000BA0  A$lcc3108 |    00000BA1  A$lcc3108 |    00000BA2  A$lcc3108
+     00000BA3  A$lcc3108 |    00000BA4  A$lcc3108 |    00000BA7  A$lcc3108
+     00000BA8  A$lcc3108 |    00000BA9  A$lcc3108 |    00000BAA  A$lcc3108
+     00000BAD  A$lcc3108 |    00000BAE  A$lcc3108 |    00000BB0  A$lcc3108
+     00000BB1  A$lcc3108 |    00000BB2  A$lcc3108 |    00000BB2  C$tactics
+     00000BB4  A$lcc3108 |    00000BB5  A$lcc3108 |    00000BB6  A$lcc3108
+     00000BB9  A$lcc3108 |    00000BBA  A$lcc3108 |    00000BBB  A$lcc3108
+     00000BBC  A$lcc3108 |    00000BBD  A$lcc3108 |    00000BBD  C$tactics
+     00000BBE  A$lcc3108 |    00000BBF  A$lcc3108 |    00000BC2  A$lcc3108
+     00000BC2  C$tactics |    00000BC5  A$lcc3108 |    00000BC8  A$lcc3108
+     00000BC9  A$lcc3108 |    00000BCB  A$lcc3108 |    00000BCB  C$tactics
 ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_CODE                  00000200    00000B8A =        2954. bytes (REL,CON)
+_CODE                  00000200    00000C1D =        3101. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     00000B8E  A$lcc2438 |    00000B90  A$lcc2438 |    00000B91  A$lcc2438
-     00000B92  A$lcc2438 |    00000B93  A$lcc2438 |    00000B94  A$lcc2438
-     00000B95  A$lcc2438 |    00000B96  A$lcc2438 |    00000B98  A$lcc2438
-     00000B9A  A$lcc2438 |    00000B9C  A$lcc2438 |    00000B9E  A$lcc2438
-     00000B9F  A$lcc2438 |    00000BA1  A$lcc2438 |    00000BA3  A$lcc2438
-     00000BA5  A$lcc2438 |    00000BA6  A$lcc2438 |    00000BA8  A$lcc2438
-     00000BA8  C$tactics |    00000BAB  A$lcc2438 |    00000BAC  A$lcc2438
-     00000BAC  C$tactics |    00000BAF  A$lcc2438 |    00000BB2  A$lcc2438
-     00000BB3  A$lcc2438 |    00000BB5  A$lcc2438 |    00000BB5  C$tactics
-     00000BB6  A$lcc2438 |    00000BB8  A$lcc2438 |    00000BB8  C$tactics
-     00000BBB  A$lcc2438 |    00000BBD  A$lcc2438 |    00000BBF  A$lcc2438
-     00000BC0  A$lcc2438 |    00000BC2  A$lcc2438 |    00000BC3  A$lcc2438
-     00000BC6  A$lcc2438 |    00000BC7  A$lcc2438 |    00000BC9  A$lcc2438
-     00000BCA  A$lcc2438 |    00000BCB  A$lcc2438 |    00000BCC  A$lcc2438
-     00000BCD  A$lcc2438 |    00000BCE  A$lcc2438 |    00000BCF  A$lcc2438
-     00000BD1  A$lcc2438 |    00000BD3  A$lcc2438 |    00000BD5  A$lcc2438
-     00000BD7  A$lcc2438 |    00000BD8  A$lcc2438 |    00000BDA  A$lcc2438
-     00000BDC  A$lcc2438 |    00000BDE  A$lcc2438 |    00000BDF  A$lcc2438
-     00000BE1  A$lcc2438 |    00000BE1  C$tactics |    00000BE4  A$lcc2438
-     00000BE5  A$lcc2438 |    00000BE5  C$tactics |    00000BE8  A$lcc2438
-     00000BEA  A$lcc2438 |    00000BEC  A$lcc2438 |    00000BEF  A$lcc2438
-     00000BEF  C$tactics |    00000BF2  A$lcc2438 |    00000BF4  A$lcc2438
-     00000BF6  A$lcc2438 |    00000BF9  A$lcc2438 |    00000BFA  A$lcc2438
-     00000BFA  C$tactics |    00000BFB  A$lcc2438 |    00000BFB  C$tactics
-     00000BFD  A$lcc2438 |    00000C00  A$lcc2438 |    00000C01  A$lcc2438
-     00000C03  A$lcc2438 |    00000C03  C$tactics |    00000C05  A$lcc2438
-     00000C07  A$lcc2438 |    00000C09  A$lcc2438 |    00000C0B  A$lcc2438
-     00000C0B  C$tactics |    00000C0D  A$lcc2438 |    00000C0E  A$lcc2438
-     00000C11  A$lcc2438 |    00000C12  A$lcc2438 |    00000C14  A$lcc2438
-     00000C14  C$tactics |    00000C16  A$lcc2438 |    00000C18  A$lcc2438
-     00000C1A  A$lcc2438 |    00000C1A  C$tactics |    00000C1C  A$lcc2438
-     00000C1F  A$lcc2438 |    00000C20  A$lcc2438 |    00000C22  A$lcc2438
-     00000C22  C$tactics |    00000C24  A$lcc2438 |    00000C26  A$lcc2438
-     00000C28  A$lcc2438 |    00000C2A  A$lcc2438 |    00000C2A  C$tactics
-     00000C2C  A$lcc2438 |    00000C2D  A$lcc2438 |    00000C30  A$lcc2438
-     00000C31  A$lcc2438 |    00000C33  A$lcc2438 |    00000C33  C$tactics
-     00000C35  A$lcc2438 |    00000C37  A$lcc2438 |    00000C39  A$lcc2438
-     00000C3C  A$lcc2438 |    00000C3F  A$lcc2438 |    00000C40  A$lcc2438
-     00000C42  A$lcc2438 |    00000C44  A$lcc2438 |    00000C46  A$lcc2438
-     00000C47  A$lcc2438 |    00000C4A  A$lcc2438 |    00000C4D  A$lcc2438
-     00000C4E  A$lcc2438 |    00000C50  A$lcc2438 |    00000C52  A$lcc2438
-     00000C54  A$lcc2438 |    00000C55  A$lcc2438 |    00000C58  A$lcc2438
-     00000C59  A$lcc2438 |    00000C5A  A$lcc2438 |    00000C5B  A$lcc2438
-     00000C5E  A$lcc2438 |    00000C61  A$lcc2438 |    00000C62  A$lcc2438
-     00000C64  A$lcc2438 |    00000C66  A$lcc2438 |    00000C68  A$lcc2438
-     00000C69  A$lcc2438 |    00000C6C  A$lcc2438 |    00000C6F  A$lcc2438
-     00000C70  A$lcc2438 |    00000C72  A$lcc2438 |    00000C74  A$lcc2438
-     00000C76  A$lcc2438 |    00000C77  A$lcc2438 |    00000C7A  A$lcc2438
-     00000C7B  A$lcc2438 |    00000C7C  A$lcc2438 |    00000C7D  A$lcc2438
-     00000C80  A$lcc2438 |    00000C83  A$lcc2438 |    00000C84  A$lcc2438
-     00000C86  A$lcc2438 |    00000C88  A$lcc2438 |    00000C8A  A$lcc2438
+     00000BCC  A$lcc3108 |    00000BCE  A$lcc3108 |    00000BCE  C$tactics
+     00000BD1  A$lcc3108 |    00000BD3  A$lcc3108 |    00000BD5  A$lcc3108
+     00000BD6  A$lcc3108 |    00000BD8  A$lcc3108 |    00000BD9  A$lcc3108
+     00000BDC  A$lcc3108 |    00000BDD  A$lcc3108 |    00000BDF  A$lcc3108
+     00000BE0  A$lcc3108 |    00000BE1  A$lcc3108 |    00000BE2  A$lcc3108
+     00000BE3  A$lcc3108 |    00000BE4  A$lcc3108 |    00000BE5  A$lcc3108
+     00000BE7  A$lcc3108 |    00000BE9  A$lcc3108 |    00000BEB  A$lcc3108
+     00000BED  A$lcc3108 |    00000BEE  A$lcc3108 |    00000BF0  A$lcc3108
+     00000BF2  A$lcc3108 |    00000BF4  A$lcc3108 |    00000BF5  A$lcc3108
+     00000BF7  A$lcc3108 |    00000BF7  C$tactics |    00000BFA  A$lcc3108
+     00000BFB  A$lcc3108 |    00000BFB  C$tactics |    00000BFE  A$lcc3108
+     00000C01  A$lcc3108 |    00000C02  A$lcc3108 |    00000C04  A$lcc3108
+     00000C04  C$tactics |    00000C05  A$lcc3108 |    00000C07  A$lcc3108
+     00000C07  C$tactics |    00000C0A  A$lcc3108 |    00000C0C  A$lcc3108
+     00000C0E  A$lcc3108 |    00000C0F  A$lcc3108 |    00000C11  A$lcc3108
+     00000C12  A$lcc3108 |    00000C15  A$lcc3108 |    00000C16  A$lcc3108
+     00000C18  A$lcc3108 |    00000C19  A$lcc3108 |    00000C1A  A$lcc3108
+     00000C1B  A$lcc3108 |    00000C1C  A$lcc3108 |    00000C1D  A$lcc3108
+     00000C1E  A$lcc3108 |    00000C20  A$lcc3108 |    00000C22  A$lcc3108
+     00000C24  A$lcc3108 |    00000C26  A$lcc3108 |    00000C27  A$lcc3108
+     00000C29  A$lcc3108 |    00000C2B  A$lcc3108 |    00000C2D  A$lcc3108
+     00000C2E  A$lcc3108 |    00000C30  A$lcc3108 |    00000C30  C$tactics
+     00000C33  A$lcc3108 |    00000C34  A$lcc3108 |    00000C34  C$tactics
+     00000C37  A$lcc3108 |    00000C39  A$lcc3108 |    00000C3B  A$lcc3108
+     00000C3E  A$lcc3108 |    00000C3E  C$tactics |    00000C41  A$lcc3108
+     00000C43  A$lcc3108 |    00000C45  A$lcc3108 |    00000C48  A$lcc3108
+     00000C49  A$lcc3108 |    00000C49  C$tactics |    00000C4A  A$lcc3108
+     00000C4A  C$tactics |    00000C4C  A$lcc3108 |    00000C4F  A$lcc3108
+     00000C50  A$lcc3108 |    00000C52  A$lcc3108 |    00000C52  C$tactics
+     00000C54  A$lcc3108 |    00000C56  A$lcc3108 |    00000C58  A$lcc3108
+     00000C5A  A$lcc3108 |    00000C5A  C$tactics |    00000C5C  A$lcc3108
+     00000C5D  A$lcc3108 |    00000C60  A$lcc3108 |    00000C61  A$lcc3108
+     00000C63  A$lcc3108 |    00000C63  C$tactics |    00000C65  A$lcc3108
+     00000C67  A$lcc3108 |    00000C69  A$lcc3108 |    00000C69  C$tactics
+     00000C6B  A$lcc3108 |    00000C6E  A$lcc3108 |    00000C6F  A$lcc3108
+     00000C71  A$lcc3108 |    00000C71  C$tactics |    00000C73  A$lcc3108
+     00000C75  A$lcc3108 |    00000C77  A$lcc3108 |    00000C79  A$lcc3108
+     00000C79  C$tactics |    00000C7B  A$lcc3108 |    00000C7C  A$lcc3108
+     00000C7F  A$lcc3108 |    00000C80  A$lcc3108 |    00000C82  A$lcc3108
+     00000C82  C$tactics |    00000C84  A$lcc3108 |    00000C86  A$lcc3108
+     00000C88  A$lcc3108 |    00000C8B  A$lcc3108 |    00000C8E  A$lcc3108
+     00000C8F  A$lcc3108 |    00000C91  A$lcc3108 |    00000C93  A$lcc3108
+     00000C95  A$lcc3108 |    00000C96  A$lcc3108 |    00000C99  A$lcc3108
+     00000C9C  A$lcc3108 |    00000C9D  A$lcc3108 |    00000C9F  A$lcc3108
+     00000CA1  A$lcc3108 |    00000CA3  A$lcc3108 |    00000CA4  A$lcc3108
+     00000CA7  A$lcc3108 |    00000CA8  A$lcc3108 |    00000CA9  A$lcc3108
+     00000CAA  A$lcc3108 |    00000CAD  A$lcc3108 |    00000CB0  A$lcc3108
+     00000CB1  A$lcc3108 |    00000CB3  A$lcc3108 |    00000CB5  A$lcc3108
+     00000CB7  A$lcc3108 |    00000CB8  A$lcc3108 |    00000CBB  A$lcc3108
+     00000CBE  A$lcc3108 |    00000CBF  A$lcc3108 |    00000CC1  A$lcc3108
+     00000CC3  A$lcc3108 |    00000CC5  A$lcc3108 |    00000CC6  A$lcc3108
 ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_CODE                  00000200    00000B8A =        2954. bytes (REL,CON)
+_CODE                  00000200    00000C1D =        3101. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     00000C8B  A$lcc2438 |    00000C8E  A$lcc2438 |    00000C91  A$lcc2438
-     00000C92  A$lcc2438 |    00000C94  A$lcc2438 |    00000C96  A$lcc2438
-     00000C98  A$lcc2438 |    00000C99  A$lcc2438 |    00000C9C  A$lcc2438
-     00000C9D  A$lcc2438 |    00000C9E  A$lcc2438 |    00000C9F  A$lcc2438
-     00000CA2  A$lcc2438 |    00000CA5  A$lcc2438 |    00000CA6  A$lcc2438
-     00000CA8  A$lcc2438 |    00000CAA  A$lcc2438 |    00000CAC  A$lcc2438
-     00000CAD  A$lcc2438 |    00000CB0  A$lcc2438 |    00000CB3  A$lcc2438
-     00000CB4  A$lcc2438 |    00000CB6  A$lcc2438 |    00000CB8  A$lcc2438
-     00000CBA  A$lcc2438 |    00000CBB  A$lcc2438 |    00000CBE  A$lcc2438
-     00000CBF  A$lcc2438 |    00000CC0  A$lcc2438 |    00000CC1  A$lcc2438
-     00000CC1  C$tactics |    00000CC4  A$lcc2438 |    00000CC5  A$lcc2438
-     00000CC5  C$tactics |    00000CC6  A$lcc2438 |    00000CC8  A$lcc2438
-     00000CCA  A$lcc2438 |    00000CCA  C$tactics |    00000CCD  A$lcc2438
-     00000CCF  A$lcc2438 |    00000CD2  A$lcc2438 |    00000CD4  A$lcc2438
-     00000CD7  A$lcc2438 |    00000CD9  A$lcc2438 |    00000CDC  A$lcc2438
-     00000CDE  A$lcc2438 |    00000CE1  A$lcc2438 |    00000CE3  A$lcc2438
-     00000CE3  C$tactics |    00000CE5  A$lcc2438 |    00000CE5  C$tactics
-     00000CE8  A$lcc2438 |    00000CEA  A$lcc2438 |    00000CEC  A$lcc2438
-     00000CEF  A$lcc2438 |    00000CF1  A$lcc2438 |    00000CF4  A$lcc2438
-     00000CF6  A$lcc2438 |    00000CF9  A$lcc2438 |    00000CFB  A$lcc2438
-     00000CFE  A$lcc2438 |    00000D00  A$lcc2438 |    00000D00  C$tactics
-     00000D00  C$tactics |    00000D03  A$lcc2438 |    00000D03  C$tactics
-     00000D05  A$lcc2438 |    00000D07  A$lcc2438 |    00000D07  C$tactics
-     00000D09  A$lcc2438 |    00000D0B  A$lcc2438 |    00000D0D  A$lcc2438
-     00000D0D  C$tactics |    00000D0F  A$lcc2438 |    00000D11  A$lcc2438
-     00000D14  A$lcc2438 |    00000D16  A$lcc2438 |    00000D16  C$tactics
-     00000D16  XG$main$0 |    00000D17  Ftactics$ |    00000D1E  Ftactics$
-     00000D25  Ftactics$ |    00000D2C  Ftactics$ |    00000D33  Ftactics$
-     00000D3A  Ftactics$ |    00000D41  Ftactics$ |    00000D48  Ftactics$
-     00000D4F  Ftactics$ |    00000D56  Ftactics$ |    00000D5D  Ftactics$
-     00000D64  Ftactics$ |    00000D6B  _copy_win
+     00000CC9  A$lcc3108 |    00000CCA  A$lcc3108 |    00000CCB  A$lcc3108
+     00000CCC  A$lcc3108 |    00000CCF  A$lcc3108 |    00000CD2  A$lcc3108
+     00000CD3  A$lcc3108 |    00000CD5  A$lcc3108 |    00000CD7  A$lcc3108
+     00000CD9  A$lcc3108 |    00000CDA  A$lcc3108 |    00000CDD  A$lcc3108
+     00000CE0  A$lcc3108 |    00000CE1  A$lcc3108 |    00000CE3  A$lcc3108
+     00000CE5  A$lcc3108 |    00000CE7  A$lcc3108 |    00000CE8  A$lcc3108
+     00000CEB  A$lcc3108 |    00000CEC  A$lcc3108 |    00000CED  A$lcc3108
+     00000CEE  A$lcc3108 |    00000CF1  A$lcc3108 |    00000CF4  A$lcc3108
+     00000CF5  A$lcc3108 |    00000CF7  A$lcc3108 |    00000CF9  A$lcc3108
+     00000CFB  A$lcc3108 |    00000CFC  A$lcc3108 |    00000CFF  A$lcc3108
+     00000D02  A$lcc3108 |    00000D03  A$lcc3108 |    00000D05  A$lcc3108
+     00000D07  A$lcc3108 |    00000D09  A$lcc3108 |    00000D0A  A$lcc3108
+     00000D0D  A$lcc3108 |    00000D0E  A$lcc3108 |    00000D0F  A$lcc3108
+     00000D10  A$lcc3108 |    00000D10  C$tactics |    00000D13  A$lcc3108
+     00000D14  A$lcc3108 |    00000D14  C$tactics |    00000D15  A$lcc3108
+     00000D17  A$lcc3108 |    00000D19  A$lcc3108 |    00000D19  C$tactics
+     00000D1C  A$lcc3108 |    00000D1E  A$lcc3108 |    00000D21  A$lcc3108
+     00000D23  A$lcc3108 |    00000D26  A$lcc3108 |    00000D28  A$lcc3108
+     00000D2B  A$lcc3108 |    00000D2D  A$lcc3108 |    00000D30  A$lcc3108
+     00000D32  A$lcc3108 |    00000D32  C$tactics |    00000D34  A$lcc3108
+     00000D34  C$tactics |    00000D37  A$lcc3108 |    00000D39  A$lcc3108
+     00000D3B  A$lcc3108 |    00000D3E  A$lcc3108 |    00000D40  A$lcc3108
+     00000D43  A$lcc3108 |    00000D45  A$lcc3108 |    00000D48  A$lcc3108
+     00000D4A  A$lcc3108 |    00000D4D  A$lcc3108 |    00000D4F  A$lcc3108
+     00000D4F  C$tactics |    00000D4F  C$tactics |    00000D52  A$lcc3108
+     00000D52  C$tactics |    00000D54  A$lcc3108 |    00000D56  A$lcc3108
+     00000D56  C$tactics |    00000D58  A$lcc3108 |    00000D5A  A$lcc3108
+     00000D5C  A$lcc3108 |    00000D5C  C$tactics |    00000D5E  A$lcc3108
+     00000D60  A$lcc3108 |    00000D63  A$lcc3108 |    00000D65  A$lcc3108
+     00000D65  C$tactics |    00000D65  XG$main$0 |    00000D66  Ftactics$
+     00000D6D  Ftactics$ |    00000D74  Ftactics$ |    00000D7B  Ftactics$
+     00000D82  Ftactics$ |    00000D89  Ftactics$ |    00000D90  Ftactics$
+     00000D97  Ftactics$ |    00000D9E  Ftactics$ |    00000DA5  Ftactics$
+     00000DAC  Ftactics$ |    00000DB3  _copy_win |    00000DD2  _set_spri
+     00000DD7  _set_bkg_ |    00000DDA  .set_pale |    00000DF9  _set_spri
+     00000DFE  _set_bkg_ |    00000E01  .set_pale
 ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
 Hexadecimal  [32-Bits]
 
@@ -520,52 +525,52 @@ Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_HOME                  00000D8A    00000170 =         368. bytes (REL,CON)
+_HOME                  00000E1D    00000170 =         368. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     00000D8A  .memset_s |    00000D93  .memcpy_s |    00000DB0  .remove_V
-     00000DB3  .remove_i |    00000DD0  .add_VBL  |    00000DD3  .add_int 
-     00000DDE  .wait_vbl |    00000DDE  _wait_vbl |    00000DEE  .display_
-     00000DEE  _display_ |    00000E06  _remove_V |    00000E11  _add_VBL 
-     00000E1C  _set_tile |    00000E21  _set_bkg_ |    00000E21  _set_win_
-     00000E29  _set_spri |    00000E59  _init_win |    00000E62  _init_bkg
-     00000E6B  _vmemset  |    00000E7C  .padup    |    00000E7C  _waitpadu
-     00000E8C  .jpad     |    00000E8C  _joypad   |    00000EB4  _waitpad 
-     00000EB5  .wait_pad |    00000EBC  .init_wtt |    00000EC4  .init_btt
-     00000ED2  .init_tt  |    00000ED5  .init_vra
+     00000E1D  .memset_s |    00000E26  .memcpy_s |    00000E43  .remove_V
+     00000E46  .remove_i |    00000E63  .add_VBL  |    00000E66  .add_int 
+     00000E71  .wait_vbl |    00000E71  _wait_vbl |    00000E81  .display_
+     00000E81  _display_ |    00000E99  _remove_V |    00000EA4  _add_VBL 
+     00000EAF  _set_tile |    00000EB4  _set_bkg_ |    00000EB4  _set_win_
+     00000EBC  _set_spri |    00000EEC  _init_win |    00000EF5  _init_bkg
+     00000EFE  _vmemset  |    00000F0F  .padup    |    00000F0F  _waitpadu
+     00000F1F  .jpad     |    00000F1F  _joypad   |    00000F47  _waitpad 
+     00000F48  .wait_pad |    00000F4F  .init_wtt |    00000F57  .init_btt
+     00000F65  .init_tt  |    00000F68  .init_vra
 ASxxxx Linker V03.00 + NoICE + sdld,  page 27.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_INITIALIZER           00000EFA    0000004C =          76. bytes (REL,CON)
+_INITIALIZER           00000F8D    00000034 =          52. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     00000EFA  Ftactics$ |    00000F2C  Ftactics$
+     00000F8D  Ftactics$ |    00000FA7  Ftactics$
 ASxxxx Linker V03.00 + NoICE + sdld,  page 28.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_GSINIT                00000F46    0000002A =          42. bytes (REL,CON)
+_GSINIT                00000FC1    0000002A =          42. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     00000F46  gsinit    |    00000F52  A$lcc2438 |    00000F52  C$tactics
-     00000F55  A$lcc2438 |    00000F57  A$lcc2438 |    00000F57  C$tactics
-     00000F5A  A$lcc2438 |    00000F5C  A$lcc2438 |    00000F5C  C$tactics
-     00000F5F  A$lcc2438 |    00000F61  A$lcc2438 |    00000F61  C$tactics
-     00000F64  A$lcc2438 |    00000F66  A$lcc2438 |    00000F66  C$tactics
-     00000F69  A$lcc2438 |    00000F6B  A$lcc2438 |    00000F6B  C$tactics
-     00000F6E  A$lcc2438
+     00000FC1  gsinit    |    00000FCD  A$lcc3108 |    00000FCD  C$tactics
+     00000FD0  A$lcc3108 |    00000FD2  A$lcc3108 |    00000FD2  C$tactics
+     00000FD5  A$lcc3108 |    00000FD7  A$lcc3108 |    00000FD7  C$tactics
+     00000FDA  A$lcc3108 |    00000FDC  A$lcc3108 |    00000FDC  C$tactics
+     00000FDF  A$lcc3108 |    00000FE1  A$lcc3108 |    00000FE1  C$tactics
+     00000FE4  A$lcc3108 |    00000FE6  A$lcc3108 |    00000FE6  C$tactics
+     00000FE9  A$lcc3108
 ASxxxx Linker V03.00 + NoICE + sdld,  page 29.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_GSFINAL               00000F70    00000001 =           1. bytes (REL,CON)
+_GSFINAL               00000FEB    00000001 =           1. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
@@ -589,12 +594,12 @@ Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_INITIALIZED           0000C0FA    0000004C =          76. bytes (REL,CON)
+_INITIALIZED           0000C0FA    00000034 =          52. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     0000C0FA  G$display |    0000C0FA  _displayT |    0000C12C  G$letter_
-     0000C12C  _letter_t
+     0000C0FA  G$display |    0000C0FA  _displayT |    0000C114  G$letter_
+     0000C114  _letter_t
 ASxxxx Linker V03.00 + NoICE + sdld,  page 32.
 Hexadecimal  [32-Bits]
 
@@ -611,9 +616,9 @@ Files Linked                              [ module(s) ]
 
 C:\Users\gerzy\OneDrive - Florida Polytechnic University\Documents\Merpcraft Stuff\codeforces\gmamer_boy\gbdk\lib/gb/crt0.o
                                           [ Runtime ]
-C:\Users\gerzy\AppData\Local\Temp/lcc243880.o
+C:\Users\gerzy\AppData\Local\Temp/lcc310840.o
                                           [ tactics ]
-C:\Users\gerzy\AppData\Local\Temp/lcc243881.o
+C:\Users\gerzy\AppData\Local\Temp/lcc310841.o
                                           [  ]
 
 
@@ -621,6 +626,8 @@ Libraries Linked                          [ object file ]
 
 C:\Users\gerzy\OneDrive - Florida Polytechnic University\Documents\Merpcraft Stuff\codeforces\gmamer_boy\gbdk\lib/gb/gb.lib
                                           [ sfr.o ]
+C:\Users\gerzy\OneDrive - Florida Polytechnic University\Documents\Merpcraft Stuff\codeforces\gmamer_boy\gbdk\lib/gb/gb.lib
+                                          [ cgb_palettes.o ]
 C:\Users\gerzy\OneDrive - Florida Polytechnic University\Documents\Merpcraft Stuff\codeforces\gmamer_boy\gbdk\lib/gb/gb.lib
                                           [ set_data.o ]
 C:\Users\gerzy\OneDrive - Florida Polytechnic University\Documents\Merpcraft Stuff\codeforces\gmamer_boy\gbdk\lib/gb/gb.lib

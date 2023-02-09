@@ -165,7 +165,7 @@ T:Ftactics$__00000003[({0}S:S$joy0$0_0$0({1}SC:U),Z,0,0)({1}S:S$joy1$0_0$0({1}SC
 T:Ftactics$__00000004[({0}S:S$joy0$0_0$0({1}SC:U),Z,0,0)({1}S:S$joy1$0_0$0({1}SC:U),Z,0,0)({2}S:S$joy2$0_0$0({1}SC:U),Z,0,0)({3}S:S$joy3$0_0$0({1}SC:U),Z,0,0)]
 T:Ftactics$_fixed[({0}S:S$l$0_0$0({1}SC:U),Z,0,0)({1}S:S$h$0_0$0({1}SC:U),Z,0,0)({0}S:S$b$0_0$0({2}ST__00000001:S),Z,0,0)({0}S:S$w$0_0$0({2}SI:U),Z,0,0)]
 T:Ftactics$OAM_item_t[({0}S:S$y$0_0$0({1}SC:U),Z,0,0)({1}S:S$x$0_0$0({1}SC:U),Z,0,0)({2}S:S$tile$0_0$0({1}SC:U),Z,0,0)({3}S:S$prop$0_0$0({1}SC:U),Z,0,0)]
-S:G$displayTexts$0_0$0({50}DA25d,DG,SC:U),E,0,0
+S:G$displayTexts$0_0$0({26}DA13d,DG,SC:U),E,0,0
 S:G$letter_table$0_0$0({26}DA26d,SC:U),E,0,0
 S:G$_VRAM$0_0$0({0}DA0d,SC:U),E,0,0
 S:G$_VRAM8000$0_0$0({0}DA0d,SC:U),E,0,0
@@ -372,4 +372,3 @@ S:Ftactics$__str_7$0_0$0({7}DA7d,SC:S),D,0,0
 S:Ftactics$__str_8$0_0$0({7}DA7d,SC:S),D,0,0
 S:Ftactics$__str_9$0_0$0({7}DA7d,SC:S),D,0,0
 S:Ftactics$__str_10$0_0$0({7}DA7d,SC:S),D,0,0
-S:Ftactics$__str_11$0_0$0({7}DA7d,SC:S),D,0,0

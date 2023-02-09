@@ -4,36 +4,39 @@
 #include "graphics/2x2tiles.c"
 #include "graphics/Letters.h"
 #include "graphics/Letters.c"
+#include "graphics/palletes.c"
 
 typedef unsigned char uchar;
 
-#define FIRST_TILE 12
-#define CHARACTER3 12
-#define CHARACTER4 13
-#define CHARACTER5 14
-#define CHARACTER6 15
+#define FIRST_TILE_OFFSET_2x2 12
+#define CHARACTER3 0
+#define CHARACTER4 1
+#define CHARACTER5 2
+#define CHARACTER6 3
 
-#define HOUSE 16
-#define CAVE 17
-#define CHEST 18
-#define TREE 19
-#define FENCE 20
-#define GRASS 21
-#define PATH 22
+#define HOUSE 4
+#define CAVE 5
+#define CHEST 6
+#define TREE 7
+#define FENCE 8
+#define GRASS 9
+#define PATH 10
 //WALL WATER ROCK FOREST BRIDGE
 
-#define START 23
-#define END 24
-#define CURSOR1 25
-#define CURSOR2 26
+#define START 11
+#define END 12
+#define CURSOR1 13
+#define CURSOR2 14
+
+const uchar palleteTable[13] = {
+    0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1
+};
 
 #define TILEMAP_START 0x9800
 #define WIN_TILEMAP_START 0x9C00
 
-const uchar* displayTexts[25] = {
-    "      ", "      ", "      ", "      ", "      ",
-    "      ", "      ", "      ", "      ", "      ",
-    "GUY   ", "GUY   ", "GUY   ", "GUY   ", "GUY   ",
+const uchar* displayTexts[13] = {
+    "GUY   ", "GUY   ", "GUY   ",
     "GUY   ", "HOUSE ", "CAVE  ", "CHEST ", "TREE  ",
     "FENCE ", "GRASS ", "PATH  ", "START ", "END   "
 };
@@ -129,7 +132,7 @@ void main() {
     volatile uchar *tilemap = (uchar *)TILEMAP_START;
     for (uchar r = 0; r < HEIGHT * 2; r++) {
         for (uchar c = 0; c < WIDTH * 2; c++) {
-            uchar map = MAP[r/2][c/2]*4;
+            uchar map = (MAP[r/2][c/2] + FIRST_TILE_OFFSET_2x2)*4;
             uchar value = map + (r&1) + (c&1)*2;
             tilemap[r*32 + c + 64] = value;
         }
@@ -139,7 +142,7 @@ void main() {
             tilemap[r*32 + c] = SPACE_LETTER;
         }
     }
-    set_sprite_data(0, 8, Tiles + ((CURSOR1 - FIRST_TILE) * 16 * 4));
+    set_sprite_data(0, 8, Tiles + (CURSOR1 * 16 * 4));
     set_sprite_tile(0, 0);
     set_sprite_tile(1, 1);
     set_sprite_tile(2, 2);
@@ -160,6 +163,8 @@ void main() {
 
     //screen brightness
     //BGP_REG = 0b11100100;
+
+    set_bkg_palette(0, 8, colors);
 
     IE_REG = IEF_VBLANK;
     enable_interrupts();

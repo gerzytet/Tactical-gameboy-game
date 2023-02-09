@@ -11,6 +11,7 @@
 	.globl _main
 	.globl _copy_window_buffer
 	.globl _change_text
+	.globl _set_bkg_palette
 	.globl _vmemset
 	.globl _set_sprite_data
 	.globl _set_bkg_data
@@ -21,6 +22,7 @@
 	.globl _displayTexts
 	.globl _windowBuffer
 	.globl _MAP
+	.globl _colors
 	.globl _Letters
 	.globl _Tiles
 ;--------------------------------------------------------
@@ -66,7 +68,7 @@ _main_target_scx_131077_139:
 	.area _INITIALIZED
 G$displayTexts$0_0$0==.
 _displayTexts::
-	.ds 50
+	.ds 26
 G$letter_table$0_0$0==.
 _letter_table::
 	.ds 26
@@ -83,34 +85,34 @@ _letter_table::
 	.area _GSINIT
 	G$main$0$0	= .
 	.globl	G$main$0$0
-	C$tactics.c$152$1_2$110	= .
-	.globl	C$tactics.c$152$1_2$110
-;tactics.c:152: static uchar x = 0;
+	C$tactics.c$151$1_2$110	= .
+	.globl	C$tactics.c$151$1_2$110
+;tactics.c:151: static uchar x = 0;
 	ld	hl, #_main_x_65538_120
 	ld	(hl), #0x00
-	C$tactics.c$153$1_2$110	= .
-	.globl	C$tactics.c$153$1_2$110
-;tactics.c:153: static uchar y = 0;
+	C$tactics.c$152$1_2$110	= .
+	.globl	C$tactics.c$152$1_2$110
+;tactics.c:152: static uchar y = 0;
 	ld	hl, #_main_y_65538_120
+	ld	(hl), #0x00
+	C$tactics.c$154$1_2$110	= .
+	.globl	C$tactics.c$154$1_2$110
+;tactics.c:154: static uchar cursorTimer = 0;
+	ld	hl, #_main_cursorTimer_65538_120
 	ld	(hl), #0x00
 	C$tactics.c$155$1_2$110	= .
 	.globl	C$tactics.c$155$1_2$110
-;tactics.c:155: static uchar cursorTimer = 0;
-	ld	hl, #_main_cursorTimer_65538_120
-	ld	(hl), #0x00
-	C$tactics.c$156$1_2$110	= .
-	.globl	C$tactics.c$156$1_2$110
-;tactics.c:156: static uchar joyTimer = 0;
+;tactics.c:155: static uchar joyTimer = 0;
 	ld	hl, #_main_joyTimer_65538_120
+	ld	(hl), #0x00
+	C$tactics.c$157$1_2$110	= .
+	.globl	C$tactics.c$157$1_2$110
+;tactics.c:157: static uchar cameraX = 0;
+	ld	hl, #_main_cameraX_65538_120
 	ld	(hl), #0x00
 	C$tactics.c$158$1_2$110	= .
 	.globl	C$tactics.c$158$1_2$110
-;tactics.c:158: static uchar cameraX = 0;
-	ld	hl, #_main_cameraX_65538_120
-	ld	(hl), #0x00
-	C$tactics.c$159$1_2$110	= .
-	.globl	C$tactics.c$159$1_2$110
-;tactics.c:159: static uchar cameraY = 0;
+;tactics.c:158: static uchar cameraY = 0;
 	ld	hl, #_main_cameraY_65538_120
 	ld	(hl), #0x00
 ;--------------------------------------------------------
@@ -124,9 +126,9 @@ _letter_table::
 	.area _CODE
 	G$change_text$0$0	= .
 	.globl	G$change_text$0$0
-	C$tactics.c$94$0_0$103	= .
-	.globl	C$tactics.c$94$0_0$103
-;tactics.c:94: void change_text(uchar *text) {
+	C$tactics.c$93$0_0$103	= .
+	.globl	C$tactics.c$93$0_0$103
+;tactics.c:93: void change_text(uchar *text) {
 ;	---------------------------------
 ; Function change_text
 ; ---------------------------------
@@ -134,21 +136,21 @@ _change_text::
 	dec	sp
 	ld	c, e
 	ld	b, d
-	C$tactics.c$95$1_0$103	= .
-	.globl	C$tactics.c$95$1_0$103
-;tactics.c:95: if (text == NULL) {
+	C$tactics.c$94$1_0$103	= .
+	.globl	C$tactics.c$94$1_0$103
+;tactics.c:94: if (text == NULL) {
 	ld	a, b
 	or	a, c
-	C$tactics.c$96$2_0$104	= .
-	.globl	C$tactics.c$96$2_0$104
-;tactics.c:96: return;
+	C$tactics.c$95$2_0$104	= .
+	.globl	C$tactics.c$95$2_0$104
+;tactics.c:95: return;
 	jr	Z, 00110$
-	C$tactics.c$98$1_1$105	= .
-	.globl	C$tactics.c$98$1_1$105
-;tactics.c:98: volatile uchar *tilemap = &windowBuffer[0][0];
-	C$tactics.c$100$4_1$109	= .
-	.globl	C$tactics.c$100$4_1$109
-;tactics.c:100: for (uchar i = 0; i < 6; i++) {
+	C$tactics.c$97$1_1$105	= .
+	.globl	C$tactics.c$97$1_1$105
+;tactics.c:97: volatile uchar *tilemap = &windowBuffer[0][0];
+	C$tactics.c$99$4_1$109	= .
+	.globl	C$tactics.c$99$4_1$109
+;tactics.c:99: for (uchar i = 0; i < 6; i++) {
 	ldhl	sp,	#0
 	ld	(hl), #0x00
 00108$:
@@ -156,9 +158,9 @@ _change_text::
 	ld	a, (hl)
 	sub	a, #0x06
 	jr	NC, 00110$
-	C$tactics.c$101$3_1$107	= .
-	.globl	C$tactics.c$101$3_1$107
-;tactics.c:101: if (text[i] == ' ') {
+	C$tactics.c$100$3_1$107	= .
+	.globl	C$tactics.c$100$3_1$107
+;tactics.c:100: if (text[i] == ' ') {
 	ld	l, (hl)
 	ld	h, #0x00
 	add	hl, bc
@@ -167,16 +169,16 @@ _change_text::
 	ld	a, (de)
 	cp	a, #0x20
 	jr	NZ, 00104$
-	C$tactics.c$102$4_1$108	= .
-	.globl	C$tactics.c$102$4_1$108
-;tactics.c:102: tile = SPACE_LETTER;
+	C$tactics.c$101$4_1$108	= .
+	.globl	C$tactics.c$101$4_1$108
+;tactics.c:101: tile = SPACE_LETTER;
 	ld	hl, #_change_text_tile_65537_105
 	ld	(hl), #0x2c
 	jr	00105$
 00104$:
-	C$tactics.c$104$4_1$109	= .
-	.globl	C$tactics.c$104$4_1$109
-;tactics.c:104: tile = letter_table[text[i] - 'A'];
+	C$tactics.c$103$4_1$109	= .
+	.globl	C$tactics.c$103$4_1$109
+;tactics.c:103: tile = letter_table[text[i] - 'A'];
 	add	a, #0xbf
 	ld	e, a
 	rlca
@@ -187,9 +189,9 @@ _change_text::
 	ld	a, (hl)
 	ld	(#_change_text_tile_65537_105),a
 00105$:
-	C$tactics.c$106$3_1$107	= .
-	.globl	C$tactics.c$106$3_1$107
-;tactics.c:106: tilemap[i] = tile;
+	C$tactics.c$105$3_1$107	= .
+	.globl	C$tactics.c$105$3_1$107
+;tactics.c:105: tilemap[i] = tile;
 	ld	de, #_windowBuffer
 	ldhl	sp,	#0
 	ld	l, (hl)
@@ -200,13 +202,13 @@ _change_text::
 	ld	hl, #_change_text_tile_65537_105
 	ld	a, (hl)
 	ld	(de), a
+	C$tactics.c$106$3_1$107	= .
+	.globl	C$tactics.c$106$3_1$107
+;tactics.c:106: tile++;
+	inc	(hl)
 	C$tactics.c$107$3_1$107	= .
 	.globl	C$tactics.c$107$3_1$107
-;tactics.c:107: tile++;
-	inc	(hl)
-	C$tactics.c$108$3_1$107	= .
-	.globl	C$tactics.c$108$3_1$107
-;tactics.c:108: tilemap[i|32] = tile;
+;tactics.c:107: tilemap[i|32] = tile;
 	ldhl	sp,	#0
 	ld	a, (hl)
 	set	5, a
@@ -217,19 +219,19 @@ _change_text::
 	ld	d, a
 	ld	a, (#_change_text_tile_65537_105)
 	ld	(de), a
-	C$tactics.c$100$2_1$106	= .
-	.globl	C$tactics.c$100$2_1$106
-;tactics.c:100: for (uchar i = 0; i < 6; i++) {
+	C$tactics.c$99$2_1$106	= .
+	.globl	C$tactics.c$99$2_1$106
+;tactics.c:99: for (uchar i = 0; i < 6; i++) {
 	ldhl	sp,	#0
 	inc	(hl)
 	jr	00108$
 00110$:
-	C$tactics.c$110$2_1$103	= .
-	.globl	C$tactics.c$110$2_1$103
-;tactics.c:110: }
+	C$tactics.c$109$2_1$103	= .
+	.globl	C$tactics.c$109$2_1$103
+;tactics.c:109: }
 	inc	sp
-	C$tactics.c$110$2_1$103	= .
-	.globl	C$tactics.c$110$2_1$103
+	C$tactics.c$109$2_1$103	= .
+	.globl	C$tactics.c$109$2_1$103
 	XG$change_text$0$0	= .
 	.globl	XG$change_text$0$0
 	ret
@@ -1933,204 +1935,238 @@ _Letters:
 	.db #0x00	; 0
 	.db #0x00	; 0
 	.db #0x00	; 0
+G$colors$0_0$0 == .
+_colors:
+	.dw #0x7fff
+	.dw #0x5294
+	.dw #0x294a
+	.dw #0x0000
+	.dw #0x17bc
+	.dw #0x22e7
+	.dw #0x19c4
+	.dw #0x14e0
+	.dw #0x17bc
+	.dw #0x22e7
+	.dw #0x19c4
+	.dw #0x14e0
+	.dw #0x17bc
+	.dw #0x22e7
+	.dw #0x19c4
+	.dw #0x14e0
+	.dw #0x17bc
+	.dw #0x22e7
+	.dw #0x19c4
+	.dw #0x14e0
+	.dw #0x17bc
+	.dw #0x22e7
+	.dw #0x19c4
+	.dw #0x14e0
+	.dw #0x17bc
+	.dw #0x22e7
+	.dw #0x19c4
+	.dw #0x14e0
+	.dw #0x17bc
+	.dw #0x22e7
+	.dw #0x19c4
+	.dw #0x14e0
 G$MAP$0_0$0 == .
 _MAP:
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x16	; 22
-	.db #0x11	; 17
-	.db #0x14	; 20
-	.db #0x10	; 16
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x10	; 16
-	.db #0x16	; 22
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x0a	; 10
+	.db #0x05	; 5
+	.db #0x08	; 8
+	.db #0x04	; 4
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x04	; 4
+	.db #0x0a	; 10
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x04	; 4
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x05	; 5
+	.db #0x06	; 6
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x04	; 4
+	.db #0x0a	; 10
+	.db #0x02	; 2
+	.db #0x03	; 3
+	.db #0x04	; 4
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x04	; 4
+	.db #0x0a	; 10
+	.db #0x07	; 7
+	.db #0x07	; 7
+	.db #0x04	; 4
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x04	; 4
+	.db #0x0a	; 10
+	.db #0x07	; 7
+	.db #0x07	; 7
+	.db #0x04	; 4
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x04	; 4
+	.db #0x0a	; 10
+	.db #0x07	; 7
+	.db #0x07	; 7
+	.db #0x04	; 4
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x04	; 4
+	.db #0x0a	; 10
+	.db #0x07	; 7
+	.db #0x07	; 7
+	.db #0x04	; 4
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x04	; 4
+	.db #0x0a	; 10
+	.db #0x0b	; 11
 	.db #0x0c	; 12
-	.db #0x0d	; 13
-	.db #0x10	; 16
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x11	; 17
-	.db #0x12	; 18
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x10	; 16
-	.db #0x16	; 22
-	.db #0x0e	; 14
-	.db #0x0f	; 15
-	.db #0x10	; 16
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x10	; 16
-	.db #0x16	; 22
-	.db #0x13	; 19
-	.db #0x13	; 19
-	.db #0x10	; 16
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x10	; 16
-	.db #0x16	; 22
-	.db #0x13	; 19
-	.db #0x13	; 19
-	.db #0x10	; 16
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x10	; 16
-	.db #0x16	; 22
-	.db #0x13	; 19
-	.db #0x13	; 19
-	.db #0x10	; 16
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x10	; 16
-	.db #0x16	; 22
-	.db #0x13	; 19
-	.db #0x13	; 19
-	.db #0x10	; 16
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x10	; 16
-	.db #0x16	; 22
-	.db #0x17	; 23
-	.db #0x18	; 24
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x16	; 22
-	.db #0x13	; 19
-	.db #0x13	; 19
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x16	; 22
-	.db #0x13	; 19
-	.db #0x13	; 19
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x10	; 16
-	.db #0x16	; 22
-	.db #0x13	; 19
-	.db #0x13	; 19
-	.db #0x10	; 16
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x11	; 17
-	.db #0x12	; 18
-	.db #0x15	; 21
-	.db #0x15	; 21
-	.db #0x10	; 16
-	.db #0x16	; 22
-	.db #0x0e	; 14
-	.db #0x0f	; 15
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x0a	; 10
+	.db #0x07	; 7
+	.db #0x07	; 7
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x0a	; 10
+	.db #0x07	; 7
+	.db #0x07	; 7
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x04	; 4
+	.db #0x0a	; 10
+	.db #0x07	; 7
+	.db #0x07	; 7
+	.db #0x04	; 4
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x05	; 5
+	.db #0x06	; 6
+	.db #0x09	; 9
+	.db #0x09	; 9
+	.db #0x04	; 4
+	.db #0x0a	; 10
+	.db #0x02	; 2
+	.db #0x03	; 3
 	G$main$0$0	= .
 	.globl	G$main$0$0
-	C$tactics.c$122$2_1$110	= .
-	.globl	C$tactics.c$122$2_1$110
-;tactics.c:122: void main() {
+	C$tactics.c$121$2_1$110	= .
+	.globl	C$tactics.c$121$2_1$110
+;tactics.c:121: void main() {
 ;	---------------------------------
 ; Function main
 ; ---------------------------------
 _main::
 	add	sp, #-9
+	C$tactics.c$122$1_0$110	= .
+	.globl	C$tactics.c$122$1_0$110
+;tactics.c:122: wait_vbl_done();
+	call	_wait_vbl_done
 	C$tactics.c$123$1_0$110	= .
 	.globl	C$tactics.c$123$1_0$110
-;tactics.c:123: wait_vbl_done();
-	call	_wait_vbl_done
+;tactics.c:123: display_off();
+	call	_display_off
 	C$tactics.c$124$1_0$110	= .
 	.globl	C$tactics.c$124$1_0$110
-;tactics.c:124: display_off();
-	call	_display_off
-	C$tactics.c$125$1_0$110	= .
-	.globl	C$tactics.c$125$1_0$110
-;tactics.c:125: LCDC_REG = 0x00;
+;tactics.c:124: LCDC_REG = 0x00;
 	xor	a, a
 	ldh	(_LCDC_REG + 0), a
-	C$tactics.c$126$1_0$110	= .
-	.globl	C$tactics.c$126$1_0$110
-;tactics.c:126: set_bkg_data(48, 60, Tiles); //tiles.  15 big tiles, 60 small tiles
+	C$tactics.c$125$1_0$110	= .
+	.globl	C$tactics.c$125$1_0$110
+;tactics.c:125: set_bkg_data(48, 60, Tiles); //tiles.  15 big tiles, 60 small tiles
 	ld	de, #_Tiles
 	push	de
 	ld	hl, #0x3c30
 	push	hl
 	call	_set_bkg_data
 	add	sp, #4
-	C$tactics.c$127$1_0$110	= .
-	.globl	C$tactics.c$127$1_0$110
-;tactics.c:127: set_bkg_data(0, 46, Letters); //letters. 46 tiles.  23 letters
+	C$tactics.c$126$1_0$110	= .
+	.globl	C$tactics.c$126$1_0$110
+;tactics.c:126: set_bkg_data(0, 46, Letters); //letters. 46 tiles.  23 letters
 	ld	de, #_Letters
 	push	de
 	ld	hl, #0x2e00
 	push	hl
 	call	_set_bkg_data
 	add	sp, #4
-	C$tactics.c$130$5_1$115	= .
-	.globl	C$tactics.c$130$5_1$115
-;tactics.c:130: for (uchar r = 0; r < HEIGHT * 2; r++) {
+	C$tactics.c$129$5_1$115	= .
+	.globl	C$tactics.c$129$5_1$115
+;tactics.c:129: for (uchar r = 0; r < HEIGHT * 2; r++) {
 	ld	c, #0x00
 00181$:
 	ld	a, c
 	sub	a, #0x18
 	jp	NC, 00102$
-	C$tactics.c$131$1_2$110	= .
-	.globl	C$tactics.c$131$1_2$110
-;tactics.c:131: for (uchar c = 0; c < WIDTH * 2; c++) {
+	C$tactics.c$130$1_2$110	= .
+	.globl	C$tactics.c$130$1_2$110
+;tactics.c:130: for (uchar c = 0; c < WIDTH * 2; c++) {
 	ldhl	sp,	#8
 	ld	(hl), #0x00
 00178$:
@@ -2138,9 +2174,9 @@ _main::
 	ld	a, (hl)
 	sub	a, #0x18
 	jp	NC, 00182$
-	C$tactics.c$132$1_2$110	= .
-	.globl	C$tactics.c$132$1_2$110
-;tactics.c:132: uchar map = MAP[r/2][c/2]*4;
+	C$tactics.c$131$1_2$110	= .
+	.globl	C$tactics.c$131$1_2$110
+;tactics.c:131: uchar map = (MAP[r/2][c/2] + FIRST_TILE_OFFSET_2x2)*4;
 	ldhl	sp,	#0
 	ld	a, c
 	ld	(hl+), a
@@ -2249,12 +2285,13 @@ _main::
 	ld	e, l
 	ld	d, h
 	ld	a, (de)
+	add	a, #0x0c
 	add	a, a
 	add	a, a
 	ld	e, a
-	C$tactics.c$133$5_1$115	= .
-	.globl	C$tactics.c$133$5_1$115
-;tactics.c:133: uchar value = map + (r&1) + (c&1)*2;
+	C$tactics.c$132$5_1$115	= .
+	.globl	C$tactics.c$132$5_1$115
+;tactics.c:132: uchar value = map + (r&1) + (c&1)*2;
 	ld	a, c
 	and	a, #0x01
 	add	a, e
@@ -2265,9 +2302,9 @@ _main::
 	add	a, a
 	add	a, e
 	ld	(hl), a
-	C$tactics.c$134$5_1$115	= .
-	.globl	C$tactics.c$134$5_1$115
-;tactics.c:134: tilemap[r*32 + c + 64] = value;
+	C$tactics.c$133$5_1$115	= .
+	.globl	C$tactics.c$133$5_1$115
+;tactics.c:133: tilemap[r*32 + c + 64] = value;
 	ldhl	sp,	#0
 	ld	a, (hl+)
 	ld	d, (hl)
@@ -2296,23 +2333,23 @@ _main::
 	add	a, #0x98
 	ld	d, a
 	ldhl	sp,	#7
-	C$tactics.c$131$4_1$114	= .
-	.globl	C$tactics.c$131$4_1$114
-;tactics.c:131: for (uchar c = 0; c < WIDTH * 2; c++) {
+	C$tactics.c$130$4_1$114	= .
+	.globl	C$tactics.c$130$4_1$114
+;tactics.c:130: for (uchar c = 0; c < WIDTH * 2; c++) {
 	ld	a, (hl+)
 	ld	(de), a
 	inc	(hl)
 	jp	00178$
 00182$:
-	C$tactics.c$130$2_1$112	= .
-	.globl	C$tactics.c$130$2_1$112
-;tactics.c:130: for (uchar r = 0; r < HEIGHT * 2; r++) {
+	C$tactics.c$129$2_1$112	= .
+	.globl	C$tactics.c$129$2_1$112
+;tactics.c:129: for (uchar r = 0; r < HEIGHT * 2; r++) {
 	inc	c
 	jp	00181$
 00102$:
-	C$tactics.c$137$1_2$110	= .
-	.globl	C$tactics.c$137$1_2$110
-;tactics.c:137: for (uchar r = 0; r < 2; r++) {
+	C$tactics.c$136$1_2$110	= .
+	.globl	C$tactics.c$136$1_2$110
+;tactics.c:136: for (uchar r = 0; r < 2; r++) {
 	ldhl	sp,	#8
 	ld	(hl), #0x00
 00187$:
@@ -2320,17 +2357,17 @@ _main::
 	ld	a, (hl)
 	sub	a, #0x02
 	jr	NC, 00104$
-	C$tactics.c$138$1_2$110	= .
-	.globl	C$tactics.c$138$1_2$110
-;tactics.c:138: for (uchar c = 0; c < WIDTH * 2; c++) {
+	C$tactics.c$137$1_2$110	= .
+	.globl	C$tactics.c$137$1_2$110
+;tactics.c:137: for (uchar c = 0; c < WIDTH * 2; c++) {
 	ld	c, #0x00
 00184$:
 	ld	a, c
 	sub	a, #0x18
 	jr	NC, 00188$
-	C$tactics.c$139$5_1$119	= .
-	.globl	C$tactics.c$139$5_1$119
-;tactics.c:139: tilemap[r*32 + c] = SPACE_LETTER;
+	C$tactics.c$138$5_1$119	= .
+	.globl	C$tactics.c$138$5_1$119
+;tactics.c:138: tilemap[r*32 + c] = SPACE_LETTER;
 	ldhl	sp,	#8
 	ld	l, (hl)
 	ld	h, #0x00
@@ -2346,22 +2383,22 @@ _main::
 	add	a, #0x98
 	ld	h, a
 	ld	(hl), #0x2c
-	C$tactics.c$138$4_1$118	= .
-	.globl	C$tactics.c$138$4_1$118
-;tactics.c:138: for (uchar c = 0; c < WIDTH * 2; c++) {
+	C$tactics.c$137$4_1$118	= .
+	.globl	C$tactics.c$137$4_1$118
+;tactics.c:137: for (uchar c = 0; c < WIDTH * 2; c++) {
 	inc	c
 	jr	00184$
 00188$:
-	C$tactics.c$137$2_1$116	= .
-	.globl	C$tactics.c$137$2_1$116
-;tactics.c:137: for (uchar r = 0; r < 2; r++) {
+	C$tactics.c$136$2_1$116	= .
+	.globl	C$tactics.c$136$2_1$116
+;tactics.c:136: for (uchar r = 0; r < 2; r++) {
 	ldhl	sp,	#8
 	inc	(hl)
 	jr	00187$
 00104$:
-	C$tactics.c$142$1_1$111	= .
-	.globl	C$tactics.c$142$1_1$111
-;tactics.c:142: set_sprite_data(0, 8, Tiles + ((CURSOR1 - FIRST_TILE) * 16 * 4));
+	C$tactics.c$141$1_1$111	= .
+	.globl	C$tactics.c$141$1_1$111
+;tactics.c:141: set_sprite_data(0, 8, Tiles + (CURSOR1 * 16 * 4));
 	ld	de, #(_Tiles + 832)
 	push	de
 	ld	hl, #0x800
@@ -2377,9 +2414,9 @@ _main::
 	ld	(hl), #0x02
 	ld	hl, #(_shadow_OAM + 14)
 	ld	(hl), #0x03
-	C$tactics.c$148$1_1$111	= .
-	.globl	C$tactics.c$148$1_1$111
-;tactics.c:148: vmemset((uchar *)WIN_TILEMAP_START, SPACE_LETTER, 32*32);
+	C$tactics.c$147$1_1$111	= .
+	.globl	C$tactics.c$147$1_1$111
+;tactics.c:147: vmemset((uchar *)WIN_TILEMAP_START, SPACE_LETTER, 32*32);
 	ld	de, #0x0400
 	push	de
 	ld	a, #0x2c
@@ -2389,131 +2426,140 @@ _main::
 	push	de
 	call	_vmemset
 	add	sp, #5
-	C$tactics.c$150$1_1$111	= .
-	.globl	C$tactics.c$150$1_1$111
-;tactics.c:150: change_text("FOREST");
+	C$tactics.c$149$1_1$111	= .
+	.globl	C$tactics.c$149$1_1$111
+;tactics.c:149: change_text("FOREST");
 	ld	de, #___str_0
 	call	_change_text
-	C$tactics.c$164$1_2$120	= .
-	.globl	C$tactics.c$164$1_2$120
-;tactics.c:164: IE_REG = IEF_VBLANK;
+	C$tactics.c$163$1_2$120	= .
+	.globl	C$tactics.c$163$1_2$120
+;tactics.c:163: set_bkg_palette(0, 8, colors);
+	ld	de, #_colors
+	push	de
+	ld	hl, #0x800
+	push	hl
+	call	_set_bkg_palette
+	add	sp, #4
+	C$tactics.c$165$1_2$120	= .
+	.globl	C$tactics.c$165$1_2$120
+;tactics.c:165: IE_REG = IEF_VBLANK;
 	ld	a, #0x01
 	ldh	(_IE_REG + 0), a
 ;C:/Users/gerzy/OneDrive - Florida Polytechnic University/Documents/Merpcraft Stuff/codeforces/gmamer_boy/gbdk/include/gb/gb.h:727: __asm__("ei");
 	ei
-	C$tactics.c$167$1_2$120	= .
-	.globl	C$tactics.c$167$1_2$120
-;tactics.c:167: LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00;
-	ld	a, #0xc3
-	ldh	(_LCDC_REG + 0), a
 	C$tactics.c$168$1_2$120	= .
 	.globl	C$tactics.c$168$1_2$120
-;tactics.c:168: while (1) {
+;tactics.c:168: LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00;
+	ld	a, #0xc3
+	ldh	(_LCDC_REG + 0), a
+	C$tactics.c$169$1_2$120	= .
+	.globl	C$tactics.c$169$1_2$120
+;tactics.c:169: while (1) {
 00158$:
-	C$tactics.c$170$2_2$121	= .
-	.globl	C$tactics.c$170$2_2$121
-;tactics.c:170: if (joyTimer > 0) {
+	C$tactics.c$171$2_2$121	= .
+	.globl	C$tactics.c$171$2_2$121
+;tactics.c:171: if (joyTimer > 0) {
 	ld	hl, #_main_joyTimer_65538_120
 	ld	a, (hl)
 	or	a, a
 	jr	Z, 00127$
-	C$tactics.c$171$3_2$122	= .
-	.globl	C$tactics.c$171$3_2$122
-;tactics.c:171: joyTimer--;
+	C$tactics.c$172$3_2$122	= .
+	.globl	C$tactics.c$172$3_2$122
+;tactics.c:172: joyTimer--;
 	dec	(hl)
 	jr	00128$
 00127$:
-	C$tactics.c$173$3_2$123	= .
-	.globl	C$tactics.c$173$3_2$123
-;tactics.c:173: uchar joy = joypad();
-	call	_joypad
-	ld	c, a
 	C$tactics.c$174$3_2$123	= .
 	.globl	C$tactics.c$174$3_2$123
-;tactics.c:174: if (joy & J_LEFT) {
+;tactics.c:174: uchar joy = joypad();
+	call	_joypad
+	ld	c, a
+	C$tactics.c$175$3_2$123	= .
+	.globl	C$tactics.c$175$3_2$123
+;tactics.c:175: if (joy & J_LEFT) {
 	bit	1, c
 	jr	Z, 00122$
-	C$tactics.c$175$4_2$124	= .
-	.globl	C$tactics.c$175$4_2$124
-;tactics.c:175: if (x > 0) {
+	C$tactics.c$176$4_2$124	= .
+	.globl	C$tactics.c$176$4_2$124
+;tactics.c:176: if (x > 0) {
 	ld	hl, #_main_x_65538_120
 	ld	a, (hl)
 	or	a, a
 	jr	Z, 00123$
-	C$tactics.c$176$5_2$125	= .
-	.globl	C$tactics.c$176$5_2$125
-;tactics.c:176: x--;
+	C$tactics.c$177$5_2$125	= .
+	.globl	C$tactics.c$177$5_2$125
+;tactics.c:177: x--;
 	dec	(hl)
 	jr	00123$
 00122$:
-	C$tactics.c$178$3_2$123	= .
-	.globl	C$tactics.c$178$3_2$123
-;tactics.c:178: } else if (joy & J_RIGHT) {
+	C$tactics.c$179$3_2$123	= .
+	.globl	C$tactics.c$179$3_2$123
+;tactics.c:179: } else if (joy & J_RIGHT) {
 	bit	0, c
 	jr	Z, 00119$
-	C$tactics.c$179$4_2$126	= .
-	.globl	C$tactics.c$179$4_2$126
-;tactics.c:179: if (x < WIDTH - 1) {
+	C$tactics.c$180$4_2$126	= .
+	.globl	C$tactics.c$180$4_2$126
+;tactics.c:180: if (x < WIDTH - 1) {
 	ld	hl, #_main_x_65538_120
 	ld	a, (hl)
 	sub	a, #0x0b
 	jr	NC, 00123$
-	C$tactics.c$180$5_2$127	= .
-	.globl	C$tactics.c$180$5_2$127
-;tactics.c:180: x++;
+	C$tactics.c$181$5_2$127	= .
+	.globl	C$tactics.c$181$5_2$127
+;tactics.c:181: x++;
 	inc	(hl)
 	jr	00123$
 00119$:
-	C$tactics.c$182$3_2$123	= .
-	.globl	C$tactics.c$182$3_2$123
-;tactics.c:182: } else if (joy & J_UP) {
+	C$tactics.c$183$3_2$123	= .
+	.globl	C$tactics.c$183$3_2$123
+;tactics.c:183: } else if (joy & J_UP) {
 	bit	2, c
 	jr	Z, 00116$
-	C$tactics.c$183$4_2$128	= .
-	.globl	C$tactics.c$183$4_2$128
-;tactics.c:183: if (y > 0) {
+	C$tactics.c$184$4_2$128	= .
+	.globl	C$tactics.c$184$4_2$128
+;tactics.c:184: if (y > 0) {
 	ld	hl, #_main_y_65538_120
 	ld	a, (hl)
 	or	a, a
 	jr	Z, 00123$
-	C$tactics.c$184$5_2$129	= .
-	.globl	C$tactics.c$184$5_2$129
-;tactics.c:184: y--;
+	C$tactics.c$185$5_2$129	= .
+	.globl	C$tactics.c$185$5_2$129
+;tactics.c:185: y--;
 	dec	(hl)
 	jr	00123$
 00116$:
-	C$tactics.c$186$3_2$123	= .
-	.globl	C$tactics.c$186$3_2$123
-;tactics.c:186: } else if (joy & J_DOWN) {
+	C$tactics.c$187$3_2$123	= .
+	.globl	C$tactics.c$187$3_2$123
+;tactics.c:187: } else if (joy & J_DOWN) {
 	bit	3, c
 	jr	Z, 00123$
-	C$tactics.c$187$4_2$130	= .
-	.globl	C$tactics.c$187$4_2$130
-;tactics.c:187: if (y < HEIGHT - 1) {
+	C$tactics.c$188$4_2$130	= .
+	.globl	C$tactics.c$188$4_2$130
+;tactics.c:188: if (y < HEIGHT - 1) {
 	ld	hl, #_main_y_65538_120
 	ld	a, (hl)
 	sub	a, #0x0b
 	jr	NC, 00123$
-	C$tactics.c$188$5_2$131	= .
-	.globl	C$tactics.c$188$5_2$131
-;tactics.c:188: y++;
+	C$tactics.c$189$5_2$131	= .
+	.globl	C$tactics.c$189$5_2$131
+;tactics.c:189: y++;
 	inc	(hl)
 00123$:
-	C$tactics.c$191$3_2$123	= .
-	.globl	C$tactics.c$191$3_2$123
-;tactics.c:191: if (joy != 0) {
+	C$tactics.c$192$3_2$123	= .
+	.globl	C$tactics.c$192$3_2$123
+;tactics.c:192: if (joy != 0) {
 	ld	a, c
 	or	a, a
 	jr	Z, 00128$
-	C$tactics.c$192$4_2$132	= .
-	.globl	C$tactics.c$192$4_2$132
-;tactics.c:192: joyTimer = 10;
+	C$tactics.c$193$4_2$132	= .
+	.globl	C$tactics.c$193$4_2$132
+;tactics.c:193: joyTimer = 10;
 	ld	hl, #_main_joyTimer_65538_120
 	ld	(hl), #0x0a
 00128$:
-	C$tactics.c$196$2_3$133	= .
-	.globl	C$tactics.c$196$2_3$133
-;tactics.c:196: uchar coord = MAP[y][x];
+	C$tactics.c$197$2_3$133	= .
+	.globl	C$tactics.c$197$2_3$133
+;tactics.c:197: uchar coord = MAP[y][x];
 	ld	hl, #_main_y_65538_120
 	ld	c, (hl)
 	ld	b, #0x00
@@ -2534,9 +2580,9 @@ _main::
 	ld	h, #0x00
 	add	hl, bc
 	ld	c, (hl)
-	C$tactics.c$197$2_3$133	= .
-	.globl	C$tactics.c$197$2_3$133
-;tactics.c:197: uchar *text = (uchar *)displayTexts[coord];
+	C$tactics.c$198$2_3$133	= .
+	.globl	C$tactics.c$198$2_3$133
+;tactics.c:198: uchar *text = (uchar *)displayTexts[coord];
 	ld	h, #0x00
 ;	spillPairReg hl
 ;	spillPairReg hl
@@ -2547,28 +2593,28 @@ _main::
 	ld	a, (hl+)
 	ld	c, a
 	ld	b, (hl)
-	C$tactics.c$198$2_3$133	= .
-	.globl	C$tactics.c$198$2_3$133
-;tactics.c:198: change_text(text);
+	C$tactics.c$199$2_3$133	= .
+	.globl	C$tactics.c$199$2_3$133
+;tactics.c:199: change_text(text);
 	ld	e, c
 	ld	d, b
 	call	_change_text
-	C$tactics.c$200$2_3$133	= .
-	.globl	C$tactics.c$200$2_3$133
-;tactics.c:200: if (x < cameraX) {
+	C$tactics.c$201$2_3$133	= .
+	.globl	C$tactics.c$201$2_3$133
+;tactics.c:201: if (x < cameraX) {
 	ld	a, (#_main_x_65538_120)
 	ld	hl, #_main_cameraX_65538_120
 	sub	a, (hl)
 	jr	NC, 00132$
-	C$tactics.c$201$3_3$134	= .
-	.globl	C$tactics.c$201$3_3$134
-;tactics.c:201: cameraX--;
+	C$tactics.c$202$3_3$134	= .
+	.globl	C$tactics.c$202$3_3$134
+;tactics.c:202: cameraX--;
 	dec	(hl)
 	jr	00133$
 00132$:
-	C$tactics.c$202$2_3$133	= .
-	.globl	C$tactics.c$202$2_3$133
-;tactics.c:202: } else if (x >= cameraX + 10) {
+	C$tactics.c$203$2_3$133	= .
+	.globl	C$tactics.c$203$2_3$133
+;tactics.c:203: } else if (x >= cameraX + 10) {
 	ld	a, (#_main_cameraX_65538_120)
 	ld	b, #0x00
 	add	a, #0x0a
@@ -2601,28 +2647,28 @@ _main::
 	scf
 00369$:
 	jr	C, 00133$
-	C$tactics.c$203$3_3$135	= .
-	.globl	C$tactics.c$203$3_3$135
-;tactics.c:203: cameraX++;
+	C$tactics.c$204$3_3$135	= .
+	.globl	C$tactics.c$204$3_3$135
+;tactics.c:204: cameraX++;
 	ld	hl, #_main_cameraX_65538_120
 	inc	(hl)
 00133$:
-	C$tactics.c$206$2_3$133	= .
-	.globl	C$tactics.c$206$2_3$133
-;tactics.c:206: if (y < cameraY) {
+	C$tactics.c$207$2_3$133	= .
+	.globl	C$tactics.c$207$2_3$133
+;tactics.c:207: if (y < cameraY) {
 	ld	a, (#_main_y_65538_120)
 	ld	hl, #_main_cameraY_65538_120
 	sub	a, (hl)
 	jr	NC, 00137$
-	C$tactics.c$207$3_3$136	= .
-	.globl	C$tactics.c$207$3_3$136
-;tactics.c:207: cameraY--;
+	C$tactics.c$208$3_3$136	= .
+	.globl	C$tactics.c$208$3_3$136
+;tactics.c:208: cameraY--;
 	dec	(hl)
 	jr	00138$
 00137$:
-	C$tactics.c$208$2_3$133	= .
-	.globl	C$tactics.c$208$2_3$133
-;tactics.c:208: } else if (y > cameraY + 7) {
+	C$tactics.c$209$2_3$133	= .
+	.globl	C$tactics.c$209$2_3$133
+;tactics.c:209: } else if (y > cameraY + 7) {
 	ld	a, (#_main_cameraY_65538_120)
 	ld	b, #0x00
 	add	a, #0x07
@@ -2655,92 +2701,92 @@ _main::
 	scf
 00372$:
 	jr	NC, 00138$
-	C$tactics.c$209$3_3$137	= .
-	.globl	C$tactics.c$209$3_3$137
-;tactics.c:209: cameraY++;
+	C$tactics.c$210$3_3$137	= .
+	.globl	C$tactics.c$210$3_3$137
+;tactics.c:210: cameraY++;
 	ld	hl, #_main_cameraY_65538_120
 	inc	(hl)
 00138$:
-	C$tactics.c$213$2_4$138	= .
-	.globl	C$tactics.c$213$2_4$138
-;tactics.c:213: target_scy = cameraY * 16;
+	C$tactics.c$214$2_4$138	= .
+	.globl	C$tactics.c$214$2_4$138
+;tactics.c:214: target_scy = cameraY * 16;
 	ld	a, (#_main_cameraY_65538_120)
 	swap	a
 	and	a, #0xf0
 	ld	(#_main_target_scy_131076_138),a
-	C$tactics.c$215$2_5$139	= .
-	.globl	C$tactics.c$215$2_5$139
-;tactics.c:215: target_scx = cameraX * 16;
+	C$tactics.c$216$2_5$139	= .
+	.globl	C$tactics.c$216$2_5$139
+;tactics.c:216: target_scx = cameraX * 16;
 	ld	a, (#_main_cameraX_65538_120)
 	swap	a
 	and	a, #0xf0
 	ld	hl, #_main_target_scx_131077_139
 	ld	(hl), a
-	C$tactics.c$217$2_5$139	= .
-	.globl	C$tactics.c$217$2_5$139
-;tactics.c:217: __asm__("halt");
+	C$tactics.c$218$2_5$139	= .
+	.globl	C$tactics.c$218$2_5$139
+;tactics.c:218: __asm__("halt");
 	halt
-	C$tactics.c$221$2_5$139	= .
-	.globl	C$tactics.c$221$2_5$139
-;tactics.c:221: if (SCY_REG < target_scy) {
+	C$tactics.c$222$2_5$139	= .
+	.globl	C$tactics.c$222$2_5$139
+;tactics.c:222: if (SCY_REG < target_scy) {
 	ldh	a, (_SCY_REG + 0)
 	ld	hl, #_main_target_scy_131076_138
 	sub	a, (hl)
 	jr	NC, 00142$
-	C$tactics.c$222$3_5$140	= .
-	.globl	C$tactics.c$222$3_5$140
-;tactics.c:222: SCY_REG += 2;
+	C$tactics.c$223$3_5$140	= .
+	.globl	C$tactics.c$223$3_5$140
+;tactics.c:223: SCY_REG += 2;
 	ldh	a, (_SCY_REG + 0)
 	add	a, #0x02
 	ldh	(_SCY_REG + 0), a
 	jr	00143$
 00142$:
-	C$tactics.c$223$2_5$139	= .
-	.globl	C$tactics.c$223$2_5$139
-;tactics.c:223: } else if (SCY_REG > target_scy) {
+	C$tactics.c$224$2_5$139	= .
+	.globl	C$tactics.c$224$2_5$139
+;tactics.c:224: } else if (SCY_REG > target_scy) {
 	ldh	a, (_SCY_REG + 0)
 	ld	b, a
 	ld	a, (#_main_target_scy_131076_138)
 	sub	a, b
 	jr	NC, 00143$
-	C$tactics.c$224$3_5$141	= .
-	.globl	C$tactics.c$224$3_5$141
-;tactics.c:224: SCY_REG -= 2;
+	C$tactics.c$225$3_5$141	= .
+	.globl	C$tactics.c$225$3_5$141
+;tactics.c:225: SCY_REG -= 2;
 	ldh	a, (_SCY_REG + 0)
 	add	a, #0xfe
 	ldh	(_SCY_REG + 0), a
 00143$:
-	C$tactics.c$226$2_5$139	= .
-	.globl	C$tactics.c$226$2_5$139
-;tactics.c:226: if (SCX_REG < target_scx) {
+	C$tactics.c$227$2_5$139	= .
+	.globl	C$tactics.c$227$2_5$139
+;tactics.c:227: if (SCX_REG < target_scx) {
 	ldh	a, (_SCX_REG + 0)
 	ld	hl, #_main_target_scx_131077_139
 	sub	a, (hl)
 	jr	NC, 00147$
-	C$tactics.c$227$3_5$142	= .
-	.globl	C$tactics.c$227$3_5$142
-;tactics.c:227: SCX_REG += 2;
+	C$tactics.c$228$3_5$142	= .
+	.globl	C$tactics.c$228$3_5$142
+;tactics.c:228: SCX_REG += 2;
 	ldh	a, (_SCX_REG + 0)
 	add	a, #0x02
 	ldh	(_SCX_REG + 0), a
 	jr	00148$
 00147$:
-	C$tactics.c$228$2_5$139	= .
-	.globl	C$tactics.c$228$2_5$139
-;tactics.c:228: } else if (SCX_REG > target_scx) {
+	C$tactics.c$229$2_5$139	= .
+	.globl	C$tactics.c$229$2_5$139
+;tactics.c:229: } else if (SCX_REG > target_scx) {
 	ldh	a, (_SCX_REG + 0)
 	ld	b, a
 	ld	a, (#_main_target_scx_131077_139)
 	sub	a, b
 	jr	NC, 00148$
-	C$tactics.c$229$3_5$143	= .
-	.globl	C$tactics.c$229$3_5$143
-;tactics.c:229: SCX_REG -= 2;
+	C$tactics.c$230$3_5$143	= .
+	.globl	C$tactics.c$230$3_5$143
+;tactics.c:230: SCX_REG -= 2;
 	ldh	a, (_SCX_REG + 0)
 	add	a, #0xfe
 	ldh	(_SCX_REG + 0), a
 00148$:
-;tactics.c:232: move_sprite(0, (x - cameraX)*16 + 8, (y-cameraY)*16 + 32);
+;tactics.c:233: move_sprite(0, (x - cameraX)*16 + 8, (y-cameraY)*16 + 32);
 	ld	a, (#_main_y_65538_120)
 	ld	hl, #_main_cameraY_65538_120
 	sub	a, (hl)
@@ -2761,7 +2807,7 @@ _main::
 	ld	a, c
 	ld	(hl+), a
 	ld	(hl), b
-;tactics.c:233: move_sprite(1, (x - cameraX)*16 + 8,  (y-cameraY)*16 + 40);
+;tactics.c:234: move_sprite(1, (x - cameraX)*16 + 8,  (y-cameraY)*16 + 40);
 	ld	a, (#_main_y_65538_120)
 	ld	hl, #_main_cameraY_65538_120
 	sub	a, (hl)
@@ -2782,7 +2828,7 @@ _main::
 	ld	a, c
 	ld	(hl+), a
 	ld	(hl), b
-;tactics.c:234: move_sprite(2, (x - cameraX)*16 + 16, (y-cameraY)*16 + 32);
+;tactics.c:235: move_sprite(2, (x - cameraX)*16 + 16, (y-cameraY)*16 + 32);
 	ld	a, (#_main_y_65538_120)
 	ld	hl, #_main_cameraY_65538_120
 	sub	a, (hl)
@@ -2803,7 +2849,7 @@ _main::
 	ld	a, c
 	ld	(hl+), a
 	ld	(hl), b
-;tactics.c:235: move_sprite(3, (x - cameraX)*16 + 16, (y-cameraY)*16 + 40);
+;tactics.c:236: move_sprite(3, (x - cameraX)*16 + 16, (y-cameraY)*16 + 40);
 	ld	a, (#_main_y_65538_120)
 	ld	hl, #_main_cameraY_65538_120
 	sub	a, (hl)
@@ -2824,20 +2870,20 @@ _main::
 	ld	a, c
 	ld	(hl+), a
 	ld	(hl), b
-	C$tactics.c$237$2_5$139	= .
-	.globl	C$tactics.c$237$2_5$139
-;tactics.c:237: cursorTimer++;
-	ld	hl, #_main_cursorTimer_65538_120
-	inc	(hl)
 	C$tactics.c$238$2_5$139	= .
 	.globl	C$tactics.c$238$2_5$139
-;tactics.c:238: if (cursorTimer == 30) {
+;tactics.c:238: cursorTimer++;
+	ld	hl, #_main_cursorTimer_65538_120
+	inc	(hl)
+	C$tactics.c$239$2_5$139	= .
+	.globl	C$tactics.c$239$2_5$139
+;tactics.c:239: if (cursorTimer == 30) {
 	ld	a, (hl)
 	sub	a, #0x1e
 	jr	NZ, 00152$
-	C$tactics.c$239$3_5$144	= .
-	.globl	C$tactics.c$239$3_5$144
-;tactics.c:239: cursorTimer = 0;
+	C$tactics.c$240$3_5$144	= .
+	.globl	C$tactics.c$240$3_5$144
+;tactics.c:240: cursorTimer = 0;
 	ld	hl, #_main_cursorTimer_65538_120
 	ld	(hl), #0x00
 ;C:/Users/gerzy/OneDrive - Florida Polytechnic University/Documents/Merpcraft Stuff/codeforces/gmamer_boy/gbdk/include/gb/gb.h:1602: shadow_OAM[nb].tile=tile;
@@ -2849,14 +2895,14 @@ _main::
 	ld	(hl), #0x02
 	ld	hl, #(_shadow_OAM + 14)
 	ld	(hl), #0x03
-	C$tactics.c$243$2_5$139	= .
-	.globl	C$tactics.c$243$2_5$139
-;tactics.c:243: set_sprite_tile(3, 3);
-	jr	00153$
-00152$:
 	C$tactics.c$244$2_5$139	= .
 	.globl	C$tactics.c$244$2_5$139
-;tactics.c:244: } else if (cursorTimer == 15) {
+;tactics.c:244: set_sprite_tile(3, 3);
+	jr	00153$
+00152$:
+	C$tactics.c$245$2_5$139	= .
+	.globl	C$tactics.c$245$2_5$139
+;tactics.c:245: } else if (cursorTimer == 15) {
 	ld	a, (#_main_cursorTimer_65538_120)
 	sub	a, #0x0f
 	jr	NZ, 00153$
@@ -2869,38 +2915,38 @@ _main::
 	ld	(hl), #0x06
 	ld	hl, #(_shadow_OAM + 14)
 	ld	(hl), #0x07
-	C$tactics.c$248$2_5$139	= .
-	.globl	C$tactics.c$248$2_5$139
-;tactics.c:248: set_sprite_tile(3, 7);
+	C$tactics.c$249$2_5$139	= .
+	.globl	C$tactics.c$249$2_5$139
+;tactics.c:249: set_sprite_tile(3, 7);
 00153$:
-	C$tactics.c$251$2_5$139	= .
-	.globl	C$tactics.c$251$2_5$139
-;tactics.c:251: copy_window_buffer();
+	C$tactics.c$252$2_5$139	= .
+	.globl	C$tactics.c$252$2_5$139
+;tactics.c:252: copy_window_buffer();
 	call	_copy_window_buffer
-	C$tactics.c$253$2_5$139	= .
-	.globl	C$tactics.c$253$2_5$139
-;tactics.c:253: LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_WINON;
-	ld	a, #0xe3
-	ldh	(_LCDC_REG + 0), a
 	C$tactics.c$254$2_5$139	= .
 	.globl	C$tactics.c$254$2_5$139
-;tactics.c:254: while (LY_REG != 16) ;
+;tactics.c:254: LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_WINON;
+	ld	a, #0xe3
+	ldh	(_LCDC_REG + 0), a
+	C$tactics.c$255$2_5$139	= .
+	.globl	C$tactics.c$255$2_5$139
+;tactics.c:255: while (LY_REG != 16) ;
 00154$:
 	ldh	a, (_LY_REG + 0)
 	sub	a, #0x10
 	jr	NZ, 00154$
-	C$tactics.c$255$2_5$139	= .
-	.globl	C$tactics.c$255$2_5$139
-;tactics.c:255: LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_WINOFF;
+	C$tactics.c$256$2_5$139	= .
+	.globl	C$tactics.c$256$2_5$139
+;tactics.c:256: LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_WINOFF;
 	ld	a, #0xc3
 	ldh	(_LCDC_REG + 0), a
 	jp	00158$
-	C$tactics.c$257$1_2$110	= .
-	.globl	C$tactics.c$257$1_2$110
-;tactics.c:257: }
+	C$tactics.c$258$1_2$110	= .
+	.globl	C$tactics.c$258$1_2$110
+;tactics.c:258: }
 	add	sp, #9
-	C$tactics.c$257$1_2$110	= .
-	.globl	C$tactics.c$257$1_2$110
+	C$tactics.c$258$1_2$110	= .
+	.globl	C$tactics.c$258$1_2$110
 	XG$main$0$0	= .
 	.globl	XG$main$0$0
 	ret
@@ -2911,46 +2957,42 @@ ___str_0:
 	.area _CODE
 Ftactics$__str_1$0_0$0 == .
 ___str_1:
-	.ascii "      "
+	.ascii "GUY   "
 	.db 0x00
 Ftactics$__str_2$0_0$0 == .
 ___str_2:
-	.ascii "GUY   "
+	.ascii "HOUSE "
 	.db 0x00
 Ftactics$__str_3$0_0$0 == .
 ___str_3:
-	.ascii "HOUSE "
+	.ascii "CAVE  "
 	.db 0x00
 Ftactics$__str_4$0_0$0 == .
 ___str_4:
-	.ascii "CAVE  "
+	.ascii "CHEST "
 	.db 0x00
 Ftactics$__str_5$0_0$0 == .
 ___str_5:
-	.ascii "CHEST "
+	.ascii "TREE  "
 	.db 0x00
 Ftactics$__str_6$0_0$0 == .
 ___str_6:
-	.ascii "TREE  "
+	.ascii "FENCE "
 	.db 0x00
 Ftactics$__str_7$0_0$0 == .
 ___str_7:
-	.ascii "FENCE "
+	.ascii "GRASS "
 	.db 0x00
 Ftactics$__str_8$0_0$0 == .
 ___str_8:
-	.ascii "GRASS "
+	.ascii "PATH  "
 	.db 0x00
 Ftactics$__str_9$0_0$0 == .
 ___str_9:
-	.ascii "PATH  "
+	.ascii "START "
 	.db 0x00
 Ftactics$__str_10$0_0$0 == .
 ___str_10:
-	.ascii "START "
-	.db 0x00
-Ftactics$__str_11$0_0$0 == .
-___str_11:
 	.ascii "END   "
 	.db 0x00
 	.area _INITIALIZER
@@ -2960,17 +3002,6 @@ __xinit__displayTexts:
 	.dw ___str_1
 	.dw ___str_1
 	.dw ___str_1
-	.dw ___str_1
-	.dw ___str_1
-	.dw ___str_1
-	.dw ___str_1
-	.dw ___str_1
-	.dw ___str_1
-	.dw ___str_2
-	.dw ___str_2
-	.dw ___str_2
-	.dw ___str_2
-	.dw ___str_2
 	.dw ___str_2
 	.dw ___str_3
 	.dw ___str_4
@@ -2980,7 +3011,6 @@ __xinit__displayTexts:
 	.dw ___str_8
 	.dw ___str_9
 	.dw ___str_10
-	.dw ___str_11
 Ftactics$__xinit_letter_table$0_0$0 == .
 __xinit__letter_table:
 	.db #0x00	; 0
