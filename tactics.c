@@ -41,16 +41,22 @@ const uchar* displayTexts[30] = {
     NULL, NULL, NULL, "START ", "END   "
 };
 
-const uchar MAP[9][10] = {
-    {HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, PATH},
-    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH},
-    {HOUSE, GRASS, GRASS, GRASS, CAVE, CHEST, GRASS, GRASS, HOUSE, PATH},
-    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH},
-    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH},
-    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH},
-    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH},
-    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH},
-    {HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, PATH}
+#define WIDTH 12
+#define HEIGHT 12
+
+const uchar MAP[12][12] = {
+    {HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, PATH, CAVE, FENCE},
+    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, CHARACTER3, CHARACTER4},
+    {HOUSE, GRASS, GRASS, GRASS, CAVE, CHEST, GRASS, GRASS, HOUSE, PATH, CHARACTER5, CHARACTER6},
+    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, TREE, TREE},
+    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, TREE, TREE},
+    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, TREE, TREE},
+    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, TREE, TREE},
+    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, TREE, TREE},
+    {HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, PATH, TREE, TREE},
+    {HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, PATH, TREE, TREE},
+    {HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, PATH, TREE, TREE},
+    {HOUSE, GRASS, GRASS, GRASS, CAVE, CHEST, GRASS, GRASS, HOUSE, PATH, CHARACTER5, CHARACTER6}
 };
 
 #define SPACE_LETTER 22 * 2
@@ -114,15 +120,15 @@ void main() {
     set_bkg_data(0, 46, Letters); //letters part 1. 46 tiles.  23 letters
 
     volatile uchar *tilemap = (uchar *)TILEMAP_START;
-    for (uchar r = 2; r < 18; r++) {
-        for (uchar c = 0; c < 20; c++) {
+    for (uchar r = 0; r < HEIGHT * 2; r++) {
+        for (uchar c = 0; c < WIDTH * 2; c++) {
             uchar map = MAP[r/2][c/2]*4;
             uchar value = map + (r&1) + (c&1)*2;
-            tilemap[r*32 + c] = value;
+            tilemap[r*32 + c + 64] = value;
         }
     }
     for (uchar r = 0; r < 2; r++) {
-        for (uchar c = 0; c < 20; c++) {
+        for (uchar c = 0; c < WIDTH * 2; c++) {
             tilemap[r*32 + c] = SPACE_LETTER;
         }
     }
@@ -135,21 +141,51 @@ void main() {
     change_text("FOREST");
 
     static uchar x = 0;
-    static uchar y = 1;
+    static uchar y = 0;
 
     static uchar cursorTimer = 0;
     static uchar joyTimer = 0;
+
+    static uchar cameraX = 0;
+    static uchar cameraY = 0;
 
     //screen brightness
     BGP_REG = 0b11100100;
 
     LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON;
     while (1) {
+        if (x < cameraX) {
+            cameraX--;
+        } else if (x >= cameraX + 10) {
+            cameraX++;
+        }
+
+        if (y < cameraY) {
+            cameraY--;
+        } else if (y > cameraY + 7) {
+            cameraY++;
+        }
+
+        SCY_REG = 0;
+        SCX_REG = 0;
+
+        cameraY *= 16;
+        cameraX *= 16;
+
+        while (LY_REG != 16) ;
+        while (STAT_REG & 0x03 != 0) ;
+        
+        SCY_REG = cameraY;
+        SCX_REG = cameraX;
+        cameraY /= 16;
+        cameraX /= 16;
+
         wait_vbl_done();
-        move_sprite(0, x*16 + 8, y*16 + 16);
-        move_sprite(1, x*16 + 8, y*16 + 24);
-        move_sprite(2, x*16 + 16, y*16 + 16);
-        move_sprite(3, x*16 + 16, y*16 + 24);
+
+        move_sprite(0, (x - cameraX)*16 + 8, (y-cameraY)*16 + 32);
+        move_sprite(1, (x - cameraX)*16 + 8,  (y-cameraY)*16 + 40);
+        move_sprite(2, (x - cameraX)*16 + 16, (y-cameraY)*16 + 32);
+        move_sprite(3, (x - cameraX)*16 + 16, (y-cameraY)*16 + 40);
 
         cursorTimer++;
         if (cursorTimer == 30) {
@@ -164,6 +200,9 @@ void main() {
             set_sprite_tile(2, 6);
             set_sprite_tile(3, 7);
         }
+        uchar coord = MAP[y][x];
+        uchar *text = (uchar *)displayTexts[coord];
+        change_text(text);
 
         if (joyTimer > 0) {
             joyTimer--;
@@ -176,23 +215,20 @@ void main() {
                 x--;
             }
         } else if (joy & J_RIGHT) {
-            if (x < 9) {
+            if (x < WIDTH - 1) {
                 x++;
             }
         } else if (joy & J_UP) {
-            if (y > 1) {
+            if (y > 0) {
                 y--;
             }
         } else if (joy & J_DOWN) {
-            if (y < 8) {
+            if (y < HEIGHT - 1) {
                 y++;
             }
         }
         if (joy != 0) {
             joyTimer = 10;
         }
-        uchar coord = MAP[y][x];
-        uchar *text = (uchar *)displayTexts[coord];
-        change_text(text);
     }
 }
