@@ -5,31 +5,31 @@
 #include "graphics/Letters.h"
 #include "graphics/Letters.c"
 #include "graphics/palletes.c"
+#include "graphics/Sprites.h"
+#include "graphics/Sprites.c"
 
 typedef unsigned char uchar;
 
 #define FIRST_TILE_OFFSET_2x2 12
-#define CHARACTER3 0
-#define CHARACTER4 1
-#define CHARACTER5 2
-#define CHARACTER6 3
 
-#define HOUSE 4
-#define CAVE 5
-#define CHEST 6
-#define TREE 7
-#define FENCE 8
-#define GRASS 9
-#define PATH 10
+#define HOUSE 0
+#define CAVE 1
+#define CHEST 2
+#define TREE 3
+#define FENCE 4
+#define GRASS 5
+#define PATH 6
 //WALL WATER ROCK FOREST BRIDGE
 
-#define START 11
-#define END 12
+#define START 7
+#define END 8
+
+#define NUM_TILES (END + 1)
+
 #define CURSOR1 13
 #define CURSOR2 14
 
-const uchar palleteTable[13] = {
-    0, 0, 0, 0,
+const uchar palleteTable[NUM_TILES] = {
     2, 3, 2, 1,
     2, 1, 1, 0, 0
 };
@@ -37,9 +37,8 @@ const uchar palleteTable[13] = {
 #define TILEMAP_START 0x9800
 #define WIN_TILEMAP_START 0x9C00
 
-const uchar* displayTexts[13] = {
-    "GUY   ", "GUY   ", "GUY   ",
-    "GUY   ", "HOUSE ", "CAVE  ", "CHEST ", "TREE  ",
+const uchar* displayTexts[NUM_TILES] = {
+    "HOUSE ", "CAVE  ", "CHEST ", "TREE  ",
     "FENCE ", "GRASS ", "PATH  ", "START ", "END   "
 };
 
@@ -48,8 +47,8 @@ const uchar* displayTexts[13] = {
 
 const uchar MAP[12][12] = {
     {HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, PATH, CAVE, FENCE},
-    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, CHARACTER3, CHARACTER4},
-    {HOUSE, GRASS, GRASS, GRASS, CAVE, CHEST, GRASS, GRASS, HOUSE, PATH, CHARACTER5, CHARACTER6},
+    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, GRASS, GRASS},
+    {HOUSE, GRASS, GRASS, GRASS, CAVE, CHEST, GRASS, GRASS, HOUSE, PATH, GRASS, GRASS},
     {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, TREE, TREE},
     {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, TREE, TREE},
     {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, TREE, TREE},
@@ -58,7 +57,7 @@ const uchar MAP[12][12] = {
     {HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, PATH, TREE, TREE},
     {HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, PATH, TREE, TREE},
     {HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, PATH, TREE, TREE},
-    {HOUSE, GRASS, GRASS, GRASS, CAVE, CHEST, GRASS, GRASS, HOUSE, PATH, CHARACTER5, CHARACTER6}
+    {HOUSE, GRASS, GRASS, GRASS, CAVE, CHEST, GRASS, GRASS, HOUSE, PATH, GRASS, GRASS}
 };
 
 #define SPACE_LETTER 22 * 2
@@ -123,6 +122,7 @@ void change_text(uchar *text) {
 // }
 
 void setup_background_palletes() {
+    set_bkg_palette(0, 8, colors);
     VBK_REG = VBK_BANK_1;
 
     volatile uchar *tilemap = (uchar *)TILEMAP_START;
@@ -139,11 +139,8 @@ void setup_background_palletes() {
 
 extern void copy_window_buffer();
 
-void main() {
-    wait_vbl_done();
-    display_off();
-    LCDC_REG = 0x00;
-    set_bkg_data(48, 60, Tiles); //tiles.  15 big tiles, 60 small tiles
+void setup_background() {
+    set_bkg_data(48, NUM_TILES * 4, Tiles); //tiles.  15 big tiles, 60 small tiles
     set_bkg_data(0, 46, Letters); //letters. 46 tiles.  23 letters
 
     volatile uchar *tilemap = (uchar *)TILEMAP_START;
@@ -154,33 +151,178 @@ void main() {
             tilemap[r*32 + c] = value;
         }
     }
-    set_sprite_data(0, 8, Tiles + (CURSOR1 * 16 * 4));
-    set_sprite_tile(0, 0);
-    set_sprite_tile(1, 1);
-    set_sprite_tile(2, 2);
-    set_sprite_tile(3, 3);
+}
+
+uchar cursorX = 0, cursorY = 0, cameraX = 0, cameraY = 0;
+
+#define display_bigsprite(slot, tile)\
+    set_sprite_tile((slot)*4, (tile)*4);\
+    set_sprite_tile((slot)*4+1, (tile)*4+1);\
+    set_sprite_tile((slot)*4+2, (tile)*4+2);\
+    set_sprite_tile((slot)*4+3, (tile)*4+3);
+
+#define move_bigsprite(slot, x, y)\
+    move_sprite((slot)*4, (x), (y));\
+    move_sprite((slot)*4+1, (x), (y)+8);\
+    move_sprite((slot)*4+2, (x)+8, (y));\
+    move_sprite((slot)*4+3, (x)+8, (y)+8);
+
+void move_cursor() {
+    static uchar cursorTimer = 0;
+
+    cursorTimer++;
+    if (cursorTimer == 50) {
+        cursorTimer = 0;
+        display_bigsprite(0, 0);
+    } else if (cursorTimer == 25) {
+        display_bigsprite(0, 1);
+    }
+
+    move_bigsprite(0, (cursorX - cameraX)*16 + 8, (cursorY-cameraY)*16 + 32);
+}
+
+uchar joyTimer = 0;
+
+void check_cursor_movement() {
+    if (joyTimer > 0) {
+        joyTimer--;
+    } else {
+        uchar joy = joypad();
+        if (joy & J_LEFT) {
+            if (cursorX > 0) {
+                cursorX--;
+            }
+        } else if (joy & J_RIGHT) {
+            if (cursorX < WIDTH - 1) {
+                cursorX++;
+            }
+        } else if (joy & J_UP) {
+            if (cursorY > 0) {
+                cursorY--;
+            }
+        } else if (joy & J_DOWN) {
+            if (cursorY < HEIGHT - 1) {
+                cursorY++;
+            }
+        }
+        if (joy != 0) {
+            joyTimer = 10;
+        }
+    }
+}
+
+uchar target_scx = 0, target_scy = 0;
+uchar scx = 0, scy = 0;
+
+void update_camera() {
+    if (cursorX < cameraX) {
+        cameraX--;
+    } else if (cursorX >= cameraX + 10) {
+        cameraX++;
+    }
+
+    if (cursorY < cameraY) {
+        cameraY--;
+    } else if (cursorY >= cameraY + 8) {
+        cameraY++;
+    }
+
+    target_scy = cameraY * 16;
+    target_scx = cameraX * 16;
+
+    if ((uchar)(SCY_REG + 16) < target_scy) {
+        scy += 2;
+    } else if ((uchar)(SCY_REG + 16) > target_scy) {
+        scy -= 2;
+    }
+    if (SCX_REG < target_scx) {
+        scx += 2;
+    } else if (SCX_REG > target_scx) {
+        scx -= 2;
+    }
+}
+
+struct Character {
+    uchar x;
+    uchar y;
+    uchar sprite;
+};
+
+#define CHARACTER_BIGTILE_START 2
+#define BOSTON 0
+#define MARIE 1
+
+uchar *characterNames[3] = {
+    "BOSTON",
+    "MARIE ",
+    NULL
+};
+
+struct Character characters[4];
+uchar numCharacters;
+
+void setup_characters() {
+    numCharacters = 2;
+    characters[0].x = 6 * 16;
+    characters[0].y = 6 * 16;
+    characters[0].sprite = BOSTON;
+    display_bigsprite(1, CHARACTER_BIGTILE_START + BOSTON * 2);
+
+    characters[1].x = 7 * 16;
+    characters[1].y = 7 * 16;
+    characters[1].sprite = MARIE * 2;
+    display_bigsprite(2, CHARACTER_BIGTILE_START + MARIE * 2);
+}
+
+#define CHARACTER_ANIMATION_DELAY  15
+
+uchar characterAnimationTimer = CHARACTER_ANIMATION_DELAY;
+
+void update_characters() {
+    for (uchar i = 0; i < numCharacters; i++) {
+        move_bigsprite(i + 1, characters[i].x - scx + 8, characters[i].y - scy + 16);
+    }
+
+    characterAnimationTimer--;
+    if (characterAnimationTimer == 0) {
+        characterAnimationTimer = CHARACTER_ANIMATION_DELAY;
+        for (uchar i = 0; i < numCharacters; i++) {
+            characters[i].sprite ^= 1;
+            display_bigsprite(i + 1, CHARACTER_BIGTILE_START + characters[i].sprite);
+        }
+    }
+}
+
+//this is 255 if we are not hovering over a character, otherwise it is the index of the character
+uchar hoverCharacter = 255;
+
+void update_gui() {
+    if (hoverCharacter == 255) {
+        uchar coord = MAP[cursorY][cursorX];
+        uchar *text = (uchar *)displayTexts[coord];
+        change_text(text);
+    } else {
+        change_text(characterNames[hoverCharacter]);
+    }
+}
+
+void main() {
+    wait_vbl_done();
+    display_off();
+    LCDC_REG = 0x00;
 
     vmemset((uchar *)WIN_TILEMAP_START, SPACE_LETTER, 32*32);
 
-    change_text("FOREST");
-
-    static uchar x = 0;
-    static uchar y = 0;
-
-    static uchar cursorTimer = 0;
-    static uchar joyTimer = 0;
-
-    static uchar cameraX = 0;
-    static uchar cameraY = 0;
-
-    //screen brightness
-    //BGP_REG = 0b11100100;
-
     setup_background_palletes();
+    setup_background();
+    change_text("      ");
 
-    set_bkg_palette(0, 8, colors);
     set_sprite_palette(0, 1, colors);
     set_sprite_prop(0, 0);
+
+    set_sprite_data(0, 24, Sprites);
+    display_bigsprite(0, 0);
+    setup_characters();
 
     IE_REG = IEF_VBLANK;
     enable_interrupts();
@@ -188,86 +330,28 @@ void main() {
     LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00;
     while (1) {
         //DURING FRAME:
-        if (joyTimer > 0) {
-            joyTimer--;
-        } else {
-            uchar joy = joypad();
-            if (joy & J_LEFT) {
-                if (x > 0) {
-                    x--;
-                }
-            } else if (joy & J_RIGHT) {
-                if (x < WIDTH - 1) {
-                    x++;
-                }
-            } else if (joy & J_UP) {
-                if (y > 0) {
-                    y--;
-                }
-            } else if (joy & J_DOWN) {
-                if (y < HEIGHT - 1) {
-                    y++;
-                }
-            }
-            if (joy != 0) {
-                joyTimer = 10;
+
+        check_cursor_movement();
+        update_camera();
+
+        update_characters();
+        hoverCharacter = 255;
+        for (uchar i = 0; i < numCharacters; i++) {
+            if (cursorX == characters[i].x / 16 && cursorY == characters[i].y / 16) {
+                hoverCharacter = i;
+                break;
             }
         }
-
-        uchar coord = MAP[y][x];
-        uchar *text = (uchar *)displayTexts[coord];
-        change_text(text);
-
-        if (x < cameraX) {
-            cameraX--;
-        } else if (x >= cameraX + 10) {
-            cameraX++;
-        }
-
-        if (y < cameraY) {
-            cameraY--;
-        } else if (y > cameraY + 7) {
-            cameraY++;
-        }
-
-        static uchar target_scy;
-        target_scy = cameraY * 16;
-        static uchar target_scx;
-        target_scx = cameraX * 16;
+        update_gui();
 
         __asm__("halt");
 
         //VBLANK:
 
-        if ((uchar)(SCY_REG + 16) < target_scy) {
-            SCY_REG += 2;
-        } else if ((uchar)(SCY_REG + 16) > target_scy) {
-            SCY_REG -= 2;
-        }
-        if (SCX_REG < target_scx) {
-            SCX_REG += 2;
-        } else if (SCX_REG > target_scx) {
-            SCX_REG -= 2;
-        }
+        move_cursor();
 
-        move_sprite(0, (x - cameraX)*16 + 8, (y-cameraY)*16 + 32);
-        move_sprite(1, (x - cameraX)*16 + 8,  (y-cameraY)*16 + 40);
-        move_sprite(2, (x - cameraX)*16 + 16, (y-cameraY)*16 + 32);
-        move_sprite(3, (x - cameraX)*16 + 16, (y-cameraY)*16 + 40);
-
-        cursorTimer++;
-        if (cursorTimer == 30) {
-            cursorTimer = 0;
-            set_sprite_tile(0, 0);
-            set_sprite_tile(1, 1);
-            set_sprite_tile(2, 2);
-            set_sprite_tile(3, 3);
-        } else if (cursorTimer == 15) {
-            set_sprite_tile(0, 4);
-            set_sprite_tile(1, 5);
-            set_sprite_tile(2, 6);
-            set_sprite_tile(3, 7);
-        }
+        SCX_REG = scx;
+        SCY_REG = scy;
 
         copy_window_buffer();
         //while (LY_REG != 0) ;

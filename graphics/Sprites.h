@@ -1,6 +1,6 @@
 /*
 
- 2X2TILES.H
+ SPRITES.H
 
  Include File.
 
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 16 x 16
-  Tiles                : 0 to 8
+  Tiles                : 0 to 5
 
   Palette colors       : None.
   SGB Palette          : None.
@@ -22,14 +22,14 @@
 
 */
 
-#ifndef __2x2Tiles_h_INCLUDE
-#define __2x2Tiles_h_INCLUDE
+#ifndef __Sprites_h_INCLUDE
+#define __Sprites_h_INCLUDE
 
 /* Bank of tiles. */
-#define TilesBank 0
+#define SpritesBank 0
 /* Start of tile array. */
-extern const unsigned char Tiles[];
+extern const unsigned char Sprites[];
 
 #endif
 
-/* End of 2X2TILES.H */
+/* End of SPRITES.H */
