@@ -1,6 +1,6 @@
 /*
 
- H
+ LETTERS.H
 
  Include File.
 
@@ -22,8 +22,8 @@
 
 */
 
-#ifndef __h_INCLUDE
-#define __h_INCLUDE
+#ifndef __Letters_h_INCLUDE
+#define __Letters_h_INCLUDE
 
 /* Bank of tiles. */
 #define LettersBank 0
@@ -32,4 +32,4 @@ extern const unsigned char Letters[];
 
 #endif
 
-/* End of H */
+/* End of LETTERS.H */
