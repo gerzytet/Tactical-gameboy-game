@@ -37,6 +37,7 @@ const uchar palleteTable[NUM_TILES] = {
 #define TILEMAP_START 0x9800
 #define WIN_TILEMAP_START 0x9C00
 
+//fixed width: 6 characters
 const uchar* displayTexts[NUM_TILES] = {
     "HOUSE ", "CAVE  ", "CHEST ", "TREE  ",
     "FENCE ", "GRASS ", "PATH  ", "START ", "END   "
@@ -133,7 +134,7 @@ uchar letter_table[26] = {
     SPACE_LETTER //z
 };
 
-#define TEXT_OFFSET 2
+#define TEXT_OFFSET 1
 
 uchar windowBuffer[2][32];
 

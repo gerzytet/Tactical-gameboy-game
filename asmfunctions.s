@@ -1,5 +1,5 @@
 .globl _copy_window_buffer
-;TEXT_OFFSET = 2
+;TEXT_OFFSET = 1
 ;WINDOW_BUFFER = 0x9C00
 ;void copy_window_buffer() {
 ;    volatile uchar *tilemap = (uchar *)WIN_TILEMAP_START + TEXT_OFFSET;
@@ -13,7 +13,7 @@ _copy_window_buffer:
     ;push bc
     ;push de
 
-    ld hl, #0x9C00 + #2 ;tilemap
+    ld hl, #0x9C00 + #1 ;tilemap
     ld de, #_windowBuffer ;windowBuffer
     ld b, #6
     .copy_window_buffer_loop:
@@ -25,7 +25,7 @@ _copy_window_buffer:
         dec b
         jr nz, .copy_window_buffer_loop
     
-    ld hl, #0x9C00 + #2 + #32 ;tilemap
+    ld hl, #0x9C00 + #1 + #32 ;tilemap
     ld de, #_windowBuffer + #32 ;windowBuffer
     ld b, #6
     .copy_window_buffer_loop2:
