@@ -72,6 +72,7 @@ struct Entity {
     uchar sprite;
     const uchar * name;
     uchar party;
+    uchar moved;
 };
 
 #define PARTY_FRIEND 0
@@ -304,6 +305,7 @@ void setup_characters() {
     entities[0].sprite = BOSTON * 2;
     entities[0].name = "BOSTON";
     entities[0].party = PARTY_FRIEND;
+    entities[0].moved = 0;
     display_bigsprite(CHARACTER_SPRITE_SLOT_START, CHARACTER_BIGTILE_START + BOSTON * 2);
 
     entities[1].x = 7 * 16;
@@ -311,6 +313,7 @@ void setup_characters() {
     entities[1].sprite = MARIE * 2;
     entities[1].name = "MARIE ";
     entities[1].party = PARTY_FRIEND;
+    entities[1].moved = 0;
     display_bigsprite(CHARACTER_SPRITE_SLOT_START + 1, CHARACTER_BIGTILE_START + MARIE * 2);
 
     entities[2].x = 3 * 16;
@@ -318,6 +321,7 @@ void setup_characters() {
     entities[2].sprite = FRED * 2;
     entities[2].name = "FRED  ";
     entities[2].party = PARTY_FRIEND;
+    entities[2].moved = 0;
     display_bigsprite(CHARACTER_SPRITE_SLOT_START + 2, CHARACTER_BIGTILE_START + FRED * 2);
 
     entities[3].x = 2 * 16;
@@ -325,6 +329,7 @@ void setup_characters() {
     entities[3].sprite = ENEMY * 2;
     entities[3].name = "ENEMY ";
     entities[3].party = PARTY_ENEMY;
+    entities[3].moved = 0;
     display_bigsprite(CHARACTER_SPRITE_SLOT_START + 2, CHARACTER_BIGTILE_START + ENEMY * 2);
 }
 
@@ -380,7 +385,7 @@ void update_gui() {
 
 void check_enter_move_mode() {
     if (joy_impulse & J_A) {
-        if (hoverCharacter != 255 && entities[hoverCharacter].party == PARTY_FRIEND) {
+        if (hoverCharacter != 255 && entities[hoverCharacter].party == PARTY_FRIEND && entities[hoverCharacter].moved == 0) {
             state = STATE_CHOOSE_MOVE;
             secondCursorX = cursorX;
             secondCursorY = cursorY;
@@ -591,6 +596,7 @@ void move_character_after_pathfinding() {
         for (uchar i = 0; i < 3; i++) {
             if (queueStart == queueEnd) {
                 state = STATE_LOOK;
+                entities[selectedCharacter].moved = 1;
                 move_bigsprite(1, 0, 0);
                 update_passable_matrix_from_character_move(secondCursorX, secondCursorY, cursorX, cursorY);
                 return;
