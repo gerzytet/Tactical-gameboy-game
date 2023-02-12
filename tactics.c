@@ -65,14 +65,19 @@ const uchar MAP[WIDTH][HEIGHT] = {
 
 uchar passable_matrix[WIDTH][HEIGHT];
 
-struct Character {
+struct Entity {
     //unit: pixels relative to the top left of the map
     uchar x;
     uchar y;
     uchar sprite;
+    const uchar * name;
+    uchar party;
 };
 
-struct Character characters[4];
+#define PARTY_FRIEND 0
+#define PARTY_ENEMY 1
+
+struct Entity entities[18];
 uchar numCharacters;
 
 const uchar passable_table[NUM_TILES] = {
@@ -101,7 +106,7 @@ void setup_passable_matrix() {
     }
 
     for (uchar i = 0; i < numCharacters; i++) {
-        passable_matrix[characters[i].y / 16][characters[i].x / 16] = 0;
+        passable_matrix[entities[i].y / 16][entities[i].x / 16] = 0;
     }
 }
 
@@ -134,11 +139,12 @@ uchar letter_table[26] = {
     SPACE_LETTER //z
 };
 
+//number of tiles from the left the text should be displayed
 #define TEXT_OFFSET 1
 
 uchar windowBuffer[2][32];
 
-void change_text(uchar *text) {
+void change_text(const uchar *text) {
     if (text == NULL) {
         return;
     }
@@ -288,43 +294,55 @@ void update_camera() {
 #define CHARACTER_SPRITE_SLOT_START 2
 #define BOSTON 0
 #define MARIE 1
-
-uchar *characterNames[3] = {
-    "BOSTON",
-    "MARIE ",
-    NULL
-};
-
-
+#define FRED 2
+#define ENEMY 3
 
 void setup_characters() {
-    numCharacters = 2;
-    characters[0].x = 6 * 16;
-    characters[0].y = 6 * 16;
-    characters[0].sprite = BOSTON;
+    numCharacters = 4;
+    entities[0].x = 6 * 16;
+    entities[0].y = 6 * 16;
+    entities[0].sprite = BOSTON * 2;
+    entities[0].name = "BOSTON";
+    entities[0].party = PARTY_FRIEND;
     display_bigsprite(CHARACTER_SPRITE_SLOT_START, CHARACTER_BIGTILE_START + BOSTON * 2);
 
-    characters[1].x = 7 * 16;
-    characters[1].y = 7 * 16;
-    characters[1].sprite = MARIE * 2;
+    entities[1].x = 7 * 16;
+    entities[1].y = 7 * 16;
+    entities[1].sprite = MARIE * 2;
+    entities[1].name = "MARIE ";
+    entities[1].party = PARTY_FRIEND;
     display_bigsprite(CHARACTER_SPRITE_SLOT_START + 1, CHARACTER_BIGTILE_START + MARIE * 2);
+
+    entities[2].x = 3 * 16;
+    entities[2].y = 3 * 16;
+    entities[2].sprite = FRED * 2;
+    entities[2].name = "FRED  ";
+    entities[2].party = PARTY_FRIEND;
+    display_bigsprite(CHARACTER_SPRITE_SLOT_START + 2, CHARACTER_BIGTILE_START + FRED * 2);
+
+    entities[3].x = 2 * 16;
+    entities[3].y = 3 * 16;
+    entities[3].sprite = ENEMY * 2;
+    entities[3].name = "ENEMY ";
+    entities[3].party = PARTY_ENEMY;
+    display_bigsprite(CHARACTER_SPRITE_SLOT_START + 2, CHARACTER_BIGTILE_START + ENEMY * 2);
 }
 
-#define CHARACTER_ANIMATION_DELAY  15
+#define CHARACTER_ANIMATION_DELAY 15
 
 uchar characterAnimationTimer = CHARACTER_ANIMATION_DELAY;
 
 void update_characters() {
     for (uchar i = 0; i < numCharacters; i++) {
-        move_bigsprite(i + CHARACTER_SPRITE_SLOT_START, characters[i].x - scx + 8, characters[i].y - scy + 16);
+        move_bigsprite(i + CHARACTER_SPRITE_SLOT_START, entities[i].x - scx + 8, entities[i].y - scy + 16);
     }
 
     characterAnimationTimer--;
     if (characterAnimationTimer == 0) {
         characterAnimationTimer = CHARACTER_ANIMATION_DELAY;
         for (uchar i = 0; i < numCharacters; i++) {
-            characters[i].sprite ^= 1;
-            display_bigsprite(i + CHARACTER_SPRITE_SLOT_START, CHARACTER_BIGTILE_START + characters[i].sprite);
+            entities[i].sprite ^= 1;
+            display_bigsprite(i + CHARACTER_SPRITE_SLOT_START, CHARACTER_BIGTILE_START + entities[i].sprite);
         }
     }
 }
@@ -343,7 +361,7 @@ uchar selectedCharacter = 255;
 void update_hover_character() {
     hoverCharacter = 255;
     for (uchar i = 0; i < numCharacters; i++) {
-        if (cursorX == characters[i].x / 16 && cursorY == characters[i].y / 16) {
+        if (cursorX == entities[i].x / 16 && cursorY == entities[i].y / 16) {
             hoverCharacter = i;
             break;
         }
@@ -356,13 +374,13 @@ void update_gui() {
         uchar *text = (uchar *)displayTexts[coord];
         change_text(text);
     } else {
-        change_text(characterNames[hoverCharacter]);
+        change_text(entities[hoverCharacter].name);
     }
 }
 
 void check_enter_move_mode() {
     if (joy_impulse & J_A) {
-        if (hoverCharacter != 255) {
+        if (hoverCharacter != 255 && entities[hoverCharacter].party == PARTY_FRIEND) {
             state = STATE_CHOOSE_MOVE;
             secondCursorX = cursorX;
             secondCursorY = cursorY;
@@ -579,19 +597,19 @@ void move_character_after_pathfinding() {
             }
             uchar x = xQueue[queueEnd] * 16;
             uchar y = yQueue[queueEnd] * 16;
-            uchar currX = characters[selectedCharacter].x;
-            uchar currY = characters[selectedCharacter].y;
+            uchar currX = entities[selectedCharacter].x;
+            uchar currY = entities[selectedCharacter].y;
             if (currX != x) {
                 if (currX < x) {
-                    characters[selectedCharacter].x++;
+                    entities[selectedCharacter].x++;
                 } else {
-                    characters[selectedCharacter].x--;
+                    entities[selectedCharacter].x--;
                 }
             } else if (currY != y) {
                 if (currY < y) {
-                    characters[selectedCharacter].y++;
+                    entities[selectedCharacter].y++;
                 } else {
-                    characters[selectedCharacter].y--;
+                    entities[selectedCharacter].y--;
                 }
             } else {
                 queueEnd--;
@@ -617,7 +635,7 @@ void main() {
     set_sprite_palette(0, 1, colors);
     set_sprite_prop(0, 0);
 
-    set_sprite_data(0, 24, Sprites);
+    set_sprite_data(0, 40, Sprites);
     display_bigsprite(0, 0);
     
 
