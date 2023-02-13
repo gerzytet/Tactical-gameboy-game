@@ -42,3 +42,77 @@ _copy_window_buffer:
     ;pop af
 
     ret
+
+;#define internal_display_bigsprite(slot, tile)\
+;    set_sprite_tile((slot)*2, (tile)*4);\
+;    set_sprite_tile((slot)*2+1, (tile)*4+2);
+
+;#define internal_move_bigsprite(slot, x, y)\
+;    move_sprite((slot)*2, (x), (y));\
+;    move_sprite((slot)*2+1, (x)+8, (y));
+
+;for (uchar i = 0; i < 20; i++) {
+;    internal_display_bigsprite(i, bigsprites[i].sprite);
+;    internal_move_bigsprite(i, bigsprites[i].x, bigsprites[i].y);
+;}
+
+;SAVES 30 SCANLINES!!!!
+.globl _display_bigsprites
+_display_bigsprites::
+    ld hl, #_shadow_OAM
+    ld de, #_bigsprites
+    ld b, #20
+
+    .bigsprites_loop:
+    ;move_sprite((slot)*2, (x), (y));
+        ld a, (de)
+        ld (hl), a
+
+        inc hl
+        inc de
+
+        ld a, (de)
+        ld (hl), a
+
+        inc hl
+        inc de
+
+    ;set_sprite_tile((slot)*2, (tile)*4);\
+
+        ld a, (de)
+        sla a
+        sla a
+        ld (hl), a
+
+        inc hl
+        inc hl
+
+        dec de
+        dec de
+    ;move_sprite((slot)*2+1, (x)+8, (y));
+        ld a, (de)
+        ld (hl), a
+
+        inc hl
+        inc de
+
+        ld a, (de)
+        add a, #8
+        ld (hl), a
+
+        inc hl
+        inc de
+    ;    set_sprite_tile((slot)*2+1, (tile)*4+2);
+        ld a, (de)
+        sla a
+        inc a
+        sla a
+        ld (hl), a
+
+        inc hl 
+        inc hl
+        inc de
+
+        dec b
+        jr nz, .bigsprites_loop
+    ret

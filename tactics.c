@@ -1,5 +1,6 @@
 #include <gb/gb.h>
 #include <gb/cgb.h>
+#include "common.h"
 #include "graphics/2x2tiles.h"
 #include "graphics/2x2tiles.c"
 #include "graphics/Letters.h"
@@ -7,24 +8,10 @@
 #include "graphics/palletes.c"
 #include "graphics/Sprites.h"
 #include "graphics/Sprites.c"
-
-typedef unsigned char uchar;
-
-#define FIRST_TILE_OFFSET_2x2 12
-
-#define HOUSE 0
-#define CAVE 1
-#define CHEST 2
-#define TREE 3
-#define FENCE 4
-#define GRASS 5
-#define PATH 6
-//WALL WATER ROCK FOREST BRIDGE
-
-#define START 7
-#define END 8
-
-#define NUM_TILES (END + 1)
+#include "graphics/Top_textbox.h"
+#include "graphics/Top_textbox.c"
+#include "pathfinding.c"
+#include "bigsprites.h"
 
 #define CURSOR1 13
 #define CURSOR2 14
@@ -43,73 +30,12 @@ const uchar* displayTexts[NUM_TILES] = {
     "FENCE ", "GRASS ", "PATH  ", "START ", "END   "
 };
 
-#define WIDTH 12
-#define HEIGHT 12
-
-const uchar MAP[WIDTH][HEIGHT] = {
-    {HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, PATH, CAVE, FENCE},
-    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, GRASS, GRASS},
-    {HOUSE, GRASS, GRASS, GRASS, CAVE, CHEST, GRASS, GRASS, HOUSE, PATH, GRASS, GRASS},
-    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, TREE, TREE},
-    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, TREE, TREE},
-    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, TREE, TREE},
-    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, TREE, TREE},
-    {HOUSE, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, GRASS, HOUSE, PATH, START, END},
-    {HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, PATH, TREE, TREE},
-    {HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, PATH, TREE, TREE},
-    {HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, HOUSE, PATH, TREE, TREE},
-    {HOUSE, GRASS, GRASS, GRASS, CAVE, CHEST, GRASS, GRASS, HOUSE, PATH, GRASS, GRASS}
-};
-
 #define SPACE_LETTER 22 * 2
 
-uchar passable_matrix[WIDTH][HEIGHT];
-
-struct Entity {
-    //unit: pixels relative to the top left of the map
-    uchar x;
-    uchar y;
-    uchar sprite;
-    const uchar * name;
-    uchar party;
-    uchar moved;
-};
+#define NAME_LENGTH 6
 
 #define PARTY_FRIEND 0
 #define PARTY_ENEMY 1
-
-struct Entity entities[18];
-uchar numCharacters;
-
-const uchar passable_table[NUM_TILES] = {
-    0, //house
-    0, //cave
-    0, //chest
-    0, //tree
-    0, //fence
-    1, //grass
-    1, //path
-    1, //start
-    1  //end
-};
-
-//BOTH IN BIG TILES
-inline void update_passable_matrix_from_character_move(uchar startX, uchar startY, uchar endX, uchar endY) {
-    passable_matrix[startY][startX] = passable_table[MAP[startY][startX]];
-    passable_matrix[endY][endX] = 0;
-}
-
-void setup_passable_matrix() {
-    for (uchar r = 0; r < HEIGHT; r++) {
-        for (uchar c = 0; c < WIDTH; c++) {
-            passable_matrix[r][c] = passable_table[MAP[r][c]];
-        }
-    }
-
-    for (uchar i = 0; i < numCharacters; i++) {
-        passable_matrix[entities[i].y / 16][entities[i].x / 16] = 0;
-    }
-}
 
 uchar letter_table[26] = {
     0, //a
@@ -189,9 +115,17 @@ void setup_background_palletes() {
 
 extern void copy_window_buffer();
 
+//Including textbox tiles!
+#define NUM_LETTERS 25
+#define TEXTBOX_END 23
+#define TEXTBOX_MIDDLE 24
+
+#define FIRST_TILE_OFFSET_2x2 (NUM_LETTERS + 1) / 2
+
 void setup_background() {
-    set_bkg_data(48, NUM_TILES * 4, Tiles); //tiles.  15 big tiles, 60 small tiles
+    set_bkg_data(FIRST_TILE_OFFSET_2x2 * 4, NUM_TILES * 4, Tiles); //tiles.  15 big tiles, 60 small tiles
     set_bkg_data(0, 46, Letters); //letters. 46 tiles.  23 letters
+    set_bkg_data(46, 4, Top_textbox);
 
     volatile uchar *tilemap = (uchar *)TILEMAP_START;
     for (uchar r = 0; r < HEIGHT * 2; r++) {
@@ -208,14 +142,6 @@ uchar cursorX = 0, cursorY = 0;
 
 //unit: pixels relative to top right of map (not actual SCX/SCY)
 uchar target_scx = 0, target_scy = 0;
-
-#define display_bigsprite(slot, tile)\
-    set_sprite_tile((slot)*2, (tile)*4);\
-    set_sprite_tile((slot)*2+1, (tile)*4+2);\
-
-#define move_bigsprite(slot, x, y)\
-    move_sprite((slot)*2, (x), (y));\
-    move_sprite((slot)*2+1, (x)+8, (y));\
 
 void move_cursor() {
     static uchar cursorTimer = 0;
@@ -309,7 +235,7 @@ void setup_characters() {
     display_bigsprite(CHARACTER_SPRITE_SLOT_START, CHARACTER_BIGTILE_START + BOSTON * 2);
 
     entities[1].x = 7 * 16;
-    entities[1].y = 7 * 16;
+    entities[1].y = 6 * 16;
     entities[1].sprite = MARIE * 2;
     entities[1].name = "MARIE ";
     entities[1].party = PARTY_FRIEND;
@@ -317,7 +243,7 @@ void setup_characters() {
     display_bigsprite(CHARACTER_SPRITE_SLOT_START + 1, CHARACTER_BIGTILE_START + MARIE * 2);
 
     entities[2].x = 3 * 16;
-    entities[2].y = 3 * 16;
+    entities[2].y = 6 * 16;
     entities[2].sprite = FRED * 2;
     entities[2].name = "FRED  ";
     entities[2].party = PARTY_FRIEND;
@@ -325,7 +251,7 @@ void setup_characters() {
     display_bigsprite(CHARACTER_SPRITE_SLOT_START + 2, CHARACTER_BIGTILE_START + FRED * 2);
 
     entities[3].x = 2 * 16;
-    entities[3].y = 3 * 16;
+    entities[3].y = 6 * 16;
     entities[3].sprite = ENEMY * 2;
     entities[3].name = "ENEMY ";
     entities[3].party = PARTY_ENEMY;
@@ -402,122 +328,6 @@ void check_exit_move_mode() {
     }
 }
 
-#define NORTH 0
-#define SOUTH 1
-#define EAST 2
-#define WEST 3
-
-//255 = no traceback
-uchar traceback[16][16];
-
-//1 bit for each tile
-uchar visited[16][2];
-
-uchar xQueue[256];
-uchar yQueue[256];
-uchar queueStart, queueEnd;
-
-uchar diff = 0;
-
-const uchar shiftTable[16] = {
-    0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80
-};
-
-void pathfind(uchar startX, uchar startY, uchar endX, uchar endY, uchar dist) {
-    for (uchar i = 0; i < 16; i++) {
-        visited[i][0] = 0;
-        visited[i][1] = 0;
-    }
-    static uchar myDist;
-    myDist = dist;
-    queueStart = 0;
-    queueEnd = 2;
-    xQueue[0] = startX;
-    yQueue[0] = startY;
-    xQueue[1] = 255;
-    yQueue[1] = 255;
-    traceback[startY][startX] = 255;
-    traceback[endY][endX] = 255;
-    //255 in the queue means we are done with this level of the queue, so decrement the dist
-    while (1) {
-        static uchar x;
-        x = xQueue[queueStart];
-        queueStart++;
-        if (x == 255) {
-            myDist--;
-            if (myDist == 255) {
-                break;
-            }
-            xQueue[queueEnd] = 255;
-            yQueue[queueEnd] = 255;
-            queueEnd++;
-            continue;
-        }
-
-        if (queueEnd == queueStart) {
-            return;
-        }
-
-        static uchar y;
-        y = yQueue[queueStart - 1];
-
-        if (visited[y][x/8] & shiftTable[x]) {
-            continue;
-        }
-
-        visited[y][x/8] |= shiftTable[x];
-       
-        diff = 0;
-        if (x > endX) {
-            diff = x - endX;
-        } else {
-            diff = endX - x;
-        }
-
-        if (y > endY) {
-            diff += y - endY;
-        } else {
-            diff += endY - y;
-        }
-
-        if (diff > myDist) {
-            continue;
-        }
-
-        if (diff == 0) {
-            return;
-        }
-
-        #define EXPLORE_HORIZ(DIR) if (~x & 16 && ~visited[y][x/8] & shiftTable[x] && passable_matrix[y][x] != 0) {\
-            traceback[y][x] = DIR;\
-            xQueue[queueEnd] = x;\
-            yQueue[queueEnd] = y;\
-            queueEnd++;\
-        }
-
-        x++;
-        EXPLORE_HORIZ(WEST);
-
-        x -= 2;
-        EXPLORE_HORIZ(EAST);
-
-        x++;
-
-#define EXPLORE_VERT(DIR) if (~y & 16 && ~visited[y][x/8] & shiftTable[x] && passable_matrix[y][x] != 0) {\
-    traceback[y][x] = DIR;\
-    xQueue[queueEnd] = x;\
-    yQueue[queueEnd] = y;\
-    queueEnd++;\
-}
-
-        y++;
-        EXPLORE_VERT(NORTH);
-
-        y -= 2;
-        EXPLORE_VERT(SOUTH);
-    }
-}
-
 inline void render_second_cursor() {
     move_bigsprite(1, secondCursorX * 16 - scx + 8, secondCursorY * 16 - scy + 16);
 }
@@ -530,12 +340,16 @@ void vblank_routine() {
 
     copy_window_buffer();
     //while (LY_REG != 0) ;
-    LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16;
-    while (LY_REG != 16) ;
+    LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJOFF | LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16;
+    set_bkg_palette_entry(0, 0, RGB_BLACK);
+    while (LY_REG != 1) ;
+    set_bkg_palette_entry(0, 0, RGB_WHITE);
+    while (LY_REG != 13) ;
+    set_bkg_palette_entry(0, 0, RGB_BLACK);
+    while (LY_REG != 15) ;
+    set_bkg_palette_entry(0, 0, RGB_WHITE);
     LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_WINOFF | LCDCF_OBJ16;
 }
-
-uchar movement_started = 0;
 
 void check_confirm_move() {
     if (joy & J_A) {
@@ -545,89 +359,26 @@ void check_confirm_move() {
             return;
         }
 
-        pathfind(secondCursorX, secondCursorY, cursorX, cursorY, 5);
-        for (uchar i = 0; i < 10; i++) {
-            if (x == secondCursorX && y == secondCursorY) {
-                state = STATE_MOVE;
-                movement_started = 0;
-                return;
-            }
-            if (traceback[y][x] == 255) {
-                return;
-            }
-            if (traceback[y][x] == NORTH) {
-                y--;
-            } else if (traceback[y][x] == SOUTH) {
-                y++;
-            } else if (traceback[y][x] == EAST) {
-                x++;
-            } else if (traceback[y][x] == WEST) {
-                x--;
-            }
+        uchar found = pathfind(secondCursorX, secondCursorY, cursorX, cursorY, 5);
+        if (found) {
+            state = STATE_MOVE;
         }
     }
-    
 }
 
-void move_character_after_pathfinding() {
-    if (!movement_started) {
-        uchar x = cursorX;
-        uchar y = cursorY;
-        movement_started = 1;
-        queueStart = 1;
-        queueEnd = 1;
-        do {
-            xQueue[queueEnd] = x;
-            yQueue[queueEnd] = y;
-            queueEnd++;
-            if (traceback[y][x] == NORTH) {
-                y--;
-            } else if (traceback[y][x] == SOUTH) {
-                y++;
-            } else if (traceback[y][x] == EAST) {
-                x++;
-            } else if (traceback[y][x] == WEST) {
-                x--;
-            } 
-        } while (x != secondCursorX || y != secondCursorY);
-        queueEnd--;
-        queueStart--;
-    } else {
-        for (uchar i = 0; i < 3; i++) {
-            if (queueStart == queueEnd) {
-                state = STATE_LOOK;
-                entities[selectedCharacter].moved = 1;
-                move_bigsprite(1, 0, 0);
-                update_passable_matrix_from_character_move(secondCursorX, secondCursorY, cursorX, cursorY);
-                return;
-            }
-            uchar x = xQueue[queueEnd] * 16;
-            uchar y = yQueue[queueEnd] * 16;
-            uchar currX = entities[selectedCharacter].x;
-            uchar currY = entities[selectedCharacter].y;
-            if (currX != x) {
-                if (currX < x) {
-                    entities[selectedCharacter].x++;
-                } else {
-                    entities[selectedCharacter].x--;
-                }
-            } else if (currY != y) {
-                if (currY < y) {
-                    entities[selectedCharacter].y++;
-                } else {
-                    entities[selectedCharacter].y--;
-                }
-            } else {
-                queueEnd--;
-            }
-        }
-    }
+void setup_gui_textbox() {
+    volatile uchar *tilemap = (uchar *) WIN_TILEMAP_START;
+    tilemap[0] = TEXTBOX_END * 2;
+    tilemap[0 + 32] = TEXTBOX_END * 2 + 1;
+    tilemap[NAME_LENGTH + 1] = TEXTBOX_MIDDLE * 2;
+    tilemap[NAME_LENGTH + 1 + 32] = TEXTBOX_MIDDLE * 2 + 1;
 }
 
 void main() {
     wait_vbl_done();
     display_off();
     LCDC_REG = 0x00;
+    init_bigsprites();
 
     vmemset((uchar *)WIN_TILEMAP_START, SPACE_LETTER, 32*32);
 
@@ -636,7 +387,10 @@ void main() {
 
     setup_characters();
     setup_passable_matrix();
+    setup_gui_textbox();
     change_text("      ");
+    
+
 
     set_sprite_palette(0, 1, colors);
     set_sprite_prop(0, 0);
@@ -652,10 +406,10 @@ void main() {
     LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_OBJ16;
     while (1) {
         //DURING FRAME:
-
         joy_impulse = joy;
         joy = joypad();
         joy_impulse = ~joy_impulse & joy;
+
         if (state == STATE_LOOK || state == STATE_CHOOSE_MOVE) {
             check_cursor_movement();
         }
@@ -672,11 +426,13 @@ void main() {
             check_confirm_move();
             check_exit_move_mode();
         } else if (state == STATE_MOVE) {
-            move_character_after_pathfinding();
+            if (move_entity_after_pathfinding(selectedCharacter)){
+                state = STATE_LOOK;
+                move_bigsprite(1, 0, 0);
+            }
         }
 
+        process_bigsprites();
         __asm__("halt");
-
-        
     }
 }
