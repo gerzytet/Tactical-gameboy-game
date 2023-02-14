@@ -118,25 +118,25 @@ void add_turn(){
         } else {
             tile = letter_table[text[i] - 'A'];
         }
-        tilemap[i] = tile;
+        tilemap[i+13] = tile;
         tile++;
-        tilemap[i|32] = tile;
+        tilemap[i+13|32] = tile;
     }
 
     //then print the turn #
-    if (turn_cntr/10 == '0') {
+    if (turn_cntr < 10) {
         tile = SPACE_LETTER;
     } else {
         tile = letter_table[turn_cntr/10 - '0' + 44];
     }
-    tilemap[4] = tile;
+    tilemap[17] = tile;
     tile++;
-    tilemap[4|32] = tile;
+    tilemap[17|32] = tile;
     
     tile = letter_table[turn_cntr%10 - '0' + 44];
-    tilemap[5] = tile;
+    tilemap[18] = tile;
     tile++;
-    tilemap[5|32] = tile;    
+    tilemap[18|32] = tile;    
 }
 
 
@@ -477,7 +477,8 @@ void main() {
     enable_interrupts();
 
     party_current = 0;
-    turn_cntr = 1;
+    turn_cntr = 0;
+    add_turn();
     
     LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_OBJ16;
     while (1) {
