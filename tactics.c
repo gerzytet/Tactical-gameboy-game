@@ -90,6 +90,7 @@ void change_text(const uchar *text) {
         return;
     }
     volatile uchar *tilemap = &windowBuffer[0][0];
+    tilemap += TEXT_OFFSET;
     static uchar tile;
     for (uchar i = 0; i < 6; i++) {
         if (text[i] == ' ') {

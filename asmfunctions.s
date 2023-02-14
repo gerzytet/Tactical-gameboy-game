@@ -14,7 +14,7 @@ _copy_window_buffer:
     ;push de
 
     ld hl, #0x9C00 + #1 ;tilemap
-    ld de, #_windowBuffer ;windowBuffer
+    ld de, #_windowBuffer + #1 ;windowBuffer
     ld b, #6
     .copy_window_buffer_loop:
         ld a, (de)
@@ -26,7 +26,7 @@ _copy_window_buffer:
         jr nz, .copy_window_buffer_loop
     
     ld hl, #0x9C00 + #1 + #32 ;tilemap
-    ld de, #_windowBuffer + #32 ;windowBuffer
+    ld de, #_windowBuffer + #1 + #32 ;windowBuffer
     ld b, #6
     .copy_window_buffer_loop2:
         ld a, (de)
@@ -40,28 +40,28 @@ _copy_window_buffer:
 
     ;TURN COUNTER:
     ld hl, #0x9C00 + #12 ;tilemap
-    ld de, #_windowBuffer ;windowBuffer
+    ld de, #_windowBuffer + #12 ;windowBuffer
     ld b, #6
-    .copy_window_buffer_loop:
+    .copy_window_buffer_loop3:
         ld a, (de)
         ld (hl), a
 
         inc hl
         inc de
         dec b
-        jr nz, .copy_window_buffer_loop
+        jr nz, .copy_window_buffer_loop3
     
     ld hl, #0x9C00 + #12 + #32 ;tilemap
-    ld de, #_windowBuffer + #32 ;windowBuffer
+    ld de, #_windowBuffer + #12 + #32 ;windowBuffer
     ld b, #6
-    .copy_window_buffer_loop2:
+    .copy_window_buffer_loop4:
         ld a, (de)
         ld (hl), a
 
         inc hl
         inc de
         dec b
-        jr nz, .copy_window_buffer_loop2
+        jr nz, .copy_window_buffer_loop4
 
     ;pop de
     ;pop bc
