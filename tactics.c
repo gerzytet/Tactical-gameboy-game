@@ -36,8 +36,12 @@ const uchar* displayTexts[NUM_TILES] = {
 
 #define PARTY_FRIEND 0
 #define PARTY_ENEMY 1
+#define PARTY_OTHER 2
 
-uchar letter_table[26] = {
+uchar party_current;
+uchar turn_cntr;
+
+uchar letter_table[36] = {
     0, //a
     2, //b
     4, //c
@@ -63,7 +67,17 @@ uchar letter_table[26] = {
     40, //w
     SPACE_LETTER, //x
     42, //y
-    SPACE_LETTER //z
+    SPACE_LETTER, //z
+    44, //0
+    46, //1
+    48, //2
+    50, //3
+    52, //4
+    54, //5
+    56, //6
+    58, //7
+    60, //8
+    62 //9
 };
 
 //number of tiles from the left the text should be displayed
@@ -88,6 +102,43 @@ void change_text(const uchar *text) {
         tilemap[i|32] = tile;
     }
 }
+
+void add_turn(){
+    ++turn_cntr;
+    party_current = 0;
+    
+    const uchar *text;
+    text = "TURN";
+
+    volatile uchar *tilemap = &windowBuffer[0][0];
+    static uchar tile;
+    for (uchar i = 0; i < 4; i++) {
+        if (text[i] == ' ') {
+            tile = SPACE_LETTER;
+        } else {
+            tile = letter_table[text[i] - 'A'];
+        }
+        tilemap[i] = tile;
+        tile++;
+        tilemap[i|32] = tile;
+    }
+
+    //then print the turn #
+    if (turn_cntr/10 == '0') {
+        tile = SPACE_LETTER;
+    } else {
+        tile = letter_table[turn_cntr/10 - '0' + 44];
+    }
+    tilemap[4] = tile;
+    tile++;
+    tilemap[4|32] = tile;
+    
+    tile = letter_table[turn_cntr%10 - '0' + 44];
+    tilemap[5] = tile;
+    tile++;
+    tilemap[5|32] = tile;    
+}
+
 
 // void copy_window_buffer() {
 //    volatile uchar *tilemap = (uchar *)WIN_TILEMAP_START + TEXT_OFFSET;
@@ -278,6 +329,28 @@ void update_characters() {
     }
 }
 
+void post_move(){
+    //check objective
+
+    for (int i = 0; i < numCharacters; ++i){
+        if ((entities[i].party == party_current) && (entities[i].moved == 0)){
+            return;
+        }
+    }
+
+    for (int i = 0; i < numCharacters; ++i){
+        if (entities[i].moved == 1){
+            entities[i].moved = 0;
+        }
+    }
+
+    //change later
+    party_current = (party_current + 1)%2;
+    if (party_current == 0){
+        add_turn();
+    }
+}
+
 #define STATE_LOOK 0
 #define STATE_CHOOSE_MOVE 1
 #define STATE_MOVE 2
@@ -311,7 +384,7 @@ void update_gui() {
 
 void check_enter_move_mode() {
     if (joy_impulse & J_A) {
-        if (hoverCharacter != 255 && entities[hoverCharacter].party == PARTY_FRIEND && entities[hoverCharacter].moved == 0) {
+        if (hoverCharacter != 255 && entities[hoverCharacter].party == party_current && entities[hoverCharacter].moved == 0) {
             state = STATE_CHOOSE_MOVE;
             secondCursorX = cursorX;
             secondCursorY = cursorY;
@@ -402,6 +475,9 @@ void main() {
     add_VBL(vblank_routine);
     IE_REG = IEF_VBLANK;
     enable_interrupts();
+
+    party_current = 0;
+    turn_cntr = 1;
     
     LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_OBJ16;
     while (1) {
@@ -429,6 +505,7 @@ void main() {
             if (move_entity_after_pathfinding(selectedCharacter)){
                 state = STATE_LOOK;
                 move_bigsprite(1, 0, 0);
+                post_move();
             }
         }
 
