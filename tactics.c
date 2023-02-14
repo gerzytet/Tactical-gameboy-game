@@ -12,6 +12,8 @@
 #include "graphics/Top_textbox.c"
 #include "pathfinding.c"
 #include "bigsprites.h"
+#include "graphics/Numbers.h"
+#include "graphics/Numbers.c"
 
 #define CURSOR1 13
 #define CURSOR2 14
@@ -67,17 +69,20 @@ uchar letter_table[36] = {
     40, //w
     SPACE_LETTER, //x
     42, //y
-    SPACE_LETTER, //z
-    44, //0
-    46, //1
-    48, //2
-    50, //3
-    52, //4
-    54, //5
-    56, //6
-    58, //7
-    60, //8
-    62 //9
+    SPACE_LETTER //z
+};
+
+uchar number_table[10] = {
+    50, //0
+    52, //1
+    54, //2
+    56, //3
+    58, //4
+    60, //5
+    62, //6
+    64, //7
+    66, //8
+    68 //9
 };
 
 //number of tiles from the left the text should be displayed
@@ -128,13 +133,13 @@ void add_turn(){
     if (turn_cntr < 10) {
         tile = SPACE_LETTER;
     } else {
-        tile = letter_table[turn_cntr/10 - '0' + 44];
+        tile = number_table[turn_cntr/10];
     }
     tilemap[17] = tile;
     tile++;
     tilemap[17|32] = tile;
     
-    tile = letter_table[turn_cntr%10 - '0' + 44];
+    tile = number_table[turn_cntr%10];
     tilemap[18] = tile;
     tile++;
     tilemap[18|32] = tile;    
@@ -172,12 +177,13 @@ extern void copy_window_buffer();
 #define TEXTBOX_END 23
 #define TEXTBOX_MIDDLE 24
 
-#define FIRST_TILE_OFFSET_2x2 (NUM_LETTERS + 1) / 2
+#define FIRST_TILE_OFFSET_2x2 (NUM_LETTERS + 10 + 1) / 2
 
 void setup_background() {
     set_bkg_data(FIRST_TILE_OFFSET_2x2 * 4, NUM_TILES * 4, Tiles); //tiles.  15 big tiles, 60 small tiles
     set_bkg_data(0, 46, Letters); //letters. 46 tiles.  23 letters
     set_bkg_data(46, 4, Top_textbox);
+    set_bkg_data(50, 20, Numbers);
 
     volatile uchar *tilemap = (uchar *)TILEMAP_START;
     for (uchar r = 0; r < HEIGHT * 2; r++) {
