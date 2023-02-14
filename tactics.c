@@ -140,6 +140,15 @@ void add_turn(){
     tilemap[18|32] = tile;    
 }
 
+void advance_phase(){
+    //change later
+    party_current = (party_current + 1)%2;
+    if (party_current == 0){
+        add_turn();
+    }
+
+}
+
 
 // void copy_window_buffer() {
 //    volatile uchar *tilemap = (uchar *)WIN_TILEMAP_START + TEXT_OFFSET;
@@ -345,11 +354,7 @@ void post_move(){
         }
     }
 
-    //change later
-    party_current = (party_current + 1)%2;
-    if (party_current == 0){
-        add_turn();
-    }
+    advance_phase();
 }
 
 #define STATE_LOOK 0
@@ -499,6 +504,9 @@ void main() {
 
         if (state == STATE_LOOK) {
             check_enter_move_mode();
+            if (joy_impulse & J_START && state == STATE_LOOK){
+                advance_phase();
+            }
         } else if (state == STATE_CHOOSE_MOVE) {
             render_second_cursor();
             check_confirm_move();
