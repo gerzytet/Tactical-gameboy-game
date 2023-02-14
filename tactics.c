@@ -12,6 +12,8 @@
 #include "graphics/Top_textbox.c"
 #include "pathfinding.c"
 #include "bigsprites.h"
+#include "graphics/Numbers.h"
+#include "graphics/Numbers.c"
 
 #define CURSOR1 13
 #define CURSOR2 14
@@ -38,8 +40,8 @@ const uchar* displayTexts[NUM_TILES] = {
 #define PARTY_ENEMY 1
 #define PARTY_OTHER 2
 
-uchar party_current;
-uchar turn_cntr;
+uchar party_current = 0;
+uchar turn_cntr = 0;
 
 uchar letter_table[36] = {
     0, //a
@@ -67,17 +69,20 @@ uchar letter_table[36] = {
     40, //w
     SPACE_LETTER, //x
     42, //y
-    SPACE_LETTER, //z
-    44, //0
-    46, //1
-    48, //2
-    50, //3
-    52, //4
-    54, //5
-    56, //6
-    58, //7
-    60, //8
-    62 //9
+    SPACE_LETTER //z
+};
+
+uchar number_table[10] = {
+    50, //0
+    52, //1
+    54, //2
+    56, //3
+    58, //4
+    60, //5
+    62, //6
+    64, //7
+    66, //8
+    68 //9
 };
 
 //number of tiles from the left the text should be displayed
@@ -107,6 +112,17 @@ void change_text(const uchar *text) {
 void add_turn(){
     ++turn_cntr;
     party_current = 0;
+    static uchar ones_digit = 0;
+    static uchar tens_digit = 0;
+
+    ones_digit++;
+    if (ones_digit >= 10) {
+        ones_digit -= 10;
+        tens_digit++;
+        if (tens_digit >= 10) {
+            tens_digit -= 10;
+        }
+    }
     
     const uchar *text;
     text = "TURN";
@@ -125,16 +141,16 @@ void add_turn(){
     }
 
     //then print the turn #
-    if (turn_cntr < 10) {
+    if (tens_digit == 0) {
         tile = SPACE_LETTER;
     } else {
-        tile = letter_table[turn_cntr/10 - '0' + 44];
+        tile = number_table[tens_digit];
     }
     tilemap[17] = tile;
     tile++;
     tilemap[17|32] = tile;
     
-    tile = letter_table[turn_cntr%10 - '0' + 44];
+    tile = number_table[ones_digit];
     tilemap[18] = tile;
     tile++;
     tilemap[18|32] = tile;    
@@ -167,7 +183,7 @@ void setup_background_palletes() {
         for (uchar c = 0; c < WIDTH * 2; c++) {
             uchar tile = MAP[r/2][c/2];
             uchar pal = palleteTable[tile];
-            tilemap[r*32 + c] = pal;
+            tilemap[r*32 + c] = pal | 0b00001000; /*set vram bank to 1*/
         }
     }
 
@@ -181,12 +197,15 @@ extern void copy_window_buffer();
 #define TEXTBOX_END 23
 #define TEXTBOX_MIDDLE 24
 
-#define FIRST_TILE_OFFSET_2x2 (NUM_LETTERS + 1) / 2
+#define FIRST_TILE_OFFSET_2x2 0
 
 void setup_background() {
+    VBK_REG = VBK_BANK_1;
     set_bkg_data(FIRST_TILE_OFFSET_2x2 * 4, NUM_TILES * 4, Tiles); //tiles.  15 big tiles, 60 small tiles
+    VBK_REG = VBK_BANK_0;
     set_bkg_data(0, 46, Letters); //letters. 46 tiles.  23 letters
     set_bkg_data(46, 4, Top_textbox);
+    set_bkg_data(50, 20, Numbers);
 
     volatile uchar *tilemap = (uchar *)TILEMAP_START;
     for (uchar r = 0; r < HEIGHT * 2; r++) {
@@ -412,8 +431,6 @@ inline void render_second_cursor() {
 }
 
 void vblank_routine() {
-    move_cursor();
-
     SCX_REG = scx;
     SCY_REG = scy;
 
@@ -451,6 +468,15 @@ void setup_gui_textbox() {
     tilemap[0 + 32] = TEXTBOX_END * 2 + 1;
     tilemap[NAME_LENGTH + 1] = TEXTBOX_MIDDLE * 2;
     tilemap[NAME_LENGTH + 1 + 32] = TEXTBOX_MIDDLE * 2 + 1;
+    tilemap[12] = TEXTBOX_MIDDLE * 2;
+    tilemap[12 + 32] = TEXTBOX_MIDDLE * 2 + 1;
+    tilemap[19] = TEXTBOX_END * 2;
+    tilemap[19 + 32] = TEXTBOX_END * 2 + 1;
+
+    VBK_REG = VBK_BANK_1;
+    tilemap[19] = 0b00100000; //horizontal flip
+    tilemap[19 + 32] = 0b00100000;
+    VBK_REG = VBK_BANK_0;
 }
 
 void main() {
@@ -482,8 +508,6 @@ void main() {
     IE_REG = IEF_VBLANK;
     enable_interrupts();
 
-    party_current = 0;
-    turn_cntr = 0;
     add_turn();
     
     LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_OBJ16;
@@ -519,6 +543,7 @@ void main() {
             }
         }
 
+        move_cursor();
         process_bigsprites();
         __asm__("halt");
     }
