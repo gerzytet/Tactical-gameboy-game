@@ -1,4 +1,3 @@
-
 #ifndef BIGSPRITES_H
 #define BIGSPRITES_H
 
