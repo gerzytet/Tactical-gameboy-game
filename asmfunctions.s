@@ -38,7 +38,7 @@ _copy_window_buffer:
         jr nz, .copy_window_buffer_loop2
     
 
-    ;TURN COUNTER:
+;TURN COUNTER:
     ld hl, #0x9C00 + #13 ;tilemap
     ld de, #_windowBuffer + #13 ;windowBuffer
     ld b, #6
@@ -62,6 +62,31 @@ _copy_window_buffer:
         inc de
         dec b
         jr nz, .copy_window_buffer_loop4
+
+;HEALTH BAR: 7 to 12
+    ld hl, #0x9C00 + #7 ;tilemap
+    ld de, #_windowBuffer + #7 ;windowBuffer
+    ld b, #6
+    .copy_window_buffer_loop5:
+        ld a, (de)
+        ld (hl), a
+
+        inc hl
+        inc de
+        dec b
+        jr nz, .copy_window_buffer_loop5
+    
+    ld hl, #0x9C00 + #7 + #32 ;tilemap
+    ld de, #_windowBuffer + #7 + #32 ;windowBuffer
+    ld b, #6
+    .copy_window_buffer_loop6:
+        ld a, (de)
+        ld (hl), a
+
+        inc hl
+        inc de
+        dec b
+        jr nz, .copy_window_buffer_loop6
 
     ;pop de
     ;pop bc

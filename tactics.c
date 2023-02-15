@@ -73,16 +73,16 @@ uchar letter_table[36] = {
 };
 
 uchar number_table[10] = {
-    50, //0
-    52, //1
-    54, //2
-    56, //3
-    58, //4
-    60, //5
-    62, //6
-    64, //7
-    66, //8
-    68 //9
+    56, //0
+    58, //1
+    60, //2
+    62, //3
+    64, //4
+    66, //5
+    68, //6
+    70, //7
+    72, //8
+    74 //9
 };
 
 //number of tiles from the left the text should be displayed
@@ -242,10 +242,12 @@ void setup_background_palletes() {
 
 extern void copy_window_buffer();
 
-//Including textbox tiles!
-#define NUM_LETTERS 25
-#define TEXTBOX_END 23
-#define TEXTBOX_MIDDLE 24
+//Including textbox tiles:
+#define NUM_LETTERS 27
+
+//unit: small tiles
+#define TEXTBOX_END 46
+#define TEXTBOX_MIDDLE 47
 
 #define FIRST_TILE_OFFSET_2x2 0
 
@@ -254,8 +256,8 @@ void setup_background() {
     set_bkg_data(FIRST_TILE_OFFSET_2x2 * 4, NUM_TILES * 4, Tiles); //tiles.  15 big tiles, 60 small tiles
     VBK_REG = VBK_BANK_0;
     set_bkg_data(0, 46, Letters); //letters. 46 tiles.  23 letters
-    set_bkg_data(46, 4, Top_textbox);
-    set_bkg_data(50, 20, Numbers);
+    set_bkg_data(46, 10, Top_textbox);
+    set_bkg_data(56, 20, Numbers);
 
     volatile uchar *tilemap = (uchar *)TILEMAP_START;
     for (uchar r = 0; r < HEIGHT * 2; r++) {
@@ -362,6 +364,8 @@ void setup_characters() {
     entities[0].name = "BOSTON";
     entities[0].party = PARTY_FRIEND;
     entities[0].moved = 0;
+    entities[0].health = 10;
+    entities[0].maxHealth = 10;
     display_bigsprite(CHARACTER_SPRITE_SLOT_START, CHARACTER_BIGTILE_START + BOSTON * 2);
 
     entities[1].x = 7 * 16;
@@ -370,6 +374,8 @@ void setup_characters() {
     entities[1].name = "MARIE ";
     entities[1].party = PARTY_FRIEND;
     entities[1].moved = 0;
+    entities[1].health = 4;
+    entities[1].maxHealth = 20;
     display_bigsprite(CHARACTER_SPRITE_SLOT_START + 1, CHARACTER_BIGTILE_START + MARIE * 2);
 
     entities[2].x = 3 * 16;
@@ -378,6 +384,8 @@ void setup_characters() {
     entities[2].name = "FRED  ";
     entities[2].party = PARTY_FRIEND;
     entities[2].moved = 0;
+    entities[2].health = 1;
+    entities[2].maxHealth = 20;
     display_bigsprite(CHARACTER_SPRITE_SLOT_START + 2, CHARACTER_BIGTILE_START + FRED * 2);
 
     entities[3].x = 2 * 16;
@@ -386,6 +394,8 @@ void setup_characters() {
     entities[3].name = "ENEMY ";
     entities[3].party = PARTY_ENEMY;
     entities[3].moved = 0;
+    entities[3].health = 19;
+    entities[3].maxHealth = 20;
     display_bigsprite(CHARACTER_SPRITE_SLOT_START + 2, CHARACTER_BIGTILE_START + ENEMY * 2);
 }
 
@@ -447,6 +457,8 @@ void update_hover_character() {
     }
 }
 
+void render_health(uchar healthLevel);
+
 void update_gui() {
     if (hoverCharacter == 255) {
         uchar coord = MAP[cursorY][cursorX];
@@ -454,6 +466,12 @@ void update_gui() {
         change_text(text);
     } else {
         change_text(entities[hoverCharacter].name);
+    }
+    if (hoverCharacter == 255) {
+        render_health(0);
+    } else {
+        uchar healthLevel = ((uint16_t)entities[hoverCharacter].health * 20) / entities[hoverCharacter].maxHealth;
+        render_health(healthLevel);
     }
 }
 
@@ -512,21 +530,92 @@ void check_confirm_move() {
     }
 }
 
+#define HFLIP 0b00100000
+#define VFLIP 0b01000000
+
+#define HEALTHBAR_START 7
+#define HEALTHBAR_END 12
+
+#define HEALTHBAR_PAL 5
+
+#define HEALTHCOL0 TEXTBOX_MIDDLE
+#define HEALTHCOL1 48
+#define HEALTHCOL2 49
+#define HEALTHCOL1REV 50
+#define HEALTH0 51
+#define HEALTH1 52
+#define HEALTH2 53
+#define HEALTH3 54
+#define HEALTH4 55
+
 void setup_gui_textbox() {
     volatile uchar *tilemap = (uchar *) WIN_TILEMAP_START;
-    tilemap[0] = TEXTBOX_END * 2;
-    tilemap[0 + 32] = TEXTBOX_END * 2 + 1;
-    tilemap[NAME_LENGTH + 1] = TEXTBOX_MIDDLE * 2;
-    tilemap[NAME_LENGTH + 1 + 32] = TEXTBOX_MIDDLE * 2 + 1;
-    tilemap[12] = TEXTBOX_MIDDLE * 2;
-    tilemap[12 + 32] = TEXTBOX_MIDDLE * 2 + 1;
-    tilemap[19] = TEXTBOX_END * 2;
-    tilemap[19 + 32] = TEXTBOX_END * 2 + 1;
+    tilemap[0] = TEXTBOX_END;
+    tilemap[0 + 32] = TEXTBOX_END;
+    tilemap[HEALTHBAR_START] = TEXTBOX_MIDDLE;
+    tilemap[HEALTHBAR_START | 32] = TEXTBOX_MIDDLE;
+    tilemap[HEALTHBAR_END] = TEXTBOX_MIDDLE;
+    tilemap[HEALTHBAR_END | 32] = TEXTBOX_MIDDLE;
+    tilemap[19] = TEXTBOX_END;
+    tilemap[19 + 32] = TEXTBOX_END;
+
+    for (uchar i = HEALTHBAR_START + 1; i < HEALTHBAR_END; i++) {
+        tilemap[i] = HEALTH0;
+        tilemap[i | 32] = HEALTH0;
+    }
 
     VBK_REG = VBK_BANK_1;
-    tilemap[19] = 0b00100000; //horizontal flip
-    tilemap[19 + 32] = 0b00100000;
+    tilemap[0 + 32] = VFLIP;
+
+    for (uchar i = HEALTHBAR_START; i <= HEALTHBAR_END; i++) {
+        tilemap[i | 32] = VFLIP;
+        tilemap[i] |= HEALTHBAR_PAL;
+        tilemap[i | 32] |= HEALTHBAR_PAL;
+    }
+
+    tilemap[HEALTHBAR_END | 32] |= HFLIP;
+    tilemap[HEALTHBAR_END] |= HFLIP;
+
+    tilemap[19] = HFLIP;
+    tilemap[19 | 32] = VFLIP | HFLIP;
     VBK_REG = VBK_BANK_0;
+}
+
+//health level is a number from 0 to 20
+void render_health(uchar healthLevel) {
+    volatile uchar *tilemap = &windowBuffer[0][0];
+    uchar tile;
+    if (healthLevel > 2) {
+        tile = HEALTHCOL2;
+        healthLevel -= 2;
+    } else {
+        tile = HEALTHCOL0 + healthLevel;
+        healthLevel = 0;
+    }
+    tilemap[HEALTHBAR_START] = tile;
+    tilemap[HEALTHBAR_START | 32] = tile;
+
+    for (uchar i = HEALTHBAR_START+1; i < HEALTHBAR_END; i++) {
+        if (healthLevel > 4) {
+            tile = HEALTH4;
+            healthLevel -= 4;
+        } else {
+            tile = HEALTH0 + healthLevel;
+            healthLevel = 0;
+        }
+        tilemap[i] = tile;
+        tilemap[i | 32] = tile;
+    }
+
+    if (healthLevel == 0) {
+        tile = HEALTHCOL0;
+    } else if (healthLevel == 1) {
+        tile = HEALTHCOL1REV;
+    } else {
+        tile = HEALTHCOL2;
+    }
+    tilemap[HEALTHBAR_END] = tile;
+    tilemap[HEALTHBAR_END | 32] = tile;
 }
 
 void main() {

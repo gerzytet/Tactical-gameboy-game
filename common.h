@@ -14,6 +14,8 @@ struct Entity {
     const uchar * name;
     uchar party;
     uchar moved;
+    uchar health;
+    uchar maxHealth;
 };
 
 struct Entity entities[18];
