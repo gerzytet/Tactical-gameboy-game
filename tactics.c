@@ -156,15 +156,65 @@ void add_turn(){
     tilemap[18|32] = tile;    
 }
 
-void advance_phase(){
-    //change later
-    party_current = (party_current + 1)%2;
-    if (party_current == 0){
-        add_turn();
+uchar is_party_exist(uchar party){
+    //when enemies & others are defeated, they are removed from the char list
+    //when players are defeated, they are set to .moved = 3 (2 is idle)
+    //the .moved var here will be changed in the future to a new var to allow
+    //  all characters to move independantly with preset algorithms
+    
+    for (int i = 0; i < numCharacters; ++i){
+        if ((entities[i].party == party) && (entities[i].moved < 3)){
+            return 1;
+        }
     }
 
+    return 0;
 }
 
+uchar win_condition = 0;
+//0 defeat enemy
+//1 move to space
+//x survive x-1 turns
+
+uchar check_win(){
+
+    //0 continue
+    //1 player win
+    //2 enemy win
+
+    if (is_party_exist(0) == 1){
+        return 2;
+    }
+    else if (is_party_exist(1) == 1){
+        if (win_condition == 0){
+            return 1;
+        }
+        else if (win_condition > 1 && turn_cntr >= win_condition){
+            return 1;
+        }    
+    }
+    return 0;
+}
+
+void advance_phase(){
+    //todo: check_win() during attack phase
+
+    //currently it checks all chars
+    //  1 time from player to enemy, enemy to other
+    //  2 times from player to other, other to player
+    //  3 times from enemy to player, (other to enemy, impossible case)
+
+    do{
+        party_current++;
+    }while(party_current <= 2 && !is_party_exist(party_current));
+    
+    if (party_current > 2){
+        //player can be assumed to be alive, this check is done in check win
+        party_current = 0;
+        //check_win();
+        add_turn();
+    }
+}
 
 // void copy_window_buffer() {
 //    volatile uchar *tilemap = (uchar *)WIN_TILEMAP_START + TEXT_OFFSET;
