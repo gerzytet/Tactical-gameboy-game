@@ -172,6 +172,7 @@ uchar is_party_exist(uchar party){
 }
 
 uchar win_condition = 0;
+uchar win_state = 0;
 //0 defeat enemy
 //1 move to space
 //x survive x-1 turns
@@ -183,14 +184,14 @@ uchar check_win(){
     //2 enemy win
 
     if (is_party_exist(0) == 1){
-        return 2;
+        win_state = 2;
     }
     else if (is_party_exist(1) == 1){
         if (win_condition == 0){
-            return 1;
+            win_state = 1;
         }
         else if (win_condition > 1 && turn_cntr >= win_condition){
-            return 1;
+            win_state = 1; 
         }    
     }
     return 0;
@@ -211,7 +212,7 @@ void advance_phase(){
     if (party_current > 2){
         //player can be assumed to be alive, this check is done in check win
         party_current = 0;
-        //check_win();
+        //check_win(); //uncomment to test gameover()
         add_turn();
     }
 }
@@ -418,9 +419,18 @@ void update_characters() {
     }
 }
 
-void post_move(){
-    //check objective
+uchar get_north_adj_entity(uchar entity);
+uchar battle(uchar attacker, uchar defender);
 
+void post_move(uchar selectedCharacter){
+
+    if (get_north_adj_entity(selectedCharacter) != 255){
+        battle(selectedCharacter, get_north_adj_entity(selectedCharacter));
+    }
+
+    //set selectedCharacter palette to greyscale
+
+    //if any characters have not yet moved, return
     for (int i = 0; i < numCharacters; ++i){
         if ((entities[i].party == party_current) && (entities[i].moved == 0)){
             return;
@@ -430,10 +440,12 @@ void post_move(){
     for (int i = 0; i < numCharacters; ++i){
         if (entities[i].moved == 1){
             entities[i].moved = 0;
+            //set palette to party color
         }
     }
 
     advance_phase();
+    //check win?
 }
 
 #define STATE_LOOK 0
@@ -618,12 +630,46 @@ void render_health(uchar healthLevel) {
     tilemap[HEALTHBAR_END | 32] = tile;
 }
 
-void main() {
-    wait_vbl_done();
-    display_off();
-    LCDC_REG = 0x00;
-    init_bigsprites();
+/*uchar[] get_adj_entities(){
+    return NULL;
+}*/
 
+uchar get_north_adj_entity(uchar entity){
+
+    for (uchar i = 0; i < numCharacters; ++i){
+        if (i != entity && entities[entity].x == entities[i].x && entities[entity].y == entities[i].y +16){
+            return i;
+        }
+    }
+    return 255;
+}
+
+uchar battle(uchar attacker, uchar defender){
+    //start battle scene
+    //attacker attacks
+    //todo: fix to not go negative
+    //todo: edit the algorithm
+    entities[defender].health -= 5;
+    if (entities[defender].health <= 0){
+        //remove from map
+        return 2;
+    }
+    //defender counters
+    entities[attacker].health -= 8;
+    if (entities[attacker].health <= 0){
+        //remove from map
+        return 1;
+    }
+    return 0;
+}
+
+void gameover(){
+    //todo
+    //set char lvl ups to mem if won
+    //title screen if lost
+}
+
+void playgame(){
     vmemset((uchar *)WIN_TILEMAP_START, SPACE_LETTER, 32*32);
 
     setup_background_palletes();
@@ -667,7 +713,7 @@ void main() {
 
         if (state == STATE_LOOK) {
             check_enter_move_mode();
-            if (joy_impulse & J_START && state == STATE_LOOK){
+            if (joy_impulse & J_SELECT && state == STATE_LOOK){
                 advance_phase();
             }
         } else if (state == STATE_CHOOSE_MOVE) {
@@ -678,7 +724,10 @@ void main() {
             if (move_entity_after_pathfinding(selectedCharacter)){
                 state = STATE_LOOK;
                 move_bigsprite(1, 0, 0);
-                post_move();
+                post_move(selectedCharacter);
+                if (win_state != 0){
+                    break; //gameover
+                }
             }
         }
 
@@ -686,4 +735,70 @@ void main() {
         process_bigsprites();
         __asm__("halt");
     }
+
+    //gameover()
+}
+
+//for *testing* GB linking
+void multiplayer(){
+    //loading..
+    //joypad_init(2, /*pointer to struct*/);
+    //connected
+
+}
+
+void set_menu_text(){
+
+}
+
+uchar max_option = 3;
+uchar menu_option = 0;
+void mainmenu(){
+
+    vmemset((uchar *)WIN_TILEMAP_START, SPACE_LETTER, 32*32);
+
+    //setup_menu_background_palletes();
+    //setup_menu_background();
+
+    //setup_gui_
+    //setup_gui_textbox();
+
+
+    menu_option = max_option;
+    while (1) {
+        //DURING FRAME:
+        joy_impulse = joy;
+        joy = joypad();
+        joy_impulse = ~joy_impulse & joy;
+
+        if (joy_impulse & J_START && menu_option == max_option){
+            //show gx
+            menu_option = 0;
+        }
+        else if (joy_impulse & J_A && menu_option == 0){
+            //show gx
+            playgame();
+        }
+        /*else if (joy_impulse & J_A && menu_option == 1){
+            //show gx
+            multiplayer(); //test code only!
+        }*/
+        else if (joy_impulse & J_RIGHT && menu_option < max_option - 1){
+            //show gx
+            ++menu_option;
+        }
+        else if (joy_impulse & J_LEFT && menu_option > 0 && menu_option < max_option){
+            //show gx
+            --menu_option;
+        }
+    }
+}
+
+void main() {
+    wait_vbl_done();
+    display_off();
+    LCDC_REG = 0x00;
+    init_bigsprites();
+
+    mainmenu();
 }
