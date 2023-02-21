@@ -6,7 +6,9 @@
 
 #define internal_display_bigsprite(slot, tile)\
     set_sprite_tile((slot)*2, (tile)*4);\
-    set_sprite_tile((slot)*2+1, (tile)*4+2);
+    set_sprite_tile((slot)*2+1, (tile)*4+2);\
+    //set 
+    
 
 #define internal_move_bigsprite(slot, x, y)\
     move_sprite((slot)*2, (x), (y));\
@@ -25,6 +27,7 @@ struct Bigsprite {
     uchar y;
     uchar x;
     uchar sprite;
+    //uchar color; or something
 };
 
 struct Bigsprite bigsprites[20];

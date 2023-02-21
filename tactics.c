@@ -14,11 +14,14 @@
 #include "bigsprites.h"
 #include "graphics/Numbers.h"
 #include "graphics/Numbers.c"
+#include <stdio.h>
+#include "graphics/Menu_BG.c"
+#include "graphics/Menu_BG_Map.c"
 
 #define CURSOR1 13
 #define CURSOR2 14
 
-const uchar palleteTable[NUM_TILES] = {
+const uchar paletteTable[NUM_TILES] = {
     4, 3, 2, 1,
     3, 1, 3, 0, 0
 };
@@ -102,6 +105,25 @@ void change_text(const uchar *text) {
             tile = SPACE_LETTER;
         } else {
             tile = letter_table[text[i] - 'A'];
+        }
+        tilemap[i] = tile;
+        tile++;
+        tilemap[i|32] = tile;
+    }
+}
+
+void change_menu_text(const uchar *text){
+    if (text == NULL) {
+        return;
+    }
+    volatile uchar *tilemap = &windowBuffer[0][0];
+    tilemap += TEXT_OFFSET;
+    static uchar tile;
+    for (uchar i = 0; i < 6; i++) {
+        if (text[i] == ' ') {
+            tile = SPACE_LETTER;
+        } else {
+            tile = letter_table[text[i] - 'A'] + 19;
         }
         tilemap[i] = tile;
         tile++;
@@ -233,7 +255,7 @@ void setup_background_palletes() {
     for (uchar r = 0; r < HEIGHT * 2; r++) {
         for (uchar c = 0; c < WIDTH * 2; c++) {
             uchar tile = MAP[r/2][c/2];
-            uchar pal = palleteTable[tile];
+            uchar pal = paletteTable[tile];
             tilemap[r*32 + c] = pal | 0b00001000; /*set vram bank to 1*/
         }
     }
@@ -350,6 +372,21 @@ void update_camera() {
     }
 }
 
+void paletteswap(uchar entity, uchar color){
+    //Swap palette of current tile
+    uchar bigsprite = entity + 2;
+    uchar sprite = bigsprite * 2;
+    uchar bytenum = sprite * 4;
+
+    volatile unsigned char* oam_data = &((unsigned char*)&shadow_OAM)[bytenum];
+    oam_data[3] &= 0b11111000;
+    oam_data[3] |= color;
+    oam_data = &((unsigned char*)&shadow_OAM)[(sprite + 1)*4];
+    oam_data[3] &= 0b11111000;
+    oam_data[3] |= color;
+}
+
+
 #define CHARACTER_BIGTILE_START 2
 #define CHARACTER_SPRITE_SLOT_START 2
 #define BOSTON 0
@@ -398,6 +435,10 @@ void setup_characters() {
     entities[3].health = 19;
     entities[3].maxHealth = 20;
     display_bigsprite(CHARACTER_SPRITE_SLOT_START + 2, CHARACTER_BIGTILE_START + ENEMY * 2);
+
+    for (int i = 0; i < numCharacters; ++i){
+        paletteswap(i, entities[i].party + 1);
+    }
 }
 
 #define CHARACTER_ANIMATION_DELAY 15
@@ -429,6 +470,7 @@ void post_move(uchar selectedCharacter){
     }
 
     //set selectedCharacter palette to greyscale
+    paletteswap(selectedCharacter, 0);
 
     //if any characters have not yet moved, return
     for (int i = 0; i < numCharacters; ++i){
@@ -441,6 +483,8 @@ void post_move(uchar selectedCharacter){
         if (entities[i].moved == 1){
             entities[i].moved = 0;
             //set palette to party color
+            paletteswap(i, entities[i].party + 1);
+
         }
     }
 
@@ -645,18 +689,23 @@ uchar get_north_adj_entity(uchar entity){
 }
 
 uchar battle(uchar attacker, uchar defender){
+    if (attacker == defender || entities[attacker].party == entities[defender].party){
+        return 0;
+    }
     //start battle scene
     //attacker attacks
     //todo: fix to not go negative
     //todo: edit the algorithm
     entities[defender].health -= 5;
-    if (entities[defender].health <= 0){
+    if (entities[defender].health == 0 || entities[defender].health > entities[defender].maxHealth){
+        entities[defender].health = 0;
         //remove from map
         return 2;
     }
     //defender counters
     entities[attacker].health -= 8;
-    if (entities[attacker].health <= 0){
+    if (entities[attacker].health <= 0 || entities[attacker].health > entities[attacker].maxHealth){
+        entities[attacker].health == 0;
         //remove from map
         return 1;
     }
@@ -670,6 +719,11 @@ void gameover(){
 }
 
 void playgame(){
+    wait_vbl_done();
+    display_off();
+    LCDC_REG = 0x00;
+    init_bigsprites();
+
     vmemset((uchar *)WIN_TILEMAP_START, SPACE_LETTER, 32*32);
 
     setup_background_palletes();
@@ -682,7 +736,7 @@ void playgame(){
     
 
 
-    set_sprite_palette(0, 1, colors);
+    set_sprite_palette(0, 4, colors_objects);
     set_sprite_prop(0, 0);
 
     set_sprite_data(0, 40, Sprites);
@@ -744,25 +798,42 @@ void multiplayer(){
     //loading..
     //joypad_init(2, /*pointer to struct*/);
     //connected
-
 }
 
-void set_menu_text(){
+/*void startstory(){
+    //playscene(0);
+    //playscene(1);
+    //playgame(0);
+    //playscene(2);
+    //playscene(3);
+    //playgame(1);
+    //playscene(4);
+    //playscene(5);
+    //playgame(2);
+    //playscene(6);
+    //playscene(7);
+    //playgame(3);
+    //playscene(8);
+    //playscene(9);
+    //playgame(4);
+    //playscene(10);
+    //playscene(11);
+    //playcredits();
+}*/
 
-}
-
-uchar max_option = 3;
+uchar max_option = 4;
 uchar menu_option = 0;
 void mainmenu(){
-
-    vmemset((uchar *)WIN_TILEMAP_START, SPACE_LETTER, 32*32);
-
-    //setup_menu_background_palletes();
-    //setup_menu_background();
-
-    //setup_gui_
-    //setup_gui_textbox();
-
+    //wait_vbl_done();
+    //display_off();
+    //LCDC_REG = 0x00;
+    
+    setup_background_palletes();
+    set_bkg_data(0,19, Menu_BG);
+    set_bkg_data(19,46, Letters); //46 tiles, 23 letters
+    set_bkg_tiles(0,0,20, 18, Menu_BG_Map);
+    DISPLAY_ON;
+    wait_vbl_done();
 
     menu_option = max_option;
     while (1) {
@@ -771,17 +842,35 @@ void mainmenu(){
         joy = joypad();
         joy_impulse = ~joy_impulse & joy;
 
+        switch (menu_option){
+            case 0:
+                change_menu_text("DEMO");
+                break;
+            case 1:
+                change_menu_text("STORY");
+                break;
+            case 2:
+                change_menu_text("MULTIPLAYER");
+                break;
+            case 3:
+                change_menu_text("SETTINGS");
+                break;
+            default:
+                change_menu_text("PRESS START");
+        }
+
         if (joy_impulse & J_START && menu_option == max_option){
             //show gx
             menu_option = 0;
         }
         else if (joy_impulse & J_A && menu_option == 0){
-            //show gx
             playgame();
         }
         /*else if (joy_impulse & J_A && menu_option == 1){
-            //show gx
-            multiplayer(); //test code only!
+            //startstory();
+        }*/
+        /*else if (joy_impulse & J_A && menu_option == 2){
+            //multiplayer(); //test code only!
         }*/
         else if (joy_impulse & J_RIGHT && menu_option < max_option - 1){
             //show gx
@@ -791,14 +880,12 @@ void mainmenu(){
             //show gx
             --menu_option;
         }
+        SHOW_BKG;
+        wait_vbl_done();
     }
 }
 
 void main() {
-    wait_vbl_done();
-    display_off();
-    LCDC_REG = 0x00;
-    init_bigsprites();
-
+    
     mainmenu();
 }
