@@ -7,7 +7,7 @@
  Info:
    Section       : 
    Bank          : 0
-   Map size      : 20 x 18
+   Map size      : 10 x 4
    Tile set      : C:\Users\newgb\Documents\Game Boy\gbtd22\menu.gbr
    Plane count   : 1 plane (8 bits)
    Plane order   : Tiles are continues
@@ -18,8 +18,8 @@
 
 */
 
-#define Menu_BG_MapWidth 20
-#define Menu_BG_MapHeight 18
+#define Menu_BG_MapWidth 10
+#define Menu_BG_MapHeight 4
 #define Menu_BG_MapBank 0
 
 extern unsigned char Menu_BG_Map[];
