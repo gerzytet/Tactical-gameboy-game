@@ -106,22 +106,14 @@ void mainmenu(){
             menu_option = 0;
             update_menu_text();
         }
-        else if (joy_impulse & J_A && menu_option == 0){
+        else if (joy_impulse & J_A && menu_option >= 0 && menu_option < MAX_OPTION){
             return;
         }
-        /*else if (joy_impulse & J_A && menu_option == 1){
-            //startstory();
-        }*/
-        /*else if (joy_impulse & J_A && menu_option == 2){
-            //multiplayer();
-        }*/
         else if (joy_impulse & J_RIGHT && menu_option < MAX_OPTION - 1){
-            //show gx
             ++menu_option;
             optionscroll(1);
         } 
         else if (joy_impulse & J_LEFT && menu_option > 0 && menu_option < MAX_OPTION){
-            //show gx
             --menu_option;
             optionscroll(2);
         }

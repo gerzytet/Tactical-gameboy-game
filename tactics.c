@@ -141,30 +141,34 @@ uchar is_party_exist(uchar party){
     return 0;
 }
 
-uchar win_condition = 0;
-uchar win_state = 0;
-//0 defeat enemy
-//1 move to space
-//x survive x-1 turns
+uchar winCondition = 0;
+uchar winState = 0;
 
-uchar check_win(){
+#define PLAYER_WON 0
+#define PLAYER_LOST 0
+
+#define WIN_IF_ENEMY_DEFEAT 0
+#define WIN_IF_PLAYER_ON_SPACE 1
+//WIN_IF_SURVIVE_X_TURNS x
+
+void check_win(){
 
     //0 continue
     //1 player win
     //2 enemy win
 
     if (is_party_exist(0) == 1){
-        win_state = 2;
+        winState = 2;
     }
     else if (is_party_exist(1) == 1){
-        if (win_condition == 0){
-            win_state = 1;
+        if (winCondition == WIN_IF_ENEMY_DEFEAT){
+            winState = 1;
         }
-        else if (win_condition > 1 && turn_cntr >= win_condition){
-            win_state = 1; 
+        else if (winCondition > 1 && turn_cntr >= winCondition){
+            winState = 1; 
         }    
     }
-    return 0;
+    return;
 }
 
 void advance_phase(){
@@ -182,18 +186,10 @@ void advance_phase(){
     if (party_current > 2){
         //player can be assumed to be alive, this check is done in check win
         party_current = 0;
-        //check_win(); //uncomment to test gameover()
+        check_win(); //uncomment to test game_over()
         add_turn();
     }
 }
-
-// void copy_window_buffer() {
-//    volatile uchar *tilemap = (uchar *)WIN_TILEMAP_START + TEXT_OFFSET;
-//    for (uchar i = 0; i < 6; i++) {
-//        tilemap[i] = windowBuffer[0][i];
-//        tilemap[i|32] = windowBuffer[1][i];
-//    }
-// }
 
 void setup_background_palletes() {
     set_bkg_palette(0, 8, colors);
@@ -658,13 +654,14 @@ uchar battle(uchar attacker, uchar defender){
     return 0;
 }
 
-void gameover(){
+void game_over(){
     //todo
     //set char lvl ups to mem if won
     //title screen if lost
+    menu_option = 255; //go to main menu
 }
 
-void playgame(){
+void play_game(){
     wait_vbl_done();
     SCY_REG = 0;
     SCX_REG = 0;
@@ -721,7 +718,7 @@ void playgame(){
                 state = STATE_LOOK;
                 move_bigsprite(1, 0, 0);
                 post_move(selectedCharacter);
-                if (win_state != 0){
+                if (winState != 0){
                     break; //gameover
                 }
             }
@@ -733,38 +730,71 @@ void playgame(){
         __asm__("halt");
     }
 
-    //gameover()
+    game_over();
 }
 
 //for *testing* GB linking
 void multiplayer(){
     //loading..
-    //joypad_init(2, /*pointer to struct*/);
+    //joypad_init(2, /*pointer to some struct*/);
     //connected
 }
 
-/*void startstory(){
-    //playscene(0);
-    //playscene(1);
-    //playgame(0);
-    //playscene(2);
+uchar winCondition_global[5] = {WIN_IF_ENEMY_DEFEAT,WIN_IF_ENEMY_DEFEAT,
+WIN_IF_ENEMY_DEFEAT,WIN_IF_ENEMY_DEFEAT,WIN_IF_ENEMY_DEFEAT};
+
+//Initialze the map with parameters before map is generated
+void play_map(uchar num){
+    //todo: initialize map with params
+    //map
+    //enemies
+
+    winCondition = winCondition_global[num];
+    play_game();
+}
+
+void start_story(){
+    //play_scene(0);
+    //play_scene(1);
+    play_map(0);
+    //play_scene(2);
     //playscene(3);
-    //playgame(1);
-    //playscene(4);
-    //playscene(5);
-    //playgame(2);
-    //playscene(6);
-    //playscene(7);
-    //playgame(3);
-    //playscene(8);
-    //playscene(9);
-    //playgame(4);
-    //playscene(10);
-    //playscene(11);
-    //playcredits();
-}*/
+    play_map(1);
+    //play_scene(4);
+    //play_scene(5);
+    play_map(2);
+    //play_scene(6);
+    //play_scene(7);
+    play_map(3);
+    //play_scene(8);
+    //play_scene(9);
+    play_map(4);
+    //play_scene(10);
+    //play_scene(11);
+    //play_credits();
+}
+
+//todo: make map struct
 
 void main() {
-    mainmenu();
-    playgame();
+    menu_option = 255;
+    while (1){
+        switch (menu_option){
+            case 255:
+                mainmenu();
+                break;
+            case 0:
+                play_game();
+                break;
+            case 1:
+                start_story();
+                break;
+            case 2:
+                //multiplayer();
+                break;
+            case 3:
+                //options();
+                return;
+        }
+    }
 }
