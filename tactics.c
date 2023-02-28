@@ -729,6 +729,8 @@ void gameover(){
 
 void playgame(){
     wait_vbl_done();
+    SCY_REG = 0;
+    SCX_REG = 0;
     display_off();
     LCDC_REG = 0x00;
     init_bigsprites();
@@ -764,11 +766,10 @@ void playgame(){
             check_cursor_movement();
         }
         update_camera();
-
+        
         update_characters();
         update_hover_character();
         update_gui();
-
         if (state == STATE_LOOK) {
             check_enter_move_mode();
             if (joy_impulse & J_SELECT && state == STATE_LOOK){
@@ -790,6 +791,7 @@ void playgame(){
         }
 
         move_cursor();
+        
         process_bigsprites();
         __asm__("halt");
     }
@@ -825,23 +827,6 @@ void multiplayer(){
     //playcredits();
 }*/
 
-UINT8 scroll1, scroll2, scroll3;
-
-/*void scrolleffect(){
-    if (LYC_REG == 0x00){
-        move_bkg(0, 0);
-        LYC_REG = 0x60;
-    }
-    if (LYC_REG == 0x30){
-        move_bkg(1, 0);
-        LYC_REG = 0x64;
-    }
-    if (LYC_REG == 0x64){
-        move_bkg(0, 0);
-        LYC_REG = 0x00;
-    }
-}*/
-
 uchar max_option = 4;
 uchar menu_option = 0;
 
@@ -865,15 +850,6 @@ void update_menu_text(){
 }
 
 void optionscroll(uchar dir){
-    //STAT_REG = 0x45;
-    //LYC_REG = 0x00;
-    
-    //disable_interrupts();
-    //add_LCD(scrolleffect);
-    //enable_interrupts();
-    
-    //set_interrupts(VBL_IFLAG | LCD_IFLAG);
-
     change_menu_text("            ", 0);
     for (uchar i = 0; i < 40; ++i){
         if (dir == 1){
