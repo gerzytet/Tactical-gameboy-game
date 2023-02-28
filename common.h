@@ -18,6 +18,40 @@ struct Entity {
     uchar maxHealth;
 };
 
+uchar joy = 0;
+uchar joy_impulse = 0;
+
+#define SPACE_LETTER 22 * 2
+
+const uchar letter_table[36] = {
+    0, //a
+    2, //b
+    4, //c
+    6, //d
+    8, //e
+    10, //f
+    12, //g
+    14, //h
+    16, //i
+    SPACE_LETTER, //j
+    18, //k
+    20, //l
+    22, //m
+    24, //n
+    26, //o
+    28, //p
+    SPACE_LETTER, //q
+    30, //r
+    32, //s
+    34, //t
+    36, //u
+    38, //v
+    40, //w
+    SPACE_LETTER, //x
+    42, //y
+    SPACE_LETTER //z
+};
+
 struct Entity entities[18];
 
 uchar numCharacters;
