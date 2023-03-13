@@ -1,4 +1,5 @@
 #include "common.h"
+#include "leveldata.h"
 
 #define NORTH 0
 #define SOUTH 1
@@ -131,6 +132,11 @@ const uchar passable_table[NUM_TILES] = {
     0, //fence
     1, //grass
     1, //path
+    0, //wall
+    0, //water
+    1, //bridge
+    0, //rock
+    0, //forest
     1, //start
     1  //end
 };
@@ -146,7 +152,7 @@ uchar move_entity_after_pathfinding(uchar index) {
         queueEnd = 1;
         uchar startX = entities[index].x / 16;
         uchar startY = entities[index].y / 16;
-        passable_matrix[startY][startX] = passable_table[MAP[startY][startX]];
+        passable_matrix[startY][startX] = passable_table[MAPS[mapIndex][startY][startX]];
         do {
             xQueue[queueEnd] = x;
             yQueue[queueEnd] = y;
@@ -202,7 +208,7 @@ uchar move_entity_after_pathfinding(uchar index) {
 void setup_passable_matrix() {
     for (uchar r = 0; r < HEIGHT; r++) {
         for (uchar c = 0; c < WIDTH; c++) {
-            passable_matrix[r][c] = passable_table[MAP[r][c]];
+            passable_matrix[r][c] = passable_table[MAPS[mapIndex][r][c]];
         }
     }
 

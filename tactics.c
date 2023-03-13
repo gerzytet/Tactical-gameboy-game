@@ -15,13 +15,19 @@
 #include "graphics/Numbers.c"
 #include <stdio.h>
 #include "main_menu.c"
+#include "leveldata.h"
+#include "dialogue.c"
+#include "options.c"
+#include "credits.c"
 
 #define CURSOR1 13
 #define CURSOR2 14
 
 const uchar paletteTable[NUM_TILES] = {
     4, 3, 2, 1,
-    3, 1, 3, 0, 0
+    3, 1, 3, 0,
+    0, 0, 0, 0,
+    0, 0
 };
 
 #define TILEMAP_START 0x9800
@@ -30,7 +36,9 @@ const uchar paletteTable[NUM_TILES] = {
 //fixed width: 6 characters
 const uchar* displayTexts[NUM_TILES] = {
     "HOUSE ", "CAVE  ", "CHEST ", "TREE  ",
-    "FENCE ", "GRASS ", "PATH  ", "START ", "END   "
+    "FENCE ", "GRASS ", "PATH  ", "WALL  ",
+    "WATER ", "BRIDGE", "ROCK  ", "FOREST",
+    "START ", "END   "
 };
 
 #define NAME_LENGTH 6
@@ -145,11 +153,11 @@ uchar winCondition = 0;
 uchar winState = 0;
 
 #define PLAYER_WON 0
-#define PLAYER_LOST 0
+#define PLAYER_LOST 1
 
 #define WIN_IF_ENEMY_DEFEAT 0
 #define WIN_IF_PLAYER_ON_SPACE 1
-//WIN_IF_SURVIVE_X_TURNS x
+//WIN_IF_SURVIVE_X_TURNS x+1
 
 void check_win(){
 
@@ -157,10 +165,10 @@ void check_win(){
     //1 player win
     //2 enemy win
 
-    if (is_party_exist(0) == 1){
+    if (is_party_exist(PARTY_FRIEND) == 0){
         winState = 2;
     }
-    else if (is_party_exist(1) == 1){
+    else if (is_party_exist(PARTY_ENEMY) == 0){
         if (winCondition == WIN_IF_ENEMY_DEFEAT){
             winState = 1;
         }
@@ -198,7 +206,7 @@ void setup_background_palletes() {
     volatile uchar *tilemap = (uchar *)TILEMAP_START;
     for (uchar r = 0; r < HEIGHT * 2; r++) {
         for (uchar c = 0; c < WIDTH * 2; c++) {
-            uchar tile = MAP[r/2][c/2];
+            uchar tile = MAPS[mapIndex][r/2][c/2];
             uchar pal = paletteTable[tile];
             tilemap[r*32 + c] = pal | 0b00001000; /*set vram bank to 1*/
         }
@@ -229,7 +237,7 @@ void setup_background() {
     volatile uchar *tilemap = (uchar *)TILEMAP_START;
     for (uchar r = 0; r < HEIGHT * 2; r++) {
         for (uchar c = 0; c < WIDTH * 2; c++) {
-            uchar map = (MAP[r/2][c/2] + FIRST_TILE_OFFSET_2x2)*4;
+            uchar map = (MAPS[mapIndex][r/2][c/2] + FIRST_TILE_OFFSET_2x2)*4;
             uchar value = map + (r&1) + (c&1)*2;
             tilemap[r*32 + c] = value;
         }
@@ -431,7 +439,6 @@ void post_move(uchar selectedCharacter){
     }
 
     advance_phase();
-    //check win?
 }
 
 #define STATE_LOOK 0
@@ -459,7 +466,7 @@ void render_health(uchar healthLevel);
 
 void update_gui() {
     if (hoverCharacter == 255) {
-        uchar coord = MAP[cursorY][cursorX];
+        uchar coord = MAPS[mapIndex][cursorY][cursorX];
         uchar *text = (uchar *)displayTexts[coord];
         change_text(text);
     } else {
@@ -654,6 +661,7 @@ uchar battle(uchar attacker, uchar defender){
     return 0;
 }
 
+//Post game handling
 void game_over(){
     //todo
     //set char lvl ups to mem if won
@@ -704,6 +712,11 @@ void play_game(){
         update_characters();
         update_hover_character();
         update_gui();
+
+        /*if (joy_impulse & J_START && state == STATE_LOOK){
+            break;
+        }*/
+
         if (state == STATE_LOOK) {
             check_enter_move_mode();
             if (joy_impulse & J_SELECT && state == STATE_LOOK){
@@ -718,6 +731,9 @@ void play_game(){
                 state = STATE_LOOK;
                 move_bigsprite(1, 0, 0);
                 post_move(selectedCharacter);
+                if (joy_impulse & J_START && state == STATE_LOOK){
+                    break;
+                }
                 if (winState != 0){
                     break; //gameover
                 }
@@ -733,50 +749,69 @@ void play_game(){
     game_over();
 }
 
-//for *testing* GB linking
+//For *testing* GB linking
 void multiplayer(){
-    //loading..
+    set_bkg_palette(0, 1, colors);
+	move_bkg(0,0);
+
+    printf("loading");
+    wait_vbl_done();
     //joypad_init(2, /*pointer to some struct*/);
     //connected
+
+    while(1){
+		//DURING FRAME:
+		joy_impulse = joy;
+		joy = joypad();
+		joy_impulse = ~joy_impulse & joy;
+		
+		if (joy_impulse & J_B){
+			menu_option = 255;
+			return;
+		}
+		wait_vbl_done();
+	}
 }
 
-uchar winCondition_global[5] = {WIN_IF_ENEMY_DEFEAT,WIN_IF_ENEMY_DEFEAT,
+const uchar winCondition_global[5] = {WIN_IF_ENEMY_DEFEAT,WIN_IF_ENEMY_DEFEAT,
 WIN_IF_ENEMY_DEFEAT,WIN_IF_ENEMY_DEFEAT,WIN_IF_ENEMY_DEFEAT};
 
 //Initialze the map with parameters before map is generated
 void play_map(uchar num){
     //todo: initialize map with params
-    //map
+    mapIndex = num;
     //enemies
 
     winCondition = winCondition_global[num];
     play_game();
 }
 
+//Plays the Story Mode from start to finish
 void start_story(){
-    //play_scene(0);
-    //play_scene(1);
+    play_scene(0);
+    play_scene(1);
     play_map(0);
-    //play_scene(2);
-    //playscene(3);
+    play_scene(2);
+    play_scene(3);
     play_map(1);
-    //play_scene(4);
-    //play_scene(5);
+    play_scene(4);
+    play_scene(5);
     play_map(2);
-    //play_scene(6);
-    //play_scene(7);
+    play_scene(6);
+    play_scene(7);
     play_map(3);
-    //play_scene(8);
-    //play_scene(9);
+    play_scene(8);
+    play_scene(9);
     play_map(4);
-    //play_scene(10);
-    //play_scene(11);
-    //play_credits();
+    play_scene(10);
+    play_scene(11);
+    play_credits();
 }
 
-//todo: make map struct
-
 void main() {
+    if (_is_GBA == GBA_DETECTED){
+        printf("GBA detected\n");
+    }
     menu_option = 255;
     while (1){
         switch (menu_option){
@@ -790,11 +825,11 @@ void main() {
                 start_story();
                 break;
             case 2:
-                //multiplayer();
+                multiplayer();
                 break;
             case 3:
-                //options();
-                return;
+                options_menu();
+                break;
         }
     }
 }
