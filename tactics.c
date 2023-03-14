@@ -19,6 +19,7 @@
 #include "dialogue.c"
 #include "options.c"
 #include "credits.c"
+#include "battle.c"
 
 #define CURSOR1 13
 #define CURSOR2 14
@@ -154,10 +155,6 @@ uchar winState = 0;
 
 #define PLAYER_WON 0
 #define PLAYER_LOST 1
-
-#define WIN_IF_ENEMY_DEFEAT 0
-#define WIN_IF_PLAYER_ON_SPACE 1
-//WIN_IF_SURVIVE_X_TURNS x+1
 
 void check_win(){
 
@@ -411,7 +408,6 @@ void update_characters() {
 }
 
 uchar get_north_adj_entity(uchar entity);
-uchar battle(uchar attacker, uchar defender);
 
 void post_move(uchar selectedCharacter){
 
@@ -637,30 +633,6 @@ uchar get_north_adj_entity(uchar entity){
     return 255;
 }
 
-uchar battle(uchar attacker, uchar defender){
-    if (attacker == defender || entities[attacker].party == entities[defender].party){
-        return 0;
-    }
-    //start battle scene
-    //attacker attacks
-    //todo: fix to not go negative
-    //todo: edit the algorithm
-    entities[defender].health -= 5;
-    if (entities[defender].health == 0 || entities[defender].health > entities[defender].maxHealth){
-        entities[defender].health = 0;
-        //remove from map
-        return 2;
-    }
-    //defender counters
-    entities[attacker].health -= 8;
-    if (entities[attacker].health <= 0 || entities[attacker].health > entities[attacker].maxHealth){
-        entities[attacker].health == 0;
-        //remove from map
-        return 1;
-    }
-    return 0;
-}
-
 //Post game handling
 void game_over(){
     //todo
@@ -772,9 +744,6 @@ void multiplayer(){
 		wait_vbl_done();
 	}
 }
-
-const uchar winCondition_global[5] = {WIN_IF_ENEMY_DEFEAT,WIN_IF_ENEMY_DEFEAT,
-WIN_IF_ENEMY_DEFEAT,WIN_IF_ENEMY_DEFEAT,WIN_IF_ENEMY_DEFEAT};
 
 //Initialze the map with parameters before map is generated
 void play_map(uchar num){

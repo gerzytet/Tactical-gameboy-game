@@ -23,6 +23,10 @@ uchar joy_impulse = 0;
 
 #define SPACE_LETTER 22 * 2
 
+#define WIN_IF_ENEMY_DEFEAT 0
+#define WIN_IF_PLAYER_ON_SPACE 1
+//WIN_IF_SURVIVE_X_TURNS x+1
+
 uchar mapIndex = 0;
 
 const uchar letter_table[36] = {

@@ -9,7 +9,7 @@
    Bank          : 0
    Map size      : 20 x 6
    Tile set      : C:\Users\newgb\Documents\Game Boy\gbtd22\dia3.gbr
-   Plane count   : 0.5 plane (4 bits)
+   Plane count   : 1 plane (8 bits)
    Plane order   : Tiles are continues
    Tile offset   : 0
    Split data    : No
