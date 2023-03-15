@@ -153,8 +153,8 @@ uchar is_party_exist(uchar party){
 uchar winCondition = 0;
 uchar winState = 0;
 
-#define PLAYER_WON 0
-#define PLAYER_LOST 1
+#define PLAYER_WON 1
+#define PLAYER_LOST 2
 
 void check_win(){
 
@@ -163,14 +163,14 @@ void check_win(){
     //2 enemy win
 
     if (is_party_exist(PARTY_FRIEND) == 0){
-        winState = 2;
+        winState = PLAYER_LOST;
     }
     else if (is_party_exist(PARTY_ENEMY) == 0){
         if (winCondition == WIN_IF_ENEMY_DEFEAT){
-            winState = 1;
+            winState = PLAYER_WON;
         }
         else if (winCondition > 1 && turn_cntr >= winCondition){
-            winState = 1; 
+            winState = PLAYER_WON; 
         }    
     }
     return;
@@ -633,12 +633,29 @@ uchar get_north_adj_entity(uchar entity){
     return 255;
 }
 
+void save_game(){
+    SaveData *saveData = (SaveData *)0xA000;
+    saveData->lastMapCompleted = mapIndex; //fix to be more accurate
+    for (int i = 0; i < 10; ++i){
+        saveData->inventory[i] = 0; //fix to write inventory
+    }
+    for (int i = 0; i < 6; ++i){
+        saveData->characterStats[i] = 0; //fix to pull from uncreated variables
+    }
+}
+
+void load_game(){
+    SaveData *saveData = (SaveData *)0xA000;
+}
+
 //Post game handling
 void game_over(){
-    //todo
-    //set char lvl ups to mem if won
-    //title screen if lost
-    menu_option = 255; //go to main menu
+    if (winState == PLAYER_WON){
+        save_game();
+    }
+    else if (winState == PLAYER_LOST){
+        menu_option = 255; //go to main menu
+    }
 }
 
 void play_game(){
@@ -756,28 +773,39 @@ void play_map(uchar num){
 }
 
 //Plays the Story Mode from start to finish
-void start_story(){
-    play_scene(0);
-    play_scene(1);
-    play_map(0);
-    play_scene(2);
-    play_scene(3);
-    play_map(1);
-    play_scene(4);
-    play_scene(5);
-    play_map(2);
-    play_scene(6);
-    play_scene(7);
-    play_map(3);
-    play_scene(8);
-    play_scene(9);
-    play_map(4);
-    play_scene(10);
-    play_scene(11);
-    play_credits();
+void start_story(uchar startFrom){
+    switch(startFrom){
+        case (0):
+            play_scene(0);
+            play_scene(1);
+            play_map(0);
+            play_scene(2);
+        case (1):
+            play_scene(3);
+            play_map(1);
+            play_scene(4);
+        case (2):
+            play_scene(5);
+            play_map(2);
+            play_scene(6);
+        case (3):
+            play_scene(7);
+            play_map(3);
+            play_scene(8);
+        case (4):
+            play_scene(9);
+            play_map(4);
+            play_scene(10);
+            play_scene(11);
+            play_credits();
+    }     
 }
 
 void main() {
+    //An uncompleted campain exists
+    //Do you wish to continue from the last save?
+    //Y/N
+
     if (_is_GBA == GBA_DETECTED){
         printf("GBA detected\n");
     }
@@ -791,7 +819,7 @@ void main() {
                 play_game();
                 break;
             case 1:
-                start_story();
+                start_story(0);
                 break;
             case 2:
                 multiplayer();

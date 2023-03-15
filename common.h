@@ -18,6 +18,12 @@ struct Entity {
     uchar maxHealth;
 };
 
+typedef struct {
+    uchar lastMapCompleted;
+    uchar inventory[10];
+    uchar characterStats[6]; //store stats for 6 different player characters
+} SaveData;
+
 uchar joy = 0;
 uchar joy_impulse = 0;
 
