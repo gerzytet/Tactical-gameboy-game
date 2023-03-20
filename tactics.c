@@ -407,12 +407,62 @@ void update_characters() {
     }
 }
 
-uchar get_north_adj_entity(uchar entity);
+uchar * get_adj_entities(uchar entity){
+    static uchar adj_entities[4] = {255,255,255,255};
+    
+    for (uchar i = 0; i < numCharacters; ++i){
+        if (i != entity && entities[entity].x == entities[i].x && entities[entity].y == entities[i].y +16){
+            adj_entities[0] = i;
+        }
+    }
+    for (uchar i = 0; i < numCharacters; ++i){
+        if (i != entity && entities[entity].x == entities[i].x && entities[entity].y == entities[i].y -16){
+            adj_entities[1] = i;
+        }
+    }
+    for (uchar i = 0; i < numCharacters; ++i){
+        if (i != entity && entities[entity].x == entities[i].x +16 && entities[entity].y == entities[i].y){
+            adj_entities[2] = i;
+        }
+    }
+    for (uchar i = 0; i < numCharacters; ++i){
+        if (i != entity && entities[entity].x == entities[i].x -16 && entities[entity].y == entities[i].y +16){
+            adj_entities[3] = i;
+        }
+    }
+
+    return adj_entities;
+}
+
+uchar * get_adj_interact_spaces(uchar entity){
+    static uchar adj_entities[4] = {255,255,255,255};
+
+    if (entities[entity].x > 0){
+        adj_entities[0] = MAPS[mapIndex][entities[entity].x-1][entities[entity].y];
+    }
+    if (entities[entity].x < WIDTH-1){
+        adj_entities[0] = MAPS[mapIndex][entities[entity].x+1][entities[entity].y];
+    }
+    if (entities[entity].y > 0){
+        adj_entities[0] = MAPS[mapIndex][entities[entity].x-1][entities[entity].y-1];
+    }
+    if (entities[entity].y < HEIGHT-1){
+        adj_entities[0] = MAPS[mapIndex][entities[entity].x][entities[entity].y+1];
+    }
+
+    return adj_entities;
+}
 
 void post_move(uchar selectedCharacter){
+    uchar * adj_entities = get_adj_entities(selectedCharacter);
+    uchar * adj_interact_spaces = get_adj_interact_spaces(selectedCharacter);
 
-    if (get_north_adj_entity(selectedCharacter) != 255){
-        battle(selectedCharacter, get_north_adj_entity(selectedCharacter));
+    for (uchar i = 0; i < 4; ++i){
+        if (adj_entities[i] != 255 || adj_interact_spaces[i] != 255){
+            //flash palette of adj entities/spaces
+            //use dpad to select which or A to skip
+            break;
+        }
     }
 
     //set selectedCharacter palette to greyscale
@@ -617,20 +667,6 @@ void render_health(uchar healthLevel) {
     }
     tilemap[HEALTHBAR_END] = tile;
     tilemap[HEALTHBAR_END | 32] = tile;
-}
-
-/*uchar[] get_adj_entities(){
-    return NULL;
-}*/
-
-uchar get_north_adj_entity(uchar entity){
-
-    for (uchar i = 0; i < numCharacters; ++i){
-        if (i != entity && entities[entity].x == entities[i].x && entities[entity].y == entities[i].y +16){
-            return i;
-        }
-    }
-    return 255;
 }
 
 void save_game(){

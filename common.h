@@ -16,6 +16,7 @@ struct Entity {
     uchar moved;
     uchar health;
     uchar maxHealth;
+    uchar inventory[5];
 };
 
 typedef struct {

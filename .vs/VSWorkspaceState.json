@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\graphics"
   ],
-  "SelectedNode": "\\common.h",
+  "SelectedNode": "\\graphics\\Game_Logo_Map.c",
   "PreviewInSolutionExplorer": false
 }

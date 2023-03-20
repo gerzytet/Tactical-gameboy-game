@@ -69,6 +69,7 @@ void set_text(const uchar *textLine1, const uchar *textLine2 ,uchar charNameInde
     return;
 }
 
+//do later
 void set_char_sprite(uchar charSpriteIndex, uchar position){
     return;
 }
@@ -94,6 +95,7 @@ void setupTextBox(){
     //todo set_bkg_data(0,46, Symbols);
     set_bkg_data(60, 20, Numbers); //numbers. 20 tiles. 10 numbers
 
+    //hide "STORY" text
     for(int i = 0; i < 5; ++i){
         hide_sprite(i);
     }

@@ -5,6 +5,8 @@
 #include "graphics/Menu_BG_Map.c"
 #include "graphics/palletes.c"
 #include "graphics/Letters.h"
+#include "graphics/Game_Logo.c"
+#include "graphics/Game_Logo_Map.c"
 
 uchar menu_option = 0;
 #define MAX_OPTION 4
@@ -74,6 +76,8 @@ void optionscroll(uchar dir){
     update_menu_text();
 }
 
+uchar logoWindowBuffer[2][32];
+
 void mainmenu(){
     cls();
     hide_sprite(5);
@@ -83,6 +87,8 @@ void mainmenu(){
     set_bkg_tiles(10, 11, 10, 4, Menu_BG_Map);
     move_bkg(0,0);
     scroll_bkg(-64, 0);
+    set_bkg_data(19, 111, game_logo_data);
+    set_win_tiles(0, 0, 20, 8, game_logo_map);
 
     VBK_REG = VBK_BANK_0;
 
@@ -91,6 +97,7 @@ void mainmenu(){
     menu_option = MAX_OPTION;
     update_menu_text();
     SHOW_SPRITES;
+    SHOW_WIN;
 
     SHOW_BKG;
     DISPLAY_ON;
