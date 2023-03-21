@@ -96,10 +96,11 @@ void mainmenu(){
     set_sprite_palette(0, 4, colors_objects);
     menu_option = MAX_OPTION;
     update_menu_text();
+    
     SHOW_SPRITES;
-    SHOW_WIN;
-
     SHOW_BKG;
+    SHOW_WIN;
+    
     DISPLAY_ON;
     wait_vbl_done();
 
@@ -122,6 +123,7 @@ void mainmenu(){
             update_menu_text();
         }
         else if (joy_impulse & J_A && menu_option >= 0 && menu_option < MAX_OPTION){
+            HIDE_WIN;
             return;
         }
         else if (joy_impulse & J_RIGHT && menu_option < MAX_OPTION - 1){
