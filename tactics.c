@@ -411,21 +411,24 @@ uchar * get_adj_entities(uchar entity){
     static uchar adj_entities[4] = {255,255,255,255};
     
     //return adjacent spaces in clockwise fashion
+    for (uchar i = 0; i < numCharacters; ++i) {
+        if (i != entity && entities[entity].x == entities[i].x && entities[entity].y == entities[i].y - 16) {
+            adj_entities[0] = i;
+        }
+    }
+
+    for (uchar i = 0; i < numCharacters; ++i) {
+        if (i != entity && entities[entity].x == entities[i].x + 16 && entities[entity].y == entities[i].y) {
+            adj_entities[1] = i;
+        }
+    }
+
     for (uchar i = 0; i < numCharacters; ++i){
         if (i != entity && entities[entity].x == entities[i].x && entities[entity].y == entities[i].y +16){
             adj_entities[2] = i;
         }
     }
-    for (uchar i = 0; i < numCharacters; ++i){
-        if (i != entity && entities[entity].x == entities[i].x && entities[entity].y == entities[i].y -16){
-            adj_entities[0] = i;
-        }
-    }
-    for (uchar i = 0; i < numCharacters; ++i){
-        if (i != entity && entities[entity].x == entities[i].x +16 && entities[entity].y == entities[i].y){
-            adj_entities[1] = i;
-        }
-    }
+       
     for (uchar i = 0; i < numCharacters; ++i){
         if (i != entity && entities[entity].x == entities[i].x -16 && entities[entity].y == entities[i].y){
             adj_entities[3] = i;
@@ -438,17 +441,19 @@ uchar * get_adj_entities(uchar entity){
 uchar * get_adj_interact_spaces(uchar entity){
     static uchar adj_entities[4] = {255,255,255,255};
 
-    if (entities[entity].x > 0){
-        adj_entities[0] = MAPS[mapIndex][entities[entity].x-1][entities[entity].y];
+    //pixel: *16, map: no 16
+
+    if (entities[entity].y > 0 && advantage[MAPS[mapIndex][entities[entity].x][entities[entity].y - 1]] != 255) {
+        adj_entities[0] = MAPS[mapIndex][entities[entity].x][entities[entity].y - 1];
     }
-    if (entities[entity].x < WIDTH-1){
-        adj_entities[0] = MAPS[mapIndex][entities[entity].x+1][entities[entity].y];
+    if (entities[entity].x < WIDTH - 1 && advantage[MAPS[mapIndex][entities[entity].x + 1][entities[entity].y]] != 255) {
+        adj_entities[1] = MAPS[mapIndex][entities[entity].x + 1][entities[entity].y];
     }
-    if (entities[entity].y > 0){
-        adj_entities[0] = MAPS[mapIndex][entities[entity].x-1][entities[entity].y-1];
+    if (entities[entity].y < HEIGHT-1 && advantage[MAPS[mapIndex][entities[entity].x][entities[entity].y+1]] != 255){
+        adj_entities[2] = MAPS[mapIndex][entities[entity].x][entities[entity].y+1];
     }
-    if (entities[entity].y < HEIGHT-1){
-        adj_entities[0] = MAPS[mapIndex][entities[entity].x][entities[entity].y+1];
+    if (entities[entity].x > 0 && advantage[MAPS[mapIndex][entities[entity].x - 1][entities[entity].y]] != 255) {
+        adj_entities[3] = MAPS[mapIndex][entities[entity].x - 1][entities[entity].y];
     }
 
     return adj_entities;
@@ -856,7 +861,7 @@ void start_story(uchar startFrom){
         case (0):
             play_scene(0);
             play_scene(1);
-            play_map(0);
+            play_map(3);
             play_scene(2);
         case (1):
             play_scene(3);

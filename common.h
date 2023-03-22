@@ -69,6 +69,8 @@ struct Entity entities[18];
 
 uchar numCharacters;
 
+const uchar advantage[14] = { 255,255,255,255,255,3,5,255,255,2,255,255,1,1 };
+
 #define HOUSE 0
 #define CAVE 1
 #define CHEST 2
