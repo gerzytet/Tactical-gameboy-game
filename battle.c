@@ -29,19 +29,25 @@ uchar battle(uchar attacker, uchar defender){
     //todo: edit the algorithm
 
     //entities[defender].health -= 5;
-     (entities[defender].health >= 5) ? entities[defender].health -= 5 :
-     entities[defender].health = 0;
+     entities[defender].health = (entities[defender].health >= 5) ? 
+         entities[defender].health - 5 : 
+         0;
         
     if (entities[defender].health <= 0) {        
         //remove from map
-        entities[defender] = nullptr;
+        //entities[defender] = 0;
         return 2;
     }
+
     //defender counters
-    entities[attacker].health -= 8;
+    entities[attacker].health = (entities[attacker].health >= 8) ? 
+        entities[attacker].health - 8 : 
+        0;
+    //entities[attacker].health -= 8;
+
     if (entities[attacker].health <= 0) {              
         //remove from map
-        entities[attacker] = nullptr;
+        //entities[attacker] = 0;
         return 1;
     }
     return 0;
