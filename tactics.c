@@ -1,3 +1,10 @@
+/*
+@file tactics.c
+@author entire team
+@date 3/22/2023
+@brief Main driver code
+*/
+
 #include <gb/gb.h>
 #include <gb/cgb.h>
 #include "common.h"
@@ -472,6 +479,9 @@ void post_move(uchar selectedCharacter){
                 //animation for palettes                
 
                 //need if statement to check whether to battle or interact?
+                /*if (selectedCharacter == ENEMY) {
+                    battle(PLAYER ,selectedCharacter)
+                }*/
 
                 if (joy_impulse & J_A) {
                     goto PALETTESWAP;

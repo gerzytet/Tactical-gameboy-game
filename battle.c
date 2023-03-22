@@ -1,3 +1,10 @@
+/*
+@file battle.c
+@author entire team
+@date 3/22/2023
+@brief Battle mechanics
+*/
+
 //todo
 
 //intro anim
@@ -18,6 +25,7 @@ void battleAnimation()
 
 //Create base functions and logic for battling. Pokemon battle style
 uchar battle(uchar attacker, uchar defender){
+    cls();
     if (attacker == defender || entities[attacker].party == entities[defender].party){
         return 0;
     }

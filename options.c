@@ -1,3 +1,10 @@
+/*
+@file options.c
+@author entire team
+@date 3/22/2023
+@brief Options menu
+*/
+
 #include "common.h"
 #include "gb/gb.h"
 #include "gb/cgb.h"

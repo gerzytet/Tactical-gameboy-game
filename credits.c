@@ -1,3 +1,10 @@
+/*
+@file credits.c
+@author entire team
+@date 3/22/2023
+@brief Placeholder, but will be the end credits
+*/
+
 #include "common.h"
 #include "gb/gb.h"
 #include "gb/cgb.h"

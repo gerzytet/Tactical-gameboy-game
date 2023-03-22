@@ -1,3 +1,10 @@
+/*
+@file pathfinding.c
+@author entire team
+@date 3/22/2023
+@brief Pathfinding algorithm for players and NPCs
+*/
+
 #include "common.h"
 #include "leveldata.h"
 
