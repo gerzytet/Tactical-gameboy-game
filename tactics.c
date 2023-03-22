@@ -410,23 +410,24 @@ void update_characters() {
 uchar * get_adj_entities(uchar entity){
     static uchar adj_entities[4] = {255,255,255,255};
     
+    //return adjacent spaces in clockwise fashion
     for (uchar i = 0; i < numCharacters; ++i){
         if (i != entity && entities[entity].x == entities[i].x && entities[entity].y == entities[i].y +16){
-            adj_entities[0] = i;
-        }
-    }
-    for (uchar i = 0; i < numCharacters; ++i){
-        if (i != entity && entities[entity].x == entities[i].x && entities[entity].y == entities[i].y -16){
-            adj_entities[1] = i;
-        }
-    }
-    for (uchar i = 0; i < numCharacters; ++i){
-        if (i != entity && entities[entity].x == entities[i].x +16 && entities[entity].y == entities[i].y){
             adj_entities[2] = i;
         }
     }
     for (uchar i = 0; i < numCharacters; ++i){
-        if (i != entity && entities[entity].x == entities[i].x -16 && entities[entity].y == entities[i].y +16){
+        if (i != entity && entities[entity].x == entities[i].x && entities[entity].y == entities[i].y -16){
+            adj_entities[0] = i;
+        }
+    }
+    for (uchar i = 0; i < numCharacters; ++i){
+        if (i != entity && entities[entity].x == entities[i].x +16 && entities[entity].y == entities[i].y){
+            adj_entities[1] = i;
+        }
+    }
+    for (uchar i = 0; i < numCharacters; ++i){
+        if (i != entity && entities[entity].x == entities[i].x -16 && entities[entity].y == entities[i].y){
             adj_entities[3] = i;
         }
     }
@@ -458,15 +459,56 @@ void post_move(uchar selectedCharacter){
     uchar * adj_interact_spaces = get_adj_interact_spaces(selectedCharacter);
 
     for (uchar i = 0; i < 4; ++i){
-        if (adj_entities[i] != 255 || adj_interact_spaces[i] != 255){
+        if (adj_entities[i] != 255 /*|| adj_interact_spaces[i] != 255*/){
             //flash palette of adj entities/spaces
             //use dpad to select which or A to skip
+
+            while (1) {
+                //DURING FRAME:
+                joy_impulse = joy;
+                joy = joypad();
+                joy_impulse = ~joy_impulse & joy;
+
+                //animation for palettes                
+
+                //need if statement to check whether to battle or interact?
+
+                if (joy_impulse & J_A) {
+                    goto PALETTESWAP;
+                }
+                else if (joy_impulse & J_UP) {                                       
+                    if (adj_entities[0] != 255) {                        
+                        battle(selectedCharacter, adj_entities[0]);
+                        goto PALETTESWAP;
+                    }
+                }
+                else if (joy_impulse & J_RIGHT) {
+                    if (adj_entities[1] != 255) {
+                        battle(selectedCharacter, adj_entities[1]);
+                        goto PALETTESWAP;
+                    }
+                }
+                else if (joy_impulse & J_DOWN) {
+                    if (adj_entities[2] != 255) {
+                        battle(selectedCharacter, adj_entities[2]);
+                        goto PALETTESWAP;
+                    }
+                }
+                else if (joy_impulse & J_LEFT) {
+                    if (adj_entities[3] != 255) {                        
+                        battle(selectedCharacter, adj_entities[3]);
+                        goto PALETTESWAP;
+                    }
+                }
+                wait_vbl_done();
+            }
+
             break;
         }
     }
 
     //set selectedCharacter palette to greyscale
-    paletteswap(selectedCharacter, 0);
+    PALETTESWAP:paletteswap(selectedCharacter, 0);
 
     //if any characters have not yet moved, return
     for (uchar i = 0; i < numCharacters; ++i){
