@@ -363,7 +363,7 @@ void setup_characters() {
     entities[1].maxHealth = 20;
     display_bigsprite(CHARACTER_SPRITE_SLOT_START + 1, CHARACTER_BIGTILE_START + MARIE * 2);
 
-    entities[2].x = 3 * 16;
+    entities[2].x = 3 * 16; //16, 16
     entities[2].y = 6 * 16;
     entities[2].sprite = FRED * 2;
     entities[2].name = "FRED  ";
@@ -483,7 +483,7 @@ void post_move(uchar selectedCharacter){
                 }
                 else if (joy_impulse & J_UP) {                                       
                     if (adj_entities[0] != 255) {                        
-                        battle(selectedCharacter, adj_entities[0]);
+                        battle(selectedCharacter, adj_entities[0]);                        
                         goto PALETTESWAP;
                     }
                 }
