@@ -34,6 +34,12 @@ uchar determineAdvantage() {
 
 //Create base functions and logic for battling. Pokemon battle style
 /*
+    fire emblem confirm battle
+    cue movie with sequence of random moves bewteen characters
+*/
+
+/* 
+Battle Layout:
 characters
 box with health and character names
 arrows
@@ -47,10 +53,11 @@ uchar battle(uchar nAttacker, uchar nDefender) {
         return 0;
     }
 
-    //cls();
+    cls();
     HIDE_SPRITES;
     HIDE_BKG;
     HIDE_WIN;
+    hide_sprites_range();
 
     //start battle scene
     //battleIntro();    
@@ -59,12 +66,7 @@ uchar battle(uchar nAttacker, uchar nDefender) {
     //display arrow in top left
         
     //todo: fix to not go negative        
-    //todo: edit the algorithm    
-
-    /*
-    fire emblem confirm battle
-    cue movie with sequence of random moves bewteen characters
-    */
+    //todo: edit the algorithm        
 
     //attacker attacks
      entities[defender].health = (entities[defender].health >= 5) ? 
@@ -81,8 +83,6 @@ uchar battle(uchar nAttacker, uchar nDefender) {
     entities[attacker].health = (entities[attacker].health >= 8) ? 
         entities[attacker].health - 8 : 
         0;
-
-
     //entities[attacker].health -= 8;
 
     if (entities[attacker].health <= 0) {              
@@ -90,6 +90,10 @@ uchar battle(uchar nAttacker, uchar nDefender) {
         return 1;
     }
     return 0;
+
+    while (1) {
+        wait_vbl_done();
+    }
 
     //battleOutro();
 

@@ -476,7 +476,7 @@ void post_move(uchar selectedCharacter){
 
                 //animation for palettes                
 
-                //need if statement to check whether to battle or interact?
+                //if statement to check whether to battle or interact?
 
                 if (joy_impulse & J_A) {
                     goto PALETTESWAP;
