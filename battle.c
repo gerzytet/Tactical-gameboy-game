@@ -41,6 +41,11 @@ uchar battle(uchar nAttacker, uchar nDefender) {
         return 0;
     }
 
+    //cls();
+    HIDE_SPRITES;
+    HIDE_BKG;
+    HIDE_WIN;
+
     //start battle scene
     //battleIntro();    
 
@@ -62,8 +67,7 @@ uchar battle(uchar nAttacker, uchar nDefender) {
      //entities[defender].health -= 5;
 
     if (entities[defender].health <= 0) {        
-        //remove from map
-        //entities[defender] = 0;
+        //remove from map        
         return 2;
     }    
 
@@ -71,12 +75,12 @@ uchar battle(uchar nAttacker, uchar nDefender) {
     entities[attacker].health = (entities[attacker].health >= 8) ? 
         entities[attacker].health - 8 : 
         0;
+
+
     //entities[attacker].health -= 8;
 
     if (entities[attacker].health <= 0) {              
-        //remove from map
-        //entities[attacker] = 0;
-        //entities[attacker].moved = 
+        //remove from map        
         return 1;
     }
     return 0;
