@@ -33,6 +33,12 @@ uchar determineAdvantage() {
 }
 
 //Create base functions and logic for battling. Pokemon battle style
+/*
+characters
+box with health and character names
+arrows
+*/
+
 uchar battle(uchar nAttacker, uchar nDefender) {
     attacker = nAttacker;
     defender = nDefender;
