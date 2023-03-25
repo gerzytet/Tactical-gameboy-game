@@ -614,7 +614,11 @@ void map_vblank_routine() {
 }
 
 void menu_vblank_routine(){
-
+    //LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJOFF | LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16;
+    SHOW_WIN;
+    while (LY_REG != 8 * 8) ;
+    HIDE_WIN;
+    //LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_WINOFF | LCDCF_OBJ16;
 }
 
 void vblank_routine(){
