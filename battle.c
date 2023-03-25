@@ -10,6 +10,10 @@
 #include "common.h"
 #include "leveldata.h"
 #include "tile_definitions.h"
+#include "graphics/Battle_Arrow.h"
+#include "graphics/Battle_Arrow.c"
+
+#define TILEMAP_START 0x9800
 
 //todo
 
@@ -75,12 +79,14 @@ uchar battle(uchar nAttacker, uchar nDefender) {
         return 0;
     }
 
-    //cls();
-    HIDE_SPRITES;
-    HIDE_BKG;
-    HIDE_WIN;
-    set_bkg_tiles(0, 0, 20, 18, blank_tile);
-    set_win_tiles(0, 0, 20, 18, blank_tile);
+    LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJOFF | LCDCF_WIN9C00 | LCDCF_WINOFF | LCDCF_OBJ8;
+
+    vmemset((uchar *)TILEMAP_START, 128, 32*32);    
+
+    // cls();
+    // HIDE_SPRITES;
+    // HIDE_BKG;
+    // HIDE_WIN;    
 
     //start battle scene
     //battleIntro();    
@@ -96,11 +102,12 @@ uchar battle(uchar nAttacker, uchar nDefender) {
     cue movie with sequence of random moves bewteen characters
     */
 
+   // get attack drawing from patrick   
+
    uchar result = 0;
     //attacker attacks
      entities[defender].health = (entities[defender].health >= 5) ? 
-         entities[defender].health - 5 : 
-         0;
+         entities[defender].health - 5 : 0;
      //entities[defender].health -= 5;
 
     if (entities[defender].health <= 0) {        
@@ -118,37 +125,8 @@ uchar battle(uchar nAttacker, uchar nDefender) {
     if (entities[attacker].health <= 0) {              
         //remove from map        
         result = 1;
-    }
+    }            
     
-    //draw the map again
-    //might want to make this its own f'n
-    /*wait_vbl_done();
-    SCY_REG = 0;
-    SCX_REG = 0;
-    display_off();
-    LCDC_REG = 0x00;
-    init_bigsprites();
-
-    vmemset((uchar *)WIN_TILEMAP_START, SPACE_LETTER, 32*32);
-
-    setup_background_palletes();
-    setup_background();
-
-    setup_characters();
-    setup_passable_matrix();
-    setup_gui_textbox();
-    change_text("      ");
-
-    set_sprite_palette(0, 4, colors_objects);
-    set_sprite_prop(0, 0);
-    set_sprite_data(0, 40, Sprites);
-    display_bigsprite(0, 0);
-
-    add_VBL(vblank_routine);
-    IE_REG = IEF_VBLANK;
-    enable_interrupts();
-    //finish draw the map again
-    */
     return result;
 
     //battleOutro();

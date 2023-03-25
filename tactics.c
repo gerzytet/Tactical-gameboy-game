@@ -80,7 +80,7 @@ void start_story(uchar startFrom){
         case (0):
             play_scene(0);
             play_scene(1);
-            play_map(2);
+            play_map(4);
             play_scene(2);
         case (1):
             play_scene(3);

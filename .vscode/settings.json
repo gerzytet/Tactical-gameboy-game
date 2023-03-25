@@ -2,6 +2,7 @@
     "files.associations": {
         "common.h": "c",
         "2x2tiles.h": "c",
-        "cgb.h": "c"
+        "cgb.h": "c",
+        "battle_arrow_map.h": "c"
     }
 }
