@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "common.h": "c"
+        "common.h": "c",
+        "2x2tiles.h": "c",
+        "cgb.h": "c"
     }
 }

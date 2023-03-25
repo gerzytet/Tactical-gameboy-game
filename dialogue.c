@@ -5,6 +5,7 @@
 #include "graphics/TextBox.c"
 #include "graphics/TextBoxMap.h"
 #include "graphics/TextBoxMap.c"
+#include "graphics/Numbers.h"
 #include "graphics/Symbols.h"
 #include "graphics/Symbols.c"
 

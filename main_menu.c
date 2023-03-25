@@ -30,13 +30,14 @@ void change_menu_text(const uchar *text, uchar length){
     if (text == NULL) {
         return;
     }
-    set_sprite_data(0, 46, Letters); //46 tiles, 23 letters
 
     for (uchar i = 0; i < MAX_LETTERS; ++i){
         uchar tile = text[i]-'A';
-        if (i >= length || text[i] != ' ') {
+        if (i < length && text[i] != ' ') {
             set_sprite_tile(i, letter_table[tile]);
             move_sprite(i, ((i+11)*8-length*4), (17)*8);
+        } else {
+            move_sprite(i, 0, 0);
         }
     }
 }
@@ -78,6 +79,14 @@ void optionscroll(uchar dir){
 
 uchar logoWindowBuffer[2][32];
 
+void menu_vblank_routine(){
+    //LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJOFF | LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16;
+    SHOW_WIN;
+    while (LY_REG != 8 * 8) ;
+    HIDE_WIN;
+    //LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_WINOFF | LCDCF_OBJ16;
+}
+
 void mainmenu(){
     game_mode = MODE_MAIN_MENU;
     hide_sprite(5);
@@ -89,6 +98,7 @@ void mainmenu(){
     scroll_bkg(-64, 0);
     set_bkg_data(19, 111, game_logo_data);
     set_win_tiles(0, 0, 20, 8, game_logo_map);
+    set_sprite_data(0, 46, Letters); //46 tiles, 23 letters
 
     VBK_REG = VBK_BANK_0;
 
