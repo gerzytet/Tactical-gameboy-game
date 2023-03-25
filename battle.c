@@ -1,10 +1,16 @@
+#include <gb/gb.h>
+#include <gb/cgb.h>
+#include "common.h"
+
 //todo
 
 uchar attacker = 0;
 uchar defender = 0;
 
+const unsigned char blank_tile[1] = {0x00};
+
 //intro anim
-void battleIntro() {
+/*void battleIntro() {
 
 }
 //outro anim
@@ -14,10 +20,9 @@ void battleOutro() {
 //battle anim
 void battleAnimation() {
 
-}
+}*/
 
 uchar determineAdvantage() {
-    
     //advantage type of space
     uchar attackerPriority = advantage[MAPS[mapIndex][entities[attacker].x*16][entities[attacker].y*16]];
     uchar defenderPriority = advantage[MAPS[mapIndex][entities[defender].x*16][entities[defender].y*16]];
@@ -30,6 +35,14 @@ uchar determineAdvantage() {
     else {
         return 3;
     }       
+}
+
+void set_attacker_image(uchar index){
+    return;
+}
+
+void set_defender_image(uchar index){
+    return;
 }
 
 //Create base functions and logic for battling. Pokemon battle style
@@ -51,20 +64,36 @@ uchar battle(uchar nAttacker, uchar nDefender) {
     HIDE_SPRITES;
     HIDE_BKG;
     HIDE_WIN;
+    set_bkg_tiles(0, 0, 20, 18, blank_tile);
+    set_win_tiles(0, 0, 20, 18, blank_tile);
 
-    //start battle scene
-    //battleIntro();    
+    for (UINT8 i = 0; i < 40; i++) {
+        move_sprite(i, 0, 0);
+    }
 
-    //function to calculate advantage with uchar  
-    //display arrow in top left
-        
-    //todo: fix to not go negative        
-    //todo: edit the algorithm    
+
+
+    set_attacker_image(attacker);
+    set_defender_image(defender);
+
+    //draw Patrick's Battle Arrow
+    //set_bkg_data..
+    /*if (determineAdvantage() > 5){
+        //draw arrow
+        //set_bkg_tiles(0,);
+    }*/
+    
+    //draw Patrick's funny box
+    //set_bkg_data..
+    //set_bkg_tiles..
+    
 
     /*
     fire emblem confirm battle
     cue movie with sequence of random moves bewteen characters
     */
+
+    uchar result = 0;
 
     //attacker attacks
      entities[defender].health = (entities[defender].health >= 5) ? 
@@ -74,22 +103,51 @@ uchar battle(uchar nAttacker, uchar nDefender) {
 
     if (entities[defender].health <= 0) {        
         //remove from map        
-        return 2;
+        result = 2;
     }    
 
     //defender counters
     entities[attacker].health = (entities[attacker].health >= 8) ? 
-        entities[attacker].health - 8 : 
-        0;
+        entities[attacker].health - 8 : 0;
 
 
     //entities[attacker].health -= 8;
 
     if (entities[attacker].health <= 0) {              
         //remove from map        
-        return 1;
+        result = 1;
     }
-    return 0;
+    
+    //draw the map again
+    //might want to make this its own f'n
+    /*wait_vbl_done();
+    SCY_REG = 0;
+    SCX_REG = 0;
+    display_off();
+    LCDC_REG = 0x00;
+    init_bigsprites();
+
+    vmemset((uchar *)WIN_TILEMAP_START, SPACE_LETTER, 32*32);
+
+    setup_background_palletes();
+    setup_background();
+
+    setup_characters();
+    setup_passable_matrix();
+    setup_gui_textbox();
+    change_text("      ");
+
+    set_sprite_palette(0, 4, colors_objects);
+    set_sprite_prop(0, 0);
+    set_sprite_data(0, 40, Sprites);
+    display_bigsprite(0, 0);
+
+    add_VBL(vblank_routine);
+    IE_REG = IEF_VBLANK;
+    enable_interrupts();
+    //finish draw the map again
+    */
+    return result;
 
     //battleOutro();
 

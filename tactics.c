@@ -596,7 +596,7 @@ inline void render_second_cursor() {
     move_bigsprite(1, secondCursorX * 16 - scx + 8, secondCursorY * 16 - scy + 16);
 }
 
-void vblank_routine() {
+void map_vblank_routine() {
     SCX_REG = scx;
     SCY_REG = scy;
 
@@ -611,6 +611,22 @@ void vblank_routine() {
     while (LY_REG != 15) ;
     set_bkg_palette_entry(0, 0, RGB_WHITE);
     LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_WINOFF | LCDCF_OBJ16;
+}
+
+void menu_vblank_routine(){
+
+}
+
+void vblank_routine(){
+    switch(game_mode){
+        case(MODE_MAP):
+            map_vblank_routine();
+            break;
+        case(MODE_MAIN_MENU):
+            menu_vblank_routine();
+            break;
+    }
+    return;
 }
 
 void check_confirm_move() {
@@ -742,6 +758,7 @@ void game_over(){
 }
 
 void play_game(){
+    game_mode = MODE_MAP;
     wait_vbl_done();
     SCY_REG = 0;
     SCX_REG = 0;
@@ -763,10 +780,6 @@ void play_game(){
     set_sprite_prop(0, 0);
     set_sprite_data(0, 40, Sprites);
     display_bigsprite(0, 0);
-
-    add_VBL(vblank_routine);
-    IE_REG = IEF_VBLANK;
-    enable_interrupts();
 
     add_turn(); 
     LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_OBJ16;
@@ -823,6 +836,7 @@ void play_game(){
 
 //For *testing* GB linking
 void multiplayer(){
+    game_mode = MODE_MULTIPLAYER;
     set_bkg_palette(0, 1, colors);
 	move_bkg(0,0);
 
@@ -987,9 +1001,13 @@ void start_story(uchar startFrom){
 }
 
 void main() {
-    //An uncompleted campain exists
+    //An uncompleted campaign exists
     //Do you wish to continue from the last save?
     //Y/N
+
+    add_VBL(vblank_routine);
+    IE_REG = IEF_VBLANK;
+    enable_interrupts();
 
     if (_is_GBA == GBA_DETECTED){
         printf("GBA detected\n");

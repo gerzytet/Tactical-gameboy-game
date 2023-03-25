@@ -79,7 +79,7 @@ void optionscroll(uchar dir){
 uchar logoWindowBuffer[2][32];
 
 void mainmenu(){
-    cls();
+    game_mode = MODE_MAIN_MENU;
     hide_sprite(5);
     set_bkg_palette(0, 1, colors);
     set_bkg_data(0, 19, Menu_BG);
@@ -107,13 +107,16 @@ void mainmenu(){
     uchar anim_frame = 0;
     uchar anim_delay = 0;
     while (1) {
+        
+        
+    
         //DURING FRAME:
         joy_impulse = joy;
         joy = joypad();
         joy_impulse = ~joy_impulse & joy;
         
         if (anim_delay == 0){
-            menu_text_anim(++anim_frame%8);    
+            menu_text_anim(++anim_frame%8);   
         }
         ++anim_delay;
         anim_delay %=8;
@@ -122,7 +125,7 @@ void mainmenu(){
             menu_option = 0;
             update_menu_text();
         }
-        else if (joy_impulse & J_A && menu_option >= 0 && menu_option < MAX_OPTION){
+        else if (joy_impulse & J_A && menu_option < MAX_OPTION){
             HIDE_WIN;
             return;
         }

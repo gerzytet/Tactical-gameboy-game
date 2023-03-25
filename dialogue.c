@@ -167,6 +167,7 @@ void setupTextBox(){
 
 //Initialize the dialogue scene
 void play_scene(uchar index){
+    game_mode = MODE_DIALOGUE;
     dialogueSceneIndex = index;
     //cls();
     set_bkg_palette(0, 1, colors);
