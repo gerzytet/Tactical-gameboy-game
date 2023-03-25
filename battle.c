@@ -36,13 +36,11 @@ uchar determineAdvantage() {
 /*
     fire emblem confirm battle
     cue movie with sequence of random moves bewteen characters
-*/
 
-/* 
-Battle Layout:
-characters
-box with health and character names
-arrows
+    Battle Layout:
+    characters
+    box with health and character names
+    arrows
 */
 
 uchar battle(uchar nAttacker, uchar nDefender) {
