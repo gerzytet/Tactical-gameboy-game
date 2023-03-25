@@ -2,6 +2,7 @@
 #include <gb/cgb.h>
 #include "common.h"
 #include "leveldata.h"
+#include "tile_definitions.h"
 
 //todo
 
@@ -25,8 +26,8 @@ void battleAnimation() {
 
 uchar determineAdvantage() {
     //advantage type of space
-    uchar attackerPriority = advantage[MAPS[mapIndex][entities[attacker].x*16][entities[attacker].y*16]];
-    uchar defenderPriority = advantage[MAPS[mapIndex][entities[defender].x*16][entities[defender].y*16]];
+    uchar attackerPriority = advantageTable[MAPS[mapIndex][entities[attacker].x*16][entities[attacker].y*16]];
+    uchar defenderPriority = advantageTable[MAPS[mapIndex][entities[defender].x*16][entities[defender].y*16]];
 
     //0-10 advantage    
 

@@ -24,23 +24,10 @@
 #define CURSOR1 13
 #define CURSOR2 14
 
-const uchar paletteTable[NUM_TILES] = {
-    4, 3, 2, 1,
-    3, 1, 3, 0,
-    0, 0, 0, 0,
-    0, 0
-};
-
 #define TILEMAP_START 0x9800
 #define WIN_TILEMAP_START 0x9C00
 
 //fixed width: 6 characters
-const uchar* displayTexts[NUM_TILES] = {
-    "HOUSE ", "CAVE  ", "CHEST ", "TREE  ",
-    "FENCE ", "GRASS ", "PATH  ", "WALL  ",
-    "WATER ", "BRIDGE", "ROCK  ", "FOREST",
-    "START ", "END   "
-};
 
 #define NAME_LENGTH 6
 
@@ -443,16 +430,16 @@ uchar * get_adj_interact_spaces(uchar entity){
 
     //pixel: *16, map: no 16
 
-    if (entities[entity].y > 0 && advantage[MAPS[mapIndex][entities[entity].x][entities[entity].y - 1]] != 255) {
+    if (entities[entity].y > 0 && advantageTable[MAPS[mapIndex][entities[entity].x][entities[entity].y - 1]] != 255) {
         adj_entities[0] = MAPS[mapIndex][entities[entity].x][entities[entity].y - 1];
     }
-    if (entities[entity].x < WIDTH - 1 && advantage[MAPS[mapIndex][entities[entity].x + 1][entities[entity].y]] != 255) {
+    if (entities[entity].x < WIDTH - 1 && advantageTable[MAPS[mapIndex][entities[entity].x + 1][entities[entity].y]] != 255) {
         adj_entities[1] = MAPS[mapIndex][entities[entity].x + 1][entities[entity].y];
     }
-    if (entities[entity].y < HEIGHT-1 && advantage[MAPS[mapIndex][entities[entity].x][entities[entity].y+1]] != 255){
+    if (entities[entity].y < HEIGHT-1 && advantageTable[MAPS[mapIndex][entities[entity].x][entities[entity].y+1]] != 255){
         adj_entities[2] = MAPS[mapIndex][entities[entity].x][entities[entity].y+1];
     }
-    if (entities[entity].x > 0 && advantage[MAPS[mapIndex][entities[entity].x - 1][entities[entity].y]] != 255) {
+    if (entities[entity].x > 0 && advantageTable[MAPS[mapIndex][entities[entity].x - 1][entities[entity].y]] != 255) {
         adj_entities[3] = MAPS[mapIndex][entities[entity].x - 1][entities[entity].y];
     }
 
