@@ -41,6 +41,7 @@ void set_text(const uchar *textLine1, const uchar *textLine2 ,uchar charNameInde
     }
     volatile uchar *tilemap = (uchar *)TILEMAP_START;
     static uchar tile;
+    charNameIndex = charNameIndex;
     
     //todo: character name
     //set name dialogueCharNames[charNameIndex]
@@ -124,6 +125,8 @@ void set_text(const uchar *textLine1, const uchar *textLine2 ,uchar charNameInde
 
 //do later
 void set_char_sprite(uchar charSpriteIndex, uchar position){
+    position = position;
+    charSpriteIndex = charSpriteIndex;
     return;
 }
 

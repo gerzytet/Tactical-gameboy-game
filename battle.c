@@ -1,6 +1,7 @@
 #include <gb/gb.h>
 #include <gb/cgb.h>
 #include "common.h"
+#include "leveldata.h"
 
 //todo
 
@@ -38,10 +39,12 @@ uchar determineAdvantage() {
 }
 
 void set_attacker_image(uchar index){
+    index = index;
     return;
 }
 
 void set_defender_image(uchar index){
+    index = index;
     return;
 }
 
@@ -72,7 +75,6 @@ uchar battle(uchar nAttacker, uchar nDefender) {
     HIDE_WIN;
     set_bkg_tiles(0, 0, 20, 18, blank_tile);
     set_win_tiles(0, 0, 20, 18, blank_tile);
-    hide_sprites_range();
 
     //start battle scene
     //battleIntro();    
@@ -88,6 +90,7 @@ uchar battle(uchar nAttacker, uchar nDefender) {
     cue movie with sequence of random moves bewteen characters
     */
 
+   uchar result = 0;
     //attacker attacks
      entities[defender].health = (entities[defender].health >= 5) ? 
          entities[defender].health - 5 : 
@@ -141,10 +144,6 @@ uchar battle(uchar nAttacker, uchar nDefender) {
     //finish draw the map again
     */
     return result;
-
-    while (1) {
-        wait_vbl_done();
-    }
 
     //battleOutro();
 

@@ -758,31 +758,32 @@ void game_over(){
 }
 
 void play_game(){
-    game_mode = MODE_MAP;
-    wait_vbl_done();
-    SCY_REG = 0;
-    SCX_REG = 0;
-    display_off();
+    __asm__("halt");
     LCDC_REG = 0x00;
-    init_bigsprites();
+    game_mode = MODE_MAP;
+    CRITICAL {
+        SCY_REG = 0;
+        SCX_REG = 0;
+        init_bigsprites();
 
-    vmemset((uchar *)WIN_TILEMAP_START, SPACE_LETTER, 32*32);
+        vmemset((uchar *)WIN_TILEMAP_START, SPACE_LETTER, 32*32);
 
-    setup_background_palletes();
-    setup_background();
+        setup_background_palletes();
+        setup_background();
 
-    setup_characters();
-    setup_passable_matrix();
-    setup_gui_textbox();
-    change_text("      ");
+        setup_characters();
+        setup_passable_matrix();
+        setup_gui_textbox();
+        change_text("      ");
 
-    set_sprite_palette(0, 4, colors_objects);
-    set_sprite_prop(0, 0);
-    set_sprite_data(0, 40, Sprites);
-    display_bigsprite(0, 0);
+        set_sprite_palette(0, 4, colors_objects);
+        set_sprite_prop(0, 0);
+        set_sprite_data(0, 40, Sprites);
+        display_bigsprite(0, 0);
 
-    add_turn(); 
-    LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_OBJ16;
+        add_turn(); 
+        LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_OBJ16;
+    }
     while (1) {
         //DURING FRAME:
         joy_impulse = joy;
