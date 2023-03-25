@@ -133,13 +133,6 @@ void mainmenu(){
     uchar anim_delay = 0;
     while (1) {
         
-        
-    
-        //DURING FRAME:
-        joy_impulse = joy;
-        joy = joypad();
-        joy_impulse = ~joy_impulse & joy;
-        
         if (anim_delay == 0){
             menu_text_anim();   
         }

@@ -36,6 +36,9 @@ void vblank_routine(){
             menu_vblank_routine();
             break;
     }
+    joy_impulse = joy;
+    joy = joypad();
+    joy_impulse = ~joy_impulse & joy;
     return;
 }
 

@@ -15,11 +15,6 @@ void play_credits(){
 	set_bkg_palette(0, 1, colors);
 	move_bkg(0,0);
 	
-	//DURING FRAME:
-    joy_impulse = joy;
-    joy = joypad();
-    joy_impulse = ~joy_impulse & joy;
-
 	printf("Thank you for playing our game!\nHope you enjoyed it!");
 
     while(1){

@@ -14,11 +14,6 @@ void multiplayer(){
     printf("Connect a second console before you continue!\nPress A for SEND MODE, press B for RECEIVE MODE\n");
     uchar mode = 0;
     while (mode == 0){
-        //DURING FRAME:
-		joy_impulse = joy;
-		joy = joypad();
-		joy_impulse = ~joy_impulse & joy;
-
         if (joy_impulse & J_A) {
             mode = 1;
             printf("Player 1 selected\n");
@@ -32,12 +27,7 @@ void multiplayer(){
 
     printf("Searching for second console\n");
 
-    while(mode == 1){
-		//DURING FRAME:
-		joy_impulse = joy;
-		joy = joypad();
-		joy_impulse = ~joy_impulse & joy;
-		
+    while(mode == 1){		
         // Check which button was pressed
         if (joy_impulse & J_A) {
             printf("A\n");

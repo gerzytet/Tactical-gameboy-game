@@ -19,12 +19,7 @@ void options_menu(){
 
 	printf("Options\nThere are no current Options\nPress B to Return");
 
-	while(1){
-		//DURING FRAME:
-		joy_impulse = joy;
-		joy = joypad();
-		joy_impulse = ~joy_impulse & joy;
-		
+	while(1){		
 		if (joy_impulse & J_B){
 			menu_option = 255;
 			return;

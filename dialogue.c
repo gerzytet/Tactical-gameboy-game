@@ -190,12 +190,7 @@ void play_scene(uchar index){
     //intro anim
 
     advance_text();
-    while (dialogueIndex <= sceneTextLength[index]){
-        //DURING FRAME:
-		joy_impulse = joy;
-		joy = joypad();
-		joy_impulse = ~joy_impulse & joy;
-		
+    while (dialogueIndex <= sceneTextLength[index]){		
         if (joy_impulse & J_A){
             advance_text();
         }

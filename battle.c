@@ -81,7 +81,7 @@ uchar battle(uchar nAttacker, uchar nDefender) {
 
     LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJOFF | LCDCF_WIN9C00 | LCDCF_WINOFF | LCDCF_OBJ8;
 
-    vmemset((uchar *)TILEMAP_START, 128, 32*32);    
+    vmemset((uchar *)TILEMAP_START, 128, 32*32);
 
     // cls();
     // HIDE_SPRITES;
@@ -125,9 +125,15 @@ uchar battle(uchar nAttacker, uchar nDefender) {
     if (entities[attacker].health <= 0) {              
         //remove from map        
         result = 1;
-    }            
+    }
+
+    while (1) {
+        if (joy_impulse & J_A) {
+            return result;
+        }
+    }
     
-    return result;
+    
 
     //battleOutro();
 

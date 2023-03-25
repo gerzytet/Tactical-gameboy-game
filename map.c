@@ -284,47 +284,38 @@ void post_move(uchar selectedCharacter){
             //flash palette of adj entities/spaces
             //use dpad to select which or A to skip
 
-            while (1) {
-                //DURING FRAME:
-                joy_impulse = joy;
-                joy = joypad();
-                joy_impulse = ~joy_impulse & joy;
+            //DURING FRAME:
 
-                //animation for palettes                
+            //animation for palettes                
 
-                //if statement to check whether to battle or interact?
+            //if statement to check whether to battle or interact?
 
-                if (joy_impulse & J_A) {
-                    goto PALETTESWAP;
-                }
-                else if (joy_impulse & J_UP) {                                       
-                    if (adj_entities[0] != 255) {                        
-                        battle(selectedCharacter, adj_entities[0]);                        
-                        goto PALETTESWAP;
-                    }
-                }
-                else if (joy_impulse & J_RIGHT) {
-                    if (adj_entities[1] != 255) {
-                        battle(selectedCharacter, adj_entities[1]);
-                        goto PALETTESWAP;
-                    }
-                }
-                else if (joy_impulse & J_DOWN) {
-                    if (adj_entities[2] != 255) {
-                        battle(selectedCharacter, adj_entities[2]);
-                        goto PALETTESWAP;
-                    }
-                }
-                else if (joy_impulse & J_LEFT) {
-                    if (adj_entities[3] != 255) {                        
-                        battle(selectedCharacter, adj_entities[3]);
-                        goto PALETTESWAP;
-                    }
-                }
-                wait_vbl_done();
-            }
+            battle(selectedCharacter, 255);
 
-            break;
+            // if (joy_impulse & J_UP) {                                       
+            //     if (adj_entities[0] != 255) {                        
+            //         battle(selectedCharacter, adj_entities[0]);                        
+            //         goto PALETTESWAP;
+            //     }
+            // }
+            // else if (joy_impulse & J_RIGHT) {
+            //     if (adj_entities[1] != 255) {
+            //         battle(selectedCharacter, adj_entities[1]);
+            //         goto PALETTESWAP;
+            //     }
+            // }
+            // else if (joy_impulse & J_DOWN) {
+            //     if (adj_entities[2] != 255) {
+            //         battle(selectedCharacter, adj_entities[2]);
+            //         goto PALETTESWAP;
+            //     }
+            // }
+            // else if (joy_impulse & J_LEFT) {
+            //     if (adj_entities[3] != 255) {                        
+            //         battle(selectedCharacter, adj_entities[3]);
+            //         goto PALETTESWAP;
+            //     }
+            // }
         }
     }
 
@@ -399,11 +390,6 @@ void play_game(){
         LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_OBJ16;
     }
     while (1) {
-        //DURING FRAME:
-        joy_impulse = joy;
-        joy = joypad();
-        joy_impulse = ~joy_impulse & joy;
-
         if (state == STATE_LOOK || state == STATE_CHOOSE_MOVE) {
             check_cursor_movement();
         }
