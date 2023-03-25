@@ -19,7 +19,7 @@
 #define display_bigsprite(slot, tile)\
     bigsprites[slot].sprite = (tile);
 
-uchar bigspriteCounts[10];
+uchar bigspriteCounts[16];
 
 struct Bigsprite {
     uchar y;

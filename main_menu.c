@@ -12,16 +12,23 @@ uchar menu_option = 0;
 #define MAX_OPTION 4
 #define MAX_LETTERS 12
 
+uchar menu_text_baseline = (17)*8;
+uchar menu_text_length;
+const uchar *menu_text;
+
+const int8_t menu_text_position_table[8] = {0, -1, -2, -1, 0, 1, 2, 1};
+
 //Changes the y-coordinate of the letters
 // based on the animation frame
-void menu_text_anim(uchar frame){
+void menu_text_anim() {
+    static uchar frame = 0;
+    frame++;
+    frame %= 8;
     for (uchar i = 0; i < MAX_LETTERS; ++i){
-        if ((i+frame)%8 > 3){
-            scroll_sprite(i, 0, 1);
+        if (menu_text[i] == ' ') {
+            continue;
         }
-        else{
-            scroll_sprite(i, 0, -1);
-        }
+        move_sprite(i, ((i+11)*8-menu_text_length*4), menu_text_baseline + menu_text_position_table[(frame+i)%8]);
     }
 }
 
@@ -30,12 +37,13 @@ void change_menu_text(const uchar *text, uchar length){
     if (text == NULL) {
         return;
     }
+    menu_text_length = length;
+    menu_text = text;
 
     for (uchar i = 0; i < MAX_LETTERS; ++i){
         uchar tile = text[i]-'A';
         if (i < length && text[i] != ' ') {
             set_sprite_tile(i, letter_table[tile]);
-            move_sprite(i, ((i+11)*8-length*4), (17)*8);
         } else {
             move_sprite(i, 0, 0);
         }
@@ -126,7 +134,7 @@ void mainmenu(){
         joy_impulse = ~joy_impulse & joy;
         
         if (anim_delay == 0){
-            menu_text_anim(++anim_frame%8);   
+            menu_text_anim();   
         }
         ++anim_delay;
         anim_delay %=8;

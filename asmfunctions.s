@@ -110,6 +110,11 @@ _copy_window_buffer:
 ;SAVES 30 SCANLINES!!!!
 .globl _display_bigsprites
 _display_bigsprites::
+    push hl
+    push de
+    push af
+    push bc
+
     ld hl, #_shadow_OAM
     ld de, #_bigsprites
     ld b, #20
@@ -166,4 +171,9 @@ _display_bigsprites::
 
         dec b
         jr nz, .bigsprites_loop
+
+    pop bc
+    pop af
+    pop de
+    pop hl
     ret
