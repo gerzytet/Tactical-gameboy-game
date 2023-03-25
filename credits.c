@@ -11,6 +11,7 @@
 #include "stdio.h"
 
 void play_credits(){
+	game_mode = MODE_CREDITS;
 	set_bkg_palette(0, 1, colors);
 	move_bkg(0,0);
 	

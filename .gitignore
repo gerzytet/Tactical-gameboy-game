@@ -3,3 +3,5 @@ tactics.asm
 *.map
 *.cdb
 *.adb
+.vs/**
+tactics.gb

@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 16 x 16
-  Tiles                : 0 to 8
+  Tiles                : 0 to 13
 
   Palette colors       : None.
   SGB Palette          : None.
@@ -22,14 +22,10 @@
 
 */
 
-#ifndef __2x2Tiles_h_INCLUDE
-#define __2x2Tiles_h_INCLUDE
 
 /* Bank of tiles. */
 #define TilesBank 0
 /* Start of tile array. */
-extern const unsigned char Tiles[];
-
-#endif
+extern unsigned char Tiles[];
 
 /* End of 2X2TILES.H */

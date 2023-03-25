@@ -7,6 +7,7 @@
 
 #include "common.h"
 #include "leveldata.h"
+#include "tile_definitions.h"
 
 #define NORTH 0
 #define SOUTH 1
@@ -130,23 +131,6 @@ uchar pathfind(uchar startX, uchar startY, uchar endX, uchar endY, uchar dist) {
         EXPLORE_VERT(SOUTH);
     }
 }
-
-const uchar passable_table[NUM_TILES] = {
-    0, //house
-    0, //cave
-    0, //chest
-    0, //tree
-    0, //fence
-    1, //grass
-    1, //path
-    0, //wall
-    0, //water
-    1, //bridge
-    0, //rock
-    0, //forest
-    1, //start
-    1  //end
-};
 
 uchar movement_started = 0;
 //returns 1 if the entity is done moving

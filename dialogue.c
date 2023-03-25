@@ -12,6 +12,7 @@
 #include "graphics/TextBox.c"
 #include "graphics/TextBoxMap.h"
 #include "graphics/TextBoxMap.c"
+#include "graphics/Numbers.h"
 #include "graphics/Symbols.h"
 #include "graphics/Symbols.c"
 
@@ -48,6 +49,7 @@ void set_text(const uchar *textLine1, const uchar *textLine2 ,uchar charNameInde
     }
     volatile uchar *tilemap = (uchar *)TILEMAP_START;
     static uchar tile;
+    charNameIndex = charNameIndex;
     
     //todo: character name
     //set name dialogueCharNames[charNameIndex]
@@ -131,6 +133,8 @@ void set_text(const uchar *textLine1, const uchar *textLine2 ,uchar charNameInde
 
 //do later
 void set_char_sprite(uchar charSpriteIndex, uchar position){
+    position = position;
+    charSpriteIndex = charSpriteIndex;
     return;
 }
 
@@ -174,6 +178,7 @@ void setupTextBox(){
 
 //Initialize the dialogue scene
 void play_scene(uchar index){
+    game_mode = MODE_DIALOGUE;
     dialogueSceneIndex = index;
     //cls();
     set_bkg_palette(0, 1, colors);
