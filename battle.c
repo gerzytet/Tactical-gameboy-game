@@ -1,3 +1,10 @@
+/*
+@file battle.c
+@author entire team
+@date 3/22/2023
+@brief Battle mechanics
+*/
+
 #include <gb/gb.h>
 #include <gb/cgb.h>
 #include "common.h"

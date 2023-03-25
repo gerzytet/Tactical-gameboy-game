@@ -1,3 +1,10 @@
+/*
+@file dialogue.c
+@author entire team
+@date 3/22/2023
+@brief Dialogue system
+*/
+
 #include <gb/gb.h>
 #include <gb/cgb.h>
 #include "common.h"

@@ -1,3 +1,11 @@
+/*
+@file bigsprites.h
+@author entire team
+@date 3/22/2023
+@brief Large sprite boiler-plate code
+*/
+
+
 #ifndef BIGSPRITES_H
 #define BIGSPRITES_H
 

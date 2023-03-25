@@ -1,3 +1,10 @@
+/*
+@file tactics.c
+@author entire team
+@date 3/22/2023
+@brief Main driver code
+*/
+
 #include <gb/gb.h>
 #include <gb/cgb.h>
 #include "common.h"
