@@ -47,6 +47,12 @@ void set_defender_image(uchar index){
 
 //Create base functions and logic for battling. Pokemon battle style
 /*
+    fire emblem confirm battle
+    cue movie with sequence of random moves bewteen characters
+*/
+
+/* 
+Battle Layout:
 characters
 box with health and character names
 arrows
@@ -66,34 +72,21 @@ uchar battle(uchar nAttacker, uchar nDefender) {
     HIDE_WIN;
     set_bkg_tiles(0, 0, 20, 18, blank_tile);
     set_win_tiles(0, 0, 20, 18, blank_tile);
+    hide_sprites_range();
 
-    for (UINT8 i = 0; i < 40; i++) {
-        move_sprite(i, 0, 0);
-    }
+    //start battle scene
+    //battleIntro();    
 
-
-
-    set_attacker_image(attacker);
-    set_defender_image(defender);
-
-    //draw Patrick's Battle Arrow
-    //set_bkg_data..
-    /*if (determineAdvantage() > 5){
-        //draw arrow
-        //set_bkg_tiles(0,);
-    }*/
-    
-    //draw Patrick's funny box
-    //set_bkg_data..
-    //set_bkg_tiles..
-    
+    //function to calculate advantage with uchar  
+    //display arrow in top left
+        
+    //todo: fix to not go negative        
+    //todo: edit the algorithm    
 
     /*
     fire emblem confirm battle
     cue movie with sequence of random moves bewteen characters
     */
-
-    uchar result = 0;
 
     //attacker attacks
      entities[defender].health = (entities[defender].health >= 5) ? 
@@ -148,6 +141,10 @@ uchar battle(uchar nAttacker, uchar nDefender) {
     //finish draw the map again
     */
     return result;
+
+    while (1) {
+        wait_vbl_done();
+    }
 
     //battleOutro();
 
