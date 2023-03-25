@@ -19,6 +19,12 @@ struct Entity {
     uchar inventory[5];
 };
 
+enum GameMode {MODE_MAIN_MENU = 255, MODE_MAP = 0, MODE_DIALOGUE = 1, MODE_MULTIPLAYER = 2, MODE_OPTIONS = 3, MODE_CREDITS = 4};
+
+uchar game_mode;
+
+void game_over();
+
 typedef struct {
     uchar lastMapCompleted;
     uchar inventory[10];
@@ -33,8 +39,14 @@ uchar joy_impulse = 0;
 #define WIN_IF_ENEMY_DEFEAT 0
 #define WIN_IF_PLAYER_ON_SPACE 1
 //WIN_IF_SURVIVE_X_TURNS x+1
+uchar winCondition = 0;
 
 uchar mapIndex = 0;
+
+#define PLAYER_WON 1
+#define PLAYER_LOST 2
+uchar winState = 0;
+
 
 const uchar letter_table[36] = {
     0, //a
@@ -68,8 +80,6 @@ const uchar letter_table[36] = {
 struct Entity entities[18];
 
 uchar numCharacters;
-
-const uchar advantage[14] = { 255,255,255,255,255,3,5,255,255,2,255,255,1,1 };
 
 #define HOUSE 0
 #define CAVE 1

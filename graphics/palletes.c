@@ -1,3 +1,6 @@
+#ifndef PALLETES_H
+#define PALLETES_H
+
 #include <gb/gb.h>
 #include <gb/cgb.h>
 
@@ -23,3 +26,5 @@ const uint16_t colors_objects[32] = {
     RGB(31, 31, 31), RGB(20, 20, 20), RGB(10, 10, 10), RGB(0, 0, 0),
     RGB(31, 31, 31), RGB(20, 20, 20), RGB(10, 10, 10), RGB(0, 0, 0),
 };
+
+#endif

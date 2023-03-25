@@ -9,6 +9,5 @@
             "stopOnEntry": true,
             "preLaunchTask": "build"
         }
-
     ]
 }

@@ -3,6 +3,5 @@ tactics.asm
 *.map
 *.cdb
 *.adb
-/.vs/GameBoy_Game/v16/Browse.VC.db-shm
-/.vs/GameBoy_Game/v16/Browse.VC.db-wal
-/.vs/GameBoy_Game/v16/Browse.VC.opendb
+.vs/**
+tactics.gb

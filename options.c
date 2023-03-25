@@ -6,6 +6,7 @@
 //todo
 
 void options_menu(){
+	game_mode = MODE_OPTIONS;
 	set_bkg_palette(0, 1, colors);
 	move_bkg(0,0);
 
