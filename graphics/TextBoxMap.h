@@ -22,6 +22,6 @@
 #define TextBoxMapHeight 6
 #define TextBoxMapBank 0
 
-extern unsigned char TextBoxMap[];
+extern const unsigned char TextBoxMap[];
 
 /* End of TEXTBOXMAP.H */

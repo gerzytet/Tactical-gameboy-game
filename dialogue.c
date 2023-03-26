@@ -9,12 +9,9 @@
 #include <gb/cgb.h>
 #include "common.h"
 #include "graphics/TextBox.h"
-#include "graphics/TextBox.c"
 #include "graphics/TextBoxMap.h"
-#include "graphics/TextBoxMap.c"
 #include "graphics/Numbers.h"
 #include "graphics/Symbols.h"
-#include "graphics/Symbols.c"
 
 #define TILEMAP_START 0x9800
 #define WIN_TILEMAP_START 0x9C00
@@ -163,12 +160,12 @@ void advance_text(){
 }
 
 void setupTextBox(){
-    set_bkg_data(0, 14, TextBox);
-    set_bkg_tiles(0, 12, 20, 6, TextBoxMap);
+    set_banked_bkg_data(0, 14, TextBox, 2);
+    set_banked_bkg_tiles(0, 12, 20, 6, TextBoxMap, 2);
 
-    set_bkg_data(14, 46, Letters); //letters. 46 tiles.  23 letters
-    set_bkg_data(60, 20, Numbers); //numbers. 20 tiles. 10 numbers
-    set_bkg_data(80, 10, Symbols); //symbols. 10 tiles. 5 symbols
+    set_banked_bkg_data(14, 46, Letters, 2); //letters. 46 tiles.  23 letters
+    set_banked_bkg_data(60, 20, Numbers, 2); //numbers. 20 tiles. 10 numbers
+    set_banked_bkg_data(80, 10, Symbols, 2); //symbols. 10 tiles. 5 symbols
 
     //hide "STORY" text
     for(int i = 0; i < 5; ++i){

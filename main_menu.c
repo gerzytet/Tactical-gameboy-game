@@ -8,12 +8,12 @@
 #include <gb/gb.h>
 #include <gb/cgb.h>
 #include "common.h"
-#include "graphics/Menu_BG.c"
-#include "graphics/Menu_BG_Map.c"
+#include "graphics/Menu_BG.h"
+#include "graphics/Menu_BG_Map.h"
+#include "graphics/Game_Logo_Map.h"
 #include "graphics/palletes.c"
 #include "graphics/Letters.h"
-#include "graphics/Game_Logo.c"
-#include "graphics/Game_Logo_Map.c"
+#include "graphics/Game_Logo.h"
 
 uchar menu_option = 0;
 #define MAX_OPTION 4
@@ -106,14 +106,14 @@ void mainmenu(){
     game_mode = MODE_MAIN_MENU;
     hide_sprite(5);
     set_bkg_palette(0, 1, colors);
-    set_bkg_data(0, 19, Menu_BG);
-    set_bkg_tiles(0, 11, 10, 4, Menu_BG_Map);
-    set_bkg_tiles(10, 11, 10, 4, Menu_BG_Map);
+    set_banked_bkg_data(0, 19, Menu_BG, 2);
+    set_banked_bkg_tiles(0, 11, 10, 4, Menu_BG_Map, 2);
+    set_banked_bkg_tiles(10, 11, 10, 4, Menu_BG_Map, 2);
     move_bkg(0,0);
     scroll_bkg(-64, 0);
-    set_bkg_data(19, 111, game_logo_data);
-    set_win_tiles(0, 0, 20, 8, game_logo_map);
-    set_sprite_data(0, 46, Letters); //46 tiles, 23 letters
+    set_banked_bkg_data(19, 111, game_logo_data, 2);
+    set_banked_win_tiles(0, 0, 20, 8, game_logo_map, 2);
+    set_banked_sprite_data(0, 46, Letters, 2); //46 tiles, 23 letters
 
     VBK_REG = VBK_BANK_0;
 

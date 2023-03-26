@@ -26,6 +26,6 @@
 /* Bank of tiles. */
 #define TextBoxBank 0
 /* Start of tile array. */
-extern unsigned char TextBox[];
+extern const unsigned char TextBox[];
 
 /* End of TEXTBOX.H */

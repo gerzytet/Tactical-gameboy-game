@@ -3,16 +3,11 @@
 #include <gb/cgb.h>
 #include "graphics/palletes.c"
 #include "graphics/Sprites.h"
-#include "graphics/Sprites.c"
 #include "tile_definitions.h"
 #include "graphics/2x2tiles.h"
-#include "graphics/2x2tiles.c"
 #include "graphics/Letters.h"
-#include "graphics/Letters.c"
 #include "graphics/Top_textbox.h"
-#include "graphics/Top_textbox.c"
 #include "graphics/Numbers.h"
-#include "graphics/Numbers.c"
 #include "pathfinding.c"
 #include "leveldata.h"
 #include "entities.c"
@@ -60,11 +55,11 @@ void setup_background_palletes() {
 
 void setup_background() {
     VBK_REG = VBK_BANK_1;
-    set_bkg_data(FIRST_TILE_OFFSET_2x2 * 4, NUM_TILES * 4, Tiles); //tiles.  15 big tiles, 60 small tiles
+    set_banked_bkg_data(FIRST_TILE_OFFSET_2x2 * 4, NUM_TILES * 4, Tiles, 2); //tiles.  15 big tiles, 60 small tiles
     VBK_REG = VBK_BANK_0;
-    set_bkg_data(0, 46, Letters); //letters. 46 tiles.  23 letters
-    set_bkg_data(46, 10, Top_textbox);
-    set_bkg_data(56, 20, Numbers);
+    set_banked_bkg_data(0, 46, Letters, 2); //letters. 46 tiles.  23 letters
+    set_banked_bkg_data(46, 10, Top_textbox, 2);
+    set_banked_bkg_data(56, 20, Numbers, 2);
 
     volatile uchar *tilemap = (uchar *)TILEMAP_START;
     for (uchar r = 0; r < HEIGHT * 2; r++) {
@@ -403,7 +398,7 @@ void play_game(){
 
         set_sprite_palette(0, 4, colors_objects);
         set_sprite_prop(0, 0);
-        set_sprite_data(0, 40, Sprites);
+        set_banked_sprite_data(0, 40, Sprites, 2);
         display_bigsprite(0, 0);
 
         add_turn(); 

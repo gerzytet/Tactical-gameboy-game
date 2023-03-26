@@ -24,7 +24,7 @@
 
 
 /* Bank of tiles. */
-#define TilesBank 0
+#define TilesBank 2
 /* Start of tile array. */
 extern unsigned char Tiles[];
 

@@ -3,6 +3,9 @@
         "common.h": "c",
         "2x2tiles.h": "c",
         "cgb.h": "c",
-        "battle_arrow_map.h": "c"
+        "battle_arrow_map.h": "c",
+        "tile_definitions.h": "c",
+        "battle_arrow.h": "c",
+        "symbols.h": "c"
     }
 }

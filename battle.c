@@ -12,7 +12,6 @@
 #include "leveldata.h"
 #include "tile_definitions.h"
 #include "graphics/Battle_Arrow.h"
-#include "graphics/Battle_Arrow.c"
 #include "map_window.c"
 
 #define TILEMAP_START 0x9800
@@ -92,7 +91,7 @@ uchar battle(uchar nAttacker, uchar nDefender) {
 
         VBK_REG = VBK_BANK_1;
         vmemset((uchar *)WIN_TILEMAP_START, 0b00001000, 32*32); 
-        set_bkg_data(129, 4, Battle_Arrow);
+        set_banked_bkg_data(129, 4, Battle_Arrow, 2);
         VBK_REG = VBK_BANK_0;    
 
         SCX_REG = 0;

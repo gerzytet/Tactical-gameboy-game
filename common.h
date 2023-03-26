@@ -9,6 +9,8 @@
 #ifndef COMMON_H
 #define COMMON_H
 
+#include "banked_graphics.h"
+
 typedef unsigned char uchar;
 
 #define WIDTH 12
@@ -18,6 +20,8 @@ typedef unsigned char uchar;
 #define SOUTH 1
 #define EAST 2
 #define WEST 3
+
+#define printf(...) ;
 
 struct Entity {
     //unit: pixels relative to the top left of the map

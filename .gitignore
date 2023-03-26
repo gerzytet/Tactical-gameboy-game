@@ -1,7 +1,12 @@
-tactics.asm
+*.asm
+!asmfunctions.s
 *.noi
 *.map
 *.cdb
 *.adb
 .vs/**
 tactics.gb
+*.lst
+*.map
+*.o
+*.sym

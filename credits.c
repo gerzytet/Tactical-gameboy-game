@@ -8,7 +8,6 @@
 #include "common.h"
 #include "gb/gb.h"
 #include "gb/cgb.h"
-#include "stdio.h"
 
 void play_credits(){
 	game_mode = MODE_CREDITS;

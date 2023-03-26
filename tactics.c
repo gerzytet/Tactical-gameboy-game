@@ -9,7 +9,6 @@
 #include <gb/cgb.h>
 #include "common.h"
 #include "bigsprites.h"
-#include <stdio.h>
 #include "main_menu.c"
 #include "leveldata.h"
 #include "dialogue.c"
