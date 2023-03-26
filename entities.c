@@ -22,16 +22,7 @@ uchar party_current = PARTY_FRIEND;
 
 void paletteswap(uchar entity, uchar color){
     //Swap palette of current tile
-    uchar bigsprite = entity + 2;
-    uchar sprite = bigsprite * 2;
-    uchar bytenum = sprite * 4;
-
-    volatile unsigned char* oam_data = &((unsigned char*)&shadow_OAM)[bytenum];
-    oam_data[3] &= 0b11111000;
-    oam_data[3] |= color;
-    oam_data = &((unsigned char*)&shadow_OAM)[(sprite + 1)*4];
-    oam_data[3] &= 0b11111000;
-    oam_data[3] |= color;
+    set_bigsprite_color(entity + 2, color);
 }
 
 void setup_characters() {

@@ -27,8 +27,17 @@
 #define display_bigsprite(slot, tile)\
     bigsprites[slot].sprite = (tile);
 
-#define set_bigsprite_color(slot, color)\
-    
+void set_bigsprite_color(uchar bigsprite, uchar color) {
+    uchar sprite = bigsprite * 2;
+    uchar bytenum = sprite * 4;
+
+    volatile unsigned char* oam_data = &((unsigned char*)&shadow_OAM)[bytenum];
+    oam_data[3] &= 0b11111000;
+    oam_data[3] |= color;
+    oam_data = &((unsigned char*)&shadow_OAM)[(sprite + 1)*4];
+    oam_data[3] &= 0b11111000;
+    oam_data[3] |= color;
+}
 
 uchar bigspriteCounts[16];
 

@@ -378,6 +378,10 @@ void update_characters() {
     }
 }
 
+void update_cursor_color() {
+    set_bigsprite_color(0, state == STATE_CHOOSE_ATTACKER ? 2 : 0);
+}
+
 void play_game(){
     __asm__("halt");
     LCDC_REG = 0x00;
@@ -414,6 +418,7 @@ void play_game(){
         update_characters();
         update_hover_character();
         update_gui();
+        update_cursor_color();
 
         /*if (joy_impulse & J_START && state == STATE_LOOK){
             break;
