@@ -27,6 +27,9 @@
 #define display_bigsprite(slot, tile)\
     bigsprites[slot].sprite = (tile);
 
+#define set_bigsprite_color(slot, color)\
+    
+
 uchar bigspriteCounts[16];
 
 struct Bigsprite {

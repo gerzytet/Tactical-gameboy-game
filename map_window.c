@@ -1,3 +1,6 @@
+#ifndef MAP_WINDOW_C
+#define MAP_WINDOW_C
+
 #include "common.h"
 #include <gb/gb.h>
 #include <gb/cgb.h>
@@ -170,7 +173,7 @@ void render_health(uchar healthLevel) {
         tilemap[i] = tile;
         tilemap[i | 32] = tile;
     }
-
+    
     if (healthLevel == 0) {
         tile = HEALTHCOL0;
     } else if (healthLevel == 1) {
@@ -185,3 +188,5 @@ void render_health(uchar healthLevel) {
 void setup_window() {
     vmemset((uchar *)WIN_TILEMAP_START, SPACE_LETTER, 32*32);
 }
+
+#endif

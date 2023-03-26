@@ -83,6 +83,8 @@ uchar battle(uchar nAttacker, uchar nDefender) {
 
     vmemset((uchar *)TILEMAP_START, 128, 32*32);
 
+    
+
     // cls();
     // HIDE_SPRITES;
     // HIDE_BKG;

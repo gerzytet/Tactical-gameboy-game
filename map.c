@@ -33,8 +33,10 @@ uchar selectedCharacter = 255;
 enum State {
     STATE_LOOK = 0,
     STATE_CHOOSE_MOVE = 1,
-    STATE_MOVE = 2
+    STATE_MOVE = 2,
+    STATE_CHOOSE_ATTACKER = 3
 };
+
 uchar state = STATE_LOOK;
 
 #define TILEMAP_START 0x9800
@@ -279,8 +281,11 @@ void post_move(uchar selectedCharacter){
     uchar * adj_entities = get_adj_entities(selectedCharacter);
     uchar * adj_interact_spaces = get_adj_interact_spaces(selectedCharacter);
 
+    uchar entity_found = 0;
     for (uchar i = 0; i < 4; ++i){
         if (adj_entities[i] != 255 /*|| adj_interact_spaces[i] != 255*/){
+            entity_found = 1;
+            
             //flash palette of adj entities/spaces
             //use dpad to select which or A to skip
 
@@ -290,7 +295,7 @@ void post_move(uchar selectedCharacter){
 
             //if statement to check whether to battle or interact?
 
-            battle(selectedCharacter, 255);
+            //battle(selectedCharacter, 255);
 
             // if (joy_impulse & J_UP) {                                       
             //     if (adj_entities[0] != 255) {                        
@@ -319,6 +324,12 @@ void post_move(uchar selectedCharacter){
         }
     }
 
+    if (entity_found) {
+        state = STATE_CHOOSE_ATTACKER;
+        secondCursorX = entities[selectedCharacter].x / 16;
+        secondCursorY = entities[selectedCharacter].y / 16;
+    }
+
     //set selectedCharacter palette to greyscale
     PALETTESWAP:paletteswap(selectedCharacter, 0);
 
@@ -334,7 +345,6 @@ void post_move(uchar selectedCharacter){
             entities[i].moved = 0;
             //set palette to party color
             paletteswap(i, entities[i].party + 1);
-
         }
     }
 
@@ -424,6 +434,8 @@ void play_game(){
                     break; //gameover
                 }
             }
+        } else if (state == STATE_CHOOSE_ATTACKER) {
+
         }
 
         move_cursor();
