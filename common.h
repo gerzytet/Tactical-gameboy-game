@@ -27,7 +27,7 @@ struct Entity {
     uchar inventory[5];
 };
 
-enum GameMode {MODE_MAIN_MENU = 255, MODE_MAP = 0, MODE_DIALOGUE = 1, MODE_MULTIPLAYER = 2, MODE_OPTIONS = 3, MODE_CREDITS = 4};
+enum GameMode {MODE_MAIN_MENU = 255, MODE_MAP = 0, MODE_DIALOGUE = 1, MODE_MULTIPLAYER = 2, MODE_OPTIONS = 3, MODE_CREDITS = 4, MODE_BATTLE = 5};
 
 uchar game_mode;
 

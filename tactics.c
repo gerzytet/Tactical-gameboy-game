@@ -35,6 +35,8 @@ void vblank_routine(){
         case(MODE_MAIN_MENU):
             menu_vblank_routine();
             break;
+        case(MODE_BATTLE):
+            break;
     }
     joy_impulse = joy;
     joy = joypad();
@@ -83,7 +85,7 @@ void start_story(uchar startFrom){
         case (0):
             play_scene(0);
             play_scene(1);
-            play_map(4);
+            play_map(0);
             play_scene(2);
         case (1):
             play_scene(3);
