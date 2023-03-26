@@ -5,6 +5,7 @@
 @brief Battle mechanics
 */
 
+
 #include <gb/gb.h>
 #include <gb/cgb.h>
 #include "common.h"
@@ -12,8 +13,10 @@
 #include "tile_definitions.h"
 #include "graphics/Battle_Arrow.h"
 #include "graphics/Battle_Arrow.c"
+#include "map_window.c"
 
 #define TILEMAP_START 0x9800
+#define WIN_TILEMAP_START 0x9C00
 
 //todo
 
@@ -79,25 +82,35 @@ uchar battle(uchar nAttacker, uchar nDefender) {
         return 0;
     }
 
-    LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJOFF | LCDCF_WIN9C00 | LCDCF_WINOFF | LCDCF_OBJ8;
+    game_mode = MODE_BATTLE;
+
+    LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG9C00 | LCDCF_OBJOFF | LCDCF_WIN9C00 | LCDCF_WINOFF | LCDCF_OBJ8;
+
+    vmemset((uchar *)WIN_TILEMAP_START, 128, 32*32); 
+
+    VBK_REG = VBK_BANK_1;
+    vmemset((uchar *)WIN_TILEMAP_START, 0b00001000, 32*32); 
+    set_bkg_data(129, 4, Battle_Arrow);
+    VBK_REG = VBK_BANK_0;    
+
+    SCX_REG = 0;
+    SCY_REG = 0;
+    set_bkg_tile_xy(0,0,0x81);
+    set_bkg_tile_xy(1,0,0x82);
+    //set_bkg_tile_xy(0,1,0x83);
+    set_bkg_tile_xy(1,1,0x84);
 
     vmemset((uchar *)TILEMAP_START, 128, 32*32);
-
-    
 
     // cls();
     // HIDE_SPRITES;
     // HIDE_BKG;
     // HIDE_WIN;    
 
-    //start battle scene
-    //battleIntro();    
+    //start battle scene    
 
-    //function to calculate advantage with uchar  
-    //display arrow in top left
-        
-    //todo: fix to not go negative        
-    //todo: edit the algorithm    
+    //call function to calculate advantage with uchar  
+    //display arrow in top left            
 
     /*
     fire emblem confirm battle
@@ -128,9 +141,13 @@ uchar battle(uchar nAttacker, uchar nDefender) {
         //remove from map        
         result = 1;
     }
+    
 
     while (1) {
         if (joy_impulse & J_A) {
+            game_mode = MODE_MAP;
+            __asm__("halt");
+            setup_gui_textbox();            
             return result;
         }
     }

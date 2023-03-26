@@ -297,6 +297,39 @@ void post_move(uchar selectedCharacter){
 
             //battle(selectedCharacter, 255);
 
+            /*
+            Once moved, display four adjacent squares for interacting or battling
+            If no interactables or enemies are adjacent, quit post_move
+            */
+
+           /*
+           if(no enemies or interactables)
+           {
+                //quit post move
+                return;
+           }
+           else if(up tile selected and something there)
+           {
+                battle(selectedCharacter, adj_entities[0]);                        
+                //start battle animation
+           }
+           else if(right tile selected and something there)
+           {
+                battle(selectedCharacter, adj_entities[1]);                        
+                //start battle animation
+           }
+           else if(down tile selected and something there)
+           {
+                battle(selectedCharacter, adj_entities[2]);                        
+                //start battle animation
+           }
+           else if(left tile selected and something there)
+           {
+                battle(selectedCharacter, adj_entities[3]);                        
+                //start battle animation
+           }
+           */
+
             // if (joy_impulse & J_UP) {                                       
             //     if (adj_entities[0] != 255) {                        
             //         battle(selectedCharacter, adj_entities[0]);                        
