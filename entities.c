@@ -98,29 +98,32 @@ uchar is_party_exist(uchar party){
 
 uchar * get_adj_entities(uchar entity){
     static uchar adj_entities[4] = {255,255,255,255};
+    for (uchar i = 0; i < 4; i++) {
+        adj_entities[i] = 255;
+    }
     
     //return adjacent spaces in clockwise fashion
     for (uchar i = 0; i < numCharacters; ++i) {
-        if (i != entity && entities[entity].x == entities[i].x && entities[entity].y == entities[i].y - 16) {
-            adj_entities[0] = i;
+        if (i != entity && entities[entity].x == entities[i].x && entities[entity].y - 16 == entities[i].y) {
+            adj_entities[NORTH] = i;
         }
     }
 
     for (uchar i = 0; i < numCharacters; ++i) {
-        if (i != entity && entities[entity].x == entities[i].x + 16 && entities[entity].y == entities[i].y) {
-            adj_entities[1] = i;
+        if (i != entity && entities[entity].x + 16 == entities[i].x && entities[entity].y == entities[i].y) {
+            adj_entities[EAST] = i;
         }
     }
 
     for (uchar i = 0; i < numCharacters; ++i){
-        if (i != entity && entities[entity].x == entities[i].x && entities[entity].y == entities[i].y +16){
-            adj_entities[2] = i;
+        if (i != entity && entities[entity].x == entities[i].x && entities[entity].y + 16 == entities[i].y){
+            adj_entities[SOUTH] = i;
         }
     }
        
     for (uchar i = 0; i < numCharacters; ++i){
-        if (i != entity && entities[entity].x == entities[i].x -16 && entities[entity].y == entities[i].y){
-            adj_entities[3] = i;
+        if (i != entity && entities[entity].x - 16 == entities[i].x && entities[entity].y == entities[i].y){
+            adj_entities[WEST] = i;
         }
     }
 

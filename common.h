@@ -14,6 +14,11 @@ typedef unsigned char uchar;
 #define WIDTH 12
 #define HEIGHT 12
 
+#define NORTH 0
+#define SOUTH 1
+#define EAST 2
+#define WEST 3
+
 struct Entity {
     //unit: pixels relative to the top left of the map
     uchar x;
@@ -106,5 +111,7 @@ uchar numCharacters;
 #define END 13
 
 #define NUM_TILES (END + 1)
+
+#define TURN_THE_DISPLAY_OFF_RIGHT_NOW_WITHOUT_THE_GBDK_NONSENSE_THAT_TRIES_TO_WAIT_FOR_VBLANK_BUT_USUALLY_JUST_HANGS LCDC_REG &= ~LCDCF_ON;
 
 #endif

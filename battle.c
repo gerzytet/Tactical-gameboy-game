@@ -85,22 +85,26 @@ uchar battle(uchar nAttacker, uchar nDefender) {
     game_mode = MODE_BATTLE;
 
     LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG9C00 | LCDCF_OBJOFF | LCDCF_WIN9C00 | LCDCF_WINOFF | LCDCF_OBJ8;
+    __asm__("halt");
+    TURN_THE_DISPLAY_OFF_RIGHT_NOW_WITHOUT_THE_GBDK_NONSENSE_THAT_TRIES_TO_WAIT_FOR_VBLANK_BUT_USUALLY_JUST_HANGS;
+    CRITICAL {
+        vmemset((uchar *)WIN_TILEMAP_START, 128, 32*32); 
 
-    vmemset((uchar *)WIN_TILEMAP_START, 128, 32*32); 
+        VBK_REG = VBK_BANK_1;
+        vmemset((uchar *)WIN_TILEMAP_START, 0b00001000, 32*32); 
+        set_bkg_data(129, 4, Battle_Arrow);
+        VBK_REG = VBK_BANK_0;    
 
-    VBK_REG = VBK_BANK_1;
-    vmemset((uchar *)WIN_TILEMAP_START, 0b00001000, 32*32); 
-    set_bkg_data(129, 4, Battle_Arrow);
-    VBK_REG = VBK_BANK_0;    
+        SCX_REG = 0;
+        SCY_REG = 0;
+        set_bkg_tile_xy(0,0,0x81);
+        set_bkg_tile_xy(1,0,0x82);
+        //set_bkg_tile_xy(0,1,0x83);
+        set_bkg_tile_xy(1,1,0x84);
+    }
+    DISPLAY_ON;
 
-    SCX_REG = 0;
-    SCY_REG = 0;
-    set_bkg_tile_xy(0,0,0x81);
-    set_bkg_tile_xy(1,0,0x82);
-    //set_bkg_tile_xy(0,1,0x83);
-    set_bkg_tile_xy(1,1,0x84);
-
-    vmemset((uchar *)TILEMAP_START, 128, 32*32);
+    //vmemset((uchar *)TILEMAP_START, 128, 32*32);
 
     // cls();
     // HIDE_SPRITES;
@@ -141,13 +145,17 @@ uchar battle(uchar nAttacker, uchar nDefender) {
         //remove from map        
         result = 1;
     }
-    
 
+    __asm__("halt");
     while (1) {
+        __asm__("halt");
         if (joy_impulse & J_A) {
             game_mode = MODE_MAP;
-            __asm__("halt");
-            setup_gui_textbox();            
+
+            TURN_THE_DISPLAY_OFF_RIGHT_NOW_WITHOUT_THE_GBDK_NONSENSE_THAT_TRIES_TO_WAIT_FOR_VBLANK_BUT_USUALLY_JUST_HANGS
+            reset_window();
+            DISPLAY_ON;
+            
             return result;
         }
     }

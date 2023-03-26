@@ -148,6 +148,17 @@ void setup_gui_textbox() {
     VBK_REG = VBK_BANK_0;
 }
 
+void reset_window() {
+    CRITICAL {
+        VBK_REG = VBK_BANK_1;
+        vmemset((volatile uchar *) WIN_TILEMAP_START, 0, 32 * 2);
+        VBK_REG = VBK_BANK_0;
+        vmemset((uchar *)WIN_TILEMAP_START, SPACE_LETTER, 32*2);
+
+        setup_gui_textbox();
+    }
+}
+
 //health level is a number from 0 to 20
 void render_health(uchar healthLevel) {
     volatile uchar *tilemap = &windowBuffer[0][0];

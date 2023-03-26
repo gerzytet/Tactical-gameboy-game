@@ -197,6 +197,8 @@ void check_confirm_move() {
     }
 }
 
+uchar last_selected;
+
 void map_vblank_routine() {
     SCX_REG = scx;
     SCY_REG = scy;
@@ -277,7 +279,8 @@ void advance_phase(){
     }
 }
 
-void post_move(uchar selectedCharacter){
+
+void post_move(){
     uchar * adj_entities = get_adj_entities(selectedCharacter);
     uchar * adj_interact_spaces = get_adj_interact_spaces(selectedCharacter);
 
@@ -285,75 +288,10 @@ void post_move(uchar selectedCharacter){
     for (uchar i = 0; i < 4; ++i){
         if (adj_entities[i] != 255 /*|| adj_interact_spaces[i] != 255*/){
             entity_found = 1;
-            
-            //flash palette of adj entities/spaces
-            //use dpad to select which or A to skip
-
-            //DURING FRAME:
-
-            //animation for palettes                
-
-            //if statement to check whether to battle or interact?
-
-            //battle(selectedCharacter, 255);
-
-            /*
-            Once moved, display four adjacent squares for interacting or battling
-            If no interactables or enemies are adjacent, quit post_move
-            */
-
-           /*
-           if(no enemies or interactables)
-           {
-                //quit post move
-                return;
-           }
-           else if(up tile selected and something there)
-           {
-                battle(selectedCharacter, adj_entities[0]);                        
-                //start battle animation
-           }
-           else if(right tile selected and something there)
-           {
-                battle(selectedCharacter, adj_entities[1]);                        
-                //start battle animation
-           }
-           else if(down tile selected and something there)
-           {
-                battle(selectedCharacter, adj_entities[2]);                        
-                //start battle animation
-           }
-           else if(left tile selected and something there)
-           {
-                battle(selectedCharacter, adj_entities[3]);                        
-                //start battle animation
-           }
-           */
-
-            // if (joy_impulse & J_UP) {                                       
-            //     if (adj_entities[0] != 255) {                        
-            //         battle(selectedCharacter, adj_entities[0]);                        
-            //         goto PALETTESWAP;
-            //     }
-            // }
-            // else if (joy_impulse & J_RIGHT) {
-            //     if (adj_entities[1] != 255) {
-            //         battle(selectedCharacter, adj_entities[1]);
-            //         goto PALETTESWAP;
-            //     }
-            // }
-            // else if (joy_impulse & J_DOWN) {
-            //     if (adj_entities[2] != 255) {
-            //         battle(selectedCharacter, adj_entities[2]);
-            //         goto PALETTESWAP;
-            //     }
-            // }
-            // else if (joy_impulse & J_LEFT) {
-            //     if (adj_entities[3] != 255) {                        
-            //         battle(selectedCharacter, adj_entities[3]);
-            //         goto PALETTESWAP;
-            //     }
-            // }
+            last_selected = i;
+            cursorX = entities[adj_entities[i]].x / 16;
+            cursorY = entities[adj_entities[i]].y / 16;
+            break;
         }
     }
 
@@ -362,6 +300,7 @@ void post_move(uchar selectedCharacter){
         secondCursorX = entities[selectedCharacter].x / 16;
         secondCursorY = entities[selectedCharacter].y / 16;
     }
+
 
     //set selectedCharacter palette to greyscale
     PALETTESWAP:paletteswap(selectedCharacter, 0);
@@ -389,6 +328,40 @@ void post_move(uchar selectedCharacter){
 #define CHARACTER_ANIMATION_DELAY 15
 
 uchar characterAnimationTimer = CHARACTER_ANIMATION_DELAY;
+
+void update_select_attacker_cursor() {
+    uchar centerX = entities[selectedCharacter].x / 16;
+    uchar centerY = entities[selectedCharacter].y / 16;
+    if (joy_impulse & J_UP && centerY > 0) {
+        last_selected = NORTH;
+        cursorX = centerX;
+        cursorY = centerY - 1;
+    } else if (joy_impulse & J_DOWN && centerY < WIDTH - 1) {
+        last_selected = SOUTH;
+        cursorX = centerX;
+        cursorY = centerY + 1;
+    } else if (joy_impulse & J_LEFT && centerX > 0) {
+        last_selected = WEST;
+        cursorX = centerX - 1;
+        cursorY = centerY;
+    } else if (joy_impulse & J_RIGHT && centerX < WIDTH - 1) {
+        last_selected = EAST;
+        cursorX = centerX + 1;
+        cursorY = centerY;
+    }
+
+    if (joy_impulse & J_A) {
+        uchar *adj_entities = get_adj_entities(selectedCharacter);
+
+        if (adj_entities[last_selected] != 255) {
+            uchar target = adj_entities[last_selected];
+            
+            battle(selectedCharacter, target);
+            state = STATE_LOOK;
+        }
+    }
+}
+
 
 void update_characters() {
     for (uchar i = 0; i < numCharacters; i++) {
@@ -459,7 +432,7 @@ void play_game(){
             if (move_entity_after_pathfinding(selectedCharacter)){
                 state = STATE_LOOK;
                 move_bigsprite(1, 0, 0);
-                post_move(selectedCharacter);
+                post_move();
                 if (joy_impulse & J_START && state == STATE_LOOK){
                     break;
                 }
@@ -468,7 +441,7 @@ void play_game(){
                 }
             }
         } else if (state == STATE_CHOOSE_ATTACKER) {
-
+            update_select_attacker_cursor();
         }
 
         move_cursor();

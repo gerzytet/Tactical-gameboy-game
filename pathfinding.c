@@ -9,11 +9,6 @@
 #include "leveldata.h"
 #include "tile_definitions.h"
 
-#define NORTH 0
-#define SOUTH 1
-#define EAST 2
-#define WEST 3
-
 //1 bit for each tile
 uchar visited[16][2];
 
