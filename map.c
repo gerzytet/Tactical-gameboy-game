@@ -31,7 +31,8 @@ enum State {
     STATE_LOOK = 0,
     STATE_CHOOSE_MOVE = 1,
     STATE_MOVE = 2,
-    STATE_CHOOSE_ATTACKER = 3
+    STATE_CHOOSE_ATTACKER = 3,
+    STATE_ENEMY_TURN = 4
 };
 
 uchar state = STATE_LOOK;
@@ -187,7 +188,7 @@ void check_confirm_move() {
             return;
         }
 
-        uchar found = pathfind(secondCursorX, secondCursorY, cursorX, cursorY, 5);
+        uchar found = pathfind(secondCursorX, secondCursorY, cursorX, cursorY, 5, 0);
         if (found) {
             state = STATE_MOVE;
         }
@@ -229,10 +230,15 @@ void check_enter_move_mode() {
     }
 }
 
+inline void hide_cursor() {
+    move_bigsprite(0, 0, 0);
+    move_bigsprite(1, 0, 0);
+}
+
 void check_exit_move_mode() {
     if (joy & J_B) {
         state = STATE_LOOK;
-        move_bigsprite(1, 0, 0);
+        hide_cursor();
     }
 }
 
@@ -256,6 +262,13 @@ void check_win(){
     return;
 }
 
+uchar currEntity = 0;
+uchar pathfinding_done = 0;
+void start_enemy_turn() {
+    currEntity = 0;
+    pathfinding_done = 0;
+}
+
 void advance_phase(){
     //todo: check_win() during attack phase
 
@@ -264,15 +277,23 @@ void advance_phase(){
     //  2 times from player to other, other to player
     //  3 times from enemy to player, (other to enemy, impossible case)
 
-    do{
-        party_current++;
-    }while(party_current <= 2 && !is_party_exist(party_current));
+    // do{
+    //     party_current++;
+    // }while(party_current <= 2 && !is_party_exist(party_current));
     
-    if (party_current > 2){
-        //player can be assumed to be alive, this check is done in check win
-        party_current = 0;
-        check_win(); //uncomment to test game_over()
+    // if (party_current > 2){
+    //     //player can be assumed to be alive, this check is done in check win
+    //     party_current = 0;
+    //     check_win(); //uncomment to test game_over()
+    //     add_turn();
+    // }
+    if (state == STATE_ENEMY_TURN) {
+        //check_win();
         add_turn();
+        state = STATE_LOOK;
+    } else {
+        start_enemy_turn();
+        state = STATE_ENEMY_TURN;
     }
 }
 
@@ -346,7 +367,9 @@ void update_select_attacker_cursor() {
         cursorX = centerX + 1;
         cursorY = centerY;
     }
+}
 
+void check_confirm_battle() {
     if (joy_impulse & J_A) {
         uchar *adj_entities = get_adj_entities(selectedCharacter);
 
@@ -359,6 +382,11 @@ void update_select_attacker_cursor() {
     }
 }
 
+void check_cancel_battle() {
+    if (joy_impulse & J_B) {
+        state = STATE_LOOK;
+    }
+}
 
 void update_characters() {
     for (uchar i = 0; i < numCharacters; i++) {
@@ -431,9 +459,9 @@ void play_game(){
             check_confirm_move();
             check_exit_move_mode();
         } else if (state == STATE_MOVE) {
-            if (move_entity_after_pathfinding(selectedCharacter)){
-                state = STATE_LOOK;
-                move_bigsprite(1, 0, 0);
+            if (move_entity_after_pathfinding(selectedCharacter, 255, 0)){
+                state = STATE_LOOK; //this might get undone by post_move
+                hide_cursor();
                 post_move();
                 if (joy_impulse & J_START && state == STATE_LOOK){
                     break;
@@ -444,7 +472,39 @@ void play_game(){
             }
         } else if (state == STATE_CHOOSE_ATTACKER) {
             update_select_attacker_cursor();
+            check_confirm_battle();
+            check_cancel_battle();
+        } else if (state == STATE_ENEMY_TURN) {
+            hide_cursor();
+        chooseEnemy:
+            if (currEntity >= numCharacters) {
+                advance_phase();
+                    goto end;
+            }
+            while (entities[currEntity].party != PARTY_ENEMY){
+                currEntity++;
+                pathfinding_done = 0;
+                if (currEntity >= numCharacters){
+                    advance_phase();
+                    goto end;
+                }
+            }
+
+            if (!pathfinding_done) {
+                uchar result = pathfind(entities[currEntity].x / 16, entities[currEntity].y / 16, entities[0].x / 16, entities[0].y / 16, 10, 1);
+                if (!result) {
+                    currEntity++;
+                    goto chooseEnemy;
+                }
+                pathfinding_done = 1;
+            }
+
+            if (move_entity_after_pathfinding(currEntity, 3, 1)) {
+                currEntity++;
+                goto chooseEnemy;
+            }
         }
+    end:
 
         move_cursor();
         
