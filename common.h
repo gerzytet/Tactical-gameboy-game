@@ -5,7 +5,6 @@
 @brief 
 */
 
-
 #ifndef COMMON_H
 #define COMMON_H
 
@@ -64,6 +63,10 @@ uchar mapIndex = 0;
 #define PLAYER_LOST 2
 uchar winState = 0;
 
+#define enemyMoveAuto 0
+#define enemyMoveMan 1
+#define enemyMoveLink 2
+uchar enemyMoveMode = enemyMoveAuto;
 
 const uchar letter_table[36] = {
     0, //a

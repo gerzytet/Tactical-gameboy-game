@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 8 x 16
-  Tiles                : 32 to 36
+  Tiles                : 32 to 37
 
   Palette colors       : None.
   SGB Palette          : None.
@@ -26,6 +26,6 @@
 /* Bank of tiles. */
 #define SymbolsBank 0
 /* Start of tile array. */
-extern const unsigned char Symbols[];
+extern unsigned char Symbols[];
 
 /* End of SYMBOLS.H */

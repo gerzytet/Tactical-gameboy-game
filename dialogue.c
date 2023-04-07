@@ -13,6 +13,10 @@
 #include "graphics/Numbers.h"
 #include "graphics/Symbols.h"
 
+#include "graphics/character_art/guard_text_data.h"
+#include "graphics/character_art/guard_text_map.h"
+//todo: rest of cast
+
 #define TILEMAP_START 0x9800
 #define WIN_TILEMAP_START 0x9C00
 
@@ -34,6 +38,9 @@ const uchar* script2[16] = {
 const uchar* dialogueCharNames[3] = {"FREDRIK", "MARIE", "BOSTON"};
 
 const uchar sceneTextLength[12] = {10,8,5,5,5,5,5,5,5,5,5,5};
+const uchar image[10] = {0,0,0,0,0,0,0,0,0,0};
+
+//remove
 const uchar imageLeft[12] = {5,5,5,5,5};
 const uchar imageRight[12] = {5,5,5,5,5};
 
@@ -56,25 +63,27 @@ void set_text(const uchar *textLine1, const uchar *textLine2 ,uchar charNameInde
             case (' '):
                 tile = SPACE_LETTER + 14;
                 break;
-
+            case (','):
+                tile = 148;
+                break;
             case ('.'):
-                tile = 80;
+                tile = 150;
                 break;
 
             case ('!'):
-                tile = 82;
+                tile = 152;
                 break;
 
             case ('?'):
-                tile = 84;
+                tile = 154;
                 break;
 
             case ('-'):
-                tile = 86;
+                tile = 156;
                 break;
 
             case ('~'):
-                tile = 88;
+                tile = 158;
                 break;
 
             default:
@@ -95,25 +104,27 @@ void set_text(const uchar *textLine1, const uchar *textLine2 ,uchar charNameInde
             case (' '):
                 tile = SPACE_LETTER + 14;
                 break;
-
+            case (','):
+                tile = 148;
+                break;
             case ('.'):
-                tile = 80;
+                tile = 150;
                 break;
 
             case ('!'):
-                tile = 82;
+                tile = 152;
                 break;
 
             case ('?'):
-                tile = 84;
+                tile = 154;
                 break;
 
             case ('-'):
-                tile = 86;
+                tile = 156;
                 break;
 
             case ('~'):
-                tile = 88;
+                tile = 158;
                 break;
 
             default:
@@ -128,10 +139,16 @@ void set_text(const uchar *textLine1, const uchar *textLine2 ,uchar charNameInde
     return;
 }
 
-//do later
-void set_char_sprite(uchar charSpriteIndex, uchar position){
-    position = position;
+void set_char_sprite(uchar charSpriteIndex){
     charSpriteIndex = charSpriteIndex;
+    
+    //switch
+    //frederik marie boston .. .. guard orallov
+
+
+    //set guard left
+    set_banked_bkg_data(178, 68, guard_text_data,2);
+    set_banked_bkg_tiles(0,2, 8, 10, guard_text_map,2);
     return;
 }
 
@@ -143,11 +160,11 @@ void advance_text(){
     }
     
     if (dialogueIndex == 0 || imageLeft[dialogueIndex-1] != imageLeft[dialogueIndex-1]){
-        set_char_sprite(imageLeft[dialogueIndex], 1);
+        set_char_sprite(image[dialogueIndex]);
     }
-    if (dialogueIndex == 0 || imageRight[dialogueIndex-1] != imageRight[dialogueIndex-1]){
+    /*if (dialogueIndex == 0 || imageRight[dialogueIndex-1] != imageRight[dialogueIndex-1]){
         set_char_sprite(imageRight[dialogueIndex], 2);
-    }
+    }*/
 
     //fix later
     if (dialogueSceneIndex == 0){
@@ -160,12 +177,15 @@ void advance_text(){
 }
 
 void setupTextBox(){
+    for (uchar i = 0; i < 20; ++i){
+        set_bkg_tile_xy(i,11,0);
+    }
     set_banked_bkg_data(0, 14, TextBox, 2);
     set_banked_bkg_tiles(0, 12, 20, 6, TextBoxMap, 2);
 
     set_banked_bkg_data(14, 46, Letters, 2); //letters. 46 tiles.  23 letters
-    set_banked_bkg_data(60, 20, Numbers, 2); //numbers. 20 tiles. 10 numbers
-    set_banked_bkg_data(80, 10, Symbols, 2); //symbols. 10 tiles. 5 symbols
+    set_banked_bkg_data(128, 20, Numbers, 2); //numbers. 20 tiles. 10 numbers
+    set_banked_bkg_data(148, 12, Symbols, 2); //symbols. 12 tiles. 6 symbols
 
     //hide "STORY" text
     for(int i = 0; i < 5; ++i){

@@ -27,15 +27,15 @@ uchar secondCursorX = 0, secondCursorY = 0;
 
 uchar selectedCharacter = 255;
 
-enum State {
+enum TurnState {
     STATE_LOOK = 0,
     STATE_CHOOSE_MOVE = 1,
     STATE_MOVE = 2,
     STATE_CHOOSE_ATTACKER = 3,
-    STATE_ENEMY_TURN = 4
+    STATE_AUTO_TURN = 4
 };
 
-uchar state = STATE_LOOK;
+uchar phase_state = STATE_LOOK;
 
 #define TILEMAP_START 0x9800
 #define FIRST_TILE_OFFSET_2x2 0
@@ -190,7 +190,7 @@ void check_confirm_move() {
 
         uchar found = pathfind(secondCursorX, secondCursorY, cursorX, cursorY, 5, 0);
         if (found) {
-            state = STATE_MOVE;
+            phase_state = STATE_MOVE;
         }
     }
 }
@@ -221,7 +221,7 @@ inline void render_second_cursor() {
 void check_enter_move_mode() {
     if (joy_impulse & J_A) {
         if (hoverCharacter != 255 && entities[hoverCharacter].party == party_current && entities[hoverCharacter].moved == 0) {
-            state = STATE_CHOOSE_MOVE;
+            phase_state = STATE_CHOOSE_MOVE;
             secondCursorX = cursorX;
             secondCursorY = cursorY;
             display_bigsprite(1, 0);
@@ -237,7 +237,7 @@ inline void hide_cursor() {
 
 void check_exit_move_mode() {
     if (joy & J_B) {
-        state = STATE_LOOK;
+        phase_state = STATE_LOOK;
         hide_cursor();
     }
 }
@@ -277,23 +277,23 @@ void advance_phase(){
     //  2 times from player to other, other to player
     //  3 times from enemy to player, (other to enemy, impossible case)
 
-    // do{
-    //     party_current++;
-    // }while(party_current <= 2 && !is_party_exist(party_current));
+    do{
+         party_current++;
+    }while(party_current <= 2 && !is_party_exist(party_current));
     
-    // if (party_current > 2){
-    //     //player can be assumed to be alive, this check is done in check win
-    //     party_current = 0;
-    //     check_win(); //uncomment to test game_over()
-    //     add_turn();
-    // }
-    if (state == STATE_ENEMY_TURN) {
+     if (party_current > 2){
+         //player can be assumed to be alive, this check is done in check win
+         party_current = 0;
+         check_win(); //uncomment to test game_over()
+         add_turn();
+    }
+    if (phase_state == STATE_AUTO_TURN) {
         //check_win();
         add_turn();
-        state = STATE_LOOK;
+        phase_state = STATE_LOOK;
     } else {
         start_enemy_turn();
-        state = STATE_ENEMY_TURN;
+        phase_state = STATE_AUTO_TURN;
     }
 }
 
@@ -314,7 +314,7 @@ void post_move(){
     }
 
     if (entity_found) {
-        state = STATE_CHOOSE_ATTACKER;
+        phase_state = STATE_CHOOSE_ATTACKER;
         secondCursorX = entities[selectedCharacter].x / 16;
         secondCursorY = entities[selectedCharacter].y / 16;
     }
@@ -377,14 +377,14 @@ void check_confirm_battle() {
             uchar target = adj_entities[last_selected];
             
             battle(selectedCharacter, target);
-            state = STATE_LOOK;
+            phase_state = STATE_LOOK;
         }
     }
 }
 
 void check_cancel_battle() {
     if (joy_impulse & J_B) {
-        state = STATE_LOOK;
+        phase_state = STATE_LOOK;
     }
 }
 
@@ -404,7 +404,7 @@ void update_characters() {
 }
 
 void update_cursor_color() {
-    set_bigsprite_color(0, state == STATE_CHOOSE_ATTACKER ? 2 : 0);
+    set_bigsprite_color(0, phase_state == STATE_CHOOSE_ATTACKER ? 2 : 0);
 }
 
 void play_game(){
@@ -435,7 +435,7 @@ void play_game(){
         LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_OBJ16;
     }
     while (1) {
-        if (state == STATE_LOOK || state == STATE_CHOOSE_MOVE) {
+        if (phase_state == STATE_LOOK || phase_state == STATE_CHOOSE_MOVE) {
             check_cursor_movement();
         }
         update_camera();
@@ -445,43 +445,14 @@ void play_game(){
         update_gui();
         update_cursor_color();
 
-        /*if (joy_impulse & J_START && state == STATE_LOOK){
-            break;
-        }*/
-
-        if (state == STATE_LOOK) {
-            check_enter_move_mode();
-            if (joy_impulse & J_SELECT && state == STATE_LOOK){
-                advance_phase();
-            }
-        } else if (state == STATE_CHOOSE_MOVE) {
-            render_second_cursor();
-            check_confirm_move();
-            check_exit_move_mode();
-        } else if (state == STATE_MOVE) {
-            if (move_entity_after_pathfinding(selectedCharacter, 255, 0)){
-                state = STATE_LOOK; //this might get undone by post_move
-                hide_cursor();
-                post_move();
-                if (joy_impulse & J_START && state == STATE_LOOK){
-                    break;
-                }
-                if (winState != 0){
-                    break; //gameover
-                }
-            }
-        } else if (state == STATE_CHOOSE_ATTACKER) {
-            update_select_attacker_cursor();
-            check_confirm_battle();
-            check_cancel_battle();
-        } else if (state == STATE_ENEMY_TURN) {
+        if (enemyMoveMode == enemyMoveAuto && (party_current != 0)) {
             hide_cursor();
         chooseEnemy:
             if (currEntity >= numCharacters) {
                 advance_phase();
                     goto end;
             }
-            while (entities[currEntity].party != PARTY_ENEMY){
+            while (entities[currEntity].party != party_current){
                 currEntity++;
                 pathfinding_done = 0;
                 if (currEntity >= numCharacters){
@@ -503,8 +474,33 @@ void play_game(){
                 currEntity++;
                 goto chooseEnemy;
             }
+        } else if (phase_state == STATE_LOOK) {
+            check_enter_move_mode();
+            if (joy_impulse & J_SELECT && phase_state == STATE_LOOK){
+                advance_phase();
+            }
+        } else if (phase_state == STATE_CHOOSE_MOVE) {
+            render_second_cursor();
+            check_confirm_move();
+            check_exit_move_mode();
+        } else if (phase_state == STATE_MOVE) {
+            if (move_entity_after_pathfinding(selectedCharacter, 255, 0)){
+                phase_state = STATE_LOOK; //this might get undone by post_move
+                hide_cursor();
+                post_move();
+                if (joy_impulse & J_START && phase_state == STATE_LOOK){
+                    break;
+                }
+                if (winState != 0){
+                    break; //gameover
+                }
+            }
+        } else if (phase_state == STATE_CHOOSE_ATTACKER) {
+            update_select_attacker_cursor();
+            check_confirm_battle();
+            check_cancel_battle();
         }
-    end:
+        end:
 
         move_cursor();
         

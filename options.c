@@ -16,7 +16,7 @@ void options_menu(){
 	set_bkg_palette(0, 1, colors);
 	move_bkg(0,0);
 
-	printf("Options\nThere are no current Options\nPress B to Return");
+	//printf("Options\nThere are no current Options\nPress B to Return");
 
 	while(1){		
 		if (joy_impulse & J_B){

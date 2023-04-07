@@ -15,9 +15,9 @@
 #include "options.c"
 #include "credits.c"
 #include "battle.c"
-#include "multiplayer.c"
+#include "multiplayer.h"
 #include "map_window.c"
-#include "map.c"
+#include "map.h"
 
 //fixed width: 6 characters
 
@@ -37,9 +37,16 @@ void vblank_routine(){
         case(MODE_BATTLE):
             break;
     }
-    joy_impulse = joy;
-    joy = joypad();
-    joy_impulse = ~joy_impulse & joy;
+    if (game_mode == MODE_MAP && enemyMoveMode == enemyMoveLink){
+        joy_impulse = joy;
+        joy = remote_joypad();
+        joy_impulse = ~joy_impulse & joy;
+    }
+    else {
+        joy_impulse = joy;
+        joy = joypad();
+        joy_impulse = ~joy_impulse & joy;
+    }
     return;
 }
 
@@ -71,6 +78,11 @@ void game_over(){
 //Initialze the map with parameters before map is generated
 void play_map(uchar num){
     //todo: initialize map with params
+    
+    if (_is_GBA == GBA_DETECTED){
+        add_VBL(vblank_routine);
+    }
+    
     mapIndex = num;
     //enemies
 
@@ -80,6 +92,7 @@ void play_map(uchar num){
 
 //Plays the Story Mode from start to finish
 void start_story(uchar startFrom){
+    enemyMoveMode = enemyMoveAuto;
     switch(startFrom){
         case (0):
             play_scene(0);
@@ -111,14 +124,12 @@ void main() {
     //An uncompleted campaign exists
     //Do you wish to continue from the last save?
     //Y/N
-
-    add_VBL(vblank_routine);
+    if (_is_GBA == GBA_NOT_DETECTED){
+        add_VBL(vblank_routine);
+    }
     IE_REG = IEF_VBLANK;
     enable_interrupts();
-
-    if (_is_GBA == GBA_DETECTED){
-        printf("GBA detected\n");
-    }
+    
     menu_option = 255;
     while (1){
         switch (menu_option){
@@ -126,6 +137,7 @@ void main() {
                 mainmenu();
                 break;
             case 0:
+                enemyMoveMode = enemyMoveAuto;
                 play_game();
                 break;
             case 1:

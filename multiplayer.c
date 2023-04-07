@@ -1,118 +1,107 @@
+#include <gb/gb.h>
+#include <gb/cgb.h>
 #include "common.h"
 #include "graphics/palletes.c"
+#include "map.h"
+#include "graphics/Letters.h"
+
+void send_joypad(){
+    _io_out = joypad();
+    send_byte();
+}
+
+uint8_t remote_joypad(){
+    receive_byte();
+    return _io_in;
+}
+
+void set_handshake_text(const uchar *text){
+    if (text == NULL) {
+        return;
+    }
+    volatile uchar *tilemap = (uchar *)TILEMAP_START;
+    static uchar tile;
+    
+    //todo: character name
+    //set name dialogueCharNames[charNameIndex]
+    for (uchar i = 0; i < 16; ++i){
+        switch(text[i])
+        {
+            case (' '):
+                tile = SPACE_LETTER;
+                break;
+
+            case ('.'):
+                tile = 66;
+                break;
+
+            default:
+                tile = letter_table[text[i] - 'A'];
+        }
+        tilemap[i] = tile;
+        tile++;
+        tilemap[(i+32)] = tile;
+        wait_vbl_done();
+    }
+}
 
 void multiplayer(){
     game_mode = MODE_MULTIPLAYER;
     set_bkg_palette(0, 1, colors);
+    set_bkg_data(0, 46, Letters); //letters. 46 tiles.  23 letters
 	move_bkg(0,0);
-
-    printf("loading");
     wait_vbl_done();
-    //joypad_init(2, /*pointer to some struct*/);
-    //connected
+    
+    receive_byte(); //check if second console connected first
+    uchar playerNum = 0;
+    
+    if (_io_in == 1){
+        playerNum = 2;
+        _io_out = 2;
+        send_byte();
+    }
+    else{
+        set_handshake_text("PLEASE CONNECT A");
+        set_handshake_text("SECOND NINTENDO ");
+        set_handshake_text("GAME BOY USING  ");
+        set_handshake_text("A LINK CABLE    ");
+        
+        playerNum = 1;
+        //send byte to second console waiting for connect
+        do{
+            receive_byte();
+            _io_out = 1;
+            send_byte();
+            wait_vbl_done();
+        }while(_io_in != 0);
+    }
 
-    printf("Connect a second console before you continue!\nPress A for SEND MODE, press B for RECEIVE MODE\n");
-    uchar mode = 0;
-    while (mode == 0){
-        if (joy_impulse & J_A) {
-            mode = 1;
-            printf("Player 1 selected\n");
-        }
-        else if (joy_impulse & J_B) {
-            mode = 2;
-            printf("Player 2 selected\n");
-        }
+    set_handshake_text("CONNECTED       ");
+    //wait 4 secs before start
+    for (uchar i = 0; i < 180; ++i){
         wait_vbl_done();
     }
 
-    printf("Searching for second console\n");
-
-    while(mode == 1){		
-        // Check which button was pressed
+    /*uchar mode = 0;
+    while (mode == 0){
         if (joy_impulse & J_A) {
-            printf("A\n");
-            _io_out = 0;
-            send_byte();
-            /* Wait for IO completion... */
-            while((_io_status == IO_SENDING) && (joypad() == 0));
-        } else if (joy_impulse & J_B) {
-            printf("B\n");
-            _io_out = 1;
-            send_byte();
-            /* Wait for IO completion... */
-            while((_io_status == IO_SENDING) && (joypad() == 0));
-        } else if (joy_impulse & J_START) {
-            printf("START\n");
-            _io_out = 2;
-            send_byte();
-            /* Wait for IO completion... */
-            while((_io_status == IO_SENDING) && (joypad() == 0));
-        } else if (joy_impulse & J_SELECT) {
-            printf("SELECT\n");
-            _io_out = 3;
-            send_byte();
-            /* Wait for IO completion... */
-            while((_io_status == IO_SENDING) && (joypad() == 0));
-        } else if (joy_impulse & J_UP) {
-            printf("UP\n");
-            _io_out = 4;
-            send_byte();
-            /* Wait for IO completion... */
-            while((_io_status == IO_SENDING) && (joypad() == 0));
-        } else if (joy_impulse & J_DOWN) {
-            printf("DOWN\n");
-            _io_out = 5;
-            send_byte();
-            /* Wait for IO completion... */
-            while((_io_status == IO_SENDING) && (joypad() == 0));
-        } else if (joypad() & J_LEFT) {
-            printf("LEFT\n");
-            _io_out = 6;
-            send_byte();
-            /* Wait for IO completion... */
-            while((_io_status == IO_SENDING) && (joypad() == 0));
-        } else if (joy_impulse   & J_RIGHT) {
-            printf("RIGHT\n");
-            _io_out = 7;
-            send_byte();
-            /* Wait for IO completion... */
-            while((_io_status == IO_SENDING) && (joypad() == 0));
+            mode = 1;
+            //printf("Player 1 selected\n");
+        }
+        else if (joy_impulse & J_B) {
+            mode = 2;
+            //printf("Player 2 selected\n");
         }
         wait_vbl_done();
-	}
+    }*/
 
-    while (mode == 2){
-        /* Receive 1 byte */
-        receive_byte();
-        /* Wait for IO completion... */
-        while((_io_status == IO_RECEIVING) && (joypad() == 0));
-        
-        switch(_io_in){
-            case (0):
-                printf("A Button received\n");
-                break;
-            case (1):
-                printf("B Button received\n");
-                break;
-            case (2):
-                printf("START Button received\n");
-                break;
-            case (3):
-                printf("SELECT Button received\n");
-                break;
-            case (4):
-                printf("DPAD Up received\n");
-                break;
-            case (5):
-                printf("DPAD Down received\n");
-                break;
-            case (6):
-                printf("DPAD Left received\n");
-                break;
-            case (7):
-                printf("DPAD Right received\n");
-                break;
-        }  
-        wait_vbl_done();
+    if (playerNum == 1){ //P1
+        enemyMoveMode = enemyMoveLink;
+        play_game();
+    }
+    else if (playerNum == 2){ //P2
+        while(1){
+            send_joypad();
+        }
     }
 }
