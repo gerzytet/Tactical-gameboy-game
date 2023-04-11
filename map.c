@@ -60,7 +60,7 @@ void setup_background() {
     VBK_REG = VBK_BANK_1;
     set_banked_bkg_data(FIRST_TILE_OFFSET_2x2 * 4, NUM_TILES * 4, Tiles, 2); //tiles.  15 big tiles, 60 small tiles
     VBK_REG = VBK_BANK_0;
-    set_banked_bkg_data(0, 46, Letters, 2); //letters. 46 tiles.  23 letters
+    set_banked_bkg_data(128, 46, Letters, 2); //letters. 46 tiles.  23 letters
     set_banked_bkg_data(46, 10, Top_textbox, 2);
     set_banked_bkg_data(56, 20, Numbers, 2);
 
@@ -250,14 +250,15 @@ void check_win(){
 
     if (is_party_exist(PARTY_FRIEND) == 0){
         winState = PLAYER_LOST;
+        DISPLAY_OFF;
     }
-    else if (is_party_exist(PARTY_ENEMY) == 0){
-        if (winCondition == WIN_IF_ENEMY_DEFEAT){
-            winState = PLAYER_WON;
-        }
-        else if (winCondition > 1 && turn_cntr >= winCondition){
-            winState = PLAYER_WON; 
-        }    
+    else if (is_party_exist(PARTY_ENEMY) == 0 && winCondition == WIN_IF_ENEMY_DEFEAT){
+        winState = PLAYER_WON;
+        DISPLAY_OFF;
+    }
+    else if (winCondition > 1 && turn_cntr >= winCondition){
+        winState = PLAYER_WON; 
+        DISPLAY_OFF;
     }
     return;
 }
@@ -287,11 +288,14 @@ void advance_phase(){
          check_win(); //uncomment to test game_over()
          add_turn();
     }
+
+    //this is not the proper place to put this
+    //if it is, checks should be done to check which turn it is 
+    //as well as the MoveMode (fixed)
     if (phase_state == STATE_AUTO_TURN) {
         //check_win();
-        add_turn();
         phase_state = STATE_LOOK;
-    } else {
+    } else if (enemyMoveMode == enemyMoveAuto){
         start_enemy_turn();
         phase_state = STATE_AUTO_TURN;
     }
@@ -319,7 +323,7 @@ void post_move(){
         secondCursorY = entities[selectedCharacter].y / 16;
     }
 
-
+    
     //set selectedCharacter palette to greyscale
     PALETTESWAP:paletteswap(selectedCharacter, 0);
 
@@ -369,6 +373,18 @@ void update_select_attacker_cursor() {
     }
 }
 
+void remove_character(uchar index){
+    hide_sprite(numCharacters*2+2);
+    hide_sprite(numCharacters*2+3);
+    entities[index] = entities[numCharacters-1];
+    
+    //trying to get the removed character to disappear
+    entities[numCharacters-1].moved = 3;
+    entities[numCharacters-1].sprite = BLANK * 2;
+
+    --numCharacters;
+}
+
 void check_confirm_battle() {
     if (joy_impulse & J_A) {
         uchar *adj_entities = get_adj_entities(selectedCharacter);
@@ -376,7 +392,12 @@ void check_confirm_battle() {
         if (adj_entities[last_selected] != 255) {
             uchar target = adj_entities[last_selected];
             
-            battle(selectedCharacter, target);
+            if (debug_instakill == 0){
+                battle(selectedCharacter, target);
+            }
+            else{
+                remove_character(target);
+            }
             phase_state = STATE_LOOK;
         }
     }
@@ -445,7 +466,7 @@ void play_game(){
         update_gui();
         update_cursor_color();
 
-        if (enemyMoveMode == enemyMoveAuto && (party_current != 0)) {
+        if (enemyMoveMode == enemyMoveAuto && (party_current == PARTY_ENEMY) && is_party_exist(PARTY_ENEMY)) {
             hide_cursor();
         chooseEnemy:
             if (currEntity >= numCharacters) {
@@ -474,6 +495,8 @@ void play_game(){
                 currEntity++;
                 goto chooseEnemy;
             }
+        } else if (enemyMoveMode == enemyMoveAuto && (party_current != 0) && is_party_exist(PARTY_ENEMY)) {
+            
         } else if (phase_state == STATE_LOOK) {
             check_enter_move_mode();
             if (joy_impulse & J_SELECT && phase_state == STATE_LOOK){
@@ -492,13 +515,14 @@ void play_game(){
                     break;
                 }
                 if (winState != 0){
-                    break; //gameover
+                    goto endgame; //gameover
                 }
             }
         } else if (phase_state == STATE_CHOOSE_ATTACKER) {
             update_select_attacker_cursor();
             check_confirm_battle();
             check_cancel_battle();
+            //check win
         }
         end:
 
@@ -508,5 +532,6 @@ void play_game(){
         __asm__("halt");
     }
 
+    endgame:
     game_over();
 }

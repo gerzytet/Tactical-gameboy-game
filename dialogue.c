@@ -15,6 +15,8 @@
 
 #include "graphics/character_art/guard_text_data.h"
 #include "graphics/character_art/guard_text_map.h"
+#include "graphics/character_art/elf_text_data.h"
+#include "graphics/character_art/elf_text_map_left.h"
 //todo: rest of cast
 
 #define TILEMAP_START 0x9800
@@ -55,39 +57,37 @@ void set_text(const uchar *textLine1, const uchar *textLine2 ,uchar charNameInde
     static uchar tile;
     charNameIndex = charNameIndex;
     
-    //todo: character name
-    //set name dialogueCharNames[charNameIndex]
     for (uchar i = 0; i < 16; ++i){
         switch(textLine1[i])
         {
             case (' '):
-                tile = SPACE_LETTER + 14;
+                tile = SPACE_LETTER+128;
                 break;
             case (','):
-                tile = 148;
+                tile = 290; 
                 break;
             case ('.'):
-                tile = 150;
+                tile = 292;
                 break;
 
             case ('!'):
-                tile = 152;
+                tile = 294;
                 break;
 
             case ('?'):
-                tile = 154;
+                tile = 296;
                 break;
 
             case ('-'):
-                tile = 156;
+                tile = 298;
                 break;
 
             case ('~'):
-                tile = 158;
+                tile = 300;
                 break;
 
             default:
-                tile = letter_table[textLine1[i] - 'A']+ 14;
+                tile = letter_table[textLine1[i] - 'A']+128;
         }
         tilemap[i+418] = tile;
         tile++;
@@ -102,33 +102,33 @@ void set_text(const uchar *textLine1, const uchar *textLine2 ,uchar charNameInde
         switch(textLine2[i])
         {
             case (' '):
-                tile = SPACE_LETTER + 14;
+                tile = SPACE_LETTER+128;
                 break;
             case (','):
-                tile = 148;
+                tile = 290;
                 break;
             case ('.'):
-                tile = 150;
+                tile = 292;
                 break;
 
             case ('!'):
-                tile = 152;
+                tile = 294;
                 break;
 
             case ('?'):
-                tile = 154;
+                tile = 296;
                 break;
 
             case ('-'):
-                tile = 156;
+                tile = 298;
                 break;
 
             case ('~'):
-                tile = 158;
+                tile = 300;
                 break;
 
             default:
-                tile = letter_table[textLine2[i] - 'A']+ 14;
+                tile = letter_table[textLine2[i] - 'A']+128;
         }
         tilemap[(i+482)] = tile;
         tile++;
@@ -139,16 +139,52 @@ void set_text(const uchar *textLine1, const uchar *textLine2 ,uchar charNameInde
     return;
 }
 
-void set_char_sprite(uchar charSpriteIndex){
+void set_char_sprite(uchar charSpriteIndex, uchar pos){
     charSpriteIndex = charSpriteIndex;
-    
-    //switch
-    //frederik marie boston .. .. guard orallov
+    pos = pos;
+    //pos 0 center 1 left 2 right
 
+    /*switch(charSpriteIndex){
+        case(0):
+            //f
+            break;
+        case(1):
+            //m
+            break;
+        case(2):
+            //b
+            break;
+        case(3):
+            //bandit
+            break;
+        case(4):
+            //elf
+            switch(pos):
+                case(2):
+                    set_banked_bkg_data(58, 54, elf_text_data,2);
+                    set_banked_bkg_tiles(12,3, 8, 9, elf_text_map_left,2);
+                    break;
+            break;
+        case(5):
+            //guard
+            switch(pos):
+                case(1):
+                    set_banked_bkg_data(186, 68, guard_text_data,2);
+                    set_banked_bkg_tiles(0,2, 8, 10, guard_text_map,2);
+            break;
+        case(6):
+            //orallov
+            break;
+    }*/
 
     //set guard left
-    set_banked_bkg_data(178, 68, guard_text_data,2);
+    set_banked_bkg_data(186, 68, guard_text_data,2);
     set_banked_bkg_tiles(0,2, 8, 10, guard_text_map,2);
+
+    //set elf right
+    set_banked_bkg_data(58, 54, elf_text_data,2);
+    set_banked_bkg_tiles(12,3, 8, 9, elf_text_map_left,2);
+
     return;
 }
 
@@ -160,7 +196,7 @@ void advance_text(){
     }
     
     if (dialogueIndex == 0 || imageLeft[dialogueIndex-1] != imageLeft[dialogueIndex-1]){
-        set_char_sprite(image[dialogueIndex]);
+        set_char_sprite(image[dialogueIndex], 0);
     }
     /*if (dialogueIndex == 0 || imageRight[dialogueIndex-1] != imageRight[dialogueIndex-1]){
         set_char_sprite(imageRight[dialogueIndex], 2);
@@ -183,9 +219,11 @@ void setupTextBox(){
     set_banked_bkg_data(0, 14, TextBox, 2);
     set_banked_bkg_tiles(0, 12, 20, 6, TextBoxMap, 2);
 
-    set_banked_bkg_data(14, 46, Letters, 2); //letters. 46 tiles.  23 letters
-    set_banked_bkg_data(128, 20, Numbers, 2); //numbers. 20 tiles. 10 numbers
-    set_banked_bkg_data(148, 12, Symbols, 2); //symbols. 12 tiles. 6 symbols
+    set_banked_bkg_data(128, 46, Letters, 2); //letters. 46 tiles.  23 letters
+    set_banked_bkg_data(14, 20, Numbers, 2); //numbers. 20 tiles. 10 numbers
+    set_banked_bkg_data(34, 12, Symbols, 2); //symbols. 12 tiles. 6 symbols
+    //set JQXZ
+    //4 tiles leftover in bkg
 
     //hide "STORY" text
     for(int i = 0; i < 5; ++i){
@@ -205,6 +243,7 @@ void play_scene(uchar index){
     //setup character art
     
     //intro anim
+    DISPLAY_ON;
 
     advance_text();
     while (dialogueIndex <= sceneTextLength[index]){		

@@ -22,14 +22,10 @@
 
 */
 
-#ifndef __Numbers_h_INCLUDE
-#define __Numbers_h_INCLUDE
 
 /* Bank of tiles. */
 #define NumbersBank 0
 /* Start of tile array. */
-extern const unsigned char Numbers[];
-
-#endif
+extern unsigned char Numbers[];
 
 /* End of NUMBERS.H */

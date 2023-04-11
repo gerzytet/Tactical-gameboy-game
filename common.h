@@ -30,7 +30,7 @@ struct Entity {
     const uchar * name;
     uchar party;
     uchar moved;
-    uchar health;
+    char health;
     uchar maxHealth;
     uchar inventory[5];
 };
@@ -38,6 +38,10 @@ struct Entity {
 enum GameMode {MODE_MAIN_MENU = 255, MODE_MAP = 0, MODE_DIALOGUE = 1, MODE_MULTIPLAYER = 2, MODE_OPTIONS = 3, MODE_CREDITS = 4, MODE_BATTLE = 5};
 
 uchar game_mode;
+
+uchar debug_instakill = 0;
+
+#define MATH_MAX 127;
 
 void game_over();
 
@@ -66,7 +70,7 @@ uchar winState = 0;
 #define enemyMoveAuto 0
 #define enemyMoveMan 1
 #define enemyMoveLink 2
-uchar enemyMoveMode = enemyMoveAuto;
+uchar enemyMoveMode = enemyMoveMan;//enemyMoveAuto;
 
 const uchar letter_table[36] = {
     0, //a

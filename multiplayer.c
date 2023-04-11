@@ -28,7 +28,7 @@ void set_handshake_text(const uchar *text){
         switch(text[i])
         {
             case (' '):
-                tile = SPACE_LETTER;
+                tile = SPACE_LETTER+128;
                 break;
 
             case ('.'):
@@ -36,11 +36,11 @@ void set_handshake_text(const uchar *text){
                 break;
 
             default:
-                tile = letter_table[text[i] - 'A'];
+                tile = letter_table[text[i] - 'A']+128;
         }
-        tilemap[i] = tile;
+        tilemap[i+418] = tile;
         tile++;
-        tilemap[(i+32)] = tile;
+        tilemap[(i+450)] = tile;
         wait_vbl_done();
     }
 }
@@ -48,11 +48,38 @@ void set_handshake_text(const uchar *text){
 void multiplayer(){
     game_mode = MODE_MULTIPLAYER;
     set_bkg_palette(0, 1, colors);
-    set_bkg_data(0, 46, Letters); //letters. 46 tiles.  23 letters
+    set_banked_bkg_data(128, 46, Letters, 2); //letters. 46 tiles.  23 letters
 	move_bkg(0,0);
     wait_vbl_done();
-    
-    receive_byte(); //check if second console connected first
+
+    //set_banked_bkg_data(0, 23, Link_Console, 2);
+    //set_banked_bkg_data(23, 10, Link_Cable, 2);
+    //set_banked_bkg_tiles(0,1,11,4,Link_Console,2);
+    //set_banked_bkg_tiles(10,1,4,7,Link_Console,2);
+    //set_banked_bkg_tiles(0,0,4,7,Link_Cable,2);
+
+    //change the different consoles to different colors
+    //const uchar cgb_one[28] = {0x10};
+    //const uchar cgb_two[28] = {0x20};
+    //set_bkg_attributes(10,1,4,7,cgb_one);
+    //set_bkg_attributes(0,0,4,7,cgb_two);
+
+    //hide "MULTILINK" text
+    for(int i = 0; i < 9; ++i){
+        hide_sprite(i);
+    }
+
+    set_handshake_text("TEST DRAW SCREEN");
+
+    while(1){		
+		if (joy_impulse & J_B){
+			menu_option = 255;
+			return;
+		}
+		wait_vbl_done();
+	}
+
+    /*receive_byte(); //check if second console connected first
     uchar playerNum = 0;
     
     if (_io_in == 1){
@@ -80,22 +107,9 @@ void multiplayer(){
     //wait 4 secs before start
     for (uchar i = 0; i < 180; ++i){
         wait_vbl_done();
-    }
-
-    /*uchar mode = 0;
-    while (mode == 0){
-        if (joy_impulse & J_A) {
-            mode = 1;
-            //printf("Player 1 selected\n");
-        }
-        else if (joy_impulse & J_B) {
-            mode = 2;
-            //printf("Player 2 selected\n");
-        }
-        wait_vbl_done();
     }*/
 
-    if (playerNum == 1){ //P1
+    /*if (playerNum == 1){ //P1
         enemyMoveMode = enemyMoveLink;
         play_game();
     }
@@ -103,5 +117,5 @@ void multiplayer(){
         while(1){
             send_joypad();
         }
-    }
+    }*/
 }

@@ -68,7 +68,8 @@ void load_game(){
 //Post game handling
 void game_over(){
     if (winState == PLAYER_WON){
-        save_game();
+        //save_game();
+        menu_option = 255;
     }
     else if (winState == PLAYER_LOST){
         menu_option = 255; //go to main menu

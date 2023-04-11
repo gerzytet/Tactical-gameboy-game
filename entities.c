@@ -12,6 +12,8 @@
 #define FRED 2
 #define ENEMY 3
 
+#define BLANK 4
+
 enum Party {
     PARTY_FRIEND = 0,
     PARTY_ENEMY = 1,
