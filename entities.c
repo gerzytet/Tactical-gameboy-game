@@ -27,6 +27,10 @@ void paletteswap(uchar entity, uchar color){
     set_bigsprite_color(entity + 2, color);
 }
 
+void palette_refresh(uchar entity){
+    paletteswap(entity, (entities[entity].moved == 0)?(entities[entity].party + 1):0);
+}
+
 void setup_characters() {
     numCharacters = 4;
     entities[0].x = 6 * 16;
@@ -70,7 +74,7 @@ void setup_characters() {
     display_bigsprite(CHARACTER_SPRITE_SLOT_START + 2, CHARACTER_BIGTILE_START + ENEMY * 2);
 
     for (uchar i = 0; i < numCharacters; ++i){
-        paletteswap(i, entities[i].party + 1);
+        palette_refresh(i);
     }
 }
 

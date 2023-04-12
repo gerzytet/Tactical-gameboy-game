@@ -61,29 +61,29 @@ void set_text(const uchar *textLine1, const uchar *textLine2 ,uchar charNameInde
         switch(textLine1[i])
         {
             case (' '):
-                tile = SPACE_LETTER+128;
+                tile = (uchar)(SPACE_LETTER+128);
                 break;
             case (','):
-                tile = 290; 
+                tile = 34; 
                 break;
             case ('.'):
-                tile = 292;
+                tile = 36;
                 break;
 
             case ('!'):
-                tile = 294;
+                tile = 38;
                 break;
 
             case ('?'):
-                tile = 296;
+                tile = 40;
                 break;
 
             case ('-'):
-                tile = 298;
+                tile = 42;
                 break;
 
             case ('~'):
-                tile = 300;
+                tile = 44;
                 break;
 
             default:
@@ -102,29 +102,29 @@ void set_text(const uchar *textLine1, const uchar *textLine2 ,uchar charNameInde
         switch(textLine2[i])
         {
             case (' '):
-                tile = SPACE_LETTER+128;
+                tile = (uchar)(SPACE_LETTER+128);
                 break;
             case (','):
-                tile = 290;
+                tile = 34;
                 break;
             case ('.'):
-                tile = 292;
+                tile = 36;
                 break;
 
             case ('!'):
-                tile = 294;
+                tile = 38;
                 break;
 
             case ('?'):
-                tile = 296;
+                tile = 40;
                 break;
 
             case ('-'):
-                tile = 298;
+                tile = 42;
                 break;
 
             case ('~'):
-                tile = 300;
+                tile = 44;
                 break;
 
             default:
@@ -245,6 +245,7 @@ void play_scene(uchar index){
     //intro anim
     DISPLAY_ON;
 
+    wait_vbl_done();
     advance_text();
     while (dialogueIndex <= sceneTextLength[index]){		
         if (joy_impulse & J_A){

@@ -39,7 +39,7 @@ enum GameMode {MODE_MAIN_MENU = 255, MODE_MAP = 0, MODE_DIALOGUE = 1, MODE_MULTI
 
 uchar game_mode;
 
-uchar debug_instakill = 0;
+uchar debug_instakill = 1;
 
 #define MATH_MAX 127;
 
@@ -54,7 +54,7 @@ typedef struct {
 uchar joy = 0;
 uchar joy_impulse = 0;
 
-#define SPACE_LETTER 22 * 2
+#define SPACE_LETTER (uchar)(22 * 2)
 
 #define WIN_IF_ENEMY_DEFEAT 0
 #define WIN_IF_PLAYER_ON_SPACE 1

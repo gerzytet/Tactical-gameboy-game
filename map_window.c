@@ -44,7 +44,7 @@ void add_turn_gui() {
     static uchar tile;
     for (uchar i = 0; i < 4; i++) {
         if (text[i] == ' ') {
-            tile = SPACE_LETTER+128;
+            tile = (uchar)(SPACE_LETTER+128);
         } else {
             tile = letter_table[text[i] - 'A']+128;
         }
@@ -55,7 +55,7 @@ void add_turn_gui() {
 
     //then print the turn #
     if (tens_digit == 0) {
-        tile = SPACE_LETTER+128;
+        tile = (uchar)(SPACE_LETTER+128);
     } else {
         tile = number_table[tens_digit];
     }
@@ -82,7 +82,7 @@ void change_text(const uchar *text) {
     static uchar tile;
     for (uchar i = 0; i < 6; i++) {
         if (text[i] == ' ') {
-            tile = SPACE_LETTER+128;
+            tile = (uchar)(SPACE_LETTER+128);
         } else {
             tile = letter_table[text[i] - 'A']+128;
         }
@@ -153,7 +153,7 @@ void reset_window() {
         VBK_REG = VBK_BANK_1;
         vmemset((volatile uchar *) WIN_TILEMAP_START, 0, 32 * 2);
         VBK_REG = VBK_BANK_0;
-        vmemset((uchar *)WIN_TILEMAP_START, SPACE_LETTER+128, 32*2);
+        vmemset((uchar *)WIN_TILEMAP_START, (uchar)(SPACE_LETTER+128), 32*2);
 
         setup_gui_textbox();
     }
@@ -197,7 +197,7 @@ void render_health(uchar healthLevel) {
 }
 
 void setup_window() {
-    vmemset((uchar *)WIN_TILEMAP_START, SPACE_LETTER+128, 32*32);
+    vmemset((uchar *)WIN_TILEMAP_START, (uchar)(SPACE_LETTER+128), 32*32);
 }
 
 #endif

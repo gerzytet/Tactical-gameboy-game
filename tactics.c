@@ -93,7 +93,7 @@ void play_map(uchar num){
 
 //Plays the Story Mode from start to finish
 void start_story(uchar startFrom){
-    enemyMoveMode = enemyMoveAuto;
+    //enemyMoveMode = enemyMoveAuto;
     switch(startFrom){
         case (0):
             play_scene(0);
@@ -138,7 +138,7 @@ void main() {
                 mainmenu();
                 break;
             case 0:
-                enemyMoveMode = enemyMoveAuto;
+                //enemyMoveMode = enemyMoveAuto;
                 play_game();
                 break;
             case 1:

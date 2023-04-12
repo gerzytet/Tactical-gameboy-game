@@ -28,11 +28,11 @@ void set_handshake_text(const uchar *text){
         switch(text[i])
         {
             case (' '):
-                tile = SPACE_LETTER+128;
+                tile = (uchar)(SPACE_LETTER+128);
                 break;
 
             case ('.'):
-                tile = 66;
+                tile = 36;
                 break;
 
             default:

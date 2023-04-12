@@ -325,7 +325,8 @@ void post_move(){
 
     
     //set selectedCharacter palette to greyscale
-    PALETTESWAP:paletteswap(selectedCharacter, 0);
+    //PALETTESWAP:palette_refresh(selectedCharacter);
+    palette_refresh(selectedCharacter);
 
     //if any characters have not yet moved, return
     for (uchar i = 0; i < numCharacters; ++i){
@@ -337,9 +338,9 @@ void post_move(){
     for (uchar i = 0; i < numCharacters; ++i){
         if (entities[i].moved == 1){
             entities[i].moved = 0;
-            //set palette to party color
-            paletteswap(i, entities[i].party + 1);
         }
+        //set palette to party color
+        palette_refresh(i);
     }
 
     advance_phase();
@@ -374,14 +375,10 @@ void update_select_attacker_cursor() {
 }
 
 void remove_character(uchar index){
-    hide_sprite(numCharacters*2+2);
-    hide_sprite(numCharacters*2+3);
     entities[index] = entities[numCharacters-1];
-    
-    //trying to get the removed character to disappear
     entities[numCharacters-1].moved = 3;
-    entities[numCharacters-1].sprite = BLANK * 2;
-
+    move_bigsprite(numCharacters-1 + CHARACTER_SPRITE_SLOT_START,0,0);
+    palette_refresh(index);
     --numCharacters;
 }
 
