@@ -32,7 +32,7 @@ enum TurnState {
     STATE_CHOOSE_MOVE = 1,
     STATE_MOVE = 2,
     STATE_CHOOSE_ATTACKER = 3,
-    STATE_AI_TURN = 4
+    STATE_AUTO_TURN = 4
 };
 
 uchar phase_state = STATE_LOOK;
@@ -292,38 +292,15 @@ void advance_phase(){
     //this is not the proper place to put this
     //if it is, checks should be done to check which turn it is 
     //as well as the MoveMode (fixed)
-    if (party_current == PARTY_ENEMY) {
-        start_enemy_turn();
-        if (enemyMoveMode == enemyMoveMan) {
-            phase_state = STATE_LOOK;
-        } else {
-            phase_state = STATE_AI_TURN;
-        }
-    } else if (party_current == PARTY_FRIEND) {
+    if (phase_state == STATE_AUTO_TURN) {
+        //check_win();
         phase_state = STATE_LOOK;
+    } else if (enemyMoveMode == enemyMoveAuto){
+        start_enemy_turn();
+        phase_state = STATE_AUTO_TURN;
     }
 }
 
-//call this after a manually controlled entity has moved and attacked, or moved without attacking.
-void post_manual_action() {
-    //if any characters have not yet moved, return
-    for (uchar i = 0; i < numCharacters; ++i){
-        if ((entities[i].party == party_current) && (entities[i].moved == 0)){
-            phase_state = STATE_LOOK;
-            return;
-        }
-    }
-
-    for (uchar i = 0; i < numCharacters; ++i){
-        if (entities[i].moved == 1){
-            entities[i].moved = 0;
-            //set palette to party color
-            paletteswap(i, entities[i].party + 1);
-        }
-    }
-
-    advance_phase();
-}
 
 void post_move(){
     uchar * adj_entities = get_adj_entities(selectedCharacter);
@@ -340,17 +317,36 @@ void post_move(){
         }
     }
 
-    //set selectedCharacter palette to greyscale
-    paletteswap(selectedCharacter, 0);
-
     if (entity_found) {
         phase_state = STATE_CHOOSE_ATTACKER;
         secondCursorX = entities[selectedCharacter].x / 16;
         secondCursorY = entities[selectedCharacter].y / 16;
-    } else {
-        post_action();
     }
+
+    
+    //set selectedCharacter palette to greyscale
+    //PALETTESWAP:palette_refresh(selectedCharacter);
+    palette_refresh(selectedCharacter);
+
+    //if any characters have not yet moved, return
+    for (uchar i = 0; i < numCharacters; ++i){
+        if ((entities[i].party == party_current) && (entities[i].moved == 0)){
+            return;
+        }
+    }
+
+    for (uchar i = 0; i < numCharacters; ++i){
+        if (entities[i].moved == 1){
+            entities[i].moved = 0;
+        }
+        //set palette to party color
+        palette_refresh(i);
+    }
+
+    advance_phase();
 }
+
+
 
 #define CHARACTER_ANIMATION_DELAY 15
 
@@ -379,14 +375,10 @@ void update_select_attacker_cursor() {
 }
 
 void remove_character(uchar index){
-    hide_sprite(numCharacters*2+2);
-    hide_sprite(numCharacters*2+3);
     entities[index] = entities[numCharacters-1];
-    
-    //trying to get the removed character to disappear
     entities[numCharacters-1].moved = 3;
-    entities[numCharacters-1].sprite = BLANK * 2;
-
+    move_bigsprite(numCharacters-1 + CHARACTER_SPRITE_SLOT_START,0,0);
+    palette_refresh(index);
     --numCharacters;
 }
 
@@ -403,7 +395,7 @@ void check_confirm_battle() {
             else{
                 remove_character(target);
             }
-            post_manual_action();
+            phase_state = STATE_LOOK;
         }
     }
 }
@@ -471,7 +463,7 @@ void play_game(){
         update_gui();
         update_cursor_color();
 
-        if (phase_state == STATE_AI_TURN) {
+        if (enemyMoveMode == enemyMoveAuto && (party_current == PARTY_ENEMY) && is_party_exist(PARTY_ENEMY)) {
             hide_cursor();
         chooseEnemy:
             if (currEntity >= numCharacters) {
@@ -500,6 +492,8 @@ void play_game(){
                 currEntity++;
                 goto chooseEnemy;
             }
+        } else if (enemyMoveMode == enemyMoveAuto && (party_current != 0) && is_party_exist(PARTY_ENEMY)) {
+            
         } else if (phase_state == STATE_LOOK) {
             check_enter_move_mode();
             if (joy_impulse & J_SELECT && phase_state == STATE_LOOK){
