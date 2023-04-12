@@ -250,15 +250,12 @@ void check_win(){
 
     if (is_party_exist(PARTY_FRIEND) == 0){
         winState = PLAYER_LOST;
-        DISPLAY_OFF;
     }
     else if (is_party_exist(PARTY_ENEMY) == 0 && winCondition == WIN_IF_ENEMY_DEFEAT){
         winState = PLAYER_WON;
-        DISPLAY_OFF;
     }
     else if (winCondition > 1 && turn_cntr >= winCondition){
-        winState = PLAYER_WON; 
-        DISPLAY_OFF;
+        winState = PLAYER_WON;
     }
     return;
 }
@@ -278,6 +275,8 @@ void advance_phase(){
     //  2 times from player to other, other to player
     //  3 times from enemy to player, (other to enemy, impossible case)
 
+    //check_win(); //uncomment to test game_over()
+
     do{
          party_current++;
     }while(party_current <= 2 && !is_party_exist(party_current));
@@ -285,7 +284,6 @@ void advance_phase(){
      if (party_current > 2){
          //player can be assumed to be alive, this check is done in check win
          party_current = 0;
-         check_win(); //uncomment to test game_over()
          add_turn();
     }
 
@@ -327,6 +325,8 @@ void post_move(){
     //set selectedCharacter palette to greyscale
     //PALETTESWAP:palette_refresh(selectedCharacter);
     palette_refresh(selectedCharacter);
+
+    //check_win(); //uncomment to test game_over()
 
     //if any characters have not yet moved, return
     for (uchar i = 0; i < numCharacters; ++i){
