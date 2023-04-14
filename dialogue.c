@@ -12,6 +12,7 @@
 #include "graphics/TextBoxMap.h"
 #include "graphics/Numbers.h"
 #include "graphics/Symbols.h"
+#include "graphics/Letters_Extra.h"
 
 #include "graphics/character_art/guard_text_data.h"
 #include "graphics/character_art/guard_text_map.h"
@@ -22,24 +23,32 @@
 #define TILEMAP_START 0x9800
 #define WIN_TILEMAP_START 0x9C00
 
-const uchar* script[20] = {
+const uchar* script[60] = {
+    //text 0
+    "LONG AGO IN THE ", "LAND OF MERPROV,", "A RUTHLESS RULER", "FORGED THE      ",
+    "CHRONO STONE,   ", "WHICH HAD THE   ", "POWER TO TRADE  ", "ANOTHER'S YOUTH ",
+    "FOR GAINING IT  ", "THEMSELVES.     ", "THE RULER WAS   ", "NOT STRONG      ",
+    "ENOUGH TO DEFEND", "AGAINST THE     ", "HORDES SEEKING  ", "TO KILL HIM AND ",
+    "SIEZE THE       ", "CHRONO STONE.   ", "BEFORE HE DIED, ", "HE HID THE STONE",
+    "BEHIND POWERFUL,", "FOREIGN MAGIC   ", "AND NO ONE WAS  ", "ABLE TO FIND IT.",
     "MEET FREDRIK, A ", "FIERCE WARRIOR  ", "WITH A STRONG   ", "REPUTATION,     ",
     "MARIE, A        ", "MYSTERIOUS WOMAN", "WITH HIDDEN     ", "POWERS,         ",
     "AND BOSTON, AN  ", "EX-SOLDIER WITH ", "A POWERFUL      ", "MACHINE GUN.    ",
     "YOU WILL HAVE TO", "TRAVEL TO       ", "DISTANT LANDS   ", "AND OVERCOME    ",
-    "MANY CHALLENGES ", "ON YOUR QUEST TO", "OVERCOME THE    ", "FORCES OF EVIL. "
-};
+    "MANY CHALLENGES ", "ON YOUR QUEST TO", "OVERCOME THE    ", "FORCES OF EVIL. ",
 
-const uchar* script2[16] = {
+    //text 1
     "PRESS THE A     ", "BUTTON ON THE   ", "CHARACTER YOU   ", "WOULD LIKE TO   ",
     "MOVE, AND PRESS ", "A AGAIN TO      ", "CONFIRM         ", "YOUR MOVE.      ",
     "YOU CAN ATTACK  ", "AN ENEMY OR PICK", "UP AN ITEM      ", "AFTER MOVING.   ",
-    "FOR THIS MAP,   ", "YOU WILL HAVE TO", "STAY ALIVE UNTIL", "BACKUP ARRIVES. ",
+    "FOR THIS MAP,   ", "YOU WILL HAVE TO", "STAY ALIVE UNTIL", "BACKUP ARRIVES. "
+
 };
 
 const uchar* dialogueCharNames[3] = {"FREDRIK", "MARIE", "BOSTON"};
 
-const uchar sceneTextLength[12] = {10,8,5,5,5,5,5,5,5,5,5,5};
+const uchar sceneTextLength[12] = {22,8,5,5,5,5,5,5,5,5,5,5};
+const uchar sceneTextOffset[12] = {0,22,30,0,0,0,0,0,0,0,0,0};
 const uchar image[10] = {0,0,0,0,0,0,0,0,0,0};
 
 //remove
@@ -49,7 +58,10 @@ const uchar imageRight[12] = {5,5,5,5,5};
 uchar dialogueIndex = 0;
 uchar dialogueSceneIndex = 0;
 
-void set_text(const uchar *textLine1, const uchar *textLine2 ,uchar charNameIndex){
+void set_text(uchar index,uchar charNameIndex){
+    const uchar *textLine1 = script[index*2];
+    const uchar *textLine2 = script[index*2+1];
+
     if (textLine1 == NULL) {
         return;
     }
@@ -86,12 +98,29 @@ void set_text(const uchar *textLine1, const uchar *textLine2 ,uchar charNameInde
                 tile = 44;
                 break;
 
+            case ('J'):
+                tile = 46;
+                break;
+        
+            case ('Q'):
+                tile = 48;
+                break;
+
+            case ('X'):
+                tile = 50;
+                break;
+
+            case ('Z'):
+                tile = 52;
+                break;
+
+
             default:
                 tile = letter_table[textLine1[i] - 'A']+128;
         }
         tilemap[i+418] = tile;
         tile++;
-        tilemap[(i+450)] = tile;
+        tilemap[i+450] = tile;
         wait_vbl_done();
     }
 
@@ -125,6 +154,22 @@ void set_text(const uchar *textLine1, const uchar *textLine2 ,uchar charNameInde
 
             case ('~'):
                 tile = 44;
+                break;
+
+            case ('J'):
+                tile = 46;
+                break;
+        
+            case ('Q'):
+                tile = 48;
+                break;
+
+            case ('X'):
+                tile = 50;
+                break;
+
+            case ('Z'):
+                tile = 52;
                 break;
 
             default:
@@ -202,13 +247,8 @@ void advance_text(){
         set_char_sprite(imageRight[dialogueIndex], 2);
     }*/
 
-    //fix later
-    if (dialogueSceneIndex == 0){
-        set_text(script[2*dialogueIndex], script[2*dialogueIndex+1],0);//dialogueCharNames[dialogueIndex]);
-    }
-    else{
-        set_text(script2[2*dialogueIndex], script2[2*dialogueIndex+1],0);//dialogueCharNames[dialogueIndex]);
-    }
+    set_text(dialogueIndex+sceneTextOffset[dialogueSceneIndex],0);
+    
     ++dialogueIndex;
 }
 
@@ -222,7 +262,7 @@ void setupTextBox(){
     set_banked_bkg_data(128, 46, Letters, 2); //letters. 46 tiles.  23 letters
     set_banked_bkg_data(14, 20, Numbers, 2); //numbers. 20 tiles. 10 numbers
     set_banked_bkg_data(34, 12, Symbols, 2); //symbols. 12 tiles. 6 symbols
-    //set JQXZ
+    set_banked_bkg_data(46, 8, Letters_Extra, 2); //extra letters. 8 tiles. 4 letters
     //4 tiles leftover in bkg
 
     //hide "STORY" text

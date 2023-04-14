@@ -1,6 +1,7 @@
 #include "graphics/Letters.c"
 #include "graphics/Numbers.c"
 #include "graphics/Symbols.c"
+#include "graphics/Letters_Extra.c"
 
 #include "graphics/Game_Logo.c"
 #include "graphics/Game_Logo_Map.c"
