@@ -281,7 +281,7 @@ void advance_phase(){
          party_current++;
     }while(party_current <= 2 && !is_party_exist(party_current));
     
-     if (party_current > 2){
+    if (party_current > 2){
          //player can be assumed to be alive, this check is done in check win
          party_current = 0;
          add_turn();
@@ -290,15 +290,37 @@ void advance_phase(){
     //this is not the proper place to put this
     //if it is, checks should be done to check which turn it is 
     //as well as the MoveMode (fixed)
-    if (phase_state == STATE_AUTO_TURN) {
-        //check_win();
-        phase_state = STATE_LOOK;
-    } else if (enemyMoveMode == enemyMoveAuto){
+    if (party_current == PARTY_ENEMY) {
         start_enemy_turn();
-        phase_state = STATE_AUTO_TURN;
+        if (enemyMoveMode == enemyMoveMan){
+            phase_state = STATE_LOOK;
+        } else if (enemyMoveMode = enemyMoveAuto) {
+            phase_state = STATE_AUTO_TURN;
+        }
+    } else {
+        phase_state = STATE_LOOK;
     }
 }
 
+void post_manual_action() {
+    //if any characters have not yet moved, return
+    for (uchar i = 0; i < numCharacters; ++i){
+        if ((entities[i].party == party_current) && (entities[i].moved == 0)){
+            phase_state = STATE_LOOK;
+            return;
+        }
+    }
+
+    for (uchar i = 0; i < numCharacters; ++i){
+        if (entities[i].moved == 1){
+            entities[i].moved = 0;
+        }
+        //set palette to party color
+        palette_refresh(i);
+    }
+
+    advance_phase();
+}
 
 void post_move(){
     uchar * adj_entities = get_adj_entities(selectedCharacter);
@@ -315,38 +337,18 @@ void post_move(){
         }
     }
 
-    if (entity_found) {
-        phase_state = STATE_CHOOSE_ATTACKER;
-        secondCursorX = entities[selectedCharacter].x / 16;
-        secondCursorY = entities[selectedCharacter].y / 16;
-    }
-
-    
     //set selectedCharacter palette to greyscale
     //PALETTESWAP:palette_refresh(selectedCharacter);
     palette_refresh(selectedCharacter);
 
-    //check_win(); //uncomment to test game_over()
-
-    //if any characters have not yet moved, return
-    for (uchar i = 0; i < numCharacters; ++i){
-        if ((entities[i].party == party_current) && (entities[i].moved == 0)){
-            return;
-        }
+    if (entity_found) {
+        phase_state = STATE_CHOOSE_ATTACKER;
+        secondCursorX = entities[selectedCharacter].x / 16;
+        secondCursorY = entities[selectedCharacter].y / 16;
+    } else {
+        post_manual_action();
     }
-
-    for (uchar i = 0; i < numCharacters; ++i){
-        if (entities[i].moved == 1){
-            entities[i].moved = 0;
-        }
-        //set palette to party color
-        palette_refresh(i);
-    }
-
-    advance_phase();
 }
-
-
 
 #define CHARACTER_ANIMATION_DELAY 15
 
@@ -395,7 +397,7 @@ void check_confirm_battle() {
             else{
                 remove_character(target);
             }
-            phase_state = STATE_LOOK;
+            post_manual_action();
         }
     }
 }
@@ -463,7 +465,7 @@ void play_game(){
         update_gui();
         update_cursor_color();
 
-        if (enemyMoveMode == enemyMoveAuto && (party_current == PARTY_ENEMY) && is_party_exist(PARTY_ENEMY)) {
+        if (phase_state == STATE_AUTO_TURN) {
             hide_cursor();
         chooseEnemy:
             if (currEntity >= numCharacters) {
@@ -492,8 +494,6 @@ void play_game(){
                 currEntity++;
                 goto chooseEnemy;
             }
-        } else if (enemyMoveMode == enemyMoveAuto && (party_current != 0) && is_party_exist(PARTY_ENEMY)) {
-            
         } else if (phase_state == STATE_LOOK) {
             check_enter_move_mode();
             if (joy_impulse & J_SELECT && phase_state == STATE_LOOK){
