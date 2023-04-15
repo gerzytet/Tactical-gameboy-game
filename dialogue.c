@@ -23,7 +23,7 @@
 #define TILEMAP_START 0x9800
 #define WIN_TILEMAP_START 0x9C00
 
-const uchar* script[60] = {
+const uchar* script[158] = {
     //text 0
     "LONG AGO IN THE ", "LAND OF MERPROV,", "A RUTHLESS RULER", "FORGED THE      ",
     "CHRONO STONE,   ", "WHICH HAD THE   ", "POWER TO TRADE  ", "ANOTHER'S YOUTH ",
@@ -38,17 +38,59 @@ const uchar* script[60] = {
     "MANY CHALLENGES ", "ON YOUR QUEST TO", "OVERCOME THE    ", "FORCES OF EVIL. ",
 
     //text 1
+    "A VILLIAGE WHERE", "OUR HEROES HAVE ", "BEEN LODGING HAS", "JUST BEEN       ",
+    "ATTACKED BY     ", "BANDITS!        ", "FREDERIK, MARIE,", "AND BOSTON FEEL ",
+    "UNPREPARED FOR  ", "THE TASK BUT    ", "AREN'T SURE IF  ", "ANYONE ELSE IS  ",
+    "ABLE TO DEFEND  ", "THE PEOPLE.     ", "THEY EACH GRAB  ", "THEIR WEAPONS   ",
+    "AND RUSH TO THE ", "SCENE OF BATTLE.",
     "PRESS THE A     ", "BUTTON ON THE   ", "CHARACTER YOU   ", "WOULD LIKE TO   ",
     "MOVE, AND PRESS ", "A AGAIN TO      ", "CONFIRM         ", "YOUR MOVE.      ",
     "YOU CAN ATTACK  ", "AN ENEMY OR PICK", "UP AN ITEM      ", "AFTER MOVING.   ",
     "FOR THIS MAP,   ", "YOU WILL HAVE TO", "STAY ALIVE UNTIL", "BACKUP ARRIVES. "
 
+    //text 2
+    "THE IMPERIAL    ", "ARMY FINALLY    ", "ARRIVE, HOWEVER,", "THE BANDITS HAVE",
+    "ALREADY BEEN    ", "DEFEATED.       ", "OUR HEROES HAVE ", "GAINED THE TRUST",
+    "AND RESPECT FROM", "THANK YOU FOR   ", "SAVING US FROM  ", "THOSE BANDITS!  ",
+    "HERE, HAVE SOME ", "HEALTH POTIONS  ", "AND WEAPONS.    ", "MARIE, DID YOU  ",
+    "SEE THE STRANGE ", "MARKINGS ON     ", "THAT BANDIT'S   ", "CLOTHING?       ",
+    "I BELIEVE I'VE  ", "READ SOMETHING  ", "ABOUT THOSE     ", "IN THE LIBRARY. ",
+    "THEY SEEM TO BE ", "CALLED THE      ", "BLOOD RAVAGERS, ", "AND HAVE A MAIN ",
+    "FORTRESS JUST   ", "SOUTH OF HERE.  ", "THERE ARE NOT   ", "MANY OF THEM,   ",
+    "BUT THE PEOPLE  ", "DO NOT HAVE     ", "ADEQUATE        ", "SUPPLIES TO     ",
+    "FIGHT THEM      ", "THEMSELVES.     ", "DO YOU THINK WE ", "CAN DRIVE THEM  ",
+    "OUT FOR GOOD?   ", "                ", "POSSIBLY, BUT   ", "WE WILL NEED TO ",
+    "PLAN OUR ATTACK ", "CAREFULLY AND   ", "NOT ATTACK THEM ", "ALL AT ONCE.    ",
+    
+    //text 3
+    "OUR HEROES      ", "ARRIVE AT THE   ", "BLOOD RAVAGERS' ", "FORTRESS.       ",
+    "THERE ARE NOT   ", "MANY ON PATROL  ", "TONIGHT, BUT    ", "MORE MAY COME   ",
+    "IF YOU ARE NOT  ", "CAREFUL.        ",
+
+    //text 4
+    "OUR HEROES HAVE ", "DEFEATED THE    ", "BLOOD RAVAGERS, ", "AND LEARN THAT  ",
+    "THE BANDITS     ", "WERE SENT BY    ", "THE SORCERESS   ", "ORALLOV SO      ",
+    "THAT THE PEOPLE ", "WILL TRUST THE  ", "ARMY THAT       ", "DELIVERED THEM. ",
+    "AS THE BANDITS  ", "AND SOLDIERS    ", "MAKE THEIR WAY  ", "THROUGH THE     ",
+    "TOWNS, OUR      ", "HEROES DECIDE   ", "TO ESCAPE       ", "ACROSS THE SEA  ",
+    "TO THE COUNTRY  ", "OF GRANDUEL.    "
+    
+    //text 5
+    //text 6
+    //text 7
+    //text 8
+    //text 9
+    //text 10
+    //text 11
+
+
+
 };
 
 const uchar* dialogueCharNames[3] = {"FREDRIK", "MARIE", "BOSTON"};
 
-const uchar sceneTextLength[12] = {22,8,5,5,5,5,5,5,5,5,5,5};
-const uchar sceneTextOffset[12] = {0,22,30,0,0,0,0,0,0,0,0,0};
+const uchar sceneTextLength[12] = {22,17,24,5,11,5,5,5,5,5,5,5};
+const uchar sceneTextOffset[12] = {0,22,39,63,68,79,0,0,0,0,0,0};
 const uchar image[10] = {0,0,0,0,0,0,0,0,0,0};
 
 //remove
@@ -223,12 +265,12 @@ void set_char_sprite(uchar charSpriteIndex, uchar pos){
     }*/
 
     //set guard left
-    set_banked_bkg_data(186, 68, guard_text_data,2);
-    set_banked_bkg_tiles(0,2, 8, 10, guard_text_map,2);
+    set_banked_bkg_data(186, 68, guard_text_data,3);
+    set_banked_bkg_tiles(0,2, 8, 10, guard_text_map,3);
 
     //set elf right
-    set_banked_bkg_data(58, 54, elf_text_data,2);
-    set_banked_bkg_tiles(12,3, 8, 9, elf_text_map_left,2);
+    set_banked_bkg_data(58, 54, elf_text_data,3);
+    set_banked_bkg_tiles(12,3, 8, 9, elf_text_map_left,3);
 
     return;
 }
@@ -256,13 +298,13 @@ void setupTextBox(){
     for (uchar i = 0; i < 20; ++i){
         set_bkg_tile_xy(i,11,0);
     }
-    set_banked_bkg_data(0, 14, TextBox, 2);
-    set_banked_bkg_tiles(0, 12, 20, 6, TextBoxMap, 2);
+    set_banked_bkg_data(0, 14, TextBox, 3);
+    set_banked_bkg_tiles(0, 12, 20, 6, TextBoxMap, 3);
 
     set_banked_bkg_data(128, 46, Letters, 2); //letters. 46 tiles.  23 letters
-    set_banked_bkg_data(14, 20, Numbers, 2); //numbers. 20 tiles. 10 numbers
-    set_banked_bkg_data(34, 12, Symbols, 2); //symbols. 12 tiles. 6 symbols
-    set_banked_bkg_data(46, 8, Letters_Extra, 2); //extra letters. 8 tiles. 4 letters
+    set_banked_bkg_data(14, 20, Numbers, 3); //numbers. 20 tiles. 10 numbers
+    set_banked_bkg_data(34, 12, Symbols, 3); //symbols. 12 tiles. 6 symbols
+    set_banked_bkg_data(46, 8, Letters_Extra, 3); //extra letters. 8 tiles. 4 letters
     //4 tiles leftover in bkg
 
     //hide "STORY" text
