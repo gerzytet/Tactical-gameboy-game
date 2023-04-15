@@ -275,7 +275,7 @@ void advance_phase(){
     //  2 times from player to other, other to player
     //  3 times from enemy to player, (other to enemy, impossible case)
 
-    //check_win(); //uncomment to test game_over()
+    check_win(); //uncomment to test game_over()
 
     do{
          party_current++;
@@ -348,6 +348,8 @@ void post_move(){
     } else {
         post_manual_action();
     }
+
+    check_win();
 }
 
 #define CHARACTER_ANIMATION_DELAY 15
