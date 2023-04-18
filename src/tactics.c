@@ -19,6 +19,7 @@
 #include "multiplayer.h"
 #include "map_window.h"
 #include "map.h"
+#include "../audio/forest_bgm.h"
 
 //fixed width: 6 characters
 
@@ -137,6 +138,8 @@ void start_story(uchar startFrom){
     }     
 }
 
+extern const hUGESong_t forest_bgm;
+
 void main() {
     //An uncompleted campaign exists
     //Do you wish to continue from the last save?
@@ -147,6 +150,17 @@ void main() {
     IE_REG = IEF_VBLANK;
     enable_interrupts();
     
+    NR52_REG = 0x80; //turns on channels
+    NR51_REG = 0xFF; //select which channels to output sound
+    NR50_REG = 0x77; //sets volume, max 0x77
+
+    
+
+    __critical {
+        hUGE_init(&forest_bgm);
+        add_VBL(hUGE_dosound);
+    }
+
     menu_option = 255;
     while (1){
         switch (menu_option){

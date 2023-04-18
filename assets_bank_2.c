@@ -10,5 +10,3 @@
 #include "graphics/Top_textbox.c"
 
 #include "graphics/Battle_Arrow.c"
-
-#include "audio/forest_bgm.c"

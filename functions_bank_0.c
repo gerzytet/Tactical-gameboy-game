@@ -10,11 +10,11 @@
 
 #include "src/bigsprites.c"
 
+#include "audio/forest_bgm.c"
+
 #include "src/banked_graphics.c"
 
 #include "src/dialogue.c"
 #include "src/credits.c"
 
 #include "src/options.c"
-
-#include "include/hUGEDriver.h"
