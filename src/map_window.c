@@ -90,6 +90,26 @@ void change_text(const uchar *text) {
     }
 }
 
+void change_overlay_text(const uchar *text, uchar length) {
+    length = length; //use this to center text
+    if (text == NULL) {
+        return;
+    }
+    volatile uchar *tilemap = &windowBuffer[0][0];
+    tilemap += TEXT_OFFSET;
+    static uchar tile;
+    for (uchar i = 0; i < 6; i++) {
+        if (text[i] == ' ') {
+            tile = (uchar)(SPACE_LETTER+128);
+        } else {
+            tile = letter_table[text[i] - 'A']+128;
+        }
+        tilemap[i+192] = tile;
+        tile++;
+        tilemap[i|32+192] = tile;
+    }
+}
+
 #define HFLIP 0b00100000
 #define VFLIP 0b01000000
 

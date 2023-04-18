@@ -133,16 +133,16 @@ uchar * get_adj_interact_spaces(uchar entity){
     //pixel: *16, map: no 16
 
     if (entities[entity].y > 0 && advantageTable[MAPS[mapIndex][entities[entity].x][entities[entity].y - 1]] != 255) {
-        adj_entities[0] = MAPS[mapIndex][entities[entity].x][entities[entity].y - 1];
+        adj_entities[NORTH] = MAPS[mapIndex][entities[entity].x][entities[entity].y - 1];
     }
     if (entities[entity].x < WIDTH - 1 && advantageTable[MAPS[mapIndex][entities[entity].x + 1][entities[entity].y]] != 255) {
-        adj_entities[1] = MAPS[mapIndex][entities[entity].x + 1][entities[entity].y];
+        adj_entities[EAST] = MAPS[mapIndex][entities[entity].x + 1][entities[entity].y];
     }
     if (entities[entity].y < HEIGHT-1 && advantageTable[MAPS[mapIndex][entities[entity].x][entities[entity].y+1]] != 255){
-        adj_entities[2] = MAPS[mapIndex][entities[entity].x][entities[entity].y+1];
+        adj_entities[SOUTH] = MAPS[mapIndex][entities[entity].x][entities[entity].y+1];
     }
     if (entities[entity].x > 0 && advantageTable[MAPS[mapIndex][entities[entity].x - 1][entities[entity].y]] != 255) {
-        adj_entities[3] = MAPS[mapIndex][entities[entity].x - 1][entities[entity].y];
+        adj_entities[WEST] = MAPS[mapIndex][entities[entity].x - 1][entities[entity].y];
     }
 
     return adj_entities;

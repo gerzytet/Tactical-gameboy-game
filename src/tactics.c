@@ -154,8 +154,6 @@ void main() {
     NR51_REG = 0xFF; //select which channels to output sound
     NR50_REG = 0x77; //sets volume, max 0x77
 
-    
-
     __critical {
         hUGE_init(&forest_bgm);
         add_VBL(hUGE_dosound);

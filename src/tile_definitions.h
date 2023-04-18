@@ -7,15 +7,15 @@
     X("HOUSE ", 4, 0, 255) \
     X("CAVE  ", 3, 0, 255) \
     X("CHEST ", 2, 0, 255) \
-    X("TREE  ", 1, 0, 255) \
-    X("FENCE ", 3, 0, 255) \
+    X("TREE  ", 1, 0, 0) \
+    X("FENCE ", 3, 0, 0) \
     X("GRASS ", 1, 1, 3) \
     X("PATH  ", 3, 1, 5) \
     X("WALL  ", 0, 0, 255) \
-    X("WATER ", 0, 0, 255) \
+    X("WATER ", 0, 0, 0) \
     X("BRIDGE", 0, 1, 2) \
-    X("ROCK  ", 0, 0, 255) \
-    X("FOREST", 0, 0, 255) \
+    X("ROCK  ", 0, 0, 0) \
+    X("FOREST", 0, 0, 0) \
     X("START ", 0, 1, 1) \
     X("END   ", 0, 1, 1)
 

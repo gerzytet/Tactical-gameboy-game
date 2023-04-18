@@ -326,13 +326,30 @@ void post_move(){
     uchar * adj_entities = get_adj_entities(selectedCharacter);
     uchar * adj_interact_spaces = get_adj_interact_spaces(selectedCharacter);
 
-    uchar entity_found = 0;
+    uchar adj_found = 0;
     for (uchar i = 0; i < 4; ++i){
-        if (adj_entities[i] != 255 /*|| adj_interact_spaces[i] != 255*/){
-            entity_found = 1;
+        if (adj_entities[i] != 255 || adj_interact_spaces[i] == 255){
+            adj_found = 1;
             last_selected = i;
-            cursorX = entities[adj_entities[i]].x / 16;
-            cursorY = entities[adj_entities[i]].y / 16;
+            
+            switch(i){
+                case(NORTH):
+                    cursorX = entities[selectedCharacter].x / 16;
+                    cursorY = (entities[selectedCharacter].y-1) / 16;
+                    break;
+                case(EAST):
+                    cursorX = (entities[selectedCharacter].x+1) / 16;
+                    cursorY = entities[selectedCharacter].y / 16;
+                    break;
+                case(SOUTH):
+                    cursorX = entities[selectedCharacter].x / 16;
+                    cursorY = (entities[adj_entities[i]].y+1) / 16;
+                    break;
+                case(WEST):
+                    cursorX = (entities[selectedCharacter].x-1) / 16;
+                    cursorY = entities[selectedCharacter].y / 16;
+                    break;
+            }
             break;
         }
     }
@@ -341,7 +358,8 @@ void post_move(){
     //PALETTESWAP:palette_refresh(selectedCharacter);
     palette_refresh(selectedCharacter);
 
-    if (entity_found) {
+    if (adj_found) {
+        
         phase_state = STATE_CHOOSE_ATTACKER;
         secondCursorX = entities[selectedCharacter].x / 16;
         secondCursorY = entities[selectedCharacter].y / 16;
@@ -386,7 +404,7 @@ void remove_character(uchar index){
     --numCharacters;
 }
 
-void check_confirm_battle() {
+void check_confirm_interact() {
     if (joy_impulse & J_A) {
         uchar *adj_entities = get_adj_entities(selectedCharacter);
 
@@ -401,10 +419,13 @@ void check_confirm_battle() {
             }
             post_manual_action();
         }
+        //todo:
+        //else if adj interact space is interactable
+        //interact
     }
 }
 
-void check_cancel_battle() {
+void check_cancel_interact() {
     if (joy_impulse & J_B) {
         phase_state = STATE_LOOK;
     }
@@ -519,8 +540,8 @@ void play_game(){
             }
         } else if (phase_state == STATE_CHOOSE_ATTACKER) {
             update_select_attacker_cursor();
-            check_confirm_battle();
-            check_cancel_battle();
+            check_confirm_interact();
+            check_cancel_interact();
             //check win
         }
         end:
