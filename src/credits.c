@@ -8,6 +8,7 @@
 #include "common.h"
 #include "gb/gb.h"
 #include "gb/cgb.h"
+#include "../graphics/palettes.c"
 
 void play_credits(){
 	game_mode = MODE_CREDITS;

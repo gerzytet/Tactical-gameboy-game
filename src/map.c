@@ -1,16 +1,16 @@
 #include "common.h"
 #include <gb/gb.h>
 #include <gb/cgb.h>
-#include "graphics/palletes.c"
-#include "graphics/Sprites.h"
+#include "../graphics/palettes.c"
+#include "../graphics/Sprites.h"
 #include "tile_definitions.h"
-#include "graphics/2x2tiles.h"
-#include "graphics/Letters.h"
-#include "graphics/Top_textbox.h"
-#include "graphics/Numbers.h"
-#include "pathfinding.c"
+#include "../graphics/2x2tiles.h"
+#include "../graphics/Letters.h"
+#include "../graphics/Top_textbox.h"
+#include "../graphics/Numbers.h"
+#include "pathfinding.h"
 #include "leveldata.h"
-#include "entities.c"
+#include "entities.h"
 
 //
 

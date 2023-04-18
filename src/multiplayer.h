@@ -8,9 +8,9 @@
 #ifndef MULTIPLAYER_H
 #define MULTIPLAYER_H
 
-#include "multiplayer.c"
-
 void send_joypad();
 uint8_t remote_joypad();
+void set_handshake_text(const uchar *text);
+void multiplayer();
 
 #endif

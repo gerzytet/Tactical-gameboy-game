@@ -11,7 +11,7 @@
 #include "common.h"
 #include "leveldata.h"
 #include "tile_definitions.h"
-#include "graphics/Battle_Arrow.h"
+#include "../graphics/Battle_Arrow.h"
 #include "map_window.c"
 
 #define TILEMAP_START 0x9800

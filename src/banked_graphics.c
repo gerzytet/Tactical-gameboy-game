@@ -1,7 +1,3 @@
-#ifndef BANKED_GRAPHICS_H
-#define BANKED_GRAPHICS_H
-
-
 #include <gb/gb.h>
 #include <gb/cgb.h>
 #include <ctype.h>
@@ -37,5 +33,3 @@ void set_banked_win_tiles(uint8_t x, uint8_t y, uint8_t w, uint8_t h, const uint
     set_win_tiles(x, y, w, h, map);
     SWITCH_ROM(save);
 }
-
-#endif

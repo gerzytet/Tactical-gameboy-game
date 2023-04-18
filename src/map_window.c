@@ -22,8 +22,6 @@ const uchar number_table[10] = {
     74 //9
 };
 
-extern void copy_window_buffer();
-
 void add_turn_gui() {
     static uchar ones_digit = 0;
     static uchar tens_digit = 0;

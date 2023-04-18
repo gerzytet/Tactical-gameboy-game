@@ -8,16 +8,18 @@
 #include <gb/gb.h>
 #include <gb/cgb.h>
 #include "common.h"
-#include "graphics/TextBox.h"
-#include "graphics/TextBoxMap.h"
-#include "graphics/Numbers.h"
-#include "graphics/Symbols.h"
-#include "graphics/Letters_Extra.h"
+#include "../graphics/palettes.c"
+#include "../graphics/TextBox.h"
+#include "../graphics/TextBoxMap.h"
+#include "../graphics/Letters.h"
+#include "../graphics/Numbers.h"
+#include "../graphics/Symbols.h"
+#include "../graphics/Letters_Extra.h"
 
-#include "graphics/character_art/guard_text_data.h"
-#include "graphics/character_art/guard_text_map.h"
-#include "graphics/character_art/elf_text_data.h"
-#include "graphics/character_art/elf_text_map_left.h"
+#include "../graphics/character_art/guard_text_data.h"
+#include "../graphics/character_art/guard_text_map.h"
+#include "../graphics/character_art/elf_text_data.h"
+#include "../graphics/character_art/elf_text_map_left.h"
 //todo: rest of cast
 
 #define TILEMAP_START 0x9800

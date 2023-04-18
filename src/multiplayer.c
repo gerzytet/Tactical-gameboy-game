@@ -1,9 +1,9 @@
 #include <gb/gb.h>
 #include <gb/cgb.h>
 #include "common.h"
-#include "graphics/palletes.c"
+#include "../graphics/palettes.c"
 #include "map.h"
-#include "graphics/Letters.h"
+#include "../graphics/Letters.h"
 
 void send_joypad(){
     _io_out = joypad();
