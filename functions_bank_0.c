@@ -16,3 +16,5 @@
 #include "src/credits.c"
 
 #include "src/options.c"
+
+#include "include/hUGEDriver.h"

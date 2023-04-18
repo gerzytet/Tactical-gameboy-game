@@ -128,10 +128,17 @@ void mainmenu(){
     DISPLAY_ON;
     wait_vbl_done();
 
+    //enable sound
+    NR52_REG = 0x80;
+    NR51_REG = 0xFF;
+    NR50_REG = 0x77;
+
+    hUGE_init(&forest_bgm);
+    add_VBL(hUGE_dosound);
+
     uchar anim_frame = 0;
     uchar anim_delay = 0;
     while (1) {
-        
         if (anim_delay == 0){
             menu_text_anim();   
         }

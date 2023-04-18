@@ -7,6 +7,7 @@
 
 #include <gb/gb.h>
 #include <gb/cgb.h>
+#include "../include/hUGEDriver.h"
 #include "common.h"
 #include "bigsprites.h"
 #include "main_menu.h"

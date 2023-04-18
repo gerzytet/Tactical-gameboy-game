@@ -43,6 +43,8 @@ uchar debug_instakill = 1;
 
 uchar menu_option = 0;
 
+extern const hUGESong_t forest_bgm;
+
 #define MATH_MAX 127;
 
 void game_over();
