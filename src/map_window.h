@@ -10,6 +10,7 @@
 
 void add_turn_gui();
 void change_text(const uchar *text);
+void set_overlay_text(const uchar *text, uchar length);
 void setup_gui_textbox();
 void reset_window();
 void render_health(uchar healthLevel);

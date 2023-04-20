@@ -212,6 +212,13 @@ void map_vblank_routine() {
     while (LY_REG != 15) ;
     set_bkg_palette_entry(0, 0, RGB_WHITE);
     LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_WINOFF | LCDCF_OBJ16;
+
+    if (showOverlayText == 1){
+        while(LY_REG != 48);
+        LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJOFF | LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16;
+        while(LY_REG != 63);
+        LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_WINOFF | LCDCF_OBJ16;
+    }
 }
 
 inline void render_second_cursor() {
@@ -407,6 +414,7 @@ void remove_character(uchar index){
 void check_confirm_interact() {
     if (joy_impulse & J_A) {
         uchar *adj_entities = get_adj_entities(selectedCharacter);
+        uchar *adj_interact_spaces = get_adj_interact_spaces(selectedCharacter);
 
         if (adj_entities[last_selected] != 255) {
             uchar target = adj_entities[last_selected];
@@ -420,8 +428,11 @@ void check_confirm_interact() {
             post_manual_action();
         }
         //todo:
-        //else if adj interact space is interactable
-        //interact
+        /*else if (adj_interact_spaces[last_selected] == 255){
+            //interact
+            set_overlay_text("SPACE SEL ", 10);
+        }*/
+        
     }
 }
 

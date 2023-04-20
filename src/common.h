@@ -41,6 +41,8 @@ uchar game_mode;
 
 uchar debug_instakill = 1;
 
+uchar showOverlayText = 0;
+
 uchar menu_option = 0;
 
 extern const hUGESong_t forest_bgm;

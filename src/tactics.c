@@ -72,18 +72,20 @@ void load_game(){
 
 //Post game handling
 void game_over(){
+    if (winState == PLAYER_WON){
+        //save_game();
+        menu_option = 255;
+        set_overlay_text("VICTORY   ", 10);
+    }
+    else if (winState == PLAYER_LOST){
+        menu_option = 255; //go to main menu
+        set_overlay_text("DEFEAT    ", 10);
+    }
+
     VBK_REG = VBK_BANK_1;
     vmemset((volatile uchar *) TILEMAP_START, 0, 32 * 32);
     VBK_REG = VBK_BANK_0;
 
-
-    if (winState == PLAYER_WON){
-        //save_game();
-        menu_option = 255;
-    }
-    else if (winState == PLAYER_LOST){
-        menu_option = 255; //go to main menu
-    }
     winState = 0;
     HIDE_SPRITES;
     for (uchar i = 0; i < 32; ++i){

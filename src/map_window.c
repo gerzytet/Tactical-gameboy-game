@@ -90,15 +90,16 @@ void change_text(const uchar *text) {
     }
 }
 
-void change_overlay_text(const uchar *text, uchar length) {
+void set_overlay_text(const uchar *text, uchar length) {
     length = length; //use this to center text
     if (text == NULL) {
         return;
     }
     volatile uchar *tilemap = &windowBuffer[0][0];
+    volatile uchar *tilemap = (uchar *)WIN_TILEMAP_START;
     tilemap += TEXT_OFFSET;
     static uchar tile;
-    for (uchar i = 0; i < 6; i++) {
+    for (uchar i = 0; i < 10; i++) {
         if (text[i] == ' ') {
             tile = (uchar)(SPACE_LETTER+128);
         } else {
@@ -108,6 +109,13 @@ void change_overlay_text(const uchar *text, uchar length) {
         tile++;
         tilemap[i|32+192] = tile;
     }
+    showOverlayText = 1;
+    for (uchar i = 0; i < 5; ++i){
+        for (uchar j = 0; j < 60; ++j){
+            wait_vbl_done();
+        }
+    }
+    showOverlayText = 0;
 }
 
 #define HFLIP 0b00100000
