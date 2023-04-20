@@ -95,7 +95,6 @@ void set_overlay_text(const uchar *text, uchar length) {
     if (text == NULL) {
         return;
     }
-    volatile uchar *tilemap = &windowBuffer[0][0];
     volatile uchar *tilemap = (uchar *)WIN_TILEMAP_START;
     tilemap += TEXT_OFFSET;
     static uchar tile;

@@ -16,11 +16,20 @@
 #include "../graphics/Symbols.h"
 #include "../graphics/Letters_Extra.h"
 
+
+#include "../graphics/character_art/bandit_text_data.h"
+#include "../graphics/character_art/bandit_text_map.h"
+#include "../graphics/character_art/boston_text_data.h"
+#include "../graphics/character_art/boston_text_map.h"
+#include "../graphics/character_art/elf_text_data.h"
+#include "../graphics/character_art/elf_text_map.h"
+#include "../graphics/character_art/frederik_text_data.h"
+#include "../graphics/character_art/frederik_text_map.h"
 #include "../graphics/character_art/guard_text_data.h"
 #include "../graphics/character_art/guard_text_map.h"
-#include "../graphics/character_art/elf_text_data.h"
-#include "../graphics/character_art/elf_text_map_left.h"
-//todo: rest of cast
+#include "../graphics/character_art/marie_text_data.h"
+#include "../graphics/character_art/marie_text_map.h"
+//todo: orallov
 
 #define TILEMAP_START 0x9800
 #define WIN_TILEMAP_START 0x9C00
@@ -233,46 +242,86 @@ void set_char_sprite(uchar charSpriteIndex, uchar pos){
     pos = pos;
     //pos 0 center 1 left 2 right
 
-    /*switch(charSpriteIndex){
+    switch(charSpriteIndex){
         case(0):
-            //f
-            break;
+            //frederik
+            switch(pos){
+                case(1):
+                    set_banked_bkg_data(58, 54, frederik_text_data,3);
+                    set_banked_bkg_tiles(0,3, 8, 9, frederik_text_map_left,3);
+                    break;
+                case(2):
+                    set_banked_bkg_data(186, 54, frederik_text_data,3);
+                    set_banked_bkg_tiles(12,3, 8, 9, frederik_text_map_right,3);
+                    break;
+            } break;
         case(1):
-            //m
-            break;
+            //marie
+            switch(pos){
+                case(1):
+                    set_banked_bkg_data(58, 54, marie_text_data,3);
+                    set_banked_bkg_tiles(0,3, 8, 9, marie_text_map_left,3);
+                    break;
+                case(2):
+                    set_banked_bkg_data(186, 54, marie_text_data,3);
+                    set_banked_bkg_tiles(12,3, 8, 9, marie_text_map_right,3);
+                    break;
+            } break;
         case(2):
-            //b
-            break;
+            //boston
+            switch(pos){
+                case(1):
+                    set_banked_bkg_data(58, 54, boston_text_data,3);
+                    set_banked_bkg_tiles(0,3, 8, 10, boston_text_map_left,3);
+                    break;
+                case(2):
+                    set_banked_bkg_data(186, 54, boston_text_data,3);
+                    set_banked_bkg_tiles(12,3, 8, 10, boston_text_map_right,3);
+                    break;
+            } break;
         case(3):
             //bandit
-            break;
+            switch(pos){
+                case(1):
+                    set_banked_bkg_data(58, 54, bandit_text_data,3);
+                    set_banked_bkg_tiles(0,3, 8, 10, bandit_text_map_left,3);
+                    break;
+                case(2):
+                    set_banked_bkg_data(186, 54, bandit_text_data,3);
+                    set_banked_bkg_tiles(12,3, 8, 10, bandit_text_map_right,3);
+                    break;
+            } break;
         case(4):
             //elf
-            switch(pos):
-                case(2):
-                    set_banked_bkg_data(58, 54, elf_text_data,2);
-                    set_banked_bkg_tiles(12,3, 8, 9, elf_text_map_left,2);
+            switch(pos){
+                case(1):
+                    set_banked_bkg_data(58, 54, elf_text_data,3);
+                    set_banked_bkg_tiles(0,3, 8, 9, elf_text_map_left,3);
                     break;
-            break;
+                case(2):
+                    set_banked_bkg_data(186, 54, elf_text_data,3);
+                    set_banked_bkg_tiles(12,3, 8, 9, elf_text_map_right,3);
+                    break;
+            } break;
         case(5):
             //guard
-            switch(pos):
+            switch(pos){
                 case(1):
-                    set_banked_bkg_data(186, 68, guard_text_data,2);
-                    set_banked_bkg_tiles(0,2, 8, 10, guard_text_map,2);
-            break;
+                    set_banked_bkg_data(186, 68, guard_text_data,3);
+                    set_banked_bkg_tiles(0,2, 8, 10, guard_text_map_left,3);
+            } break;
         case(6):
             //orallov
             break;
-    }*/
+    }
 
     //set guard left
-    set_banked_bkg_data(186, 68, guard_text_data,3);
-    set_banked_bkg_tiles(0,2, 8, 10, guard_text_map,3);
+    //set_banked_bkg_data(186, 68, guard_text_data,3);
+    //set_banked_bkg_tiles(0,2, 8, 10, guard_text_map,3);
 
     //set elf right
-    set_banked_bkg_data(58, 54, elf_text_data,3);
-    set_banked_bkg_tiles(12,3, 8, 9, elf_text_map_left,3);
+    //set_banked_bkg_data(58, 54, elf_text_data,3);
+    //set_banked_bkg_tiles(12,3, 8, 9, elf_text_map_left,3);
 
     return;
 }

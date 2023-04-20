@@ -3,12 +3,13 @@
 
  Tiles map
 
- TileMap Size      : 20 x 8
-*/ 
+ TileMap Size      : 8 x 10
+*/
 
 #ifndef GUARD_TEXT_MAP_H
 #define GUARD_TEXT_MAP_H
 
-extern const unsigned char guard_text_map[];
+extern const unsigned char guard_text_map_left[];
+extern const unsigned char guard_text_map_right[];
 
 #endif

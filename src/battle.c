@@ -14,6 +14,20 @@
 #include "../graphics/Battle_Arrow.h"
 #include "map_window.c"
 
+#include "../graphics/character_art/bandit_text_data.h"
+#include "../graphics/character_art/bandit_text_map.h"
+#include "../graphics/character_art/boston_text_data.h"
+#include "../graphics/character_art/boston_text_map.h"
+#include "../graphics/character_art/elf_text_data.h"
+#include "../graphics/character_art/elf_text_map.h"
+#include "../graphics/character_art/frederik_text_data.h"
+#include "../graphics/character_art/frederik_text_map.h"
+#include "../graphics/character_art/guard_text_data.h"
+#include "../graphics/character_art/guard_text_map.h"
+#include "../graphics/character_art/marie_text_data.h"
+#include "../graphics/character_art/marie_text_map.h"
+//todo: orallov
+
 #define TILEMAP_START 0x9800
 #define WIN_TILEMAP_START 0x9C00
 
