@@ -11,6 +11,8 @@
 const uchar winCondition_global[5] = {WIN_IF_ENEMY_DEFEAT,WIN_IF_ENEMY_DEFEAT,
 WIN_IF_ENEMY_DEFEAT,WIN_IF_ENEMY_DEFEAT,WIN_IF_ENEMY_DEFEAT};
 
+//const hUGESong_t * const map_bgm[5] = {&forest_bgm, &forest_bgm, &plains_bgm, &forest_bgm, &fortress_bgm};
+
 /*
 Ideas for condition to progress to next level:
 move to space for boss

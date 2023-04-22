@@ -10,3 +10,11 @@
 #include "graphics/Top_textbox.c"
 
 #include "graphics/Battle_Arrow.c"
+#include "graphics/Battle_Arrow_Map.c"
+#include "graphics/Battle_Stats_Box.c"
+#include "graphics/Battle_Stats_Box_Map.c"
+
+/*#include "audio/battle_bgm.c"
+#include "audio/plains_bgm.c"
+#include "audio/forest_bgm.c"
+#include "audio/fortress_bgm.c"*/

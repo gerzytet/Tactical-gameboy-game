@@ -12,6 +12,8 @@
 #include "leveldata.h"
 #include "tile_definitions.h"
 #include "../graphics/Battle_Arrow.h"
+#include "../graphics/Battle_Stats_Box.h"
+#include "../graphics/Battle_Stats_Box_Map.h"
 #include "map_window.c"
 
 #include "../graphics/character_art/bandit_text_data.h"
@@ -37,19 +39,6 @@ uchar attacker = 0;
 uchar defender = 0;
 
 const unsigned char blank_tile[1] = {0x00};
-
-//intro anim
-/*void battleIntro() {
-
-}
-//outro anim
-void battleOutro() {
-
-}
-//battle anim
-void battleAnimation() {
-
-}*/
 
 uchar determineAdvantage() {
     //advantage type of space
@@ -115,6 +104,9 @@ uchar battle(uchar nAttacker, uchar nDefender) {
         //set_bkg_tile_xy(0,1,0x83);
         set_bkg_tile_xy(1,1,0x84);
     }
+    set_banked_bkg_data(0,14,Battle_Stats_Box,2);
+    set_banked_bkg_tiles(0,14,20,4, Battle_Stats_Box_Map, 2);
+
     DISPLAY_ON;
 
     //vmemset((uchar *)TILEMAP_START, 128, 32*32);

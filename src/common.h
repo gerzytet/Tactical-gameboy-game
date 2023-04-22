@@ -39,13 +39,13 @@ enum GameMode {MODE_MAIN_MENU = 255, MODE_MAP = 0, MODE_DIALOGUE = 1, MODE_MULTI
 
 uchar game_mode;
 
-uchar debug_instakill = 1;
+uchar debug_instakill = 0;
 
 uchar showOverlayText = 0;
 
 uchar menu_option = 0;
 
-extern const hUGESong_t forest_bgm;
+//extern const hUGESong_t forest_bgm;
 
 #define MATH_MAX 127;
 

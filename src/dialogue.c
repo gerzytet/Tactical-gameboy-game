@@ -34,6 +34,16 @@
 #define TILEMAP_START 0x9800
 #define WIN_TILEMAP_START 0x9C00
 
+//const uchar character[] = {};
+
+/*const uchar script[79] = {
+    7,7,7,7,7,7,7,7,7,7,7,7,
+    0,0,1,1,2,2,2,2,2,2,
+
+    7,7,7,7,7,7,7,7,7,7,7,7,
+    7,7,7,7,7
+}*/
+
 const uchar* script[158] = {
     //text 0
     "LONG AGO IN THE ", "LAND OF MERPROV,", "A RUTHLESS RULER", "FORGED THE      ",
@@ -247,11 +257,11 @@ void set_char_sprite(uchar charSpriteIndex, uchar pos){
             //frederik
             switch(pos){
                 case(1):
-                    set_banked_bkg_data(58, 54, frederik_text_data,3);
+                    set_banked_bkg_data(58, 59, frederik_text_data,3);
                     set_banked_bkg_tiles(0,3, 8, 9, frederik_text_map_left,3);
                     break;
                 case(2):
-                    set_banked_bkg_data(186, 54, frederik_text_data,3);
+                    set_banked_bkg_data(186, 59, frederik_text_data,3);
                     set_banked_bkg_tiles(12,3, 8, 9, frederik_text_map_right,3);
                     break;
             } break;
@@ -259,11 +269,11 @@ void set_char_sprite(uchar charSpriteIndex, uchar pos){
             //marie
             switch(pos){
                 case(1):
-                    set_banked_bkg_data(58, 54, marie_text_data,3);
+                    set_banked_bkg_data(58, 47, marie_text_data,3);
                     set_banked_bkg_tiles(0,3, 8, 9, marie_text_map_left,3);
                     break;
                 case(2):
-                    set_banked_bkg_data(186, 54, marie_text_data,3);
+                    set_banked_bkg_data(186, 47, marie_text_data,3);
                     set_banked_bkg_tiles(12,3, 8, 9, marie_text_map_right,3);
                     break;
             } break;
@@ -271,23 +281,23 @@ void set_char_sprite(uchar charSpriteIndex, uchar pos){
             //boston
             switch(pos){
                 case(1):
-                    set_banked_bkg_data(58, 54, boston_text_data,3);
-                    set_banked_bkg_tiles(0,3, 8, 10, boston_text_map_left,3);
+                    set_banked_bkg_data(58, 52, boston_text_data,3);
+                    set_banked_bkg_tiles(0,2, 8, 10, boston_text_map_left,3);
                     break;
                 case(2):
-                    set_banked_bkg_data(186, 54, boston_text_data,3);
-                    set_banked_bkg_tiles(12,3, 8, 10, boston_text_map_right,3);
+                    set_banked_bkg_data(186, 52, boston_text_data,3);
+                    set_banked_bkg_tiles(12,2, 8, 10, boston_text_map_right,3);
                     break;
             } break;
         case(3):
             //bandit
             switch(pos){
                 case(1):
-                    set_banked_bkg_data(58, 54, bandit_text_data,3);
+                    set_banked_bkg_data(58, 56, bandit_text_data,3);
                     set_banked_bkg_tiles(0,3, 8, 10, bandit_text_map_left,3);
                     break;
                 case(2):
-                    set_banked_bkg_data(186, 54, bandit_text_data,3);
+                    set_banked_bkg_data(186, 56, bandit_text_data,3);
                     set_banked_bkg_tiles(12,3, 8, 10, bandit_text_map_right,3);
                     break;
             } break;
@@ -333,10 +343,14 @@ void advance_text(){
         return;
     }
     
-    if (dialogueIndex == 0 || imageLeft[dialogueIndex-1] != imageLeft[dialogueIndex-1]){
+
+    set_char_sprite(1,1);
+    set_char_sprite(2,2);
+
+    /*if (dialogueIndex == 0 || imageLeft[dialogueIndex-1] != imageLeft[dialogueIndex-1]){
         set_char_sprite(image[dialogueIndex], 0);
     }
-    /*if (dialogueIndex == 0 || imageRight[dialogueIndex-1] != imageRight[dialogueIndex-1]){
+    if (dialogueIndex == 0 || imageRight[dialogueIndex-1] != imageRight[dialogueIndex-1]){
         set_char_sprite(imageRight[dialogueIndex], 2);
     }*/
 
@@ -373,7 +387,6 @@ void play_scene(uchar index){
     move_bkg(0,0);
     
     setupTextBox();
-    //setup character art
     
     //intro anim
     DISPLAY_ON;

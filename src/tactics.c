@@ -7,7 +7,7 @@
 
 #include <gb/gb.h>
 #include <gb/cgb.h>
-#include "../include/hUGEDriver.h"
+#include "../music_includes/hUGEDriver.h"
 #include "common.h"
 #include "bigsprites.h"
 #include "main_menu.h"
@@ -19,7 +19,12 @@
 #include "multiplayer.h"
 #include "map_window.h"
 #include "map.h"
+#include "banked_graphics.h"
+/*#include "../audio/menu_bgm.h"
+#include "../audio/battle_bgm.h"
+#include "../audio/plains_bgm.h"
 #include "../audio/forest_bgm.h"
+#include "../audio/fortress_bgm.h"*/
 
 //fixed width: 6 characters
 
@@ -112,7 +117,7 @@ void play_map(uchar num){
 
 //Plays the Story Mode from start to finish
 void start_story(uchar startFrom){
-    //enemyMoveMode = enemyMoveAuto;
+    enemyMoveMode = enemyMoveAuto;
     switch(startFrom){
         case (0):
             play_scene(0);
@@ -140,7 +145,7 @@ void start_story(uchar startFrom){
     }     
 }
 
-extern const hUGESong_t forest_bgm;
+//extern const hUGESong_t forest_bgm;
 
 void main() {
     //An uncompleted campaign exists
@@ -156,11 +161,16 @@ void main() {
     NR51_REG = 0xFF; //select which channels to output sound
     NR50_REG = 0x77; //sets volume, max 0x77
 
-    __critical {
-        hUGE_init(&forest_bgm);
-        add_VBL(hUGE_dosound);
-    }
+    /*__critical {
+        hUGE_init_banked(&main_bgm, 2);
+        add_VBL(hUGE_dosound_banked);
+    }*/
 
+    /*__critical{
+        hUGE_init(&menu_bgm);
+        add_VBL(hUGE_dosound);
+    }*/
+    
     menu_option = 255;
     while (1){
         switch (menu_option){
@@ -168,7 +178,7 @@ void main() {
                 mainmenu();
                 break;
             case 0:
-                //enemyMoveMode = enemyMoveAuto;
+                enemyMoveMode = enemyMoveAuto;
                 play_game();
                 break;
             case 1:

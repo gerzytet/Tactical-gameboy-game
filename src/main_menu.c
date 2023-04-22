@@ -7,6 +7,7 @@
 
 #include <gb/gb.h>
 #include <gb/cgb.h>
+#include "../music_includes/hUGEDriver.h"
 #include "common.h"
 #include "../graphics/Menu_BG.h"
 #include "../graphics/Menu_BG_Map.h"
@@ -14,6 +15,7 @@
 #include "../graphics/palettes.c"
 #include "../graphics/Letters.h"
 #include "../graphics/Game_Logo.h"
+#include "../audio/menu_bgm.h"
 
 #define MAX_OPTION 4
 #define MAX_LETTERS 12

@@ -12,6 +12,8 @@ void set_banked_bkg_data(uint8_t first_tile, uint8_t nb_tiles, const uint8_t *da
 void set_banked_sprite_data(uint8_t first_tile, uint8_t nb_tiles, const uint8_t *data, uint8_t bank) NONBANKED;
 void set_banked_bkg_tiles(uint8_t x, uint8_t y, uint8_t w, uint8_t h, const uint8_t *map, uint8_t bank) NONBANKED;
 void set_banked_win_tiles(uint8_t x, uint8_t y, uint8_t w, uint8_t h, const uint8_t *map, uint8_t bank) NONBANKED;
+//void hUGE_init_banked(const hUGESong_t * song, uint8_t bank);
+//void hUGE_dosound_banked();
 
 
 #endif

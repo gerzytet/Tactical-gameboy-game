@@ -10,9 +10,9 @@
 
 #include "src/bigsprites.c"
 
-#include "audio/forest_bgm.c"
-
 #include "src/banked_graphics.c"
+
+#include "audio/menu_bgm.c"
 
 #include "src/dialogue.c"
 #include "src/credits.c"

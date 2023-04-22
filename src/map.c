@@ -486,6 +486,10 @@ void play_game(){
         display_bigsprite(0, 0);
 
         add_turn(); 
+
+        
+        //hUGE_init_banked(map_bgm[mapIndex], 2);
+
         LCDC_REG = LCDCF_BGON | LCDCF_ON | LCDCF_BG8800 | LCDCF_OBJON | LCDCF_WIN9C00 | LCDCF_OBJ16;
     }
     while (1) {
